@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
         [HttpGet("skill")]
-        public async Task<IActionResult> GetCreateSkill()
+        public async Task<IActionResult> GetSkillName()
         {
             var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
             var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;

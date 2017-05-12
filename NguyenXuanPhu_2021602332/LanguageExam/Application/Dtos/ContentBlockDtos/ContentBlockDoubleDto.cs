@@ -12,10 +12,13 @@ namespace Application.Dtos.ContentBlockDtos
 {
     public class ContentBlockDoubleDto
     {
-        public string TextContent { get; set; }
+        public string Content { get; set; }
         public byte Level { get; set; }
         public List<QuestionCreateDto> Questions { get; set; }
+        public IFormFile? AudioFile { get; set; }
 
+        // foreign key image file
+        public IFormFile? ImageFile { get; set; }
         // foreign key question level
         public Guid QuestionTypeId { get; set; }
         

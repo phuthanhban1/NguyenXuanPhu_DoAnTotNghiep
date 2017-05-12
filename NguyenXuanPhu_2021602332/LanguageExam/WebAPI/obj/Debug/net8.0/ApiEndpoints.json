@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "WebAPI.Controllers.ContentBlockController",
+    "Method": "AddDouble",
+    "RelativePath": "api/ContentBlock/double",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lists",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockDoubleDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ContentBlockController",
     "Method": "AddSingle",
     "RelativePath": "api/ContentBlock/single",
     "HttpMethod": "POST",
@@ -10,7 +26,7 @@
       {
         "Name": "lists",
         "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockSingleDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

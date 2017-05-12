@@ -10,8 +10,8 @@ namespace Domain.Entities
     public class ContentBlock
     {
         public Guid Id { get; set; }
-        public string? TextContent { get; set; }
-        public bool IsConfirm { get; set; }
+        public string? Content { get; set; }
+        public byte Status { get; set; }
         public byte Level { get; set; }
         public bool IsUsed { get; set; }
         public DateOnly CreatedDate { get; set; }

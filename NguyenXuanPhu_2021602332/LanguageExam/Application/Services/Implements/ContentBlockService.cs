@@ -18,45 +18,62 @@ namespace Application.Services.Implements
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task AddDouble(ContentBlockDoubleDto contentBlockDoubleDto)
+        public async Task AddDouble(List<ContentBlockDoubleDto> list)
         {
-            var contentBlock = new ContentBlock
+            foreach(var contentBlockDoubleDto in list)
             {
-                Id = Guid.NewGuid(),
-                TextContent = contentBlockDoubleDto.TextContent,
-                Level = contentBlockDoubleDto.Level,
-                QuestionTypeId = contentBlockDoubleDto.QuestionTypeId,
-                IsConfirm = false,
-                IsUsed = false,
-                CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
-                UpdatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
-            };
-            await _unitOfWork.ContentBlocks.AddAsync(contentBlock);
-            contentBlockDoubleDto.Questions.ForEach(async (x) =>
-            {
-                var question = new Question
+                var contentBlock = new ContentBlock
                 {
-                    Id = new Guid(),
-                    Content = x.Content,
-                    Score = x.Score,
-                    ContentBlockId = contentBlock.Id
+                    Id = Guid.NewGuid(),
+                    Content = contentBlockDoubleDto.Content,
+                    Level = contentBlockDoubleDto.Level,
+                    QuestionTypeId = contentBlockDoubleDto.QuestionTypeId,
+                    IsConfirm = false,
+                    IsUsed = false,
+                    CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                    UpdatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                 };
-                await _unitOfWork.Questions.AddAsync(question);
-                question.Answers.ForEach(async (a) => {
-                    var count = 0;
-                    var answerEntity = new Answer
+                var audioFile = new ExamFile();
+                var imageFile = new ExamFile();
+                if (contentBlockDoubleDto.AudioFile != null)
+                {
+                    audioFile = await ExtensionService.GetImageFile(contentBlockDoubleDto.AudioFile);
+                    await _unitOfWork.ExamFiles.AddAsync(audioFile);
+                    contentBlock.AudioFileId = audioFile.Id;
+                }
+                if (contentBlockDoubleDto.ImageFile != null)
+                {
+                    imageFile = await ExtensionService.GetImageFile(contentBlockDoubleDto.ImageFile);
+                    await _unitOfWork.ExamFiles.AddAsync(imageFile);
+                    contentBlock.ImageFileId = imageFile.Id;
+                }
+                await _unitOfWork.ContentBlocks.AddAsync(contentBlock);
+                contentBlockDoubleDto.Questions.ForEach(async (x) =>
+                {
+                    var question = new Question
                     {
-                        Id = Guid.NewGuid(),
-                        QuestionId = question.Id,
-                        Content = a.Content,
-                        IsCorrect = a.IsCorrect
+                        Id = new Guid(),
+                        Content = x.Content,
+                        Score = x.Score,
+                        ContentBlockId = contentBlock.Id
                     };
-                    if ((bool)a.IsCorrect) count++;
-                    if (count > 1)
-                        throw new BadRequestException("Có nhiều hơn 1 đáp án đúng");
-                    await _unitOfWork.Answers.AddAsync(answerEntity);
+                    await _unitOfWork.Questions.AddAsync(question);
+                    x.Answers.ForEach(async (a) => {
+                        var count = 0;
+                        var answerEntity = new Answer
+                        {
+                            Id = Guid.NewGuid(),
+                            QuestionId = question.Id,
+                            Content = a.Content,
+                            IsCorrect = a.IsCorrect
+                        };
+                        if ((bool)a.IsCorrect) count++;
+                        if (count > 1)
+                            throw new BadRequestException("Có nhiều hơn 1 đáp án đúng");
+                        await _unitOfWork.Answers.AddAsync(answerEntity);
+                    });
                 });
-            });
+            }
             await _unitOfWork.SaveChangeAsync();
         }
         public Task<ContentBlock> GetByIdAsync(Guid id)
@@ -75,7 +92,7 @@ namespace Application.Services.Implements
                 var contentBlock = new ContentBlock
                 {
                     Id = Guid.NewGuid(),
-                    TextContent = contentBlockSingleDto.TextContent,
+                    Content = contentBlockSingleDto.TextContent,
                     Level = contentBlockSingleDto.Level,
                     QuestionTypeId = contentBlockSingleDto.QuestionTypeId,
                     IsConfirm = false,

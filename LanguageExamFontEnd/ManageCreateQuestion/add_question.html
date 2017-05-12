@@ -514,10 +514,8 @@
                 </div>
             </main>
         </div>
-    </div>
-
-        
-    </div>
+    </div> 
+    
 
 
     <!-- Bootstrap JS and Popper.js -->
@@ -529,7 +527,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
     
     <script>
-        var url = 'https://localhost:7001/api'
         $(document).ready(function() {
             var addQuestionUrl = 'add_reading_question.html';
             var skillId = '';
@@ -633,30 +630,31 @@
                     bankName = response.questionBankName;
                     $('#skillName').text(skillName);
                     
-                        if(!response.isConfirm) {
-                            $('#confirm-btn').show();
-                            $('#detail-btn').hide();
-                        // Ẩn các menu quản lý khi chưa xác nhận
-                        $('#menu-question-type').parent().hide();
-                        $('#menu-question').parent().hide();
-                        } else {
-                            $('#confirm-btn').hide();
-                            $('#detail-btn').show();
-                        // Hiện các menu quản lý khi đã xác nhận
-                        $('#menu-question-type').parent().show();
-                        $('#menu-question').parent().show();
-                        }
-                        skillId = response.id;
+                    if(!response.isConfirm) {
+                        $('#confirm-btn').show();
+                        $('#detail-btn').hide();
+                    // Ẩn các menu quản lý khi chưa xác nhận
+                    $('#menu-question-type').parent().hide();
+                    $('#menu-question').parent().hide();
+                    } else {
+                        $('#confirm-btn').hide();
+                        $('#detail-btn').show();
+                    // Hiện các menu quản lý khi đã xác nhận
+                    $('#menu-question-type').parent().show();
+                    $('#menu-question').parent().show();
+                    }
+                    skillId = response.id;
                     $('#question-bank-name').text(response.questionBankName);
-                        $('#language').text(response.language);
-                        $('#skill').text(response.name);
-                        $('#task').text(response.task);
-                        $('#deadline').text(response.dueDate);
-                        
-                        // Update new fields
-                        $('#question-creator').text(response.creatorName || 'Chưa có');
-                        $('#question-reviewer').text(response.reviewerName || 'Chưa có');
-                        $('#skill-deadline').text(response.skillDeadline || 'Chưa có');
+                    $('#language').text(response.language);
+                    $('#skill').text(response.name);
+                    $('#task').text(response.task);
+                    $('#deadline').text(response.dueDate);
+                    
+                    // Update new fields
+                    $('#question-creator').text(response.creatorName || 'Chưa có');
+                    $('#question-reviewer').text(response.reviewerName || 'Chưa có');
+                    $('#skill-deadline').text(response.skillDeadline || 'Chưa có');
+
                 },
                 error: function(error) {
                     console.log('Error:', error.responseText);
@@ -693,11 +691,10 @@
         });
     </script>
 
-// script thêm câu hỏi
 <script>
     let questionCounter = 0; // Thêm biến đếm số câu hỏi
-    
-    function createSingleFormHtml(hasImage = false) {
+    var skillName = '';
+    function createSingleFormHtml(hasImage = false, skillName = 'nghe') {
         return `
         <div id="singleQuestionForm">
             <div class="card question-card">
@@ -709,10 +706,10 @@
                 </div>
                 <div class="card-body">
                     <!-- Thêm hình ảnh -->
-                    <div id="singleQuestionImage" class="mt-2" ${!hasImage ? 'style="display:none;"' : ''}>
+                    <div id="singleQuestionImage_${questionCounter}" class="mt-2" ${!hasImage ? 'style="display:none;"' : ''}>
                         <label class="form-label">Hình ảnh câu hỏi</label>
-                        <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
-                        <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                        <input type="file" accept="image/*" class="form-control image-input" onchange="previewSingleImage(event, ${questionCounter})">
+                        <img id="singleImagePreview_${questionCounter}" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
                     </div>
                     <!-- Nội dung câu hỏi text -->
                     <div class="mb-3">
@@ -722,10 +719,10 @@
                         </div>
                     </div>
                     <!-- Âm thanh -->
-                    <div id="singleQuestionAudio" style="display:none;" class="mt-3">
+                    <div id="singleQuestionAudio_${questionCounter}" class="mt-3 audio-input" ${skillName !== 'nghe' ? 'style="display:none;"' : ''}>
                         <label class="form-label">File âm thanh</label>
-                        <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event)">
-                        <audio id="audioPreview" controls style="display:none; margin-top:10px;"></audio>
+                        <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event, ${questionCounter})">
+                        <audio id="audioPreview_${questionCounter}" controls style="display:none; margin-top:10px;"></audio>
                     </div>
                     <!-- Đáp án -->
                     <div class="mb-3">
@@ -763,7 +760,7 @@
         `;
     }
 
-    function createDoubleFormHtml(hasImage = false) {
+    function createDoubleFormHtml(hasImage = false, skillName = 'nghe') {
         return `
         <div id="doubleQuestionForm">
             <div class="card question-card">
@@ -786,7 +783,7 @@
                         <img id="doubleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
                     </div>
                     <!-- Âm thanh -->
-                    <div id="doubleQuestionAudio" style="display:none;" class="mt-3">
+                    <div id="doubleQuestionAudio" class="mt-3 audio-input" ${skillName !== 'nghe' ? 'style="display:none;"' : ''}>
                         <label class="form-label">File âm thanh</label>
                         <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event)">
                         <audio id="audioPreview" controls style="display:none; margin-top:10px;"></audio>
@@ -887,6 +884,8 @@
     $(document).ready(function() {
         var skillId = ''
         var questionTypes = []
+        var skillName = '';
+        // thêm form theo type
         $.ajax({
             url: 'https://localhost:7001/api/skill/skill',
             type: 'GET',
@@ -895,6 +894,7 @@
             },
             success: function(response) {
                 skillId = response.id
+                skillName = response.name;
                 console.log('Skill ID:', skillId);
                 $.ajax({
                     url: `https://localhost:7001/api/questiontype/skill/${skillId}`,
@@ -909,19 +909,18 @@
                         questionTypes.forEach(type => {
                             $('#questionCategory').append(`<option value="${type.id}_${type.isSingle}_${type.hasImage}">${type.name}</option>`);
                         });
-                        const params = new URLSearchParams(window.location.search);
-                        const skill = params.get("skill");
-                        console.log(skill);
-                        if(skill === 'nghe') {
-                            $('#singleQuestionAudio').show();
+                        
+                    
+                        if(skillName === 'nghe') {
+                            $('.audio-input').show();
                         }
         
                         function addQuestionForm(format, hasImage) {
                             if(format) {
-                                    $('#questionList').prepend(createSingleFormHtml(hasImage));
+                                    $('#questionList').prepend(createSingleFormHtml(hasImage, skillName));
                                     questionCounter++;
                             } else {
-                                $('#questionList').prepend(createDoubleFormHtml(hasImage));
+                                $('#questionList').prepend(createDoubleFormHtml(hasImage, skillName));
                                 questionCounter++;
                             }
                             updateQuestionNumbers();
@@ -942,9 +941,6 @@
             }
         });
 
-        
-        
-        
         // Xử lý chọn loại câu hỏi
         $('#questionCategory').on('change', function() {
             $('#questionList').empty();
@@ -952,7 +948,7 @@
             $('#btn-add-question').prop('disabled', false); // Enable nút thêm câu hỏi khi chọn loại mới
         });
 
-        // Xử lý thêm câu hỏi
+        // Xử lý nút thêm form nhập câu hỏi
         $('#btn-add-question').on('click', function() {
             const selectedValue = $('#questionCategory').val();
             if (!selectedValue) {
@@ -973,6 +969,10 @@
                 // Show form dựa vào isSingle
                 if (selectedType.isSingle === true) {
                     $('#questionList').prepend(createSingleFormHtml(selectedType.hasImage));
+                    // Hiển thị audio input nếu là kỹ năng nghe
+                    if(skillName === 'nghe') {
+                        $(`#singleQuestionAudio_${questionCounter-1}`).show();
+                    }
                 } else {
                     $('#questionList').prepend(createDoubleFormHtml(selectedType.hasImage));
                 }
@@ -981,8 +981,19 @@
         });
 
         // Thêm xử lý submit form
-        $('form').on('submit', function(e) {
+        $('#questionForm').on('submit', function(e) {
             e.preventDefault();
+            
+            // Kiểm tra xem đã chọn loại câu hỏi chưa
+            const selectedValue = $('#questionCategory').val();
+            if (!selectedValue) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo!',
+                    text: 'Vui lòng chọn loại câu hỏi trước!'
+                });
+                return;
+            }
             
             // Reset tất cả viền đỏ trước khi validate
             resetAllBorders();
@@ -990,16 +1001,23 @@
             // Validate trước khi lấy dữ liệu
             const validationResult = validateAllQuestions();
             if (!validationResult.isValid) {
-                alert(validationResult.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: validationResult.message
+                });
                 return;
             }
 
             const questionsData = getAllQuestionsData();
-            console.log('Questions Data: 414', JSON.stringify(questionsData, null, 2));
+            console.log('Questions data to be sent:', questionsData);
             
-            // Kiểm tra dữ liệu trước khi gửi
-            if (questionsData.length === 0) {
-                alert('Vui lòng thêm ít nhất một câu hỏi');
+            if (!questionsData || questionsData.length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo!',
+                    text: 'Vui lòng thêm ít nhất một câu hỏi!'
+                });
                 return;
             }
 
@@ -1008,47 +1026,87 @@
                 try {
                     const selectedValue = $('#questionCategory').val();
                     const [id, isSingle, hasImage] = selectedValue.split('_');
-                    // Tạo mảng chứa các câu hỏi
-                    const questions = questionsData.map(question => {
-                        const questionData = {
-                            QuestionTypeId: id,
-                            Level: 1,
-                            Score: 2,
-                            TextContent: question.content,
-                            Answers: question.answers.map(answer => ({
-                                Content: answer.text,
-                                IsCorrect: answer.isCorrect
-                            }))
-                        };
-
-                        // Thêm hình ảnh nếu có
-                        if (question.hasImage && question.image) {
-                            questionData.ImageFile = question.image.file;
-                        }
-
-                        return questionData;
-                    });
                     
-                    // Gửi danh sách câu hỏi
+                    // Tạo FormData
+                    const formData = new FormData();
+                    var apiUrl = '';
+                    if(isSingle === 'true') {
+                        apiUrl = 'https://localhost:7001/api/contentblock/single';
+                        questionsData.forEach((q, i) => {
+                            formData.append(`lists[${i}].TextContent`, q.TextContent);
+                            formData.append(`lists[${i}].Level`, q.Level);
+                            formData.append(`lists[${i}].QuestionTypeId`, q.QuestionTypeId);
+                            formData.append(`lists[${i}].Score`, q.Score);
+                            if (q.ImageFile) {
+                                formData.append(`lists[${i}].ImageFile`, q.ImageFile);
+                            }
+                            if (q.AudioFile) {
+                                formData.append(`lists[${i}].AudioFile`, q.AudioFile);
+                            }
+
+                            q.Answers.forEach((ans, j) => {
+                                formData.append(`lists[${i}].Answers[${j}].Content`, ans.AnswerText);
+                                formData.append(`lists[${i}].Answers[${j}].IsCorrect`, ans.IsCorrect);
+                            });
+                        });
+                    } else {
+                        apiUrl = 'https://localhost:7001/api/contentblock/double';
+                        questionsData.forEach((q, i) => {
+                            formData.append(`lists[${i}].Content`, q.Content);
+                            formData.append(`lists[${i}].Level`, q.Level);
+                            formData.append(`lists[${i}].QuestionTypeId`, q.QuestionTypeId);
+                            if (q.ImageFile) {
+                                formData.append(`lists[${i}].ImageFile`, q.ImageFile);
+                            }
+                            if (q.AudioFile) {
+                                formData.append(`lists[${i}].AudioFile`, q.AudioFile);
+                            }
+                            q.Questions.forEach((question, j) => {
+                                formData.append(`lists[${i}].Questions[${j}].Content`, question.Content);
+                                formData.append(`lists[${i}].Questions[${j}].Score`, question.Score);
+                                question.Answers.forEach((ans, k) => {
+                                    formData.append(`lists[${i}].Questions[${j}].Answers[${k}].Content`, ans.Content);
+                                    formData.append(`lists[${i}].Questions[${j}].Answers[${k}].IsCorrect`, ans.IsCorrect);
+                                });
+                            });
+                        });
+                    }
+                    // Gửi request
                     const response = await $.ajax({
-                        url: 'https://localhost:7001/api/contentblock/single',
+                        url: apiUrl,
                         method: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify(questions),
-                        xhrFields: { withCredentials : true},
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        xhrFields: { withCredentials: true },
                         success: function(response) {
-                            console.log('Response:', response);
+                            console.log('Server response:', response);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Đã lưu câu hỏi thành công!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.reload();
+                            });
                         },
                         error: function(error) {
-                            console.error('Error:', error.responseText);
+                            console.error('Server error:', error.responseText);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: 'Có lỗi xảy ra khi lưu câu hỏi. Vui lòng thử lại!'
+                            });
                         }
                     });
-                    
-                    //window.location.href = '/questions'; // Chuyển hướng sau khi lưu thành công
-                    
                 } catch (error) {
                     console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi lưu câu hỏi');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Có lỗi xảy ra khi lưu câu hỏi. Vui lòng thử lại!'
+                    });
                 }
             };
 
@@ -1056,46 +1114,162 @@
             processQuestions();
         });
 
-        // Thêm xử lý khi người dùng thay đổi giá trị input
-        $(document).on('input', '.answer-option input[type="text"]', function() {
-            resetAllBorders();
-            const validationResult = validateAllQuestions();
-            if (!validationResult.isValid) {
-                // Không hiển thị alert khi đang nhập
-                console.log(validationResult.message);
+        // Hàm lấy dữ liệu từ câu hỏi đơn
+    function getSingleQuestionData(questionElement) {
+        const selectedValue = $('#questionCategory').val();
+        if (!selectedValue) {
+            console.error('No question type selected');
+            return null;
+        }
+        const [id, isSingle, hasImage] = selectedValue.split('_');
+        const questionText = questionElement.find('.card-body textarea').first().val();
+        
+        // Get question index from the badge text, with a fallback to 0
+        const badgeText = questionElement.find('.badge').text();
+        let questionIndex = 0;
+        if (badgeText) {
+            const match = badgeText.match(/\d+/);
+            if (match) {
+                questionIndex = parseInt(match[0]) - 1;
             }
-        });
+        }
+        
+        let imageFile = null;
+        let audioFile = null;
+        
+        if(hasImage === 'true') {
+            imageFile = questionElement.find(`#singleQuestionImage_${questionIndex} input[type="file"]`).prop('files')[0];
+        }
 
-        // Thêm xử lý khi người dùng thay đổi file
-        $(document).on('change', '.answer-option input[type="file"]', function() {
-            resetAllBorders();
-            const validationResult = validateAllQuestions();
-            if (!validationResult.isValid) {
-                // Không hiển thị alert khi đang chọn file
-                console.log(validationResult.message);
+        
+        // Lấy file audio nếu là kỹ năng nghe
+        if(skillName === 'nghe') {
+            audioFile = questionElement.find(`#singleQuestionAudio_${questionIndex} input[type="file"]`).prop('files')[0];
+        }
+        
+        const answers = questionElement.find('.answer-option').map(function() {
+            return {
+                Content: $(this).find('input[type="text"]').val(),
+                IsCorrect: $(this).find('input[type="radio"]').is(':checked')
+            };
+        }).get();
+        
+        return {
+            TextContent: questionText,
+            Level: 1,
+            Score: 2,
+            QuestionTypeId: id,
+            ImageFile: imageFile,
+            AudioFile: audioFile,
+            Answers: answers
+        };
+    }
+
+    // Hàm lấy dữ liệu từ câu hỏi kép
+    function getDoubleQuestionData(questionElement) {
+        alert('test');
+        const selectedValue = $('#questionCategory').val();
+        if (!selectedValue) {
+            console.error('No question type selected');
+            return null;
+        }
+        const [id, isSingle, hasImage] = selectedValue.split('_');
+        const passage = questionElement.find('.card-body textarea').first().val();
+        var imageFile = null;
+        var audioFile = null;
+        if(hasImage === 'true') {
+            imageFile = questionElement.find('#doubleQuestionImage input[type="file"]').prop('files')[0];
+        }
+        if(skillName === 'nghe') {
+            audioFile = questionElement.find('#doubleQuestionAudio input[type="file"]').prop('files')[0];
+        }
+        const questions = questionElement.find('.card.mb-3').map(function() {
+            const subQuestionElement = $(this);
+            return {
+                Content: subQuestionElement.find('input[type="text"]').first().val(),
+                Score: 1,
+                Answers: subQuestionElement.find('.answer-option').map(function() {
+                    return {
+                        Content: $(this).find('input[type="text"]').val(),
+                        IsCorrect: $(this).find('input[type="radio"]').is(':checked')
+                    };
+                }).get()
+            };
+        }).get();
+
+        return {
+            QuestionTypeId: id,
+            Content: passage,
+            Level: 1,
+            ImageFile: imageFile,
+            AudioFile: audioFile,
+            Questions: questions
+        };
+    }
+
+    // Hàm lấy tất cả dữ liệu câu hỏi
+    function getAllQuestionsData() {
+        const questions = [];
+        const selectedValue = $('#questionCategory').val();
+        if (!selectedValue) {
+            console.error('No question type selected');
+            return [];
+        }
+        const [id, isSingle, hasImage] = selectedValue.split('_');
+        console.log('Selected question type:', { id, isSingle, hasImage });
+        
+        $('#questionList > div').each(function() {
+            const questionElement = $(this);
+            const questionType = questionElement.find('.card-header h5').text().trim();
+            //console.log('Processing question type:', questionType);
+            
+            if (isSingle === 'true') {
+                const questionData = getSingleQuestionData(questionElement);
+                if (questionData) {
+                    questions.push(questionData);
+                }
+            } else {
+                const questionData = getDoubleQuestionData(questionElement);
+                if (questionData) {
+                    questions.push(questionData);
+                }
             }
         });
+        
+        console.log('All questions data:', questions);
+        return questions;
+    }
+
+    
+    // Thêm xử lý khi người dùng thay đổi giá trị input
+    $(document).on('input', '.answer-option input[type="text"]', function() {
+        resetAllBorders();
+        const validationResult = validateAllQuestions();
+        if (!validationResult.isValid) {
+            // Không hiển thị alert khi đang nhập
+            console.log(validationResult.message);
+        }
     });
 
-    // Hàm xử lý hiển thị/ẩn hình ảnh cho câu hỏi đơn
-    function toggleSingleImage() {
-        const hasImage = $('#hasSingleImage').is(':checked');
-        $('#singleQuestionImage').toggle(hasImage);
-    }
+    // Thêm xử lý khi người dùng thay đổi file
+    $(document).on('change', '.answer-option input[type="file"]', function() {
+        resetAllBorders();
+        const validationResult = validateAllQuestions();
+        if (!validationResult.isValid) {
+            // Không hiển thị alert khi đang chọn file
+            console.log(validationResult.message);
+        }
+    });
+});
 
-    // Hàm xử lý hiển thị/ẩn hình ảnh cho câu hỏi kép
-    function toggleDoubleImage() {
-        const hasImage = $('#hasDoubleImage').is(':checked');
-        $('#doubleQuestionImage').toggle(hasImage);
-    }
 
     // Hàm xem trước hình ảnh cho câu hỏi đơn
-    function previewSingleImage(event) {
+    function previewSingleImage(event, questionIndex) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                $('#singleImagePreview').attr('src', e.target.result).show();
+                $(`#singleImagePreview_${questionIndex}`).attr('src', e.target.result).show();
             }
             reader.readAsDataURL(file);
         }
@@ -1114,11 +1288,11 @@
     }
 
     // Hàm xem trước âm thanh
-    function previewAudio(event) {
+    function previewAudio(event, questionIndex) {
         const file = event.target.files[0];
         if (file) {
             const url = URL.createObjectURL(file);
-            $('#audioPreview').attr('src', url).show();
+            $(`#audioPreview_${questionIndex}`).attr('src', url).show();
         }
     }
 
@@ -1154,103 +1328,6 @@
         $('.question-card').each(function(index) {
             $(this).find('.badge').text(`Câu ${index + 1}`);
         });
-    }
-
-    // Hàm lấy dữ liệu từ câu hỏi đơn
-    function getSingleQuestionData(questionElement) {
-        const questionText = questionElement.find('.card-body textarea').first().val();
-        const imageFile = questionElement.find('#singleQuestionImage input[type="file"]').prop('files')[0];
-        const audioFile = questionElement.find('#singleQuestionAudio input[type="file"]').prop('files')[0];
-        const answers = questionElement.find('.answer-option').map(function() {
-            return {
-                text: $(this).find('input[type="text"]').val(),
-                isCorrect: $(this).find('input[type="radio"]').is(':checked')
-            };
-        }).get();
-        return {
-            type: 'single',
-            questionNumber: questionElement.find('.badge').text().trim(),
-            content: questionText,
-            hasImage: imageFile !== undefined,
-            image: imageFile ? {
-                name: imageFile.name,
-                type: imageFile.type,
-                size: imageFile.size,
-                file: imageFile
-            } : null,
-            hasAudio: audioFile !== undefined,
-            audio: audioFile ? {
-                name: audioFile.name,
-                type: audioFile.type,
-                size: audioFile.size,
-                file: audioFile
-            } : null,
-            answers: answers
-        };
-    }
-
-    // Hàm lấy dữ liệu từ câu hỏi kép
-    function getDoubleQuestionData(questionElement) {
-        const passage = questionElement.find('.card-body textarea').first().val();
-        const imageFile = questionElement.find('#doubleQuestionImage input[type="file"]').prop('files')[0];
-        const audioFile = questionElement.find('#doubleQuestionAudio input[type="file"]').prop('files')[0];
-        const subQuestions = questionElement.find('.card.mb-3').map(function() {
-            const subQuestionElement = $(this);
-            const subImageFile = subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0];
-            return {
-                question: subQuestionElement.find('input[type="text"]').first().val(),
-                hasImage: subImageFile !== undefined,
-                image: subImageFile ? {
-                    name: subImageFile.name,
-                    type: subImageFile.type,
-                    size: subImageFile.size,
-                    file: subImageFile
-                } : null,
-                answers: subQuestionElement.find('.answer-option').map(function() {
-                    return {
-                        text: $(this).find('input[type="text"]').val(),
-                        isCorrect: $(this).find('input[type="radio"]').is(':checked')
-                    };
-                }).get()
-            };
-        }).get();
-
-        return {
-
-            questionNumber: questionElement.find('.badge').text().trim(),
-            passage: passage,
-            hasImage: imageFile !== undefined,
-            image: imageFile ? {
-                name: imageFile.name,
-                type: imageFile.type,
-                size: imageFile.size,
-                file: imageFile
-            } : null,
-            hasAudio: audioFile !== undefined,
-            audio: audioFile ? {
-                name: audioFile.name,
-                type: audioFile.type,
-                size: audioFile.size,
-                file: audioFile
-            } : null,
-            subQuestions: subQuestions
-        };
-    }
-
-    // Hàm lấy tất cả dữ liệu câu hỏi
-    function getAllQuestionsData() {
-        const questions = [];
-        $('#questionList > div').each(function() {
-            const questionElement = $(this);
-            const questionType = questionElement.find('.card-header h5').text().trim();
-            
-            if (questionType.includes('Câu hỏi đọc hiểu')) {
-                questions.push(getSingleQuestionData(questionElement));
-            } else if (questionType.includes('Câu hỏi đọc chọn ý')) {
-                questions.push(getDoubleQuestionData(questionElement));
-            }
-        });
-        return questions;
     }
 
     // Hàm kiểm tra đáp án trùng nhau trong câu hỏi đọc hiểu

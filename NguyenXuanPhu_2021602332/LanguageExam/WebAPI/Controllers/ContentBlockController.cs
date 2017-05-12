@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("single")]
-        public async Task<IActionResult> AddSingle(List<ContentBlockSingleDto> lists)
+        public async Task<IActionResult> AddSingle([FromForm] List<ContentBlockSingleDto> lists)
         {
             if (lists == null)
             {
@@ -25,5 +25,18 @@ namespace WebAPI.Controllers
             await _contentBlockService.AddSingle(lists);
             return Ok();
         }
+
+        [HttpPost("double")]
+        public async Task<IActionResult> AddDouble([FromForm] List<ContentBlockDoubleDto> lists)
+        {
+            if (lists == null)
+            {
+                return BadRequest("ContentBlockDoubleTextDto cannot be null");
+            }
+            await _contentBlockService.AddDouble(lists);
+            return Ok();
+        }
+
+
     }
 }
