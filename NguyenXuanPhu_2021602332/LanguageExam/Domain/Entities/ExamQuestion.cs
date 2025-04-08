@@ -9,7 +9,7 @@ namespace Domain.Entities
     public class ExamQuestion
     {
         public Guid Id { get; set; }
-        public int QuestionNumber { get; set; }
+        public int Order { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
 
@@ -18,14 +18,7 @@ namespace Domain.Entities
         public Exam Exam { get; set; }
 
         // foreign key content block
-        public Guid ContentBlockId { get; set; }
-        public ContentBlock ContentBlock { get; set; }
-
-        // foreign key user
-        public Guid CreatedUserId { get; set; }
-        public User CreatedUser { get; set; }
-
-        public List<DetailConstruction> DetailConstructions { get; set; }
+        public List<ContentBlock> ContentBlocks { get; set; }
 
     }
 }

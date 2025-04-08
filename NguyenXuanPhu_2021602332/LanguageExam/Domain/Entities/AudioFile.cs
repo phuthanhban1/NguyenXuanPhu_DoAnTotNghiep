@@ -6,7 +6,7 @@
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public string ContentType { get; set; }
-        public ExamFormat ExamFormat { get; set; }
-        public ContentBlock ContentBlock { get; set; }
+        public Skill? Skill { get; set; }
+        public ContentBlock? ContentBlock { get; set; }
     }
 }

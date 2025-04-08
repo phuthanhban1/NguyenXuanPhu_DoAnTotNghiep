@@ -13,11 +13,11 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<AudioFile> builder)
         {
+            builder.ToTable("AudioFile");
             builder.HasKey(a => a.Id);
 
-            builder.Property(a => a.FileName).IsRequired();
-            builder.Property(a => a.FileData).IsRequired();
-            builder.Property(a => a.ContentType).IsRequired();
+
+            
         }
     }
 }

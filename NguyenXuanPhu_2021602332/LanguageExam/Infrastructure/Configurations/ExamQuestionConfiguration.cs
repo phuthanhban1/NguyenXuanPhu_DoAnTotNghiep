@@ -9,10 +9,8 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<ExamQuestion> builder)
         {
-            builder.ToTable("ExamQuestions").HasKey(eq => eq.Id);
-            builder.HasOne(eq => eq.CreatedUser)
-                .WithOne(u => u.ExamQuestions)
-                .HasForeignKey<ExamQuestion>(eq => eq.CreatedUserId);
+            builder.ToTable("ExamQuestion").HasKey(eq => eq.Id);
+            
             builder.HasOne(eq => eq.Exam)
                 .WithOne(e => e.ExamQuestion)
                 .HasForeignKey<ExamQuestion>(eq => eq.ExamId);

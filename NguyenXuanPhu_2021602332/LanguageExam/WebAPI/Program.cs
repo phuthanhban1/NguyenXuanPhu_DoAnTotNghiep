@@ -1,4 +1,9 @@
+using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ExamContext>(ops => ops.UseSqlServer(builder.Configuration.GetConnectionString("ExamConnection")));
 
 // Add services to the container.
 

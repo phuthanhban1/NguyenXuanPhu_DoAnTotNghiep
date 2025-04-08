@@ -13,27 +13,16 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<ContentBlock> builder)
         {
+            builder.ToTable("ContentBlock");
             builder.HasKey(cb => cb.Id);
 
-            builder.Property(cb => cb.Content).IsRequired();
-
-            builder.HasOne(cb => cb.CreatedUser)
-                   .WithMany()
-                   .HasForeignKey(cb => cb.CreatedUserId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(cb => cb.ConfirmedUser)
-                   .WithMany()
-                   .HasForeignKey(cb => cb.ConfirmedUserId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
             builder.HasOne(cb => cb.AudioFile)
-                   .WithMany()
-                   .HasForeignKey(cb => cb.AudioFileId);
+                   .WithOne(af => af.ContentBlock)
+                   .HasForeignKey<ContentBlock>(cb => cb.AudioFileId);
 
-            builder.HasOne(cb => cb.QuestionType)
-                   .WithMany(qt => qt.DetailConstructions)
-                   .HasForeignKey(cb => cb.QuestionTypeId);
+            builder.HasOne(cb => cb.QuestionLevel)
+                   .WithMany(ql => ql.ContentBlocks)
+                   .HasForeignKey(cb => cb.QuestionLevelId);
         }
     }
 

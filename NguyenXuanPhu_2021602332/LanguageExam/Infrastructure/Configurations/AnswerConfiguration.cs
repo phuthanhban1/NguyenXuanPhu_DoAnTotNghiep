@@ -13,11 +13,8 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Answer> builder)
         {
+            builder.ToTable("Answer");
             builder.HasKey(a => a.Id);
-
-            builder.Property(a => a.Content)
-                   .IsRequired()
-                   .HasMaxLength(500);
 
             builder.HasOne(a => a.Question)
                    .WithMany(q => q.Answers)

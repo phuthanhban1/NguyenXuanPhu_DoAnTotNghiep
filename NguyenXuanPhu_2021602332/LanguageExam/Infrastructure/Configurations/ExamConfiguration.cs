@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Configurations
 {
@@ -13,11 +8,16 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Exam> builder)
         {
-            builder.ToTable("Exams")
+            builder.ToTable("Exam")
                 .HasKey(e => e.Id);
-            builder.HasOne(e => e.CreatedUser)
-                .WithMany(u => u.Exams)
-                .HasForeignKey(e => e.CreatedUserId);
+            builder.HasOne(e => e.Manager)
+                .WithMany(u => u.ManagedExam)
+                .HasForeignKey(e => e.ManagerId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.CreatedQuestionUser)
+                .WithMany(u => u.CreatedQuestionExam)
+                .HasForeignKey(e => e.CreatedQuestionUserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

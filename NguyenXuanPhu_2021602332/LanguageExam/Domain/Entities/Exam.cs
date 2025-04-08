@@ -16,13 +16,17 @@ namespace Domain.Entities
         public DateTime BeginDate { get; set; }
         public string Password { get; set; }
         public int Fee { get; set; }
-        // foreign key
-        public Guid CreatedUserId { get; set; }
-        public User CreatedUser { get; set; }
-        // 1-1 relation
+        public bool IsActive { get; set; }
+        // id manager
+        public Guid ManagerId { get; set; }
+        public User Manager { get; set; }
+        // id created exam question
+        public Guid CreatedQuestionUserId { get; set; }
+        public User CreatedQuestionUser { get; set; }
+
+
+        public List<Examinee> Examinees { get; set; }
         public ExamQuestion ExamQuestion { get; set; }
-        public List<Task> Tasks { get; set; }
-        public List<ExamQuestionContent> ExamContents { get; set; }
 
     }
 }

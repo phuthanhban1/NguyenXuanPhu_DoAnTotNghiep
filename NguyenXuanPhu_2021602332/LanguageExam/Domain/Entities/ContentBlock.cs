@@ -9,23 +9,21 @@ namespace Domain.Entities
     public class ContentBlock
     {
         public Guid Id { get; set; }
-        public string Content { get; set; }
+        public string? Content { get; set; }
         public bool IsConfirm { get; set; }
+        public DateTime? UsedDate { get; set; }
+        public bool IsUsed { get; set; }
         public string? UnConFirmedReason { get; set; }
-        public Guid CreatedUserId { get; set; }
-        public User CreatedUser { get; set; }
-        public Guid ConfirmedUserId { get; set; }
-        public User ConfirmedUser { get; set; }
 
         // foreign key audio file
-        public Guid AudioFileId { get; set; }
+        public Guid? AudioFileId { get; set; }
         public AudioFile? AudioFile { get; set; }
 
-        // foreign key question type
-        public Guid QuestionTypeId { get; set; }
-        public QuestionType QuestionType { get; set; }
+        // foreign key question level
+        public Guid QuestionLevelId { get; set; }
+        public QuestionLevel QuestionLevel { get; set; }
 
-        public ExamQuestion ExamQuestion { get; set; }
+        public ExamQuestion? ExamQuestion { get; set; }
         public List<Question> Questions { get; set; }
     }
 }

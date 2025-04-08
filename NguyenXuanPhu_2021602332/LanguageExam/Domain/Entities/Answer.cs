@@ -10,7 +10,7 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; }
         public string Content { get; set; }
-        public bool IsCorrect { get; set; }
+        public bool? IsCorrect { get; set; }
         //foreign key question
         public Guid QuestionId { get; set; }
         public Question Question { get; set; }
