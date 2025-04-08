@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Entities
+{
+    public class QuestionBank
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Language { get; set; }
+
+        // fk user
+        public Guid ManagerId { get; set; }
+        public User Manager { get; set; }
+
+        public List<Skill> Skills { get; set; }
+
+    }
+}
