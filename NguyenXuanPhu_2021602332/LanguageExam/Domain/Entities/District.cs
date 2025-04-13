@@ -8,11 +8,11 @@ namespace Domain.Entities
 {
     public class District 
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         // foreign key province
-        public Guid ProvinceId { get; set; }
+        public int ProvinceId { get; set; }
         public Province Province { get; set; }
        
         public List<Ward> Wards { get; set; }

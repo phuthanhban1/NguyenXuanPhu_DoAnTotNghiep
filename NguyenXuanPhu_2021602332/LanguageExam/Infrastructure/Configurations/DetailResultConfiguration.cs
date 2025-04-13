@@ -14,6 +14,11 @@ namespace Infrastructure.Configurations
             builder.HasOne(a => a.Examinee)
                    .WithMany(q => q.DetailResults)
                    .HasForeignKey(a => new {a.UserId , a.ExamId});
+
+            builder.HasOne(a => a.Answer)
+                     .WithMany(q => q.DetailResults)
+                     .HasForeignKey(a => a.AnswerId)
+                     .OnDelete(DeleteBehavior.NoAction);
         }
     }
     

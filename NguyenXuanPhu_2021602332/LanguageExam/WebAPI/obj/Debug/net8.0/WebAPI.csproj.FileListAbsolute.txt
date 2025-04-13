@@ -149,3 +149,6 @@ C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\ne
 C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\Infrastructure.dll
 C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\Infrastructure.pdb
 C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\Domain.pdb
+C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\AutoMapper.dll
+C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\Application.dll
+C:\Code\Tai lieu do an\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\Application.pdb

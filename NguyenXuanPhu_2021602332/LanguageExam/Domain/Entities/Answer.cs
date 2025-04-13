@@ -14,6 +14,7 @@ namespace Domain.Entities
         //foreign key question
         public Guid QuestionId { get; set; }
         public Question Question { get; set; }
+        public List<DetailResult> DetailResults { get; set; }
 
     }
 }

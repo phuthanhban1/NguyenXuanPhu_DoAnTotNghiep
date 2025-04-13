@@ -13,7 +13,7 @@
         public string Strict { get; set; }
 
         //foreign key ward
-        public Guid WardId { get; set; }
+        public int WardId { get; set; }
         public Ward Ward { get; set; }
         // foreign key role 
         public Guid RoleId { get; set; }

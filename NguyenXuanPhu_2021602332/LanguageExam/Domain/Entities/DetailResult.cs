@@ -10,7 +10,10 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; }
         public int QuestionNumber { get; set; }
-        public byte Answer { get; set; }
+        // fK: answer
+        public Guid AnswerId { get; set; }
+        public Answer Answer { get; set; }
+
         // foreign key examinee
         public Guid ExamId { get; set; }
         public Guid UserId { get; set; }

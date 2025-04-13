@@ -12,9 +12,7 @@ namespace Domain.Entities
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public string ContentType { get; set; }
-        
         public Question? Question { get; set; }
-
         public User ImageFace { get; set; }
         public User ImageIdCardBefore { get; set; }
         public User ImageIdCardAfter { get; set; }

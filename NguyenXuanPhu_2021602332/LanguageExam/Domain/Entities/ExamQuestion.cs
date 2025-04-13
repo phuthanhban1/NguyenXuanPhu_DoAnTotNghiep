@@ -9,16 +9,16 @@ namespace Domain.Entities
     public class ExamQuestion
     {
         public Guid Id { get; set; }
+        public string Skill { get; set; }
         public int Order { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
 
         //foreign key exam
         public Guid ExamId { get; set; }
         public Exam Exam { get; set; }
 
         // foreign key content block
-        public List<ContentBlock> ContentBlocks { get; set; }
+        public Guid ContentBlockId { get; set; }
+        public ContentBlock ContentBlock { get; set; }
 
     }
 }

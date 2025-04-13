@@ -3,76 +3,64 @@
   "WorkspaceRootPath": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408042501_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250408042501_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\questionbankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\questionbankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\imagefilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\imagefilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\wardconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\wardconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\examineecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\examineecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\skillconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\skillconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\examcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\examcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408042302_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250408042302_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\answercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\answercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\audiofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\audiofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\imagefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\imagefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\skillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\skillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250413145746_updateExamQuestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250413145746_updateExamQuestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\imagefileconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\imagefileconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\detailresultdtos\\detailresultcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\detailresultdtos\\detailresultcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\context\\examcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\examcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\examquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\examquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\questionbank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\questionbank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\contentblockdtos\\contentblockupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\contentblockdtos\\contentblockupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\contentblockdtos\\contentblockcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\contentblockdtos\\contentblockcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\exam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\exam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\questionlevelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\questionlevelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408034244_update3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250408034244_update3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\contentblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\contentblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\questionlevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\questionlevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\examinee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\examinee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,96 +71,200 @@
       "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\province.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\examquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\examquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\examinee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\examinee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\district.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\district.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\detailresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\detailresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\contentblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\contentblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408033752_update2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250408033752_update2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\examconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\examconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408032007_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250408032007_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408031632_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250408031632_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\questionlevelconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\questionlevelconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\examineeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\examineeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\answerconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\answerconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\questionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\questionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\questionbankconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\questionbankconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\provinceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\provinceconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\districtconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\districtconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\detailresultconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\detailresultconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\contentblockconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\contentblockconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\examquestionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\examquestionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\answerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\answerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\audiofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\audiofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\contentblockconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\contentblockconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iquestionlevelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iquestionlevelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\audiofileconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\audiofileconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\questionleveldtos\\questionlevelupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\questionleveldtos\\questionlevelupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\examdtos\\examupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\examdtos\\examupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\examineedtos\\examineecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\examineedtos\\examineecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\examineedtos\\examineeupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\examineedtos\\examineeupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\skilldtos\\skillupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\skilldtos\\skillupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\detailresultdtos\\detailresultupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\detailresultdtos\\detailresultupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\questionleveldtos\\questionlevelcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\questionleveldtos\\questionlevelcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\questionlevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\questionlevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\detailresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\detailresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\examineeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\examineeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\ianswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\ianswerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\examservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\examservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\idetailresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\idetailresultservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\repositories\\implementations\\detailresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\detailresultrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\detailresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\detailresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iexamineeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iexamineeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\repositories\\implementations\\examineerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\examineerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\repositories\\interfaces\\iexamineerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\interfaces\\iexamineerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\examineeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\examineeconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\skilldtos\\skillcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\skilldtos\\skillcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\mappings\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\mappings\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250413135606_updateDetailRs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250413135606_updateDetailRs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\detailresultconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\detailresultconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\exam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\exam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iexamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iexamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\imagefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\imagefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\examdtos\\examcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\examdtos\\examcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iquestionbankservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iquestionbankservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iaudiofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iaudiofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\audiofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\audiofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\imagefiledtos\\imagefiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\imagefiledtos\\imagefiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iimagefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iimagefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\skillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\skillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iskillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iskillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\questionbankservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\questionbankservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\skilldtos\\skilldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\skilldtos\\skilldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\questionbankdtos\\questionbankupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\questionbankdtos\\questionbankupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\questionbankdtos\\questionbankdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\questionbankdtos\\questionbankdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\questionbankdtos\\questionbankcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\dtos\\questionbankdtos\\questionbankcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\tai lieu do an\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\questionbank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\questionbank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -182,570 +274,855 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "QuestionBankController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\QuestionBankController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\QuestionBankController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\QuestionBankController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\QuestionBankController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:58:49.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImageFileController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ImageFileController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ImageFileController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ImageFileController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\ImageFileController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:58:41.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\UserController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:58:24.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "20250413145746_updateExamQuestion.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250413145746_updateExamQuestion.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250413145746_updateExamQuestion.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250413145746_updateExamQuestion.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250413145746_updateExamQuestion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:57:46.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ExamQuestion.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ExamQuestion.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\ExamQuestion.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ExamQuestion.cs",
+              "RelativeToolTip": "Domain\\Entities\\ExamQuestion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:38:47.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SkillController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\SkillController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\SkillController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\SkillController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\SkillController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:16:38.641Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AnswerController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\AnswerController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\AnswerController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\AnswerController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\AnswerController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:16:55.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ExamController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ExamController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExamController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ExamController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\ExamController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:16:51.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExamineeController.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ExamineeController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExamineeController.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ExamineeController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\ExamineeController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAUwBgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:19:17.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ContentBlockUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ContentBlockDtos\\ContentBlockUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ContentBlockDtos\\ContentBlockUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:52:56.956Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ContentBlockCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ContentBlockDtos\\ContentBlockCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ContentBlockDtos\\ContentBlockCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:52:42.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ContentBlock.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ContentBlock.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\ContentBlock.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ContentBlock.cs",
+              "RelativeToolTip": "Domain\\Entities\\ContentBlock.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:41:47.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Province.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Province.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Province.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Province.cs",
+              "RelativeToolTip": "Domain\\Entities\\Province.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:45:29.632Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Question.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Question.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Question.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Question.cs",
+              "RelativeToolTip": "Domain\\Entities\\Question.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:02:32.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DetailResultCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\DetailResultDtos\\DetailResultCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\DetailResultDtos\\DetailResultCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\DetailResultDtos\\DetailResultCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\DetailResultDtos\\DetailResultCreateDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAjwA0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:22:31.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ContentBlockConfiguration.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:44:50.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Examinee.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Examinee.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Examinee.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Examinee.cs",
+              "RelativeToolTip": "Domain\\Entities\\Examinee.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:40:45.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "QuestionLevelService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\QuestionLevelService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\QuestionLevelService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\QuestionLevelService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\QuestionLevelService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:36:04.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ExamQuestionConfiguration.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:42:53.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "QuestionLevelUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionLevelDtos\\QuestionLevelUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\QuestionLevelDtos\\QuestionLevelUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionLevelDtos\\QuestionLevelUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\QuestionLevelDtos\\QuestionLevelUpdateDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:31:43.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ExamUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamDtos\\ExamUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ExamDtos\\ExamUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamDtos\\ExamUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ExamDtos\\ExamUpdateDto.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwBAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:31:58.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ExamineeCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamineeDtos\\ExamineeCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ExamineeDtos\\ExamineeCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamineeDtos\\ExamineeCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ExamineeDtos\\ExamineeCreateDto.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:58:40.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AudioFileService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\AudioFileService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\AudioFileService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\AudioFileService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\AudioFileService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:25:30.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AnswerService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\AnswerService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\AnswerService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\AnswerService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\AnswerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:00:54.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ExamineeUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamineeDtos\\ExamineeUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ExamineeDtos\\ExamineeUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamineeDtos\\ExamineeUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ExamineeDtos\\ExamineeUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:59:13.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "SkillUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\SkillDtos\\SkillUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\SkillDtos\\SkillUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\SkillDtos\\SkillUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\SkillDtos\\SkillUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:14:40.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IQuestionLevelService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IQuestionLevelService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IQuestionLevelService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IQuestionLevelService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IQuestionLevelService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:30:58.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DetailResultUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\DetailResultDtos\\DetailResultUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\DetailResultDtos\\DetailResultUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\DetailResultDtos\\DetailResultUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\DetailResultDtos\\DetailResultUpdateDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:23:03.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "QuestionLevelCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionLevelDtos\\QuestionLevelCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\QuestionLevelDtos\\QuestionLevelCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionLevelDtos\\QuestionLevelCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\QuestionLevelDtos\\QuestionLevelCreateDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:31:30.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "QuestionLevel.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionLevel.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\QuestionLevel.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionLevel.cs",
+              "RelativeToolTip": "Domain\\Entities\\QuestionLevel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:32:45.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DetailResultService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\DetailResultService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\DetailResultService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\DetailResultService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\DetailResultService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAzwBkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:25:49.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ExamService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ExamService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\ExamService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ExamService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\ExamService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAD4vxcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:30:03.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "IAnswerService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IAnswerService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IAnswerService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IAnswerService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IAnswerService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:17:22.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ExamineeService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ExamineeService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\ExamineeService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ExamineeService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\ExamineeService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAnwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:56:49.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "DetailResultRepository.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\DetailResultRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\DetailResultRepository.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\DetailResultRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\DetailResultRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:24:14.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IDetailResultService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IDetailResultService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IDetailResultService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IDetailResultService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IDetailResultService.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:46:38.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "ExamineeRepository.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\ExamineeRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\ExamineeRepository.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\ExamineeRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\ExamineeRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAjwBAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:09:35.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IExamineeService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IExamineeService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IExamineeService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IExamineeService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IExamineeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:05:37.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "DetailResult.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\DetailResult.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\DetailResult.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\DetailResult.cs",
+              "RelativeToolTip": "Domain\\Entities\\DetailResult.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:41:32.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "IExamineeRepository.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Interfaces\\IExamineeRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Interfaces\\IExamineeRepository.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Interfaces\\IExamineeRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Interfaces\\IExamineeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:09:10.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ExamineeConfiguration.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamineeConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamineeConfiguration.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamineeConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Configurations\\ExamineeConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:09:00.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "AutoMapperProfile.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Mappings\\AutoMapperProfile.cs",
+              "RelativeDocumentMoniker": "Application\\Mappings\\AutoMapperProfile.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Mappings\\AutoMapperProfile.cs",
+              "RelativeToolTip": "Application\\Mappings\\AutoMapperProfile.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:05:08.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "20250413135606_updateDetailRs.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250413135606_updateDetailRs.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250413135606_updateDetailRs.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250413135606_updateDetailRs.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250413135606_updateDetailRs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:56:06.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "SkillCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\SkillDtos\\SkillCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\SkillDtos\\SkillCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\SkillDtos\\SkillCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\SkillDtos\\SkillCreateDto.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAowA8AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T15:56:20.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "DetailResultConfiguration.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\DetailResultConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\DetailResultConfiguration.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\DetailResultConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Configurations\\DetailResultConfiguration.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAYwBEAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:53:08.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Answer.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Answer.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Answer.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Answer.cs",
+              "RelativeToolTip": "Domain\\Entities\\Answer.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:53:35.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "IExamService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IExamService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IExamService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IExamService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IExamService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:30:17.732Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20250408042501_init.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408042501_init.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250408042501_init.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408042501_init.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250408042501_init.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T04:25:01.539Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "20250408042302_init.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408042302_init.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250408042302_init.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408042302_init.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250408042302_init.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T04:23:02.242Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AudioFile.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\AudioFile.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\AudioFile.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\AudioFile.cs",
-              "RelativeToolTip": "Domain\\Entities\\AudioFile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:54:28.992Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\User.cs",
-              "RelativeToolTip": "Domain\\Entities\\User.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAqwBcAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T06:42:13.084Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ImageFile.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ImageFile.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\ImageFile.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ImageFile.cs",
-              "RelativeToolTip": "Domain\\Entities\\ImageFile.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAkwA4AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:45:50.505Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\UserConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\UserConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\UserConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\UserConfiguration.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwCAAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:45:27.964Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SkillConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\SkillConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\SkillConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\SkillConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\SkillConfiguration.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBIAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:19:32.998Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WardConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\WardConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\WardConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\WardConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\WardConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:37:31.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ImageFileConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ImageFileConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ImageFileConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ImageFileConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\ImageFileConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:10:34.211Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ExamContext.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Context\\ExamContext.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Context\\ExamContext.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Context\\ExamContext.cs",
-              "RelativeToolTip": "Infrastructure\\Context\\ExamContext.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAACYAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:49:13.593Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "QuestionBank.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionBank.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\QuestionBank.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionBank.cs",
-              "RelativeToolTip": "Domain\\Entities\\QuestionBank.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:48:24.455Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Answer.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Answer.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Answer.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Answer.cs",
-              "RelativeToolTip": "Domain\\Entities\\Answer.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAzwA4AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:53:30.569Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 46,
               "Title": "Exam.cs",
               "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Exam.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Exam.cs",
               "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Exam.cs",
               "RelativeToolTip": "Domain\\Entities\\Exam.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:46:11.28Z",
+              "WhenOpened": "2025-04-13T13:28:21.334Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "20250408034244_update3.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408034244_update3.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250408034244_update3.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408034244_update3.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250408034244_update3.cs",
+              "DocumentIndex": 48,
+              "Title": "ImageFileService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ImageFileService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\ImageFileService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ImageFileService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\ImageFileService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwCEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:00:51.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "ExamCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamDtos\\ExamCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ExamDtos\\ExamCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ExamDtos\\ExamCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ExamDtos\\ExamCreateDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:31:47.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\UnitOfWork\\UnitOfWork.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeToolTip": "Infrastructure\\UnitOfWork\\UnitOfWork.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAA+wEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:26:47.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ImageFileDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ImageFileDtos\\ImageFileDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\ImageFileDtos\\ImageFileDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ImageFileDtos\\ImageFileDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\ImageFileDtos\\ImageFileDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T03:42:45.128Z",
+              "WhenOpened": "2025-04-12T16:24:10.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "IAudioFileService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IAudioFileService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IAudioFileService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IAudioFileService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IAudioFileService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:23:50.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "IQuestionBankService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IQuestionBankService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IQuestionBankService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IQuestionBankService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IQuestionBankService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T15:54:15.409Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 53,
+              "Title": "AudioFile.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\AudioFile.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\AudioFile.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\AudioFile.cs",
+              "RelativeToolTip": "Domain\\Entities\\AudioFile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:24:53.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "IImageFileService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IImageFileService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IImageFileService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IImageFileService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IImageFileService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:21:57.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "SkillService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\SkillService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\SkillService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\SkillService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\SkillService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAA1wDYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:06:50.995Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "QuestionBankService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\QuestionBankService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\QuestionBankService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\QuestionBankService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\QuestionBankService.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAA3wCwAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T16:00:53.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ISkillService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\ISkillService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\ISkillService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\ISkillService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\ISkillService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAjwA8AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T15:54:10.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
               "Title": "Skill.cs",
               "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Skill.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Skill.cs",
               "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Skill.cs",
               "RelativeToolTip": "Domain\\Entities\\Skill.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAgwAQAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:45:41.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T15:55:49.312Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Role.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Role.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Role.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Role.cs",
-              "RelativeToolTip": "Domain\\Entities\\Role.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 61,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\UserService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Implements\\UserService.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\UserService.cs",
+              "RelativeToolTip": "Application\\Services\\Implements\\UserService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:35:26.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T16:00:58.014Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "QuestionLevel.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionLevel.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\QuestionLevel.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionLevel.cs",
-              "RelativeToolTip": "Domain\\Entities\\QuestionLevel.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 60,
+              "Title": "SkillDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\SkillDtos\\SkillDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\SkillDtos\\SkillDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\SkillDtos\\SkillDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\SkillDtos\\SkillDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:00:33.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T15:55:45.902Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Question.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Question.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Question.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Question.cs",
-              "RelativeToolTip": "Domain\\Entities\\Question.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 62,
+              "Title": "QuestionBankUpdateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionBankDtos\\QuestionBankUpdateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\QuestionBankDtos\\QuestionBankUpdateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionBankDtos\\QuestionBankUpdateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\QuestionBankDtos\\QuestionBankUpdateDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:12:37.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T16:04:38.943Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Province.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Province.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Province.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Province.cs",
-              "RelativeToolTip": "Domain\\Entities\\Province.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 63,
+              "Title": "QuestionBankDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionBankDtos\\QuestionBankDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\QuestionBankDtos\\QuestionBankDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionBankDtos\\QuestionBankDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\QuestionBankDtos\\QuestionBankDto.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:52:57.371Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T16:04:31.91Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ExamQuestion.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ExamQuestion.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\ExamQuestion.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ExamQuestion.cs",
-              "RelativeToolTip": "Domain\\Entities\\ExamQuestion.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 64,
+              "Title": "QuestionBankCreateDto.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionBankDtos\\QuestionBankCreateDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\QuestionBankDtos\\QuestionBankCreateDto.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionBankDtos\\QuestionBankCreateDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\QuestionBankDtos\\QuestionBankCreateDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:45:51.738Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T16:04:19.888Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Ward.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Ward.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Ward.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Ward.cs",
-              "RelativeToolTip": "Domain\\Entities\\Ward.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 65,
+              "Title": "QuestionBank.cs",
+              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionBank.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\QuestionBank.cs",
+              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionBank.cs",
+              "RelativeToolTip": "Domain\\Entities\\QuestionBank.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:39:25.37Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Examinee.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Examinee.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Examinee.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Examinee.cs",
-              "RelativeToolTip": "Domain\\Entities\\Examinee.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:45:52.594Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "District.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\District.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\District.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\District.cs",
-              "RelativeToolTip": "Domain\\Entities\\District.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:35:13.863Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "DetailResult.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\DetailResult.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\DetailResult.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\DetailResult.cs",
-              "RelativeToolTip": "Domain\\Entities\\DetailResult.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:40:20.327Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "ContentBlock.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ContentBlock.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\ContentBlock.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ContentBlock.cs",
-              "RelativeToolTip": "Domain\\Entities\\ContentBlock.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:55:30.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "20250408033752_update2.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408033752_update2.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250408033752_update2.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408033752_update2.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250408033752_update2.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T03:37:52.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "RoleConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\RoleConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\RoleConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\RoleConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\RoleConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:35:39.87Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "20250408032007_init.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408032007_init.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250408032007_init.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408032007_init.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250408032007_init.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T03:20:07.899Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "20250408031632_init.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408031632_init.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250408031632_init.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250408031632_init.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250408031632_init.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T03:16:32.442Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "ExamConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\ExamConfiguration.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:59:22.481Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "QuestionLevelConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\QuestionLevelConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\QuestionLevelConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\QuestionLevelConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\QuestionLevelConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:28:43.278Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "ExamineeConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamineeConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamineeConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamineeConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\ExamineeConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:43:10.626Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "AnswerConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\AnswerConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\AnswerConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\AnswerConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\AnswerConfiguration.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:53:10.327Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "QuestionConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\QuestionConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\QuestionConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\QuestionConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\QuestionConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:59:23.76Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "QuestionBankConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\QuestionBankConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\QuestionBankConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\QuestionBankConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\QuestionBankConfiguration.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:17:06.958Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "ProvinceConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ProvinceConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ProvinceConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ProvinceConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\ProvinceConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:36:21.946Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "DistrictConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\DistrictConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\DistrictConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\DistrictConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\DistrictConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:37:19.917Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "DetailResultConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\DetailResultConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\DetailResultConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\DetailResultConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\DetailResultConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:39:47.936Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "ExamQuestionConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\ExamQuestionConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:30:39.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Program.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Program.cs",
-              "RelativeToolTip": "WebAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T02:59:27.464Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "WebAPI\\appsettings.json",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\appsettings.json",
-              "RelativeToolTip": "WebAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-04-08T02:58:08.706Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "ContentBlockConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\ContentBlockConfiguration.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:55:04.362Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "AudioFileConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\AudioFileConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\AudioFileConfiguration.cs",
-              "ToolTip": "C:\\Code\\Tai lieu do an\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\AudioFileConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\AudioFileConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T01:53:42.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-12T16:02:32.741Z"
             }
           ]
         }

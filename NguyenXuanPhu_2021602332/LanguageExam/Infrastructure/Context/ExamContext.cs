@@ -39,6 +39,15 @@ namespace Infrastructure.Context
             base.OnModelCreating(modelBuilder);
             
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ExamContext).Assembly);
+            modelBuilder.Entity<Role>().HasData(
+                new Role { Id = Guid.NewGuid(), Name = "Admin" },
+                new Role { Id = Guid.NewGuid(), Name = "ExamManager" },
+                new Role { Id = Guid.NewGuid(), Name = "TestCreator" },
+                new Role { Id = Guid.NewGuid(), Name = "QuestionBankManager" },
+                new Role { Id = Guid.NewGuid(), Name = "QuestionContributor" },
+                new Role { Id = Guid.NewGuid(), Name = "QuestionContributor" },
+                new Role { Id = Guid.NewGuid(), Name = "User" }
+            );
         }
     }
 }

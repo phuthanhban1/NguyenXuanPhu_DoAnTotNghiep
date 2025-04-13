@@ -8,7 +8,7 @@ namespace Domain.Entities
 {
     public class Province
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<District> Districts { get; set; }
     }
