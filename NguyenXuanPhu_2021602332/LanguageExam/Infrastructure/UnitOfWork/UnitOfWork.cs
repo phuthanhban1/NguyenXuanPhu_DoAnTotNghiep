@@ -1,6 +1,8 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Repositories.Implementations;
 using Infrastructure.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace Infrastructure.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private IDbContextTransaction _transaction;
         protected readonly ExamContext _context;
 
         public UnitOfWork(ExamContext context)
@@ -34,6 +37,24 @@ namespace Infrastructure.UnitOfWork
             Roles = new RoleRepository(_context);
             Wards = new WardRepository(_context);
         }
+        
+
+        public async Task BeginTransactionAsync()
+        {
+            _transaction = await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+            await _transaction?.CommitAsync();
+        }
+
+        public async Task RollbackAsync()
+        {
+            await _transaction?.RollbackAsync();
+        }
+        
 
         public IAnswerRepository Answers {get; set;}
 

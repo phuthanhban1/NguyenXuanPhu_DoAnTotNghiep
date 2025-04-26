@@ -26,5 +26,17 @@ namespace WebAPI.Controllers
             await _questionBankService.UpdateAsync(questionBankUpdateDto);
             return Ok();
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            await _questionBankService.DeleteAsync(id);
+            return Ok();
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<QuestionBankDto>>> GetAll()
+        {
+            var questionBanks = await _questionBankService.GetAllAsync();
+            return Ok(questionBanks);
+        }
     }
 }

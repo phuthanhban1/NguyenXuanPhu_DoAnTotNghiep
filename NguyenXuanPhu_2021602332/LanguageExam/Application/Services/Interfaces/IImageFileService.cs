@@ -10,7 +10,7 @@ namespace Application.Services.Interfaces
 {
     public interface IImageFileService
     {
-        Task AddAsync(IFormFile file);
+        Task<Guid> AddAsync(IFormFile file);
         Task UpdateAsync(Guid id, IFormFile file);
         Task DeleteAsync(Guid id);
         Task<ImageFileDto> GetByIdAsync(Guid id);

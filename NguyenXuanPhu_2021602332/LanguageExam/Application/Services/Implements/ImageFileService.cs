@@ -73,20 +73,21 @@ namespace Application.Services.Implements
             }
         }
 
-        public async Task AddAsync(IFormFile file)
+        public async Task<Guid> AddAsync(IFormFile file)
         {
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
-
+            Guid idImage = Guid.NewGuid();
             var image = new ImageFile
             {
-                Id = Guid.NewGuid(),
+                Id = idImage,
                 FileName = file.FileName,
                 FileData = memoryStream.ToArray(),
                 ContentType = file.ContentType
             };
             await _unitOfWork.ImageFiles.AddAsync(image);
             await _unitOfWork.SaveChangeAsync();
+            return idImage;
         }
     }
 }

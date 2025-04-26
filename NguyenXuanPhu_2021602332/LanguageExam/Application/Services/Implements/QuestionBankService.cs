@@ -29,6 +29,7 @@ namespace Application.Services.Implements
             var questionBank = _mapper.Map<QuestionBank>(userCreateDto);    
             questionBank.Id = Guid.NewGuid();
             questionBank.CreatedAt = DateTime.UtcNow;
+            questionBank.IsActive = true;
             await _unitOfWork.QuestionBanks.AddAsync(questionBank);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -42,19 +43,18 @@ namespace Application.Services.Implements
             }
             else
             {
-                await _unitOfWork.QuestionBanks.DeleteAsync(questionBank);
+                questionBank.IsActive = false;
+                await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
             }
         }
 
-        public Task<List<QuestionBankDto>> GetAllAsync()
+        public async Task<List<QuestionBankDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<QuestionBankDto> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
+            var banks = await _unitOfWork.QuestionBanks.GetAllAsync();
+            var activeBanks = banks.Where(b => b.IsActive).ToList();
+            var questionBankDtos = _mapper.Map<List<QuestionBankDto>>(activeBanks);
+            return questionBankDtos;
         }
 
         public async Task UpdateAsync(QuestionBankUpdateDto questionBankUpdateDto)
@@ -63,6 +63,10 @@ namespace Application.Services.Implements
             if (questionBank == null)
             {
                 throw new NotFoundException($"Không tìm thấy ngân hàng câu hỏi có id: {questionBankUpdateDto.Id}");
+            }
+            else if (DateTime.Now >= questionBank.CreatedAt.AddMonths(2))
+            {
+                throw new BadRequestException($"Thời gian cập nhật đã kết thúc");
             }
             else
             {

@@ -13,13 +13,15 @@
     <Folder Include="Dtos\ExamQuestionDtos\" />
     <Folder Include="Dtos\WardDtos\" />
     <Folder Include="Dtos\RoleDtos\" />
-    <Folder Include="Dtos\QuestionDtos\" />
     <Folder Include="Dtos\ProvinceDtos\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

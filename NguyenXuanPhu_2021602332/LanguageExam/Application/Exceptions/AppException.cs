@@ -11,5 +11,7 @@ namespace Application.Exceptions
         public virtual int StatusCode { get; } = 500;
 
         public AppException(string message) : base(message) { }
+        public AppException(string message, Exception innerException)
+        : base(message, innerException) { }
     }
 }

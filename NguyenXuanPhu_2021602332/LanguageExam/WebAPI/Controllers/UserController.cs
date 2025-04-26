@@ -15,6 +15,19 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            var users = await _userService.GetAllAsync();
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(Guid id)
+        {
+            var user = _userService.GetById(id);
+            return Ok(user);
+        }
         [HttpPost]
         public async Task<ActionResult> Add(UserCreateDto userCreateDto)
         {
@@ -40,6 +53,17 @@ namespace WebAPI.Controllers
         {
             await _userService.UpdateRole(userRoleUpdateDto);
             return Ok();
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(UserLoginDto userLoginDto)
+        {
+            var token = await _userService.Login(userLoginDto);
+            if(token == null)
+            {
+                return Unauthorized("Email và mật khẩu không hợp lệ");
+            }
+            return Ok(new { Token = token });
         }
     }
 }

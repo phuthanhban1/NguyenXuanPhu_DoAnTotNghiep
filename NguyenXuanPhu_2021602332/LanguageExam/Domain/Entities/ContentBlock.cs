@@ -14,6 +14,7 @@ namespace Domain.Entities
         public byte QuestionAmount { get; set; }
         public bool IsUsed { get; set; }
         public string? UnConFirmedReason { get; set; }
+        public QuestionStruct QuestionStruct { get; set; }
 
         // foreign key audio file
         public Guid? AudioFileId { get; set; }

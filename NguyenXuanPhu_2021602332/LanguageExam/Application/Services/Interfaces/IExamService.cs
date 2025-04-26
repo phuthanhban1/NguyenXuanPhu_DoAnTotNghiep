@@ -13,7 +13,9 @@ namespace Application.Services.Interfaces
         Task AddAsync(ExamCreateDto examCreateDto);
         Task UpdateAsync(ExamUpdateDto examUpdateDto);
         Task DeleteAsync(Guid id);
-        Task<QuestionBankDto> GetByIdAsync(Guid id);
-        Task<List<QuestionBankDto>> GetAllAsync();
+        
+        Task<List<ExamDto>> GetAllAsync();
+        Task<List<ExamDto>> GetByManagerIdAsync(Guid id);
+
     }
 }

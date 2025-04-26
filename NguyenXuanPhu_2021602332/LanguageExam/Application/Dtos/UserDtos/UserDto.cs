@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Dtos.ImageFileDtos;
+using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,34 +9,17 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.UserDtos
 {
-    public class UserDto
+    public class UserDto : BaseUserDto
     {
         public Guid Id { get; set; }
-        public string IdCard { get; set; }
-        public bool Gener { get; set; }
-        public DateOnly DateOfBirth { get; set; }
-        
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Strict { get; set; }
 
-        //foreign key ward
-        public int WardId { get; set; }
-        public Ward Ward { get; set; }
-      
-        // fk img: anh mat
-        public Guid ImageFaceId { get; set; }
-        public ImageFile ImageFace { get; set; }
+        public ImageFileDto ImageFace { get; set; }
+       
+        public ImageFileDto ImageIdCardBefore { get; set; }
 
-        // fk img: id card before
-        public Guid ImageIdCardBeforeId { get; set; }
-        public ImageFile ImageIdCardBefore { get; set; }
+        public ImageFileDto ImageIdCardAfter { get; set; }
+        public string Address { get; set; }
 
-        // fk img: id card after
-        public Guid ImageIdCardAfterId { get; set; }
-        public ImageFile ImageIdCardAfter { get; set; }
 
-  
     }
 }

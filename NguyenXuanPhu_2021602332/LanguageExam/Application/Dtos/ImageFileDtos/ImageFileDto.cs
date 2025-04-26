@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.ImageFileDtos
 {
-    public class ImageFileDto
+    public class ImageFileDto : ImageFileUpdateDto
     {
         public Guid Id { get; set; }
-        public string FileName { get; set; }
-        public Byte[] FileData { get; set; }
-        public string ContentType { get; set; }
+        
     }
 }

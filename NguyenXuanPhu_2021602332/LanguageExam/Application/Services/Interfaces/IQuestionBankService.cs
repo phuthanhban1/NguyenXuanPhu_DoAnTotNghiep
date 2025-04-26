@@ -13,7 +13,7 @@ namespace Application.Services.Interfaces
         Task AddAsync(QuestionBankCreateDto questionBankCreateDto);
         Task UpdateAsync(QuestionBankUpdateDto questionBankUpdateDto);
         Task DeleteAsync(Guid id);
-        Task<QuestionBankDto> GetByIdAsync(Guid id);
+        //Task<QuestionBankDto> GetByIdAsync(Guid id);
         Task<List<QuestionBankDto>> GetAllAsync();
     }
 }

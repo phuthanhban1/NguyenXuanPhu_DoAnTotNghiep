@@ -34,5 +34,29 @@ namespace WebAPI.Controllers
             await _examService.UpdateAsync(examUpdateDto);
             return Ok();
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteExam(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest("Invalid exam ID");
+            }
+            await _examService.DeleteAsync(id);
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllExam()
+        {
+            var exams = await _examService.GetAllAsync();
+            return Ok(exams);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetExamByManager(Guid id)
+        {
+            var exams = await _examService.GetByManagerIdAsync(id);
+            return Ok(exams);
+        }
     }
 }

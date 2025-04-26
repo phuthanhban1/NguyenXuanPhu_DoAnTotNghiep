@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace Application.Dtos.UserDtos
 {
     public class UserCreateDto
     {
-        
         public string IdCard { get; set; }
-        public bool Gener { get; set; }
+        public DateOnly? DateOfIssue { get; set; }
+        public string? PlaceOfIssue { get; set; }
+        public bool Gender { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
@@ -24,15 +26,16 @@ namespace Application.Dtos.UserDtos
         //public Ward Ward { get; set; }
 
         // fk img: anh mat
-        public Guid ImageFaceId { get; set; }
+        public IFormFile ImageFace { get; set; }
+
         //public ImageFile ImageFace { get; set; }
 
         // fk img: id card before
-        public Guid ImageIdCardBeforeId { get; set; }
+        public IFormFile ImageIdCardBefore { get; set; }
         //public ImageFile ImageIdCardBefore { get; set; }
 
         // fk img: id card after
-        public Guid ImageIdCardAfterId { get; set; }
+        public IFormFile ImageIdCardAfter { get; set; }
         //public ImageFile ImageIdCardAfter { get; set; }
     }
 }

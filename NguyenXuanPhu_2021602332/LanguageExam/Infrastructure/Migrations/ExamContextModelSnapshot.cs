@@ -92,6 +92,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("QuestionLevelId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("QuestionStruct")
+                        .HasColumnType("int");
+
                     b.Property<string>("UnConFirmedReason")
                         .HasColumnType("nvarchar(max)");
 
@@ -170,6 +173,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("CreatedQuestionUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ExamStructId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Fee")
                         .HasColumnType("int");
 
@@ -193,6 +199,9 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedQuestionUserId");
+
+                    b.HasIndex("ExamStructId")
+                        .IsUnique();
 
                     b.HasIndex("ManagerId");
 
@@ -227,6 +236,29 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("ExamQuestion", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.ExamStruct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("QuestionLevelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Skill")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionLevelId");
+
+                    b.ToTable("ExamStruct", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Examinee", b =>
@@ -326,6 +358,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Language")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -390,37 +425,42 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("22d63de4-3fdc-468b-bc4b-fe733f8638e4"),
+                            Id = new Guid("2959ca56-a667-46a0-acea-eba1e9961419"),
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("28f93555-9065-4115-a017-2ca4ddb13505"),
+                            Id = new Guid("85af4517-be3b-4ea9-b2cd-1ad9b4417870"),
                             Name = "ExamManager"
                         },
                         new
                         {
-                            Id = new Guid("0063fa63-e83b-45a6-bf95-85dd1e6812b1"),
+                            Id = new Guid("45b76d26-26e2-41d1-a0f7-ed6b55dc2190"),
                             Name = "TestCreator"
                         },
                         new
                         {
-                            Id = new Guid("03a7bc8c-48ca-44dd-847b-e033c360ead4"),
+                            Id = new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62"),
                             Name = "QuestionBankManager"
                         },
                         new
                         {
-                            Id = new Guid("365bc42b-8f58-47a1-b838-1a872faaaa52"),
+                            Id = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
                             Name = "QuestionContributor"
                         },
                         new
                         {
-                            Id = new Guid("870de52e-e757-4cef-98e6-8bb8f057164f"),
-                            Name = "QuestionContributor"
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            Name = "QuestionReviewer"
                         },
                         new
                         {
-                            Id = new Guid("4586a5d0-44c8-4862-95bd-a9e4677635b7"),
+                            Id = new Guid("a0e4f1d5-3c8b-4f2a-8e6c-7d9b5e0a2f1d"),
+                            Name = "Examinee"
+                        },
+                        new
+                        {
+                            Id = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "User"
                         });
                 });
@@ -468,7 +508,10 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("DateOfBirth")
+                    b.Property<DateOnly?>("DateOfBirth")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("DateOfIssue")
                         .HasColumnType("date");
 
                     b.Property<string>("Email")
@@ -476,59 +519,75 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Gener")
+                    b.Property<bool?>("Gender")
                         .HasColumnType("bit");
 
                     b.Property<string>("IdCard")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ImageFaceId")
+                    b.Property<Guid?>("ImageFaceId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ImageIdCardAfterId")
+                    b.Property<Guid?>("ImageIdCardAfterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ImageIdCardBeforeId")
+                    b.Property<Guid?>("ImageIdCardBeforeId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlaceOfIssue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Strict")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WardId")
+                    b.Property<int?>("WardId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ImageFaceId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ImageFaceId] IS NOT NULL");
 
                     b.HasIndex("ImageIdCardAfterId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ImageIdCardAfterId] IS NOT NULL");
 
                     b.HasIndex("ImageIdCardBeforeId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ImageIdCardBeforeId] IS NOT NULL");
 
                     b.HasIndex("RoleId");
 
                     b.HasIndex("WardId");
 
                     b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9a53fe4d-3c72-4bd2-909c-5a33f0fcb33d"),
+                            Email = "phuthanhban3@gmail.com",
+                            FullName = "Nguyễn Xuân Phú",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("2959ca56-a667-46a0-acea-eba1e9961419")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Ward", b =>
@@ -619,6 +678,12 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.ExamStruct", "ExamStruct")
+                        .WithOne("Exam")
+                        .HasForeignKey("Domain.Entities.Exam", "ExamStructId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.User", "Manager")
                         .WithMany("ManagedExam")
                         .HasForeignKey("ManagerId")
@@ -626,6 +691,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("CreatedQuestionUser");
+
+                    b.Navigation("ExamStruct");
 
                     b.Navigation("Manager");
                 });
@@ -647,6 +714,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("ContentBlock");
 
                     b.Navigation("Exam");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ExamStruct", b =>
+                {
+                    b.HasOne("Domain.Entities.QuestionLevel", "QuestionLevel")
+                        .WithMany("ExamStructs")
+                        .HasForeignKey("QuestionLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("QuestionLevel");
                 });
 
             modelBuilder.Entity("Domain.Entities.Examinee", b =>
@@ -735,20 +813,17 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.ImageFile", "ImageFace")
                         .WithOne("ImageFace")
                         .HasForeignKey("Domain.Entities.User", "ImageFaceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.ImageFile", "ImageIdCardAfter")
                         .WithOne("ImageIdCardAfter")
                         .HasForeignKey("Domain.Entities.User", "ImageIdCardAfterId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.ImageFile", "ImageIdCardBefore")
                         .WithOne("ImageIdCardBefore")
                         .HasForeignKey("Domain.Entities.User", "ImageIdCardBeforeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.Role", "Role")
                         .WithMany("Users")
@@ -758,9 +833,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Entities.Ward", "Ward")
                         .WithMany("Users")
-                        .HasForeignKey("WardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WardId");
 
                     b.Navigation("ImageFace");
 
@@ -816,6 +889,12 @@ namespace Infrastructure.Migrations
                     b.Navigation("Examinees");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ExamStruct", b =>
+                {
+                    b.Navigation("Exam")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.Examinee", b =>
                 {
                     b.Navigation("DetailResults");
@@ -853,6 +932,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.QuestionLevel", b =>
                 {
                     b.Navigation("ContentBlocks");
+
+                    b.Navigation("ExamStructs");
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>

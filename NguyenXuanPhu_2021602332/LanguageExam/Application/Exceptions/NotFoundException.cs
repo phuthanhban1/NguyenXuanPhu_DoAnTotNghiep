@@ -11,5 +11,6 @@ namespace Application.Exceptions
         public override int StatusCode => 404;
 
         public NotFoundException(string message) : base(message) { }
+        public NotFoundException(string message, Exception e) : base(message, e) { }
     }
 }

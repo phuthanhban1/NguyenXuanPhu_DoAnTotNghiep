@@ -47,14 +47,19 @@ namespace Application.Services.Implements
             }
         }
 
-        public Task<List<QuestionBankDto>> GetAllAsync()
+        public async Task<List<ExamDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var exams = await _unitOfWork.Exams.GetAllAsync();
+            var examDtos = _mapper.Map<List<ExamDto>>(exams);
+            return examDtos;
         }
 
-        public Task<QuestionBankDto> GetByIdAsync(Guid id)
+        public async Task<List<ExamDto>> GetByManagerIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var exams = await _unitOfWork.Exams.GetAllAsync();
+            var examByManagers = exams.Where(exams => exams.ManagerId == id).ToList();
+            var examDtos = _mapper.Map<List<ExamDto>>(examByManagers);
+            return examDtos;
         }
 
         public async Task UpdateAsync(ExamUpdateDto examUpdateDto)

@@ -11,5 +11,7 @@ namespace Application.Exceptions
         public override int StatusCode => 400;
 
         public BadRequestException(string message) : base(message) { }
+        public BadRequestException(string message, Exception e) : base(message, e) { }
+
     }
 }

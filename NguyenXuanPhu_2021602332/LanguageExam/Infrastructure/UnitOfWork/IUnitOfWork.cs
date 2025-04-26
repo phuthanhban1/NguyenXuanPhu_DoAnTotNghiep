@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +28,9 @@ namespace Infrastructure.UnitOfWork
         IRoleRepository Roles { get; }
         IWardRepository Wards { get; }
         Task<int> SaveChangeAsync();
+        Task BeginTransactionAsync();
+        Task CommitAsync();
+        Task RollbackAsync();
+        
     }
 }

@@ -12,7 +12,7 @@ namespace Application.Services.Interfaces
         Task AddAsync(QuestionLevelCreateDto questionLevelCreateDto);
         Task UpdateAsync(QuestionLevelUpdateDto questionLevelUpdateDto);
         Task DeleteAsync(Guid id);
-        //Task<QuestionLevelDto> GetByIdAsync(Guid id);
-        //Task<List<QuestionLevelDto>> GetAllAsync();
+        Task<QuestionLevelUpdateDto> GetByIdAsync(Guid id);
+        Task<List<QuestionLevelUpdateDto>> GetAllAsync(Guid skillId);
     }
 }

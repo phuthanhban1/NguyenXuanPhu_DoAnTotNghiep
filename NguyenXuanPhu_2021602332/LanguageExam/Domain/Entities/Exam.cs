@@ -24,9 +24,14 @@ namespace Domain.Entities
         public Guid CreatedQuestionUserId { get; set; }
         public User CreatedQuestionUser { get; set; }
 
+        // foreign key exam struct
+        public Guid ExamStructId { get; set; }
+        public ExamStruct ExamStruct { get; set; }
 
         public List<Examinee> Examinees { get; set; }
         public ExamQuestion ExamQuestion { get; set; }
+
+
 
     }
 }

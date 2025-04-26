@@ -9,8 +9,8 @@ namespace Application.Services.Interfaces
 {
     public interface IContentBlockService
     {
-        //IEnumerable<ContentBlock> GetAllAsync();
-        //Task<ContentBlock> GetByIdAsync(Guid id);
+        IEnumerable<ContentBlock> GetAllAsync();
+        Task<ContentBlock> GetByIdAsync(Guid id);
         //Task AddAsync(ContentBlockCreateDto contentBlockCreateDto);
         //Task DeleteAsync(Guid id);
         //Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto);

@@ -6,11 +6,14 @@ namespace Application.Services.Interfaces
     {
         Task AddAsync(UserCreateDto userCreateDto);
         Task UpdateAsync(UserUpdateDto userUpdateDto);
-        Task DeleteAsync(Guid id);
-        Task<UserDto> GetByIdAsync(Guid id);
-        Task<List<UserDto>> GetAllAsync();
+        
+        UserDto GetById(Guid id);
+        Task<List<GetAllUserDto>> GetAllAsync();
 
         Task UpdateRole(UserRoleUpdateDto userRoleUpdateDto);
         Task UpdatePassword(UserPassworDto userPassworDto);
+
+        Task<string> Login(UserLoginDto userLoginDto);
+        Task<List<GetAllUserDto>> GetByEmail(string email);
     }
 }

@@ -17,5 +17,6 @@ namespace Domain.Entities
         public Skill Skill { get; set; }
 
         public List<ContentBlock> ContentBlocks { get; set; }
+        public List<ExamStruct> ExamStructs { get; set; }
     }
 }

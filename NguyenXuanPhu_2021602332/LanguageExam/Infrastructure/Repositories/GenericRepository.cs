@@ -51,5 +51,10 @@ namespace Infrastructure.Repositories
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
         }
+
+        public IQueryable<T> GetById(Guid id)
+        {
+            return _context.Set<T>().Where(e => EF.Property<Guid>(e, "Id") == id);
+        }
     }
 }
