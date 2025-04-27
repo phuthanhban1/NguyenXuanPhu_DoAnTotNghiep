@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cropper</title>
+    <!-- Cropper.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
+</head>
+<body>
+    <div>
+        <h2>Upload and Crop Image</h2>
+        <input type="file" id="uploadImage" accept="image/*" />
+        <br>
+        <img id="image" style="max-width: 100%;" src="" alt="Image" />
+    </div>
+    
+    <!-- Crop and Save Button -->
+    <button id="cropButton">Crop Image</button>
+
+    <!-- Cropper.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+    <script>
+        let cropper;
+
+        // Tải ảnh từ file input
+        document.getElementById('uploadImage').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function (e) {
+                const imageElement = document.getElementById('image');
+                imageElement.src = e.target.result;
+
+                // Khởi tạo cropper mới khi ảnh thay đổi
+                if (cropper) {
+                    cropper.destroy();  // Hủy cropper cũ nếu có
+                }
+                cropper = new Cropper(imageElement, {
+                    aspectRatio: 1,  // Tỉ lệ cắt, 1:1 để cắt hình vuông
+                    viewMode: 1,
+                    responsive: true,
+                    autoCropArea: 0.8,
+                    cropBoxResizable: true,
+                });
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Xử lý cắt ảnh và lưu hoặc gửi lên server
+        document.getElementById('cropButton').addEventListener('click', function () {
+            if (cropper) {
+                // Lấy canvas của ảnh đã cắt
+                const canvas = cropper.getCroppedCanvas();
+                
+                if (canvas) {
+                    // Chuyển canvas thành Blob để gửi lên server
+                    canvas.toBlob(function (blob) {
+                        const formData = new FormData();
+                        formData.append('croppedImage', blob, 'croppedImage.png');
+
+                        // Gửi ảnh đã cắt lên server (Ví dụ: thông qua Fetch API)
+                        fetch('/upload', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Image uploaded successfully:', data);
+                        })
+                        .catch(error => {
+                            console.error('Error uploading image:', error);
+                        });
+                    });
+                } else {
+                    alert('Please crop the image first.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

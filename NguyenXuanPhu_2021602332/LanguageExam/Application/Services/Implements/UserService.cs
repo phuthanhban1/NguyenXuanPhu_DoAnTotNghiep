@@ -145,7 +145,7 @@ namespace Application.Services.Implements
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Sid, user.Id + ""),
-                    new Claim(ClaimTypes.Role, user.Role + "")
+                    new Claim(ClaimTypes.Role, user.Role.Name + "")
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 Issuer = _configuration["JwtSettings:Issuer"],

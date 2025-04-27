@@ -18,7 +18,8 @@ namespace Infrastructure.Repositories.Implementations
 
         public async Task<User> Login(string email, string password)
         {
-            var user = await _context.User.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
+            var user = await _context.User.Include(r => r.Role)
+                .FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
             return user;
         }
 

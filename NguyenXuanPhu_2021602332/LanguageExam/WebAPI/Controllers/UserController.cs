@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.UserDtos;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -29,7 +31,7 @@ namespace WebAPI.Controllers
             return Ok(user);
         }
         [HttpPost]
-        public async Task<ActionResult> Add(UserCreateDto userCreateDto)
+        public async Task<ActionResult> Add([FromForm] UserCreateDto userCreateDto)
         {
             await _userService.AddAsync(userCreateDto);
             return Ok();
@@ -63,7 +65,17 @@ namespace WebAPI.Controllers
             {
                 return Unauthorized("Email và mật khẩu không hợp lệ");
             }
-            return Ok(new { Token = token });
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true, // Chỉ server đọc được
+                Secure = true,   // Chỉ gửi qua HTTPS (nên dùng ở môi trường thật)
+                SameSite = SameSiteMode.None,  // khi muon cross-site
+                Expires = DateTime.UtcNow.AddHours(2) // Thời gian sống
+            };
+
+            Response.Cookies.Append("token", token, cookieOptions);
+
+            return Ok(token);
         }
     }
 }

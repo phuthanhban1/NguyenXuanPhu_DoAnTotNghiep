@@ -775,94 +775,48 @@
         "tags": [
           "User"
         ],
-        "parameters": [
-          {
-            "name": "IdCard",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "DateOfIssue",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
-          },
-          {
-            "name": "PlaceOfIssue",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Gender",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "DateOfBirth",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
-          },
-          {
-            "name": "Password",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "FullName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Email",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "PhoneNumber",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Strict",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "WardId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
+                  "IdCard": {
+                    "type": "string"
+                  },
+                  "DateOfIssue": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "PlaceOfIssue": {
+                    "type": "string"
+                  },
+                  "Gender": {
+                    "type": "boolean"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "FullName": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "Strict": {
+                    "type": "string"
+                  },
+                  "WardId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
                   "ImageFace": {
                     "type": "string",
                     "format": "binary"
@@ -878,6 +832,39 @@
                 }
               },
               "encoding": {
+                "IdCard": {
+                  "style": "form"
+                },
+                "DateOfIssue": {
+                  "style": "form"
+                },
+                "PlaceOfIssue": {
+                  "style": "form"
+                },
+                "Gender": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "Password": {
+                  "style": "form"
+                },
+                "FullName": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "PhoneNumber": {
+                  "style": "form"
+                },
+                "Strict": {
+                  "style": "form"
+                },
+                "WardId": {
+                  "style": "form"
+                },
                 "ImageFace": {
                   "style": "form"
                 },

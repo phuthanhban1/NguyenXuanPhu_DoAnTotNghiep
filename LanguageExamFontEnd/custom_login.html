@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Đăng ký tài khoản</title>
+    <meta name="title" content="Đăng ký" />
+    <meta name="description" content="" />
+    <meta name="author" content="IIG Viet Nam">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://s3-hfx03.fptcloud.com/online/img/favicon.png" type="image/x-icon" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+    <!-- Web Fonts  -->
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/animate/animate.compat.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/owl.carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://s3-hfx03.fptcloud.com/online/vendor/owl.carousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet"
+        href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/theme.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/theme-elements.css">
+    <link rel="stylesheet"
+        href="https://s3-hfx03.fptcloud.com/online/vendor/simple-line-icons/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/fontawesome-free/css/all.min.css">
+
+    <!-- Revolution Slider CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/css/settings.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/css/layers.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/css/navigation.css">
+    <!-- Current Page CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/circle-flip-slideshow/css/component.css">
+
+    <!-- Skin CSS -->
+    <link id="skinCSS" rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/skins/default.css">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/custom.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/jquery.toast.min.css">
+
+    <!-- Head Libs -->
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/modernizr/modernizr.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery/jquery.min.js"></script>
+    <script
+        src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script
+        src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js"></script>
+
+    <!-- Constants -->
+    <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/constants.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59ERC2E791"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-59ERC2E791');</script>
+
+    <!-- Add these lines before other scripts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+
+    <style>
+        #upload-demo {
+            width: 100%;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .center-block {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modal-body {
+            padding: 20px;
+        }
+    </style>
+     <script>
+        $(document).ready(function() {
+            // Lấy danh sách tỉnh/thành phố khi load trang
+            $.ajax({
+                url: 'https://localhost:7001/api/province', // Thay bằng endpoint thực tế của bạn
+                method: 'GET',
+                success: function(data) {
+                    var html = '<option selected disabled value="">Chọn</option>';
+                    data.forEach(function(city) {
+                        html += '<option value="' + city.id + '">' + city.name + '</option>';
+                    });
+                    $('#CityWork').html(html);
+                },
+                error: function() {
+                    $('#CityWork').html('<option value="">Không tải được</option>');
+                }
+            });
+
+            // Khi chọn Tỉnh/Thành phố
+            $('#CityWork').on('change', function() {
+                var cityId = $(this).val();
+                $('#DistrictWork').html('<option value="">Đang tải...</option>');
+                $('#WardWork').html('<option value="">Chọn</option>');
+                $.ajax({
+                    url: 'https://localhost:7001/api/district/province/' + cityId, // Thay bằng URL API thực tế
+                    method: 'GET',
+                    success: function(data) {
+                        var html = '<option value="">Chọn</option>';
+                        data.forEach(function(district) {
+                            html += '<option value="' + district.id + '">' + district.name + '</option>';
+                        });
+                        $('#DistrictWork').html(html);
+                    },
+                    error: function() {
+                        $('#DistrictWork').html('<option value=\"\">Không tải được</option>');
+                    }
+                });
+            });
+        
+            // Khi chọn Quận/Huyện
+            $('#DistrictWork').on('change', function() {
+                var districtId = $(this).val();
+                $('#WardWork').html('<option value="">Đang tải...</option>');
+                $.ajax({
+                    url: 'https://localhost:7001/api/ward/district/' + districtId, // Thay bằng URL API thực tế
+                    method: 'GET',
+                    success: function(data) {
+                        var html = '<option value="">Chọn</option>';
+                        data.forEach(function(ward) {
+                            html += '<option value="' + ward.id + '">' + ward.name + '</option>';
+                        });
+                        $('#WardWork').html(html);
+                    },
+                    error: function() {
+                        $('#WardWork').html('<option value=\"\">Không tải được</option>');
+                    }
+                });
+            });
+        });
+        </script>
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/custom.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/business/examregister.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/coppie/croppie.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/business/normal-exam.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/services.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/crop-image.js"></script>
+        <script type="text/javascript">
+            var listItem = []
+            const minSize = 1048576;
+            const maxSize = 3145728;
+            const maxSizeFilePdf = 5242880;
+            var quality = 0.5;
+            $('#IDCardFront, #IDCardBack, #BirthCertificate,#SchoolCertificate').change(async function (e) {
+                const nameAttr = this.getAttribute("name");
+                $('#' + nameAttr + 'Preview').attr("src", '');
+
+                if (typeof (this.files[0]) != 'undefined') {
+
+                    $('label[for="' + nameAttr + '"]').remove()
+                    readURL(this);
+                    const acceptAttr = this.getAttribute("accept");
+                    if (acceptAttr == "application/pdf") {
+                        if (this.files[0].type != "application/pdf" || this.files[0].size > 5242880) {
+                            const error = "File Pdf vượt quá dung lượng cho phép "
+                            var validator = $("#UserInfoForm").validate();
+                            validator.showErrors({
+                                "SchoolCertificate": error
+                            });
+
+                            ShowToastMessage({
+                                text: error,
+                                bgColor: bgError
+                            });
+                        }
+                    }
+                    else {
+                        if (this.files[0].size > minSize && this.files[0].size < maxSize) {
+                            const dataTransfer = await DownSizeImange(e.target.files, quality)
+                            // gán lại file to input
+                            e.target.files = dataTransfer.files;
+                        }
+
+                        if (((this.files[0].type != "image/jpeg") && (this.files[0].type != "image/jpg")) || this.files[0].size > 512000 || this.files[0].size < 10000) {
+                            const error = "Vui lòng chọn file đúng định dạng .jpeg hoặc .jpg  và có dung lượng dưới 500KB"
+                            var validator = $("#UserInfoForm").validate();
+                            switch (nameAttr) {
+                                case "IDCardFront":
+                                    validator.showErrors({
+                                        "IDCardFront": error
+                                    });
+                                    break;
+                                case "IDCardBack":
+                                    validator.showErrors({
+                                        "IDCardBack": error
+                                    });
+                                    break;
+                                case "BirthCertificate":
+                                    validator.showErrors({
+                                        "BirthCertificate": error
+                                    });
+                                    break;
+
+                            }
+                            ShowToastMessage({
+                                text: error,
+                                bgColor: bgError
+                            });
+                        }
+                    }
+
+                }
+            })
+
+            var $uploadCrop;
+            
+            $(document).ready(function() {
+                const maxSize = 512000; // 500KB
+                const minSize = 10000;  // 10KB
+                let $uploadCrop = null;
+
+                // Initialize croppie
+                $uploadCrop = $('#upload-demo').croppie({
+                    viewport: {
+                        width: 354,
+                        height: 472
+                    },
+                    boundary: {
+                        width: 400,
+                        height: 500
+                    },
+                    enableExif: true
+                });
+
+                // Handle image upload
+                $('#Image3x4').on('change', function() {
+                    if (this.files && this.files[0]) {
+                        const file = this.files[0];
+                        
+                        // Check file size
+                        if (file.size > maxSize) {
+                            alert('Kích thước ảnh không được vượt quá 500KB');
+                            this.value = '';
+                            return;
+                        }
+                        if (file.size < minSize) {
+                            alert('Kích thước ảnh phải lớn hơn 10KB');
+                            this.value = '';
+                            return;
+                        }
+
+                        // Check file type
+                        if (!file.type.match('image/jpeg') && !file.type.match('image/jpg') && !file.type.match('image/png')) {
+                            alert('Vui lòng chọn file ảnh định dạng JPG, PNG hoặc JPEG');
+                            this.value = '';
+                            return;
+                        }
+
+                        // Destroy previous croppie instance if exists
+                        // if ($uploadCrop) {
+                        //     $uploadCrop.croppie('destroy');
+                        // }
+
+                        // If file is valid, show croppie
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $uploadCrop = $('#upload-demo').croppie({
+                                viewport: {
+                                    width: 354,
+                                    height: 472
+                                },
+                                boundary: {
+                                    width: 400,
+                                    height: 500
+                                },
+                                enableExif: true
+                            });
+                            $uploadCrop.croppie('bind', {
+                                url: e.target.result
+                            });
+                            $('#cropImagePop').modal('show');
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // Handle close button click
+                $('#closeModal').on('click', function() {
+                    $('#cropImagePop').modal('hide');
+                });
+
+                // Initialize datepicker
+                $('.type-date').datepicker({
+                    format: "dd/mm/yyyy",
+                    language: "vi",
+                    orientation: "bottom auto",
+                    endDate: '+0d',
+                    autoclose: true,
+                });
+                // Form validation
+                $("#UserInfoForm").validate({
+                    rules: {
+                        VietnameseName: {
+                            required: true,
+                            pattern: /^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\ ]+$/
+                        },
+                        BirthDay: {
+                            required: true,
+                            pattern: /^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$/
+                        },
+                        Gender: {
+                            required: true
+                        },
+                        Phone: {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                            number: true
+                        },
+                        Email: {
+                            required: true,
+                            email: true
+                        }
+                    },
+                    messages: {
+                        VietnameseName: {
+                            required: "Vui lòng nhập họ và tên thí sinh",
+                            pattern: "Tên không đúng định dạng"
+                        },
+                        BirthDay: {
+                            required: "Vui lòng nhập ngày sinh",
+                            pattern: "Vui lòng nhập đúng định dạng dd/mm/yyyy"
+                        },
+                        Gender: {
+                            required: "Vui lòng chọn giới tính"
+                        },
+                        Phone: {
+                            required: "Vui lòng nhập số điện thoại",
+                            minlength: "Số điện thoại phải đủ 10 số",
+                            number: "Vui lòng nhập đúng định dạng số diện thoại"
+                        },
+                        Email: {
+                            required: "Vui lòng nhập email",
+                            email: "Vui lòng nhập email đúng định dạng"
+                        }
+                    }
+                });
+
+                // Image upload preview
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $(input).siblings('img').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                // Handle image uploads
+                $('#IDCardFront, #IDCardBack, #Image3x4').change(function() {
+                    readURL(this);
+                });
+
+                // Handle form submission
+                $('#SubmitProfile').click(function(e) {
+                    e.preventDefault();
+                    var validateUserInfo = $('#UserInfoForm').valid();
+                    var validateFile = ValidateFile();
+
+                    if (validateUserInfo && validateFile) {
+                        // Submit form
+                        $('#UserInfoForm').submit();
+                    } else {
+                        var error = $('.error:visible').first();
+                        if (error) {
+                            if (error.attr('name') == 'Image3x4' || error.attr('name') == 'IDCardFront' || error.attr('name') == 'IDCardBack') {
+                                $('html, body').animate({
+                                    scrollTop: $('#' + error.attr('name') + 'Preview').offset().top
+                                }, 1000);
+                            } else {
+                                $(error).focus();
+                            }
+                            let text = "Vui lòng điền đầy đủ thông tin";
+                            ShowToastMessage({
+                                text: text,
+                                bgColor: bgError
+                            });
+                        }
+                    }
+                });
+            });
+
+            // File validation function
+            function ValidateFile() {
+                var result = true;
+                var maxSizeImage = 512000;
+                $('#IDCardFront, #IDCardBack, #Image3x4').each(function() {
+                    const nameAttr = this.getAttribute("name");
+                    if (typeof(this.files[0]) != 'undefined') {
+                        if (nameAttr == "Image3x4" && (this.files[0].size > maxSizeImage || this.files[0].size < 10000)) {
+                            const error = "Vui lòng chọn file ảnh và có dung lượng dưới 200KB";
+                            var validator = $("#UserInfoForm").validate();
+                            validator.showErrors({
+                                "Image3x4": error
+                            });
+                            result = false;
+                        } else if (nameAttr != "Image3x4" && (this.files[0].type != "image/jpeg" && this.files[0].type != "image/jpg" && this.files[0].type != "image/png" || this.files[0].size > 512000 || this.files[0].size < 10000)) {
+                            const error = "Vui lòng chọn file đúng định dạng .jpeg, .png hoặc .jpg và có dung lượng dưới 200KB";
+                            var validator = $("#UserInfoForm").validate();
+                            switch (nameAttr) {
+                                case "IDCardFront":
+                                    validator.showErrors({
+                                        "IDCardFront": error
+                                    });
+                                    break;
+                                case "IDCardBack":
+                                    validator.showErrors({
+                                        "IDCardBack": error
+                                    });
+                                    break;
+                            }
+                            result = false;
+                        }
+                    }
+                });
+                return result;
+            }
+            $(function() {
+    var isDragging = false, startY, startTop;
+    var $modalDialog = $('#cropImagePop .modal-dialog');
+
+    $('#headerModal').css('cursor', 'move');
+
+    $('#headerModal').on('mousedown', function(e) {
+        isDragging = true;
+        startY = e.clientY;
+        startTop = parseInt($modalDialog.css('top')) || 0;
+        $(document).on('mousemove.cropperModal', function(e) {
+            if (isDragging) {
+                var newTop = startTop + (e.clientY - startY);
+                $modalDialog.css('top', newTop + 'px');
+            }
+        });
+        $(document).on('mouseup.cropperModal', function() {
+            isDragging = false;
+            $(document).off('.cropperModal');
+        });
+    });
+    // Reset modal position when open
+    $('#cropImagePop').on('show.bs.modal', function () {
+                $modalDialog.css('top', '');
+            });
+        });
+        </script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.appear/jquery.appear.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.validation/jquery.validate.min.js"></script>
+    
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.validation/additional-methods.min.js"></script>
+    
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/lazysizes/lazysizes.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/isotope/jquery.isotope.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/owl.carousel/owl.carousel.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    
+        <!-- Theme Base, Components and Settings -->
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/theme.js"></script>
+        <!-- Current Page Vendor and Views -->
+        <!-- Revolution Slider Scripts -->
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+        <script src="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    
+        <!-- Current Page Vendor and Views -->
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/views/view.contact.js"></script>
+        <!-- Theme Initialization Files -->
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/theme.init.js"></script>
+        <!-- add Toast -->
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/jquery.toast.min.js"></script>
+    
+        <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/business/identity.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#cropImageBtn').on('click', function(e) {
+                    console.log('clicked')
+                    e.preventDefault();
+                    if ($uploadCrop) {
+                        $uploadCrop.croppie('result', {
+                            type: 'canvas',
+                            size: 'viewport'
+                        }).then(function(resp) {
+                            $('#Image3x4Preview').attr('src', resp);
+                            $('#cropImagePop').modal('hide');
+                        });
+                    }
+                });
+            });
+        </script> 
+</head>
+<body data-plugin-page-transition class="loading-overlay-showing" data-loading-overlay
+    data-plugin-options="{'effect': 'default'}">
+    
+    <div class="body">       
+        <div style="min-height:48vh">
+            <!-- <link href="/css/normal-exam.css" rel="stylesheet" />
+            <link href="/css/coppie/croppie.min.css" rel="stylesheet" /> -->
+            <div class="container py-2">
+                <div class="row">
+                    <h2 class="text-center title-exam-registration">Đăng ký tài khoản</h2>
+                    <p class="text-center text-note">
+                        Chú ý: Những mục đánh dấu * là bắt buộc người dùng phải nhập
+                    </p>
+                </div>
+
+                <div class="row place-userInfor">
+                    <form id="UserInfoForm" class="contact-form needs-validation" novalidate="">
+                        <input hidden name="profileChange" value="0" />
+                        <input hidden name="profileId" value="" />
+                        <div class="col-lg-8">
+                            <h4 class="text-uppercase text-title-form">THÔNG TIN CÁ NHÂN</h4>
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label class="form-label mb-1 text-2 required">Họ và tên thí sinh</label>
+                                    <input type="text" value="" class="form-control text-3 h-auto py-2"
+                                        name="VietnameseName"
+                                        placeholder="Nhập họ và tên thí sinh"
+                                        aria-invalid="true" maxlength="255" required=""
+                                        data-msg-required="Vui lòng nhập họ và tên thí sinh"
+                                        data-rule-pattern="^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\ ]+$"
+                                        data-msg-pattern="Tên không đúng định dạng">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label class="form-label mb-1 text-2 required">Ngày sinh</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-3 h-auto py-2 type-date"
+                                            id="DateOfBirth" name="DateOfBirth"
+                                            placeholder="DD/MM/YYYY" data-provide="datepicker" required=""
+                                            data-msg-required="Vui lòng nhập ngày sinh"
+                                            data-rule-pattern="^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$"
+                                            data-msg-pattern="Vui lòng nhập đúng định dạng dd/mm/yyyy">
+                                        <label class="input-group-text" for="DateOfBirth"><i
+                                                class="fas fa-calendar-alt"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label class="form-label mb-1 text-2 required">Giới tính</label>
+                                    <div class="col-lg-9">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Gender" id="man"
+                                                value="man" required=""
+                                                data-msg-required="Vui lòng chọn giới tính">
+                                            <label class="form-check-label" for="man">Nam</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Gender"
+                                                id="woman" value="woman">
+                                            <label class="form-check-label" for="woman">Nữ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row group-detail-typeIdCard">
+                                <div class="form-group col-lg-6">
+                                    <div class="TypeIdCard-None">
+                                        <label class="form-label mb-1 text-2 required">Số CCCD</label>
+                                        <input class="form-control text-3 h-auto py-2" type="text" 
+                                            name="CCCD"
+                                            placeholder="Nhập số CCCD" 
+                                            required=""
+                                            data-msg-required="Vui lòng nhập số CCCD"
+                                            data-rule-pattern="^[0-9]{12}$"
+                                            data-msg-pattern="Vui lòng nhập đúng định dạng số CCCD (12 số)"
+                                            maxlength="12">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label class="form-label mb-1 text-2 required">Ngày cấp</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-3 h-auto py-2 type-date"
+                                            id="DateOfIssueOfIDCard" name="DateOfIssueOfIDCard"
+                                            placeholder="DD/MM/YYYY" data-provide="datepicker" required=""
+                                            data-msg-required="Vui lòng nhập ngày cấp"
+                                            data-rule-pattern="^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$"
+                                            data-msg-pattern="Vui lòng nhập đúng định dạng dd/mm/yyyy">
+                                        <label class="input-group-text" for="DateOfIssueOfIDCard"><i
+                                                class="fas fa-calendar-alt"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row group-detail-typeIdCard">
+                                <div class="form-group col-lg-12">
+                                    <label class="form-label mb-1 text-2 required">Nơi cấp</label>
+                                    <input class="form-control text-3 h-auto py-2" type="text"
+                                        placeholder="Nhập nơi cấp" name="PlaceProvideIdCard"
+                                        value="" maxlength="255" required=""
+                                        data-msg-required="Vui lòng nhập nơi cấp">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label class="form-label mb-1 text-2 required">Số điện thoại</label>
+                                <input class="form-control text-3 h-auto py-2" type="text" name="Phone"
+                                    placeholder="Nhập số điện thoại"
+                                    required=""
+                                    data-msg-required="Vui lòng nhập số điện thoại"
+                                    data-rule-minlength="10" maxlength="10"
+                                    data-msg-minlength="Số điện thoại phải đủ 10 số"
+                                    data-rule-number="^[0-9]{10}"
+                                    data-msg-number="Vui lòng nhập đúng định dạng số diện thoại">
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <label class="form-label mb-1 text-2 required">Số nhà, đường/phố</label>
+                                    <input type="text" value="" class="form-control text-3 h-auto py-2 "
+                                        placeholder="Nhập số nhà, đường/phố"
+                                        name="HouseNumber" required="" maxlength="255"
+                                        data-msg-required="Vui lòng nhập thông tin số nhà, đường phố">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-group col-lg-4">
+                                    <label class="form-label mb-1 text-2 required">Tỉnh/Thành phố</label>
+                                    <select class="form-select form-control h-auto py-2" id="CityWork"
+                                        name="CityWork" required=""
+                                        data-msg-required="Vui lòng chọn Tỉnh/Thành phố">
+                                        <option selected="" disabled value="">Chọn</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label
+                                        class="form-label mb-1 text-2 required">Quận/Huyện</label>
+                                    <select class="form-select form-control h-auto py-2" id="DistrictWork"
+                                        name="DistrictWork" required=""
+                                        data-msg-required="Vui lòng chọn Quận/Huyện">
+                                        <option selected="" disabled value="">Chọn</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label
+                                        class="form-label mb-1 text-2 required">Phường/Xã</label>
+                                    <select class="form-select form-control h-auto py-2" id="WardWork"
+                                        name="WardWork" required=""
+                                        data-msg-required="Vui lòng chọn Xã/Phường">
+                                        <option selected="" disabled value="">Chọn</option>
+                                    </select>
+                                </div>
+                               
+                            </div>
+                            <h4 class="text-uppercase text-title-form">THÔNG TIN TÀI KHOẢN</h4>
+                            <div class="form-group col-lg-6">
+                                <label class="form-label mb-1 text-2 required">Email</label>
+                                <input type="text" value="" class="form-control text-3 h-auto py-2"
+                                    name="Email" data-msg-required="Vui lòng nhập email"
+                                    placeholder="Nhập email" maxlength="255"
+                                    data-rule-pattern="^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$"
+                                    data-msg-pattern="Vui lòng nhập email đúng định dạng"
+                                    required>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label class="form-label mb-1 text-2 required">Mật khẩu</label>
+                                    <input type="password" value="" class="form-control text-3 h-auto py-2"
+                                        name="Password" data-msg-required="Vui lòng nhập mật khẩu"
+                                        placeholder="Nhập mật khẩu" maxlength="255" 
+                                        data-rule-minlength="8"
+                                        data-msg-minlength="Mật khẩu phải có ít nhất 8 ký tự"
+                                        required>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label class="form-label mb-1 text-2 required">Xác nhận mật khẩu</label>
+                                    <input type="password" value="" class="form-control text-3 h-auto py-2"
+                                        name="ConfirmPassword" data-msg-required="Vui lòng xác nhận mật khẩu"
+                                        placeholder="Nhập lại mật khẩu" maxlength="255"
+                                        data-rule-equalTo="#Password"
+                                        data-msg-equalTo="Mật khẩu xác nhận không khớp"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <div class="form-group form-check" style="text-align: justify;">
+                                        <input class="form-check-input single-check" type="checkbox" value="" id="agreecommit" name="agreecommit" required="" data-msg-required="Vui lòng đồng ý cam kết">
+                                        <label class="form-check-label" for="agreecommit">
+                                            Tôi xin cam kết
+                                        </label>
+                                    </div>
+                                    <div class="row p-3 text-note">
+                                        <p><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">- Tôi đã đọc và hiểu rõ, đồng thời đồng ý tuân thủ theo các Quy định liên quan đến tài khoản của IIG Việt Nam. </span></p>
+                                        <p><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">- Mọi thông tin, hồ sơ tôi đã kê khai và cung cấp bao gồm các thông tin cá nhân, ảnh và giấy tờ tùy thân của tôi, là chính xác và tuân thủ các quy định của IIG Việt Nam.</span></p>
+                                        <p><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">- Tôi đã đọc và hiểu rõ <a href="/vi/privacy-policy/" title="Privacy Policy" target="_blank" rel="noopener">Chính sách bảo mật thông tin khách hàng</a>. Tôi đồng ý cho phép IIG Việt Nam sử dụng thông tin cá nhân để phục vụ cho các mục đích nằm trong chính sách này.</span></p>
+                                        <p><span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">- Trường hợp tôi vi phạm bất kỳ cam kết nào ở trên, tôi chấp nhận chịu mọi hình thức xử lý theo đúng quy định của IIG Việt Nam và pháp luật, đồng thời tôi hiểu rằng IIG Việt Nam có quyền từ chối cung cấp dịch vụ cho tôi</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 place-photos">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="form-label mb-2 text-2 required"><strong>Hình
+                                            3x4cm</strong></label>
+                                    <div class="">
+                                        <small class="sub-text">
+                                            <span class="text-danger"> Lưu ý*:</span> Nếu ảnh không đáp ứng tiêu chuẩn theo yêu cầu, tài khoản sẽ không được xác thực <br />
+                                            Vui lòng tuân thủ các yêu cầu tiêu chuẩn về ảnh <a href="/vi/news/quy-dinh-ve-anh-the-khi-dang-ky-thi-va-du-thi-cac-bai-thi-tin-hoc/" target="_blank">tại đây</a>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-6">
+                                        <div class="img-thumbnail box-img-3x4 text-center">
+                                            <small class="d-block">
+                                                Ảnh mẫu
+                                            </small>
+                                            <div class="posision-relative img-3x4-template mx-auto">
+                                                <div class="position-relative" style="right: -31px;">
+                                                    <small class="position-absolute"
+                                                        style="right: 6px;top: 50px; transform: rotate(90deg);">472px</small>
+                                                    <img src="https://s3-hfx03.fptcloud.com/online/img/gallery/arrow_1.png"
+                                                        class="position-absolute" style="right: 20px;">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <img src="https://s3-hfx03.fptcloud.com/online/img/gallery/arrow_2.png"
+                                                    class=" mx-auto">
+                                                <small class="d-block text-center">
+                                                    354px
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="box-img-3x4 img-thumbnail text-center position-relative ">
+                                            <span class="d-block" style="height: 160px;">
+                                                <small class="d-block">
+                                                    Ảnh người dùng
+                                                </small>
+                                                <img id="Image3x4Preview" class="img-fluid img-3x4"
+                                                    src="https://s3-hfx03.fptcloud.com/online/img/avatars/user.png">
+                                                <input type="file" name="Image3x4" id="Image3x4"
+                                                    accept="image/*" class="item-img position-absolute"
+                                                    data-validate="true" required=""
+                                                    data-msg-required="Vui lòng chọn ảnh">
+                                            </span>
+                                            <button type="button" id="btnUploadImage3x4"
+                                                class="btn btn-primary btn-sm mb-2 mt-2 mx-auto"
+                                                onclick="$('#Image3x4').click()">Tải lên</button>
+                                        </div>
+                                        <div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog"
+                                            aria-labelledby="cropImagePop">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" id="headerModal"
+                                                        style="background-color: #0B4D8D ">
+                                                        <div class="modal-title" id="exampleModalLabel"></div>
+                                                        <button type="button" class="close" aria-label="Close"
+                                                            data-bs-dismiss="modal" id="closeModal"
+                                                            style="background-color: white; border: 1px solid gray; border-radius: 6px">
+                                                            <span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="upload-demo" class="center-block"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-bs-dismiss="modal">Đóng</button>
+                                                        <button type="button" id="cropImageBtn"
+                                                            class="btn btn-primary">Cắt</button>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row detail-IDCardFront">
+                                <div class="form-group">
+                                    <label class="form-label mb-2 text-2 required"><strong>Mặt
+                                            trước CCCD</strong></label>
+                                    <div class="">
+                                        <small class="sub-text">
+                                            <span class="text-danger"> Lưu ý*:</span> Còn hạn và nguyên gốc, không bong/rách; Các chi tiết rõ nét, không có dấu hiệu chỉnh sửa.<br />
+                                            Vui lòng tuân thủ các yêu cầu tiêu chuẩn về giấy tờ <a href="/vi/news/quy-dinh-ve-giay-to-tuy-than-khi-dang-ky-thi-va-du-thi-1/" target="_blank">tại đây</a>
+                                        </small>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <div class="img-thumbnail text-center position-relative ">
+                                                <span class="d-block pt-3" style="height: 160px;">
+                                                    <img id="IDCardFrontPreview"
+                                                        class="img-fluid bg-img-idCard "
+                                                        src="https://s3-hfx03.fptcloud.com/online/img/gallery/rectangle-623.png"
+                                                        style="max-width: 325px;max-height: 135px;">
+                                                    <input type="file" name="IDCardFront" id="IDCardFront"
+                                                        class="position-absolute" accept="image/jpg, image/jpeg"
+                                                        data-validate="true" style="z-index:-1" required=""
+                                                        data-msg-required="Vui lòng chọn ảnh">
+                                                </span>
+                                                <button type="button" id="btnUploadIDCardFront"
+                                                    class="btn btn-primary btn-sm mb-2 mt-2 mx-auto"
+                                                    onclick="$('#IDCardFront').click()">Tải lên</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row detail-IDCardBack">
+                                <div class="form-group">
+                                    <label class="form-label mb-2 text-2 required"><strong>Mặt sau
+                                            CCCD:</strong></label>
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <div class="img-thumbnail text-center position-relative ">
+                                                <span class="d-block pt-3" style="height: 160px;">
+                                                    <img id="IDCardBackPreview" class="img-fluid bg-img-idCard"
+                                                        src="https://s3-hfx03.fptcloud.com/online/img/gallery/rectangle-623.png"
+                                                        style="max-width: 325px;max-height: 135px;">
+                                                    <input type="file" name="IDCardBack" id="IDCardBack"
+                                                        class="position-absolute" accept="image/jpg, image/jpeg"
+                                                        data-msg-required="Vui lòng chọn ảnh"
+                                                        required="" data-validate="true" style="z-index:-1">
+                                                </span>
+                                                <button type="button" id="btnUploadIDCardBack"
+                                                    class="btn btn-primary btn-sm mb-2 mt-2 mx-auto"
+                                                    onclick="$('#IDCardBack').click()">Tải lên</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col text-center">
+                            <button type="submit" id="SubmitProfile" class="btn btn-primary" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Loading..." style="align-items:center;">
+                                <div class="text-button">Đăng ký</div>
+                            </button>
+                        </div>
+                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

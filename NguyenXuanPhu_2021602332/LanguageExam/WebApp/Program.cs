@@ -3,9 +3,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
-
+app.UseCors("AllowAll");
+app.UseStaticFiles();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

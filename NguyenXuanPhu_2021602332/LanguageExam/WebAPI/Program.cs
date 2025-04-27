@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -42,6 +43,7 @@ if (key.Length < 32)
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
+    {
         option.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -52,7 +54,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = jwtSetting["Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(key)
 
-        }
+        };
+
+        option.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var token = context.Request.Cookies["token"];
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.Token = token;
+                }
+                return Task.CompletedTask;
+            }
+        };
+    }
+        
     );
 
 builder.Services.AddAuthorization();
@@ -92,18 +109,20 @@ builder.Services.AddSwaggerGen(ops =>
 });
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+            .WithOrigins("http://127.0.0.1:5503") // domain FE
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
     });
 });
 
 
 var app = builder.Build();
-app.UseCors("AllowAll");
+//app.UseCors("AllowAll")
+    app.UseCors("AllowFrontend");
 // DI Exception
 //app.UseMiddleware<ExceptionMiddleware>();
 //app.UseExceptionHandler(errorApp =>
