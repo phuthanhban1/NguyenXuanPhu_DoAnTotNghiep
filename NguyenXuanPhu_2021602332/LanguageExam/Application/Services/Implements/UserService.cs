@@ -27,11 +27,23 @@ namespace Application.Services.Implements
             _mapper = mapper;
             _configuration = configuration;
         }
-        
+        public async Task<bool> CheckUserByEmail(string email)
+        {
+            var getUserEmail = await _unitOfWork.Users.FindAsync(u => u.Email == email);
+            if(getUserEmail == null || !getUserEmail.Any())
+            {
+                return false;
+            }
+            return true;
+        }
         public async Task AddAsync(UserCreateDto userCreateDto)
         {
             try
             {
+                if(await CheckUserByEmail(userCreateDto.Email))
+                {
+                    throw new BadRequestException("Email đã tồn tại");
+                }
                 var user = _mapper.Map<User>(userCreateDto);
                 user.Id = Guid.NewGuid();
                 user.RoleId = new Guid("8A7DD16F-85BF-4143-BE0B-A31DA3BBE44A");

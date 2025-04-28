@@ -15,5 +15,6 @@ namespace Application.Services.Interfaces
 
         Task<string> Login(UserLoginDto userLoginDto);
         Task<List<GetAllUserDto>> GetByEmail(string email);
+        Task<bool> CheckUserByEmail(string email);
     }
 }

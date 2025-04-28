@@ -3,28 +3,60 @@
   "WorkspaceRootPath": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\emailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\extensionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\extensionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\implements\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\imagefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\imagefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\skillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\skillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\context\\examcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\examcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\repositories\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\webapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\wardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,16 +71,8 @@
       "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\extensionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|solutionrelative:application\\services\\extensionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\imagefilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\imagefilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\application\\services\\implements\\imagefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -131,20 +155,8 @@
       "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\wardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\imagefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\imagefile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\context\\examcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\examcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\examstructconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\examstructconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{990ACE2A-FCF4-440F-9A06-CF4264C4AB95}|Infrastructure\\Infrastructure.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\infrastructure\\configurations\\examconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -177,10 +189,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\domain\\entities\\questionlevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{542D0ACF-7335-4B19-B470-6D5BB67A0E38}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\questionlevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED513133-FEE5-47FD-9A63-08CD2BEA5EE9}|ConsoleApp1\\ConsoleApp1.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED513133-FEE5-47FD-9A63-08CD2BEA5EE9}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E3267145-F872-422E-9C1B-DC5A83B36FE1}|Application\\Application.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\application\\dtos\\contentblockdtos\\contentblockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -221,10 +229,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\questionbankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\questionbankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\skillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\skillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{995ED643-170D-412B-A9D8-D7F7F78C361B}|WebAPI\\WebAPI.csproj|c:\\code\\githubdoantotnghiep\\nguyenxuanphu_doantotnghiep\\nguyenxuanphu_2021602332\\languageexam\\webapi\\controllers\\questionlevelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -278,7 +282,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -286,108 +290,187 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\User.cs",
-              "RelativeToolTip": "Domain\\Entities\\User.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAnwAoAAAAfAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "EmailController.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\EmailController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\EmailController.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\EmailController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\EmailController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T07:25:22.381Z",
+              "WhenOpened": "2025-04-28T06:55:22.84Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "WebAPI\\appsettings.json",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\appsettings.json",
+              "RelativeToolTip": "WebAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-28T04:15:37.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExtensionService.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\ExtensionService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\ExtensionService.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\ExtensionService.cs",
+              "RelativeToolTip": "Application\\Services\\ExtensionService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAuwB4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T15:11:13.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ExamContext.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Context\\ExamContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\ExamContext.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Context\\ExamContext.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\ExamContext.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACgAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T07:24:03.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\UserService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\UserService.cs",
               "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\UserService.cs",
               "RelativeToolTip": "Application\\Services\\Implements\\UserService.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAowJAAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAGQAAAAAAAAAAADwvysAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-26T07:31:44.592Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "WardController.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\WardController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\WardController.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\WardController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\WardController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T17:21:33.293Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ExceptionMiddleware.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Middleware\\ExceptionMiddleware.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Middleware\\ExceptionMiddleware.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Middleware\\ExceptionMiddleware.cs",
-              "RelativeToolTip": "WebAPI\\Middleware\\ExceptionMiddleware.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T07:14:41.728Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "BaseUserDto.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\BaseUserDto.cs",
-              "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\BaseUserDto.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\BaseUserDto.cs",
-              "RelativeToolTip": "Application\\Dtos\\UserDtos\\BaseUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T17:41:47.512Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Ward.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Ward.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Ward.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Ward.cs",
-              "RelativeToolTip": "Domain\\Entities\\Ward.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T07:26:55.197Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Program.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Program.cs",
-              "RelativeToolTip": "WebAPI\\Program.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAQwG8AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T17:32:10.838Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\UserController.cs",
               "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\UserController.cs",
               "RelativeToolTip": "WebAPI\\Controllers\\UserController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAzwEcAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAIA2wEMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-24T17:30:56.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DistrictController.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\DistrictController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\DistrictController.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\DistrictController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\DistrictController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T17:17:48.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IUserService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IUserService.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IUserService.cs",
+              "RelativeToolTip": "Application\\Services\\Interfaces\\IUserService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAawBEAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-28T04:46:19.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SkillController.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\SkillController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\SkillController.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\SkillController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\SkillController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T18:14:40.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ImageFile.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ImageFile.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\ImageFile.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ImageFile.cs",
+              "RelativeToolTip": "Domain\\Entities\\ImageFile.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwA0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T13:10:02.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\User.cs",
+              "RelativeToolTip": "Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIAwwAoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T07:25:22.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserConfiguration.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\UserConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\UserConfiguration.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\UserConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Configurations\\UserConfiguration.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBwAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T07:26:56.946Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T14:59:21.442Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 13,
+              "Title": "WebAPI.http",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\WebAPI.http",
+              "RelativeDocumentMoniker": "WebAPI\\WebAPI.http",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\WebAPI.http",
+              "RelativeToolTip": "WebAPI\\WebAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-04-26T17:07:45.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "UserCreateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\UserCreateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\UserCreateDto.cs",
@@ -399,33 +482,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WebAPI.http",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\WebAPI.http",
-              "RelativeDocumentMoniker": "WebAPI\\WebAPI.http",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\WebAPI.http",
-              "RelativeToolTip": "WebAPI\\WebAPI.http",
+              "DocumentIndex": 16,
+              "Title": "Ward.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Ward.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Ward.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Ward.cs",
+              "RelativeToolTip": "Domain\\Entities\\Ward.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-04-26T17:07:45.166Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T14:59:21.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T07:26:55.197Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 27,
+              "Title": "BaseUserDto.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\BaseUserDto.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\BaseUserDto.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\BaseUserDto.cs",
+              "RelativeToolTip": "Application\\Dtos\\UserDtos\\BaseUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T17:41:47.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ExceptionMiddleware.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Middleware\\ExceptionMiddleware.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Middleware\\ExceptionMiddleware.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Middleware\\ExceptionMiddleware.cs",
+              "RelativeToolTip": "WebAPI\\Middleware\\ExceptionMiddleware.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T07:14:41.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "WardController.cs",
+              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\WardController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\WardController.cs",
+              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\WardController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\WardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-26T17:21:33.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
               "Title": "GetAllUserDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\GetAllUserDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\GetAllUserDto.cs",
@@ -437,31 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DistrictController.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\DistrictController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\DistrictController.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\DistrictController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\DistrictController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T17:17:48.869Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ExtensionService.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\ExtensionService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\ExtensionService.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\ExtensionService.cs",
-              "RelativeToolTip": "Application\\Services\\ExtensionService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T15:11:13.378Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "ImageFileController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ImageFileController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ImageFileController.cs",
@@ -473,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "ImageFileService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ImageFileService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\ImageFileService.cs",
@@ -485,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "UserUpdateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\UserUpdateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\UserUpdateDto.cs",
@@ -497,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 67,
               "Title": "20250426174647_fixGender.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250426174647_fixGender.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250426174647_fixGender.cs",
@@ -509,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "GetListUser.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\GetListUser.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\GetListUser.cs",
@@ -521,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "UserLoginDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\UserLoginDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\UserLoginDto.cs",
@@ -533,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "UserPassworDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\UserPassworDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\UserPassworDto.cs",
@@ -545,7 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "UserRoleUpdateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\UserRoleUpdateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\UserRoleUpdateDto.cs",
@@ -557,7 +638,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "WardService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\WardService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\WardService.cs",
@@ -569,7 +650,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 35,
               "Title": "IAnswerService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IAnswerService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IAnswerService.cs",
@@ -581,7 +662,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "ProvinceController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ProvinceController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ProvinceController.cs",
@@ -593,7 +674,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\UserDtos\\UserDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\UserDtos\\UserDto.cs",
@@ -605,7 +686,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "IWardService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IWardService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IWardService.cs",
@@ -617,7 +698,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 32,
               "Title": "IDistrictService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IDistrictService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IDistrictService.cs",
@@ -629,7 +710,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "DistrictService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\DistrictService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\DistrictService.cs",
@@ -641,7 +722,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 33,
               "Title": "IProvinceService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IProvinceService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IProvinceService.cs",
@@ -653,7 +734,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 34,
               "Title": "ProvinceService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ProvinceService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\ProvinceService.cs",
@@ -665,7 +746,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 36,
               "Title": "AutoMapperProfile.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Mappings\\AutoMapperProfile.cs",
               "RelativeDocumentMoniker": "Application\\Mappings\\AutoMapperProfile.cs",
@@ -677,7 +758,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 37,
               "Title": "WardRepository.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Repositories\\Implementations\\WardRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\WardRepository.cs",
@@ -689,19 +770,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "ImageFile.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ImageFile.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\ImageFile.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ImageFile.cs",
-              "RelativeToolTip": "Domain\\Entities\\ImageFile.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwA0AAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T13:10:02.598Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 66,
               "Title": "20250426073258_init.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250426073258_init.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250426073258_init.cs",
@@ -713,7 +782,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 65,
               "Title": "20250426073426_fix.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Migrations\\20250426073426_fix.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250426073426_fix.cs",
@@ -725,31 +794,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "UserConfiguration.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\UserConfiguration.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Configurations\\UserConfiguration.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\UserConfiguration.cs",
-              "RelativeToolTip": "Infrastructure\\Configurations\\UserConfiguration.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T07:26:56.946Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "ExamContext.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Context\\ExamContext.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Context\\ExamContext.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Context\\ExamContext.cs",
-              "RelativeToolTip": "Infrastructure\\Context\\ExamContext.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAqwDcAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T07:24:03.946Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 38,
               "Title": "ExamStructConfiguration.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamStructConfiguration.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamStructConfiguration.cs",
@@ -761,7 +806,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 39,
               "Title": "ExamConfiguration.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\ExamConfiguration.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Configurations\\ExamConfiguration.cs",
@@ -773,7 +818,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 44,
               "Title": "AnswerConfiguration.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Infrastructure\\Configurations\\AnswerConfiguration.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Configurations\\AnswerConfiguration.cs",
@@ -785,7 +830,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 43,
               "Title": "Exam.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Exam.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Exam.cs",
@@ -797,7 +842,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 42,
               "Title": "ExamQuestion.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ExamQuestion.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\ExamQuestion.cs",
@@ -809,7 +854,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "ExamStruct.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ExamStruct.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\ExamStruct.cs",
@@ -821,7 +866,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "QuestionStruct.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionStruct.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\QuestionStruct.cs",
@@ -833,7 +878,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 47,
               "Title": "ContentBlockDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\ContentBlockDtos\\ContentBlockDto.cs",
@@ -845,7 +890,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 46,
               "Title": "QuestionLevel.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\QuestionLevel.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\QuestionLevel.cs",
@@ -857,7 +902,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 45,
               "Title": "ContentBlock.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\ContentBlock.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\ContentBlock.cs",
@@ -869,7 +914,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 48,
               "Title": "SimilarQuestion.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\SimilarQuestion.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\SimilarQuestion.cs",
@@ -881,7 +926,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 52,
               "Title": "ConsoleApp1.csproj",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\ConsoleApp1\\ConsoleApp1.csproj",
               "RelativeDocumentMoniker": "ConsoleApp1\\ConsoleApp1.csproj",
@@ -893,7 +938,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 50,
               "Title": "ContentBlockUpdateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockUpdateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\ContentBlockDtos\\ContentBlockUpdateDto.cs",
@@ -905,7 +950,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 49,
               "Title": "QuestionDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionDtos\\QuestionDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\QuestionDtos\\QuestionDto.cs",
@@ -917,19 +962,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\ConsoleApp1\\Program.cs",
-              "RelativeDocumentMoniker": "ConsoleApp1\\Program.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\ConsoleApp1\\Program.cs",
-              "RelativeToolTip": "ConsoleApp1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T05:07:54.922Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 51,
               "Title": "ContentBlockCreateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\ContentBlockDtos\\ContentBlockCreateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\ContentBlockDtos\\ContentBlockCreateDto.cs",
@@ -941,7 +974,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 53,
               "Title": "Question.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\Question.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Question.cs",
@@ -953,7 +986,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 54,
               "Title": "DetailResult.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Domain\\Entities\\DetailResult.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\DetailResult.cs",
@@ -965,7 +998,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 56,
               "Title": "QuestionBankController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\QuestionBankController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\QuestionBankController.cs",
@@ -977,7 +1010,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 55,
               "Title": "ExamineeController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ExamineeController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExamineeController.cs",
@@ -989,7 +1022,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 58,
               "Title": "ExamController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\ExamController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\ExamController.cs",
@@ -1001,19 +1034,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
-              "Title": "SkillController.cs",
-              "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\SkillController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\SkillController.cs",
-              "ToolTip": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\SkillController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\SkillController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-24T18:14:40.559Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 61,
               "Title": "IContentBlockService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IContentBlockService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IContentBlockService.cs",
@@ -1025,7 +1046,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 62,
               "Title": "ContentBlockService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\ContentBlockService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\ContentBlockService.cs",
@@ -1037,7 +1058,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 57,
               "Title": "QuestionLevelController.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\WebAPI\\Controllers\\QuestionLevelController.cs",
               "RelativeDocumentMoniker": "WebAPI\\Controllers\\QuestionLevelController.cs",
@@ -1049,7 +1070,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 60,
               "Title": "QuestionLevelService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Implements\\QuestionLevelService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Implements\\QuestionLevelService.cs",
@@ -1061,7 +1082,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 59,
               "Title": "IQuestionLevelService.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Services\\Interfaces\\IQuestionLevelService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\Interfaces\\IQuestionLevelService.cs",
@@ -1073,7 +1094,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 63,
               "Title": "QuestionLevelUpdateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionLevelDtos\\QuestionLevelUpdateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\QuestionLevelDtos\\QuestionLevelUpdateDto.cs",
@@ -1085,7 +1106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 64,
               "Title": "QuestionLevelCreateDto.cs",
               "DocumentMoniker": "C:\\Code\\GitHubDoAnTotNghiep\\NguyenXuanPhu_DoAnTotNghiep\\NguyenXuanPhu_2021602332\\LanguageExam\\Application\\Dtos\\QuestionLevelDtos\\QuestionLevelCreateDto.cs",
               "RelativeDocumentMoniker": "Application\\Dtos\\QuestionLevelDtos\\QuestionLevelCreateDto.cs",

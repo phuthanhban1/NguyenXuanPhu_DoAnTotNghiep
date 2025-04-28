@@ -56,7 +56,16 @@ namespace WebAPI.Controllers
             await _userService.UpdateRole(userRoleUpdateDto);
             return Ok();
         }
-
+        [HttpGet("check-email")]
+        public async Task<ActionResult> CheckEmail(string email)
+        {
+            var check = await _userService.CheckUserByEmail(email);
+            if(check == true)
+            {
+                return BadRequest(); // user existed
+            }
+            return Ok(); // có thể thêm tài khoản
+        }
         [HttpPost("login")]
         public async Task<ActionResult> Login(UserLoginDto userLoginDto)
         {

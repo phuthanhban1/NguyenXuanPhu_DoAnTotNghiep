@@ -107,22 +107,22 @@ builder.Services.AddSwaggerGen(ops =>
         }
     });
 });
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy
-            .WithOrigins("http://127.0.0.1:5503") // domain FE
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials();
-    });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowFrontend", policy =>
+//    {
+//        policy
+//            .WithOrigins("http://127.0.0.1:5503") // domain FE
+//        .AllowAnyHeader()
+//        .AllowAnyMethod()
+//        .AllowCredentials();
+//    });
+//});
 
 
 var app = builder.Build();
 //app.UseCors("AllowAll")
-    app.UseCors("AllowFrontend");
+//app.UseCors("AllowFrontend");
 // DI Exception
 //app.UseMiddleware<ExceptionMiddleware>();
 //app.UseExceptionHandler(errorApp =>
