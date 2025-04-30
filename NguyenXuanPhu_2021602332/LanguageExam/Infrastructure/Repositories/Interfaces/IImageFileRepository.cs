@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Interfaces
 {
-    public interface IImageFileRepository : IGenericRepository<ImageFile>
+    public interface IImageFileRepository : IGenericRepository<Domain.Entities.File>
     {
        
         

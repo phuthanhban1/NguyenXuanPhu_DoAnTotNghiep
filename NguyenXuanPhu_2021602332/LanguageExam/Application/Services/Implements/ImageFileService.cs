@@ -78,7 +78,7 @@ namespace Application.Services.Implements
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
             Guid idImage = Guid.NewGuid();
-            var image = new ImageFile
+            var image = new Domain.Entities.File
             {
                 Id = idImage,
                 FileName = file.FileName,

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết kỹ năng</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .part-card {
+            transition: all 0.3s ease;
+        }
+        .part-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .question-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .question-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .question-item:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <!-- Header with Breadcrumb -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
+                        <li class="breadcrumb-item"><a href="exam_bank_detail.html" class="text-decoration-none">TOEIC 2024</a></li>
+                        <li class="breadcrumb-item active">Listening</li>
+                    </ol>
+                </nav>
+                <h2 class="mt-2">
+                    <i class="fas fa-headphones text-primary me-2"></i>
+                    Listening Skill
+                </h2>
+            </div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addQuestionModal">
+                <i class="fas fa-plus me-2"></i>Thêm câu hỏi mới
+            </button>
+        </div>
+
+        <!-- Skill Overview -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h6 class="text-white-50">Tổng số câu hỏi</h6>
+                        <h2 class="mb-0">125</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h6 class="text-white-50">Đã hoàn thành</h6>
+                        <h2 class="mb-0">75%</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h6 class="text-white-50">Số Part</h6>
+                        <h2 class="mb-0">4</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <h6 class="text-white-50">Độ khó trung bình</h6>
+                        <h2 class="mb-0">7.5</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parts Section -->
+        <div class="row g-4">
+            <!-- Part 1 -->
+            <div class="col-md-6">
+                <div class="card part-card">
+                    <div class="card-header bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Part 1: Photographs</h5>
+                            <span class="badge bg-primary">30 câu hỏi</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-list">
+                            <div class="question-item p-2 border-bottom">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-secondary me-2">Q1</span>
+                                        Look at the picture and choose...
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-success">Easy</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- More questions... -->
+                        </div>
+                        <button class="btn btn-outline-primary w-100 mt-3">
+                            <i class="fas fa-plus me-2"></i>Thêm câu hỏi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part 2 -->
+            <div class="col-md-6">
+                <div class="card part-card">
+                    <div class="card-header bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Part 2: Question-Response</h5>
+                            <span class="badge bg-primary">25 câu hỏi</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-list">
+                            <div class="question-item p-2 border-bottom">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="badge bg-secondary me-2">Q1</span>
+                                        Listen to the question and choose...
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-warning">Medium</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- More questions... -->
+                        </div>
+                        <button class="btn btn-outline-primary w-100 mt-3">
+                            <i class="fas fa-plus me-2"></i>Thêm câu hỏi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div class="modal fade" id="addQuestionModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm câu hỏi mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Part</label>
+                            <select class="form-select">
+                                <option>Part 1: Photographs</option>
+                                <option>Part 2: Question-Response</option>
+                                <option>Part 3: Conversations</option>
+                                <option>Part 4: Short Talks</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung câu hỏi</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">File âm thanh</label>
+                            <input type="file" class="form-control" accept="audio/*">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Độ khó</label>
+                            <select class="form-select">
+                                <option>Easy</option>
+                                <option>Medium</option>
+                                <option>Hard</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Đáp án</label>
+                            <div id="answers">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-text">
+                                        <input type="radio" name="correct" checked>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Đáp án A">
+                                </div>
+                                <!-- More answers... -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary">Thêm mới</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

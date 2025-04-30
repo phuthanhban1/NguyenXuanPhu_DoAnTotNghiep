@@ -24,7 +24,7 @@ namespace Infrastructure.Context
         public DbSet<Exam> Exam { get; set; }
         public DbSet<Examinee> Examinee { get; set; }
         public DbSet<ExamQuestion> ExamQuestion { get; set; }
-        public DbSet<ImageFile> ImageFile { get; set; }
+        public DbSet<Domain.Entities.File> ImageFile { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<QuestionBank> QuestionBank { get; set; }

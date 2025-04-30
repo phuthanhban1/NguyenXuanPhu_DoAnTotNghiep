@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configurations
 {
-    public class ImageFileConfiguration : IEntityTypeConfiguration<ImageFile>
+    public class FileConfiguration : IEntityTypeConfiguration<Domain.Entities.File>
     {
-        public void Configure(EntityTypeBuilder<ImageFile> builder)
+        public void Configure(EntityTypeBuilder<Domain.Entities.File> builder)
         {
             builder.ToTable("ImageFile").HasKey(i => i.Id);
         }

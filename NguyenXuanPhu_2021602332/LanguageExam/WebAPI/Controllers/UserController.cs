@@ -56,6 +56,7 @@ namespace WebAPI.Controllers
             await _userService.UpdateRole(userRoleUpdateDto);
             return Ok();
         }
+
         [HttpGet("check-email")]
         public async Task<ActionResult> CheckEmail(string email)
         {
@@ -64,6 +65,19 @@ namespace WebAPI.Controllers
             {
                 return BadRequest(); // user existed
             }
+            return Ok(); // có thể thêm tài khoản
+        }
+
+        [HttpGet("test")]
+        public async Task<ActionResult> Test()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new { Sid = sid });
             return Ok(); // có thể thêm tài khoản
         }
         [HttpPost("login")]

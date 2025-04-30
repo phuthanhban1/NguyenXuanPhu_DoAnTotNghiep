@@ -18,5 +18,7 @@ namespace Domain.Entities
 
         public List<ContentBlock> ContentBlocks { get; set; }
         public List<ExamStruct> ExamStructs { get; set; }
+
+        //Có dạng câu, số lượng câu hỏi, số lượng đáp án
     }
 }

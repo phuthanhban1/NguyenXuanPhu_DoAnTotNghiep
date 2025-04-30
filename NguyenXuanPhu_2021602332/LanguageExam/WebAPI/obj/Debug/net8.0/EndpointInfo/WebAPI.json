@@ -1124,6 +1124,18 @@
         }
       }
     },
+    "/api/User/test": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/login": {
       "post": {
         "tags": [
@@ -1848,6 +1860,9 @@
             "format": "date-time"
           },
           "isActive": {
+            "type": "boolean"
+          },
+          "isUpdating": {
             "type": "boolean"
           },
           "managerId": {

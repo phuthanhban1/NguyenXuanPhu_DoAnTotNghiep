@@ -70,40 +70,72 @@
                             <div class="tab-pane fade show active" id="manual" role="tabpanel">
                                 <form>
                                     <div class="mb-4">
-                                        <label class="form-label">Loại câu hỏi</label>
-                                        <select class="form-select">
-                                            <option>Đọc hiểu</option>
-                                            <option>Điền từ</option>
-                                            <option>Tìm từ đồng nghĩa</option>
+                                        <label class="form-label">Dạng câu hỏi</label>
+                                        <select class="form-select" id="questionType" onchange="toggleQuestionType()">
+                                            <option value="single">Câu hỏi đơn</option>
+                                            <option value="paragraph">Đoạn văn nhiều câu hỏi</option>
                                         </select>
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="form-label">Nội dung câu hỏi</label>
-                                        <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label class="form-label">Đáp án</label>
-                                        <div id="answerOptions">
-                                            <div class="answer-option">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <input type="radio" class="form-check-input me-2" name="correctAnswer" checked>
-                                                    <input type="text" class="form-control" placeholder="Nhập đáp án...">
-                                                    <button type="button" class="btn btn-outline-danger ms-2" onclick="removeAnswer(this)">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
+                                    <!-- Single Question Form -->
+                                    <div id="singleQuestionForm">
+                                        <div class="mb-4">
+                                            <label class="form-label">Loại câu hỏi</label>
+                                            <select class="form-select">
+                                                <option>Đọc hiểu</option>
+                                                <option>Điền từ</option>
+                                                <option>Tìm từ đồng nghĩa</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Nội dung câu hỏi</label>
+                                            <div class="mb-2">
+                                                <input type="radio" name="singleContentType" value="text" checked onchange="toggleSingleContentType()"> Text
+                                                <input type="radio" name="singleContentType" value="image" class="ms-3" onchange="toggleSingleContentType()"> Ảnh
+                                            </div>
+                                            <div id="singleQuestionText">
+                                                <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
+                                            </div>
+                                            <div id="singleQuestionImage" style="display:none;">
+                                                <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
+                                                <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-outline-primary mt-2" onclick="addAnswer()">
-                                            <i class="fas fa-plus me-2"></i>Thêm đáp án
-                                        </button>
+                                        <div class="mb-4">
+                                            <label class="form-label">Đáp án</label>
+                                            <div id="answerOptions">
+                                                <div class="answer-option">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer" checked>
+                                                        <input type="text" class="form-control" placeholder="Nhập đáp án...">
+                                                        <button type="button" class="btn btn-outline-danger ms-2" onclick="removeAnswer(this)">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-primary mt-2" onclick="addAnswer()">
+                                                <i class="fas fa-plus me-2"></i>Thêm đáp án
+                                            </button>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Giải thích</label>
+                                            <textarea class="form-control" rows="3" placeholder="Nhập giải thích cho đáp án..."></textarea>
+                                        </div>
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="form-label">Giải thích</label>
-                                        <textarea class="form-control" rows="3" placeholder="Nhập giải thích cho đáp án..."></textarea>
+                                    <!-- Paragraph with Multiple Questions Form -->
+                                    <div id="paragraphQuestionForm" style="display:none;">
+                                        <div class="mb-4">
+                                            <label class="form-label">Đoạn văn</label>
+                                            <textarea class="form-control" rows="4" placeholder="Nhập đoạn văn..."></textarea>
+                                        </div>
+                                        <div id="subQuestions">
+                                            <!-- Sub-question items will be appended here -->
+                                        </div>
+                                        <button type="button" class="btn btn-outline-primary mt-2" onclick="addSubQuestion()">
+                                            <i class="fas fa-plus me-2"></i>Thêm câu hỏi nhỏ
+                                        </button>
                                     </div>
 
                                     <div class="d-flex justify-content-end gap-2">
@@ -169,6 +201,109 @@
 
         function removeAnswer(button) {
             button.closest('.answer-option').remove();
+        }
+
+        function toggleQuestionType() {
+            const type = document.getElementById('questionType').value;
+            document.getElementById('singleQuestionForm').style.display = type === 'single' ? '' : 'none';
+            document.getElementById('paragraphQuestionForm').style.display = type === 'paragraph' ? '' : 'none';
+        }
+
+        function toggleSingleContentType() {
+            const type = document.querySelector('input[name="singleContentType"]:checked').value;
+            document.getElementById('singleQuestionText').style.display = type === 'text' ? '' : 'none';
+            document.getElementById('singleQuestionImage').style.display = type === 'image' ? '' : 'none';
+        }
+
+        function previewSingleImage(event) {
+            const img = document.getElementById('singleImagePreview');
+            if (event.target.files && event.target.files[0]) {
+                img.src = URL.createObjectURL(event.target.files[0]);
+                img.style.display = 'block';
+            } else {
+                img.src = '';
+                img.style.display = 'none';
+            }
+        }
+
+        // Sub-question logic
+        function addSubQuestion() {
+            const subQuestions = document.getElementById('subQuestions');
+            const idx = subQuestions.children.length;
+            const subQ = document.createElement('div');
+            subQ.className = 'card mb-3';
+            subQ.innerHTML = `
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <strong>Câu hỏi nhỏ ${idx + 1}</strong>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="this.closest('.card').remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="mb-2">
+                        <input type="radio" name="subContentType${idx}" value="text" checked onchange="toggleSubContentType(${idx})"> Text
+                        <input type="radio" name="subContentType${idx}" value="image" class="ms-3" onchange="toggleSubContentType(${idx})"> Ảnh
+                    </div>
+                    <div id="subQuestionText${idx}">
+                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
+                    </div>
+                    <div id="subQuestionImage${idx}" style="display:none;">
+                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, ${idx})">
+                        <img id="subImagePreview${idx}" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                    </div>
+                    <div>
+                        <label class="form-label">Đáp án</label>
+                        <div class="sub-answer-options">
+                            <div class="answer-option">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer${idx}">
+                                    <input type="text" class="form-control" placeholder="Nhập đáp án...">
+                                    <button type="button" class="btn btn-outline-danger ms-2" onclick="this.closest('.answer-option').remove()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addSubAnswer(this, ${idx})">
+                            <i class="fas fa-plus me-2"></i>Thêm đáp án
+                        </button>
+                    </div>
+                </div>
+            `;
+            subQuestions.appendChild(subQ);
+        }
+
+        function toggleSubContentType(idx) {
+            const type = document.querySelector(`input[name="subContentType${idx}"]:checked`).value;
+            document.getElementById(`subQuestionText${idx}`).style.display = type === 'text' ? '' : 'none';
+            document.getElementById(`subQuestionImage${idx}`).style.display = type === 'image' ? '' : 'none';
+        }
+
+        function previewSubImage(event, idx) {
+            const img = document.getElementById(`subImagePreview${idx}`);
+            if (event.target.files && event.target.files[0]) {
+                img.src = URL.createObjectURL(event.target.files[0]);
+                img.style.display = 'block';
+            } else {
+                img.src = '';
+                img.style.display = 'none';
+            }
+        }
+
+        function addSubAnswer(btn, idx) {
+            const answerOptions = btn.parentElement.querySelector('.sub-answer-options');
+            const newAnswer = document.createElement('div');
+            newAnswer.className = 'answer-option';
+            newAnswer.innerHTML = `
+                <div class="d-flex align-items-center mb-2">
+                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer${idx}">
+                    <input type="text" class="form-control" placeholder="Nhập đáp án...">
+                    <button type="button" class="btn btn-outline-danger ms-2" onclick="this.closest('.answer-option').remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            answerOptions.appendChild(newAnswer);
         }
     </script>
 </body>

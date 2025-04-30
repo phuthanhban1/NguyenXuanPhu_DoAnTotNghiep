@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ImageFile
+    public class File
     {
         public Guid Id { get; set; }
         public string FileName { get; set; }
@@ -16,7 +16,8 @@ namespace Domain.Entities
         public User ImageFace { get; set; }
         public User ImageIdCardBefore { get; set; }
         public User ImageIdCardAfter { get; set; }
-
+        public Skill? Skill { get; set; }
+        public ContentBlock? ContentBlock { get; set; }
 
     }
 }

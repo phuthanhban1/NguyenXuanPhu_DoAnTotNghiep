@@ -8,9 +8,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-
-
-
 namespace Application.Services
 {
     public class ExtensionService
@@ -43,12 +40,12 @@ namespace Application.Services
                 await smtp.SendMailAsync(message);
             }
         }
-        public static async Task<ImageFile> GetImageFile(IFormFile file)
+        public static async Task<Domain.Entities.File> GetImageFile(IFormFile file)
         {
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
             Guid idImage = Guid.NewGuid();
-            var image = new ImageFile
+            var image = new Domain.Entities.File
             {
                 Id = idImage,
                 FileName = file.FileName,
