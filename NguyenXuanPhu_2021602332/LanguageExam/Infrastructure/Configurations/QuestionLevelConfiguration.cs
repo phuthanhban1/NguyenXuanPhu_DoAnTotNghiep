@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Configurations
 {
-    public class QuestionLevelConfiguration : IEntityTypeConfiguration<QuestionLevel>
+    public class QuestionLevelConfiguration : IEntityTypeConfiguration<QuestionType>
     {
-        public void Configure(EntityTypeBuilder<QuestionLevel> builder)
+        public void Configure(EntityTypeBuilder<QuestionType> builder)
         {
             builder.ToTable("QuestionLevel");
             builder.HasKey(a => a.Id);

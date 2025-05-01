@@ -32,6 +32,10 @@
         .skill-badge:hover {
             transform: scale(1.05);
         }
+        .bg-warning {
+            padding: 0 2px;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -45,7 +49,11 @@
                         <li class="breadcrumb-item active">TOEIC 2024</li>
                     </ol>
                 </nav>
-                <h2 class="mt-2">Ngân hàng câu hỏi TOEIC 2024</h2>
+                <h2 class="mt-2 mb-1">Ngân hàng câu hỏi TOEIC 2024</h2>
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-success me-2">Đang hoạt động</span>
+                    <small class="text-muted">Cập nhật lần cuối: 01/03/2024</small>
+                </div>
             </div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">
                 <i class="fas fa-plus me-2"></i>Thêm kỹ năng mới
@@ -87,11 +95,22 @@
                 <div class="row g-4">
                     <!-- Listening Skill -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card skill-card">
+                        <div class="card skill-card" data-skill="listening">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="mb-0"><i class="fas fa-headphones text-primary me-2"></i>Listening</h5>
                                     <span class="badge bg-primary">125 câu hỏi</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A" class="rounded-circle me-2" width="24" height="24">
+                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user1">
+                                            Nguyễn Văn A
+                                        </a>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="listening">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
                                 </div>
                                 <div class="mb-3">
                                     <span class="skill-badge bg-light text-dark">Part 1 <span class="badge bg-secondary ms-1">30</span></span>
@@ -109,11 +128,22 @@
 
                     <!-- Reading Skill -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card skill-card">
+                        <div class="card skill-card" data-skill="reading">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="mb-0"><i class="fas fa-book-reader text-success me-2"></i>Reading</h5>
                                     <span class="badge bg-success">125 câu hỏi</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Tran+Thi+B" class="rounded-circle me-2" width="24" height="24">
+                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user2">
+                                            Trần Thị B
+                                        </a>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="reading">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
                                 </div>
                                 <div class="mb-3">
                                     <span class="skill-badge bg-light text-dark">Part 5 <span class="badge bg-secondary ms-1">40</span></span>
@@ -130,11 +160,22 @@
 
                     <!-- Speaking Skill -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card skill-card">
+                        <div class="card skill-card" data-skill="speaking">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="mb-0"><i class="fas fa-microphone text-warning me-2"></i>Speaking</h5>
                                     <span class="badge bg-warning text-dark">50 câu hỏi</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Le+Van+C" class="rounded-circle me-2" width="24" height="24">
+                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user3">
+                                            Lê Văn C
+                                        </a>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="speaking">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
                                 </div>
                                 <div class="mb-3">
                                     <span class="skill-badge bg-light text-dark">Part 1 <span class="badge bg-secondary ms-1">15</span></span>
@@ -194,8 +235,370 @@
         </div>
     </div>
 
+    <!-- User Detail Modal -->
+    <div class="modal fade" id="userDetailModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông tin người phụ trách</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="" id="userAvatar" class="rounded-circle mb-3" width="100" height="100">
+                        <h4 id="userName" class="mb-0"></h4>
+                        <p class="text-muted" id="userRole">Giáo viên</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted">Email</label>
+                            <div id="userEmail"></div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted">Số điện thoại</label>
+                            <div id="userPhone"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label text-muted">Chuyên môn</label>
+                            <div id="userSpecialty"></div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-muted">Kinh nghiệm</label>
+                            <div id="userExperience"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change User Modal -->
+    <div class="modal fade" id="changeUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thay đổi người phụ trách</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Kỹ năng</label>
+                        <input type="text" class="form-control" id="skillName" readonly>
+                    </div>
+                    
+                    <!-- Thêm thanh tìm kiếm email -->
+                    <div class="mb-3">
+                        <label class="form-label">Tìm kiếm người phụ trách</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control" id="searchEmail" 
+                                   placeholder="Nhập email để tìm kiếm...">
+                        </div>
+                    </div>
+
+                    <!-- Thêm danh sách kết quả tìm kiếm -->
+                    <div id="searchResults" class="mb-3 d-none">
+                        <label class="form-label">Kết quả tìm kiếm</label>
+                        <div class="list-group" id="userSearchList">
+                            <!-- Kết quả tìm kiếm sẽ được thêm vào đây -->
+                        </div>
+                    </div>
+
+                    <!-- Preview người được chọn -->
+                    <div id="newUserPreview" class="d-none">
+                        <label class="form-label">Người được chọn</label>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="" class="rounded-circle me-3" width="48" height="48" id="previewAvatar">
+                                    <div>
+                                        <h6 class="mb-1" id="previewName"></h6>
+                                        <div class="text-muted small" id="previewSpecialty"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <small class="text-muted d-block">Email</small>
+                                        <div id="previewEmail"></div>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted d-block">Kinh nghiệm</small>
+                                        <div id="previewExperience"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmChangeUser">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Data mẫu cho người dùng
+        const userData = {
+            user1: {
+                name: 'Nguyễn Văn A',
+                avatar: 'https://ui-avatars.com/api/?name=Nguyen+Van+A',
+                role: 'Giáo viên TOEIC',
+                email: 'nguyenvana@example.com',
+                phone: '0123456789',
+                specialty: 'Listening & Speaking',
+                experience: '5 năm kinh nghiệm giảng dạy TOEIC'
+            },
+            user2: {
+                name: 'Trần Thị B',
+                avatar: 'https://ui-avatars.com/api/?name=Tran+Thi+B',
+                role: 'Giáo viên TOEIC',
+                email: 'tranthib@example.com',
+                phone: '0987654321',
+                specialty: 'Reading & Writing',
+                experience: '7 năm kinh nghiệm giảng dạy TOEIC'
+            },
+            user3: {
+                name: 'Lê Văn C',
+                avatar: 'https://ui-avatars.com/api/?name=Le+Van+C',
+                role: 'Giáo viên TOEIC',
+                email: 'levanc@example.com',
+                phone: '0369852147',
+                specialty: 'Speaking & Pronunciation',
+                experience: '3 năm kinh nghiệm giảng dạy TOEIC'
+            },
+            user4: {
+                name: 'Phạm Thị D',
+                avatar: 'https://ui-avatars.com/api/?name=Pham+Thi+D',
+                role: 'Giáo viên TOEIC',
+                email: 'phamthid@example.com',
+                phone: '0123456789',
+                specialty: 'All Skills',
+                experience: '10 năm kinh nghiệm'
+            }
+        };
+
+        // Xử lý hiển thị thông tin trong modal
+        const userDetailModal = document.getElementById('userDetailModal');
+        userDetailModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const userId = button.getAttribute('data-user');
+            const user = userData[userId];
+
+            // Cập nhật thông tin trong modal
+            this.querySelector('#userAvatar').src = user.avatar;
+            this.querySelector('#userName').textContent = user.name;
+            this.querySelector('#userRole').textContent = user.role;
+            this.querySelector('#userEmail').textContent = user.email;
+            this.querySelector('#userPhone').textContent = user.phone;
+            this.querySelector('#userSpecialty').textContent = user.specialty;
+            this.querySelector('#userExperience').textContent = user.experience;
+        });
+
+        // Xử lý modal thay đổi người phụ trách
+        const changeUserModal = document.getElementById('changeUserModal');
+        const newUserSelect = document.getElementById('newUserSelect');
+        const newUserPreview = document.getElementById('newUserPreview');
+        let currentSkill = '';
+
+        changeUserModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const skill = button.getAttribute('data-skill');
+            currentSkill = skill;
+            
+            // Cập nhật tên kỹ năng trong modal
+            document.getElementById('skillName').value = skill.charAt(0).toUpperCase() + skill.slice(1);
+            
+            // Reset form
+            newUserSelect.value = '';
+            newUserPreview.classList.add('d-none');
+        });
+
+        // Xử lý khi chọn người phụ trách mới
+        newUserSelect.addEventListener('change', function() {
+            const selectedUserId = this.value;
+            if (!selectedUserId) {
+                newUserPreview.classList.add('d-none');
+                return;
+            }
+
+            const user = userData[selectedUserId];
+            if (user) {
+                // Hiển thị preview
+                document.getElementById('previewAvatar').src = user.avatar;
+                document.getElementById('previewName').textContent = user.name;
+                document.getElementById('previewSpecialty').textContent = user.specialty;
+                document.getElementById('previewEmail').textContent = user.email;
+                document.getElementById('previewExperience').textContent = user.experience;
+                newUserPreview.classList.remove('d-none');
+            }
+        });
+
+        // Xử lý khi xác nhận thay đổi
+        document.getElementById('confirmChangeUser').addEventListener('click', function() {
+            const selectedUserId = newUserSelect.value;
+            if (!selectedUserId) {
+                alert('Vui lòng chọn người phụ trách mới');
+                return;
+            }
+
+            const user = userData[selectedUserId];
+            if (user) {
+                // Cập nhật UI
+                const skillCard = document.querySelector(`[data-skill="${currentSkill}"]`).closest('.skill-card');
+                const userSection = skillCard.querySelector('.d-flex.align-items-center.justify-content-between.mb-3');
+                
+                userSection.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <img src="${user.avatar}" class="rounded-circle me-2" width="24" height="24">
+                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${selectedUserId}">
+                            ${user.name}
+                        </a>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="${currentSkill}">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                `;
+
+                // Đóng modal
+                const modal = bootstrap.Modal.getInstance(changeUserModal);
+                modal.hide();
+
+                // Hiển thị thông báo thành công
+                alert('Đã thay đổi người phụ trách thành công!');
+            }
+        });
+
+        // Cập nhật phần xử lý tìm kiếm email
+        const searchEmail = document.getElementById('searchEmail');
+        const searchResults = document.getElementById('searchResults');
+        const userSearchList = document.getElementById('userSearchList');
+        let selectedUserId = null;
+
+        // Thêm debounce function để tránh gọi quá nhiều lần khi người dùng đang nhập
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Hàm tìm kiếm và hiển thị kết quả
+        function searchUsers(searchTerm) {
+            searchTerm = searchTerm.toLowerCase();
+            
+            // Nếu input rỗng, ẩn kết quả
+            if (!searchTerm) {
+                searchResults.classList.add('d-none');
+                return;
+            }
+
+            // Tìm kiếm trong userData
+            const matchedUsers = Object.entries(userData).filter(([id, user]) => {
+                return user.email.toLowerCase().includes(searchTerm) || 
+                       user.name.toLowerCase().includes(searchTerm);
+            });
+
+            // Hiển thị kết quả với highlight từ khóa tìm kiếm
+            if (matchedUsers.length > 0) {
+                userSearchList.innerHTML = matchedUsers.map(([id, user]) => {
+                    // Highlight phần email match với searchTerm
+                    const highlightedEmail = user.email.replace(
+                        new RegExp(searchTerm, 'gi'),
+                        match => `<span class="bg-warning">${match}</span>`
+                    );
+                    
+                    // Highlight phần tên match với searchTerm
+                    const highlightedName = user.name.replace(
+                        new RegExp(searchTerm, 'gi'),
+                        match => `<span class="bg-warning">${match}</span>`
+                    );
+
+                    return `
+                        <button type="button" 
+                                class="list-group-item list-group-item-action user-search-item"
+                                data-user-id="${id}">
+                            <div class="d-flex align-items-center">
+                                <img src="${user.avatar}" class="rounded-circle me-2" width="32" height="32">
+                                <div>
+                                    <div class="fw-bold">${highlightedName}</div>
+                                    <small class="text-muted">${highlightedEmail}</small>
+                                </div>
+                            </div>
+                        </button>
+                    `;
+                }).join('');
+                
+                searchResults.classList.remove('d-none');
+
+                // Thêm event listeners cho các kết quả
+                document.querySelectorAll('.user-search-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const userId = this.getAttribute('data-user-id');
+                        const user = userData[userId];
+                        selectedUserId = userId;
+
+                        // Hiển thị preview
+                        document.getElementById('previewAvatar').src = user.avatar;
+                        document.getElementById('previewName').textContent = user.name;
+                        document.getElementById('previewSpecialty').textContent = user.specialty;
+                        document.getElementById('previewEmail').textContent = user.email;
+                        document.getElementById('previewExperience').textContent = user.experience;
+                        document.getElementById('newUserPreview').classList.remove('d-none');
+
+                        // Đánh dấu item được chọn và bỏ đánh dấu các item khác
+                        document.querySelectorAll('.user-search-item').forEach(i => 
+                            i.classList.remove('active'));
+                        this.classList.add('active');
+
+                        // Cập nhật giá trị input search
+                        searchEmail.value = user.email;
+                    });
+                });
+            } else {
+                userSearchList.innerHTML = `
+                    <div class="list-group-item text-center text-muted">
+                        Không tìm thấy kết quả cho "${searchTerm}"
+                    </div>
+                `;
+                searchResults.classList.remove('d-none');
+            }
+        }
+
+        // Sử dụng debounce để tối ưu hiệu suất
+        const debouncedSearch = debounce((searchTerm) => {
+            searchUsers(searchTerm);
+        }, 300); // Đợi 300ms sau khi người dùng ngừng gõ
+
+        // Xử lý sự kiện input
+        searchEmail.addEventListener('input', function(e) {
+            debouncedSearch(e.target.value);
+        });
+
+        // Thêm xử lý click outside để ẩn kết quả tìm kiếm
+        document.addEventListener('click', function(e) {
+            if (!searchEmail.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.classList.add('d-none');
+            }
+        });
+
+        // Thêm xử lý focus vào input để hiển thị lại kết quả
+        searchEmail.addEventListener('focus', function() {
+            if (this.value) {
+                searchResults.classList.remove('d-none');
+            }
+        });
+    </script>
 </body>
 </html>
 

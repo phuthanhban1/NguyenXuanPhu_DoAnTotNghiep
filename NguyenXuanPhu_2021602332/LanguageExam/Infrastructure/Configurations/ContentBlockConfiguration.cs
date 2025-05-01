@@ -16,9 +16,13 @@ namespace Infrastructure.Configurations
             builder.ToTable("ContentBlock");
             builder.HasKey(cb => cb.Id);
 
-            builder.HasOne(cb => cb.File)
+            builder.HasOne(cb => cb.AudioFile)
                    .WithOne(af => af.ContentBlock)
                    .HasForeignKey<ContentBlock>(cb => cb.AudioFileId);
+
+            builder.HasOne(cb => cb.ImageFile)
+                   .WithOne(af => af.ContentBlock)
+                   .HasForeignKey<ContentBlock>(cb => cb.ImageFileId);
 
             builder.HasOne(cb => cb.QuestionLevel)
                    .WithMany(ql => ql.ContentBlocks)

@@ -9,23 +9,56 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .part-card {
+        .question-type-card {
             transition: all 0.3s ease;
         }
-        .part-card:hover {
+        .question-type-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .question-list {
-            max-height: 400px;
+        /* Style cho modal popup */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+        }
+        .modal-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1051;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
             overflow-y: auto;
         }
-        .question-item {
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .modal-popup.show {
+            display: block;
+            animation: modalFadeIn 0.3s;
         }
-        .question-item:hover {
-            background-color: #f8f9fa;
+        .modal-overlay.show {
+            display: block;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
         }
     </style>
 </head>
@@ -38,173 +71,181 @@
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
                         <li class="breadcrumb-item"><a href="exam_bank_detail.html" class="text-decoration-none">TOEIC 2024</a></li>
-                        <li class="breadcrumb-item active">Listening</li>
+                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Listening</a></li>
+                        <li class="breadcrumb-item active">Quản lý dạng câu hỏi</li>
                     </ol>
                 </nav>
                 <h2 class="mt-2">
-                    <i class="fas fa-headphones text-primary me-2"></i>
-                    Listening Skill
+                    <i class="fas fa-list-ul text-primary me-2"></i>
+                    Quản lý dạng câu hỏi
                 </h2>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addQuestionModal">
-                <i class="fas fa-plus me-2"></i>Thêm câu hỏi mới
+            <button class="btn btn-primary" onclick="showAddTypeForm()">
+                <i class="fas fa-plus me-2"></i>Thêm dạng mới
             </button>
         </div>
 
-        <!-- Skill Overview -->
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="card bg-primary text-white">
-                    <div class="card-body">
-                        <h6 class="text-white-50">Tổng số câu hỏi</h6>
-                        <h2 class="mb-0">125</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-success text-white">
-                    <div class="card-body">
-                        <h6 class="text-white-50">Đã hoàn thành</h6>
-                        <h2 class="mb-0">75%</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-info text-white">
-                    <div class="card-body">
-                        <h6 class="text-white-50">Số Part</h6>
-                        <h2 class="mb-0">4</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card bg-warning text-white">
-                    <div class="card-body">
-                        <h6 class="text-white-50">Độ khó trung bình</h6>
-                        <h2 class="mb-0">7.5</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Parts Section -->
-        <div class="row g-4">
+        <!-- Danh sách dạng câu hỏi -->
+        <div class="row g-4 mb-4">
             <!-- Part 1 -->
             <div class="col-md-6">
-                <div class="card part-card">
-                    <div class="card-header bg-white">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Part 1: Photographs</h5>
-                            <span class="badge bg-primary">30 câu hỏi</span>
-                        </div>
-                    </div>
+                <div class="card question-type-card">
                     <div class="card-body">
-                        <div class="question-list">
-                            <div class="question-item p-2 border-bottom">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-secondary me-2">Q1</span>
-                                        Look at the picture and choose...
-                                    </div>
-                                    <div>
-                                        <span class="badge bg-success">Easy</span>
-                                    </div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="card-title mb-1">Part 1: Photographs</h5>
+                                <p class="text-muted mb-0">Quan sát hình ảnh và chọn câu mô tả phù hợp</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary me-1" onclick="editQuestionType(1)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteQuestionType(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-image text-primary me-2"></i>
+                                    <span>Có hình ảnh</span>
                                 </div>
                             </div>
-                            <!-- More questions... -->
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-headphones text-primary me-2"></i>
+                                    <span>Có file âm thanh</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-list-ol text-primary me-2"></i>
+                                    <span>4 đáp án</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-alt text-muted me-2"></i>
+                                    <span class="text-muted">Không có đoạn văn</span>
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn btn-outline-primary w-100 mt-3">
-                            <i class="fas fa-plus me-2"></i>Thêm câu hỏi
-                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Part 2 -->
             <div class="col-md-6">
-                <div class="card part-card">
-                    <div class="card-header bg-white">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Part 2: Question-Response</h5>
-                            <span class="badge bg-primary">25 câu hỏi</span>
-                        </div>
-                    </div>
+                <div class="card question-type-card">
                     <div class="card-body">
-                        <div class="question-list">
-                            <div class="question-item p-2 border-bottom">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-secondary me-2">Q1</span>
-                                        Listen to the question and choose...
-                                    </div>
-                                    <div>
-                                        <span class="badge bg-warning">Medium</span>
-                                    </div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="card-title mb-1">Part 2: Question-Response</h5>
+                                <p class="text-muted mb-0">Nghe câu hỏi và chọn câu trả lời phù hợp</p>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary me-1" onclick="editQuestionType(2)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteQuestionType(2)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-headphones text-primary me-2"></i>
+                                    <span>Có file âm thanh</span>
                                 </div>
                             </div>
-                            <!-- More questions... -->
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-list-ol text-primary me-2"></i>
+                                    <span>3 đáp án</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-image text-muted me-2"></i>
+                                    <span class="text-muted">Không có hình ảnh</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-file-alt text-muted me-2"></i>
+                                    <span class="text-muted">Không có đoạn văn</span>
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn btn-outline-primary w-100 mt-3">
-                            <i class="fas fa-plus me-2"></i>Thêm câu hỏi
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Question Modal -->
-    <div class="modal fade" id="addQuestionModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Thêm câu hỏi mới</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- Modal Popup và Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-popup" id="questionTypeModal">
+        <div class="card border-0">
+            <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="modal-title mb-0">Thêm dạng câu hỏi mới</h4>
+                    <button type="button" class="btn-close" onclick="hideModal()"></button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label">Part</label>
-                            <select class="form-select">
-                                <option>Part 1: Photographs</option>
-                                <option>Part 2: Question-Response</option>
-                                <option>Part 3: Conversations</option>
-                                <option>Part 4: Short Talks</option>
-                            </select>
+            </div>
+            <div class="card-body p-4">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Tên Part</label>
+                            <input type="text" class="form-control" placeholder="Ví dụ: Part 1: Photographs">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Nội dung câu hỏi</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                        <div class="col-md-6">
+                            <label class="form-label">Số lượng đáp án</label>
+                            <input type="number" class="form-control" min="2" max="6" value="4">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">File âm thanh</label>
-                            <input type="file" class="form-control" accept="audio/*">
+                        <div class="col-12">
+                            <label class="form-label">Mô tả</label>
+                            <textarea class="form-control" rows="2" placeholder="Mô tả ngắn gọn về dạng câu hỏi"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Độ khó</label>
-                            <select class="form-select">
-                                <option>Easy</option>
-                                <option>Medium</option>
-                                <option>Hard</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Đáp án</label>
-                            <div id="answers">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-text">
-                                        <input type="radio" name="correct" checked>
+                        <div class="col-12">
+                            <label class="form-label">Cấu trúc câu hỏi</label>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="hasAudio">
+                                        <label class="form-check-label" for="hasAudio">
+                                            <i class="fas fa-headphones me-2"></i>Có file âm thanh
+                                        </label>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Đáp án A">
                                 </div>
-                                <!-- More answers... -->
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="hasImage">
+                                        <label class="form-check-label" for="hasImage">
+                                            <i class="fas fa-image me-2"></i>Có hình ảnh
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="hasText">
+                                        <label class="form-check-label" for="hasText">
+                                            <i class="fas fa-file-alt me-2"></i>Có đoạn văn
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer bg-white border-top-0 px-4 pb-4">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-2" onclick="hideModal()">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="saveQuestionType()">Lưu</button>
                 </div>
             </div>
         </div>
@@ -212,7 +253,96 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentEditId = null;
+
+        // Hiển thị modal
+        function showModal() {
+            document.getElementById('modalOverlay').classList.add('show');
+            document.getElementById('questionTypeModal').classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        // Ẩn modal
+        function hideModal() {
+            document.getElementById('modalOverlay').classList.remove('show');
+            document.getElementById('questionTypeModal').classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Hiển thị form thêm dạng câu hỏi
+        function showAddTypeForm() {
+            currentEditId = null;
+            document.querySelector('#questionTypeModal .modal-title').textContent = 'Thêm dạng câu hỏi mới';
+            document.querySelector('#questionTypeModal form').reset();
+            showModal();
+        }
+
+        // Sửa dạng câu hỏi
+        function editQuestionType(id) {
+            currentEditId = id;
+            document.querySelector('#questionTypeModal .modal-title').textContent = 'Sửa dạng câu hỏi';
+            
+            // TODO: Load dữ liệu của dạng câu hỏi vào form
+            const typeData = {
+                name: 'Part 1: Photographs',
+                description: 'Quan sát hình ảnh và chọn câu mô tả phù hợp',
+                hasAudio: false,
+                hasImage: true,
+                hasText: false,
+                answerCount: 4
+            };
+
+            // Điền dữ liệu vào form
+            const form = document.querySelector('#questionTypeModal form');
+            form.querySelector('input[type="text"]').value = typeData.name;
+            form.querySelector('textarea').value = typeData.description;
+            form.querySelector('#hasAudio').checked = typeData.hasAudio;
+            form.querySelector('#hasImage').checked = typeData.hasImage;
+            form.querySelector('#hasText').checked = typeData.hasText;
+            form.querySelector('input[type="number"]').value = typeData.answerCount;
+
+            showModal();
+        }
+
+        // Lưu dạng câu hỏi
+        function saveQuestionType() {
+            const form = document.querySelector('#questionTypeModal form');
+            const formData = {
+                name: form.querySelector('input[type="text"]').value,
+                description: form.querySelector('textarea').value,
+                hasAudio: form.querySelector('#hasAudio').checked,
+                hasImage: form.querySelector('#hasImage').checked,
+                hasText: form.querySelector('#hasText').checked,
+                answerCount: form.querySelector('input[type="number"]').value
+            };
+
+            // Validate dữ liệu
+            if (!formData.name || !formData.description) {
+                alert('Vui lòng điền đầy đủ thông tin!');
+                return;
+            }
+
+            // TODO: Gọi API để lưu dữ liệu
+            console.log('Save question type:', formData);
+            console.log('Edit mode:', currentEditId ? 'Edit' : 'Add');
+
+            hideModal();
+        }
+
+        // Click outside to close
+        document.getElementById('modalOverlay').addEventListener('click', hideModal);
+        document.querySelector('.modal-popup').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Xóa dạng câu hỏi
+        function deleteQuestionType(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa dạng câu hỏi này?')) {
+                // TODO: Gọi API xóa dạng câu hỏi
+                console.log('Xóa dạng câu hỏi:', id);
+            }
+        }
+    </script>
 </body>
 </html>
-
-

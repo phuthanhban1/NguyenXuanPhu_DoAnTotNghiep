@@ -11,14 +11,13 @@ namespace Infrastructure.UnitOfWork
     public interface IUnitOfWork
     {
         IAnswerRepository Answers { get;}
-        IAudioFileRepository AudioFiles { get;}
+        IExamFileRepository ExamFiles { get;}
         IContentBlockRepository ContentBlocks { get; }
         IDetailResultRepository DetailResults { get; }
         IDistrictRepository Districts { get; }
         IExamineeRepository Examinees { get; }
         IExamQuestionRepository ExamQuestions { get; }
         IExamRepository Exams { get; }
-        IImageFileRepository ImageFiles { get; }
         IProvinceRepository Provinces { get; }
         IQuestionBankRepository QuestionBanks { get; }
         IQuestionLevelRepository QuestionLevels { get; }

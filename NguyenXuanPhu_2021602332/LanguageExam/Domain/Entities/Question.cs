@@ -15,7 +15,7 @@ namespace Domain.Entities
 
         //foreign key imgae file
         public Guid? ImageFileId { get; set; }
-        public File? ImageFile { get; set; }
+        public ExamFile? ImageFile { get; set; }
 
         //foreign key content block
         public Guid ContentBlockId { get; set; }

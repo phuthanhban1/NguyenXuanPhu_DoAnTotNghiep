@@ -50,15 +50,15 @@ namespace Application.Services.Implements
 
                 var imageFace = await ExtensionService.GetImageFile(userCreateDto.ImageFace);
                 user.ImageFaceId = imageFace.Id;
-                await _unitOfWork.ImageFiles.AddAsync(imageFace);
+                await _unitOfWork.ExamFiles.AddAsync(imageFace);
 
                 var imageBefore = await ExtensionService.GetImageFile(userCreateDto.ImageIdCardBefore);
                 user.ImageIdCardBeforeId = imageBefore.Id;
-                await _unitOfWork.ImageFiles.AddAsync(imageBefore);
+                await _unitOfWork.ExamFiles.AddAsync(imageBefore);
 
                 var imageAfter = await ExtensionService.GetImageFile(userCreateDto.ImageIdCardAfter);
                 user.ImageIdCardAfterId = imageAfter.Id;
-                await _unitOfWork.ImageFiles.AddAsync(imageAfter);
+                await _unitOfWork.ExamFiles.AddAsync(imageAfter);
 
                 user.IsActive = true;
                 await _unitOfWork.Users.AddAsync(user);
@@ -84,17 +84,17 @@ namespace Application.Services.Implements
                     // image face
                     var imageFace = await ExtensionService.GetImageFile(userUpdateDto.ImageFace);
                     imageFace.Id = (Guid)user.ImageFaceId;
-                    await _unitOfWork.ImageFiles.UpdateAsync(imageFace);
+                    await _unitOfWork.ExamFiles.UpdateAsync(imageFace);
 
                     //image before
                     var imageBefore = await ExtensionService.GetImageFile(userUpdateDto.ImageIdCardBefore);
                     imageBefore.Id = (Guid)user.ImageIdCardBeforeId;
-                    await _unitOfWork.ImageFiles.UpdateAsync(imageBefore);
+                    await _unitOfWork.ExamFiles.UpdateAsync(imageBefore);
 
                     // image after
                     var imageAfter = await ExtensionService.GetImageFile(userUpdateDto.ImageIdCardAfter);
                     imageAfter.Id = (Guid)user.ImageIdCardAfterId;
-                    await _unitOfWork.ImageFiles.UpdateAsync(imageAfter);
+                    await _unitOfWork.ExamFiles.UpdateAsync(imageAfter);
 
                     _mapper.Map(userUpdateDto, user);
                     await _unitOfWork.Users.UpdateAsync(user);

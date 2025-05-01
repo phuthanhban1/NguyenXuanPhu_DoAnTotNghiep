@@ -23,7 +23,7 @@ namespace Application.Services.Implements
         }
         public async Task AddAsync(QuestionLevelCreateDto questionLevelCreateDto)
         {
-            var questionLevel = _mapper.Map<QuestionLevel>(questionLevelCreateDto);
+            var questionLevel = _mapper.Map<QuestionType>(questionLevelCreateDto);
             await _unitOfWork.QuestionLevels.AddAsync(questionLevel);
             await _unitOfWork.SaveChangeAsync();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class File
+    public class ExamFile
     {
         public Guid Id { get; set; }
         public string FileName { get; set; }

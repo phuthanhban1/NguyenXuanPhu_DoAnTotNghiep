@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Implementations
 {
-    public class ImageFileRepository : GenericRepository<Domain.Entities.File>, IImageFileRepository
+    public class ExamFileRepository : GenericRepository<Domain.Entities.ExamFile>, IExamFileRepository
     {
-        public ImageFileRepository(ExamContext context) : base(context)
+        public ExamFileRepository(ExamContext context) : base(context)
         {
 
         }

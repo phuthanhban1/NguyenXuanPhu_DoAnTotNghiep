@@ -12,5 +12,8 @@ namespace Domain.Entities
         public Guid ContentBlockId2 { get; set; }
         public float Score { get; set; }
         public string Reason { get; set; }
+        
+        public ContentBlock ContentBlock1 { get; set; }
+        public ContentBlock ContentBlock2 { get; set; }
     }
 }

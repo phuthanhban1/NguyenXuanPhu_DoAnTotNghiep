@@ -17,18 +17,17 @@ namespace Infrastructure.Context
         }
 
         public DbSet<Answer> Answer { get; set; }
-        public DbSet<AudioFile> AudioFile { get; set; }
         public DbSet<ContentBlock> ContentBlock { get; set; }
         public DbSet<DetailResult> DetailResult { get; set; }
         public DbSet<District> District { get; set; }
         public DbSet<Exam> Exam { get; set; }
         public DbSet<Examinee> Examinee { get; set; }
         public DbSet<ExamQuestion> ExamQuestion { get; set; }
-        public DbSet<Domain.Entities.File> ImageFile { get; set; }
+        public DbSet<Domain.Entities.ExamFile> File { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<QuestionBank> QuestionBank { get; set; }
-        public DbSet<QuestionLevel> QuestionLevel { get; set; }
+        public DbSet<QuestionType> QuestionLevel { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Skill> Skill { get; set; }
         public DbSet<User> User { get; set; }

@@ -24,15 +24,15 @@
 
         // fk img: anh mat
         public Guid? ImageFaceId { get; set; }
-        public File? ImageFace { get; set; }
+        public ExamFile? ImageFace { get; set; }
 
         // fk img: id card before
         public Guid? ImageIdCardBeforeId { get; set; }
-        public File? ImageIdCardBefore { get; set; }
+        public ExamFile? ImageIdCardBefore { get; set; }
 
         // fk img: id card after
         public Guid? ImageIdCardAfterId { get; set; }
-        public File? ImageIdCardAfter { get; set; }
+        public ExamFile? ImageIdCardAfter { get; set; }
 
         public List<Exam>? ManagedExam { get; set; }
         public List<Exam>? CreatedQuestionExam { get; set; }

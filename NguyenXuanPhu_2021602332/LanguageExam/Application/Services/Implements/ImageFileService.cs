@@ -22,14 +22,14 @@ namespace Application.Services.Implements
 
         public async Task DeleteAsync(Guid id)
         {
-            var image = await _unitOfWork.ImageFiles.GetByIdAsync(id);
+            var image = await _unitOfWork.ExamFiles.GetByIdAsync(id);
             if (image == null)
             {
                 throw new NotFoundException($"Không tìm thấy ảnh có id {id}");
             }
             else
             {
-                await _unitOfWork.ImageFiles.DeleteAsync(image);
+                await _unitOfWork.ExamFiles.DeleteAsync(image);
                 await _unitOfWork.SaveChangeAsync();
             }
         }
@@ -41,7 +41,7 @@ namespace Application.Services.Implements
 
         public async Task<ImageFileDto> GetByIdAsync(Guid id)
         {
-            var image = await _unitOfWork.ImageFiles.GetByIdAsync(id);
+            var image = await _unitOfWork.ExamFiles.GetByIdAsync(id);
             if (image == null)
             {
                 return null;
@@ -59,7 +59,7 @@ namespace Application.Services.Implements
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
 
-            var image = await _unitOfWork.ImageFiles.GetByIdAsync(id);
+            var image = await _unitOfWork.ExamFiles.GetByIdAsync(id);
             if(image == null)
             {
                 throw new NotFoundException($"Không tìm thấy ảnh có id {id}");
@@ -68,7 +68,7 @@ namespace Application.Services.Implements
                 image.FileName = file.FileName;
                 image.FileData = memoryStream.ToArray();
                 image.ContentType = file.ContentType;
-                await _unitOfWork.ImageFiles.UpdateAsync(image);
+                await _unitOfWork.ExamFiles.UpdateAsync(image);
                 await _unitOfWork.SaveChangeAsync();
             }
         }
@@ -78,14 +78,14 @@ namespace Application.Services.Implements
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);
             Guid idImage = Guid.NewGuid();
-            var image = new Domain.Entities.File
+            var image = new Domain.Entities.ExamFile
             {
                 Id = idImage,
                 FileName = file.FileName,
                 FileData = memoryStream.ToArray(),
                 ContentType = file.ContentType
             };
-            await _unitOfWork.ImageFiles.AddAsync(image);
+            await _unitOfWork.ExamFiles.AddAsync(image);
             await _unitOfWork.SaveChangeAsync();
             return idImage;
         }

@@ -17,8 +17,8 @@
 
         // foreign key: audio file
         public Guid? AudioFileId { get; set; }
-        public AudioFile? AudioFile { get; set; }
-        public List<QuestionLevel> QuestionLevels { get; set; }
+        public ExamFile? AudioFile { get; set; }
+        public List<QuestionType> QuestionLevels { get; set; }
 
 
     }

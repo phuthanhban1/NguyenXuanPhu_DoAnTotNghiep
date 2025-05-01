@@ -20,14 +20,14 @@ namespace Infrastructure.UnitOfWork
         {
             _context = context;
             Answers = new AnswerRepository(_context);
-            AudioFiles = new AudioFileRepository(_context);
+            
             ContentBlocks = new ContentBlockRepository(_context);
             DetailResults = new DetailResultRepository(_context);
             Districts = new DistrictRepository(_context);
             Examinees = new ExamineeRepository(_context);
             ExamQuestions = new ExamQuestionRepository(_context);
             Exams = new ExamRepository(_context);
-            ImageFiles = new ImageFileRepository(_context);
+            ExamFiles = new ExamFileRepository(_context);
             Provinces = new ProvinceRepository(_context);
             QuestionBanks = new QuestionBankRepository(_context);
             QuestionLevels = new QuestionLevelRepository(_context);
@@ -58,7 +58,7 @@ namespace Infrastructure.UnitOfWork
 
         public IAnswerRepository Answers {get; set;}
 
-        public IAudioFileRepository AudioFiles {get; set;}
+        
 
         public IContentBlockRepository ContentBlocks {get; set;}
 
@@ -72,7 +72,7 @@ namespace Infrastructure.UnitOfWork
 
         public IExamRepository Exams {get; set;}
 
-        public IImageFileRepository ImageFiles {get; set;}
+        public IExamFileRepository ExamFiles {get; set;}
 
         public IProvinceRepository Provinces {get; set;}
 

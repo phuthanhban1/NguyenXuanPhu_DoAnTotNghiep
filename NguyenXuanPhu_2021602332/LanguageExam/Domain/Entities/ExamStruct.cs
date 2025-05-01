@@ -13,7 +13,7 @@ namespace Domain.Entities
         public int Order { get; set; }
 
         public Guid QuestionLevelId { get; set; }
-        public QuestionLevel QuestionLevel { get; set; }
+        public QuestionType QuestionLevel { get; set; }
 
         public Exam Exam { get; set; }
 

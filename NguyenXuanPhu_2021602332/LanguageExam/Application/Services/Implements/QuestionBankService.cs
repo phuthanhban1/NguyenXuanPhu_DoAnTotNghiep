@@ -29,7 +29,7 @@ namespace Application.Services.Implements
             var questionBank = _mapper.Map<QuestionBank>(userCreateDto);    
             questionBank.Id = Guid.NewGuid();
             questionBank.CreatedAt = DateTime.UtcNow;
-            questionBank.IsActive = true;
+            //questionBank.IsActive = true;
             await _unitOfWork.QuestionBanks.AddAsync(questionBank);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -43,7 +43,7 @@ namespace Application.Services.Implements
             }
             else
             {
-                questionBank.IsActive = false;
+                questionBank.Status = 1;
                 await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
             }
@@ -52,7 +52,7 @@ namespace Application.Services.Implements
         public async Task<List<QuestionBankDto>> GetAllAsync()
         {
             var banks = await _unitOfWork.QuestionBanks.GetAllAsync();
-            var activeBanks = banks.Where(b => b.IsActive).ToList();
+            var activeBanks = banks.Where(b => b.Status == 0).ToList();
             var questionBankDtos = _mapper.Map<List<QuestionBankDto>>(activeBanks);
             return questionBankDtos;
         }

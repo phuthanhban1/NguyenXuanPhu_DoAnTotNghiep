@@ -39,7 +39,7 @@ namespace Application.Mappings
                 .ForMember(ud => ud.ImageIdCardBefore, u => u.Ignore())
                 .ForMember(ud => ud.ImageIdCardAfter, u => u.Ignore());
 
-            CreateMap<Domain.Entities.File, ImageFileDto>();
+            CreateMap<Domain.Entities.ExamFile, ImageFileDto>();
 
             CreateMap<QuestionBankUpdateDto, QuestionBank>();
             CreateMap<QuestionBankCreateDto, QuestionBank>();

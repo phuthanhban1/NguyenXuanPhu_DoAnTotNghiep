@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Implementations
 {
-    public class QuestionLevelRepository : GenericRepository<QuestionLevel>, IQuestionLevelRepository
+    public class QuestionLevelRepository : GenericRepository<QuestionType>, IQuestionLevelRepository
     {
         public QuestionLevelRepository(ExamContext context) : base(context)
         {

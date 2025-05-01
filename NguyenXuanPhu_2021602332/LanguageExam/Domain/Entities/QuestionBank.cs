@@ -14,7 +14,7 @@ namespace Domain.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime QuestionCreateDue { get; set; }
         public DateTime QuestionReviewDue { get; set; }
-        public bool Status { get; set; }
+        public byte Status { get; set; }
         //public bool IsUpdating { get; set; }
         // fk user
         public Guid ManagerId { get; set; }
