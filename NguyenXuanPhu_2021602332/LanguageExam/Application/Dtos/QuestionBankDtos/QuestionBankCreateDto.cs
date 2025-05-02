@@ -14,6 +14,5 @@ namespace Application.Dtos.QuestionBankDtos
         // fk user
         public DateTime QuestionCreateDue { get; set; }
         public DateTime QuestionReviewDue { get; set; }
-        public Guid ManagerId { get; set; }
     }
 }

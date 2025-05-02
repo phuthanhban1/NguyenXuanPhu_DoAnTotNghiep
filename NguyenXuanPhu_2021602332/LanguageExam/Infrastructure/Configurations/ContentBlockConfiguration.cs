@@ -17,11 +17,11 @@ namespace Infrastructure.Configurations
             builder.HasKey(cb => cb.Id);
 
             builder.HasOne(cb => cb.AudioFile)
-                   .WithOne(af => af.ContentBlock)
+                   .WithOne(af => af.AudioContentBlock)
                    .HasForeignKey<ContentBlock>(cb => cb.AudioFileId);
 
             builder.HasOne(cb => cb.ImageFile)
-                   .WithOne(af => af.ContentBlock)
+                   .WithOne(af => af.ImageContentBlock)
                    .HasForeignKey<ContentBlock>(cb => cb.ImageFileId);
 
             builder.HasOne(cb => cb.QuestionLevel)

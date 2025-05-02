@@ -11,11 +11,10 @@ namespace Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Language { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime QuestionCreateDue { get; set; }
         public DateTime QuestionReviewDue { get; set; }
-        public byte Status { get; set; }
-        //public bool IsUpdating { get; set; }
+        public byte Status { get; set; } // 0: chua bat dau, 1: dang thuc hien, 2: da hoan thanh, 3: da huy
         // fk user
         public Guid ManagerId { get; set; }
         public User Manager { get; set; }

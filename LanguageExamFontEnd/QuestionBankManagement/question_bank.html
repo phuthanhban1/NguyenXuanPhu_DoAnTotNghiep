@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý ngân hàng đề</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <style>
+        .language-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 150px;
+        }
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-color: #0d6efd;
+        }
+        .search-box {
+            border-radius: 20px;
+            padding-left: 40px;
+        }
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .status-active {
+            color: #198754;
+            background-color: #d1e7dd;
+            border: 1px solid #badbcc;
+        }
+        .status-creating {
+            color: #0d6efd;
+            background-color: #e7f1ff;
+            border: 1px solid #b6d4fe;
+        }
+        .status-draft {
+            color: #6c757d;
+            background-color: #e2e3e5;
+            border: 1px solid #d3d6d8;
+        }
+        
+        
+        .language-card img {
+        width: 80px;
+        height: 50px;
+        object-fit: cover;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        border: 1px solid #000;
+    }
+    </style>
+    
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Ngân hàng đề thi</h2>    
+        </div>
+
+        <!-- Language Selection -->
+        <div class="row g-4 mb-5">
+            <!-- <div class="col-md-3">
+                <div class="card language-card" onclick="selectLanguage('en')">
+                    <div class="card-body text-center">
+                        <img src="https://flagcdn.com/w80/gb.png" alt="English" class="mb-3">
+                        <h5>Tiếng Anh</h5>
+                        <div class="text-muted">150 kho đề</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card language-card" onclick="selectLanguage('jp')">
+                    <div class="card-body text-center">
+                        <img src="https://flagcdn.com/w80/jp.png" alt="Japanese" class="mb-3">
+                        <h5>Tiếng Nhật</h5>
+                        <div class="text-muted">120 kho đề</div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-md-3">
+                <div class="card language-card" data-lang="korean">
+                    <div class="card-body text-center">
+                        <img src="https://flagcdn.com/w80/kr.png" alt="Korean" class="mb-3">
+                        <h5>Tiếng Hàn</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-3">
+                <div class="card language-card" onclick="selectLanguage('cn')">
+                    <div class="card-body text-center">
+                        <img src="https://flagcdn.com/w80/cn.png" alt="Chinese" class="mb-3">
+                        <h5>Tiếng Trung</h5>
+                        <div class="text-muted">100 kho đề</div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Exam List Section -->
+        <div id="examList" style="display: none;">
+            <!-- Search and Filter -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="position-relative">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="form-control search-box" placeholder="Tìm kiếm kho đề...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="active">Đang hoạt động</option>
+                        <option value="draft">Đang tạo</option>
+                        <option value="draft">Đã khóa</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select">
+                        <option value="">Sắp xếp theo</option>
+                        <option value="newest">Mới nhất</option>
+                        <option value="oldest">Cũ nhất</option>
+                        <option value="name">Tên A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Exam Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tên kho đề</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <!-- Thay đổi phần tbody trong bảng -->
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="assets/js/QuestionBank/question_bank.js"></script> -->
+    <script>
+        
+
+
+$(document).ready(function() {
+    var examData = [];
+    // Bắt sự kiện chọn ngôn ngữ
+    $('.language-card').on('click', function() {
+        var lang = $(this).data('lang');
+        selectLanguage(lang);
+    });
+
+    // Xử lý tìm kiếm
+    $('.search-box').on('input', function() {
+        var searchTerm = $(this).val().toLowerCase();
+        var filteredExams = examData.filter(function(exam) {
+            return exam.name.toLowerCase().includes(searchTerm);
+        });
+        renderExamList(filteredExams);
+    });
+
+    // Xử lý lọc theo trạng thái
+    $('select').eq(0).on('change', function() {
+        var status = $(this).val();
+        var filteredExams = status ?
+            examData.filter(function(exam) { return exam.status === status; }) :
+            examData;
+        renderExamList(filteredExams);
+    });
+
+    // Xử lý sắp xếp
+    $('select').eq(1).on('change', function() {
+        var sortBy = $(this).val();
+        var sortedExams = examData.slice();
+        switch (sortBy) {
+            case 'newest':
+                sortedExams.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+                break;
+            case 'oldest':
+                sortedExams.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
+                break;
+            case 'name':
+                sortedExams.sort(function(a, b) { return a.name.localeCompare(b.name); });
+                break;
+        }
+        renderExamList(sortedExams);
+    });
+
+    // Xử lý nút Edit
+    $('tbody').on('click', '.btn-edit', function() {
+        var examId = $(this).closest('tr').data('exam-id');
+        handleEdit(examId);
+    });
+
+    // Xử lý nút Delete
+    $('tbody').on('click', '.btn-delete', function() {
+        var examId = $(this).closest('tr').data('exam-id');
+        handleDelete(examId);
+    });
+
+    // Hàm render danh sách kho đề 
+    function renderExamList(exams) {
+        var $tbody = $('tbody');
+        $tbody.html(
+            exams.map(function(exam) {
+                var statusText = '';
+                var statusClass = '';
+                if (exam.status == 1) {
+                    statusText = 'Đang hoạt động';
+                    statusClass = 'status-active';
+                } else if (exam.status == 0) {
+                    statusText = 'Đang tạo';
+                    statusClass = 'status-creating';
+                } else {
+                    statusText = 'Đã khóa';
+                    statusClass = 'status-draft';
+                }
+                return `
+                    <tr data-exam-id="${exam.id}">
+                        <td>
+                            <a href="exam_bank_detail.html" class="text-decoration-none text-dark">
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2"><i class="fas fa-folder text-warning"></i></span>
+                                    ${exam.name}
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <span class="badge ${statusClass}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <td>${exam.date}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-1 btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger btn-delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('')
+        );
+    }
+
+    // Hàm xử lý khi chọn ngôn ngữ
+    function selectLanguage(lang) {
+        $('#examList').show();
+        // Gọi API để lấy dữ liệu theo ngôn ngữ
+        $.ajax({
+            url: `https://localhost:7001/api/questionbank/${lang}`,
+            type: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(response) {
+                // Chuyển đổi dữ liệu từ API thành định dạng phù hợp
+                console.log(response);
+                examData = response.map(function(exam) {
+                    return {
+                        id: exam.id,
+                        name: exam.name,
+                        status: exam.status,
+                        date: new Date(exam.createdDate).toLocaleDateString('vi-VN'),
+                        language: exam.language
+                    };
+                });
+                renderExamList(examData);
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                if (error.responseText) {
+                    console.log('ResponseText:', error.responseText); // Nội dung trả về từ server
+                }
+                if (error.status) {
+                    console.log('Status:', error.status); // Mã lỗi HTTP (404, 500, 405, ...)
+                }
+            }
+        });
+    }
+
+    function handleEdit(examId) {
+        var exam = examData.find(e => e.id === examId);
+        if (!exam) return;
+
+        var $form = $('#editExamForm');
+        $form.find('input[name="name"]').val(exam.name);
+        $form.find('input[name="language"]').val(exam.language);
+
+        var $statusSelect = $form.find('select[name="status"]');
+        $statusSelect.empty();
+
+        if (exam.status == 0) {
+            $statusSelect.append('<option value="2">Đã khóa</option>');
+        } else if (exam.status == 2) {
+            $statusSelect.append('<option value="0">Đang tạo</option>');
+        } else if (exam.status == 1) {
+            $statusSelect.append('<option value="0">Đang tạo</option>');
+            $statusSelect.append('<option value="2">Đã khóa</option>');
+        }
+
+        $statusSelect.val(exam.status);
+
+        // Hiện/ẩn 2 ô ngày khi mở modal
+        if ($statusSelect.val() == "0") {
+            $('#date-fields').removeClass('d-none');
+        } else {
+            $('#date-fields').addClass('d-none');
+        }
+
+        $form.data('exam-id', examId);
+
+        var modal = new bootstrap.Modal(document.getElementById('editExamModal'));
+        modal.show();
+    }
+
+    $('#editExamForm').on('submit', function(e) {
+        e.preventDefault();
+        var examId = $(this).data('exam-id');
+        var exam = examData.find(e => e.id === examId);
+        var formData = new FormData($('#editExamForm')[0]);
+        if (!exam) return;
+        $.ajax({
+            url: `https://localhost:7001/api/questionbank/${examId}`,
+            type: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: formData,
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.error('Error updating data:', error);
+            }
+        });
+        // Cập nhật dữ liệu
+        exam.name = $(this).find('input[name="name"]').val();
+        exam.language = $(this).find('input[name="language"]').val();
+        exam.status = $(this).find('select[name="status"]').val();
+
+        // Cập nhật lại bảng
+        renderExamList(examData);
+
+        // Đóng modal
+        var modal = bootstrap.Modal.getInstance(document.getElementById('editExamModal'));
+        modal.hide();
+    });
+
+    // Khi thay đổi trạng thái trong modal sửa
+    $('#editExamForm').on('change', 'select[name="status"]', function() {
+        if ($(this).val() == "0") { // Đang tạo
+            $('#date-fields').removeClass('d-none');
+        } else {
+            $('#date-fields').addClass('d-none');
+        }
+    });
+
+});
+
+
+ 
+    </script>
+    
+    <!-- Modal Sửa Đề Thi -->
+    <div class="modal fade" id="editExamModal" tabindex="-1" aria-labelledby="editExamModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form id="editExamForm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editExamModalLabel">Sửa thông tin kho đề</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Tên kho đề</label>
+                <input type="text" class="form-control" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Trạng thái</label>
+                <select class="form-select" name="status">
+                  <option value="0">Đang tạo</option>
+                  <option value="2">Đã khóa</option>
+                </select>
+              </div>
+              <div class="mb-3 d-none" id="date-fields">
+                <label class="form-label">Hạn tạo đề</label>
+                <input type="date" class="form-control mb-2" name="han_tao_de">
+                <label class="form-label">Hạn duyệt đề</label>
+                <input type="date" class="form-control" name="han_duyet_de">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+              <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</body>
+
+
+</html>

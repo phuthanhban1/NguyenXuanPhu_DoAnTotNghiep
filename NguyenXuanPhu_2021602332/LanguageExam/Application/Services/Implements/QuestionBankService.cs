@@ -24,12 +24,13 @@ namespace Application.Services.Implements
             _mapper = mapper;
         }
 
-        public async Task AddAsync(QuestionBankCreateDto userCreateDto)
+        public async Task AddAsync(QuestionBankCreateDto userCreateDto, Guid managerId)
         {
             var questionBank = _mapper.Map<QuestionBank>(userCreateDto);    
             questionBank.Id = Guid.NewGuid();
-            questionBank.CreatedAt = DateTime.UtcNow;
-            //questionBank.IsActive = true;
+            questionBank.CreatedDate = DateTime.UtcNow;
+            questionBank.ManagerId = managerId;
+            questionBank.Status = 0;
             await _unitOfWork.QuestionBanks.AddAsync(questionBank);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -57,6 +58,17 @@ namespace Application.Services.Implements
             return questionBankDtos;
         }
 
+        public async Task<List<QuestionBankDto>> GetByLanguageManageId(string language, Guid managerId)
+        {
+            var questionBanks = await _unitOfWork.QuestionBanks.GetByLanguageManager(language, managerId);
+            if (questionBanks == null)
+            {
+                throw new NotFoundException($"Không tìm thấy ngân hàng câu hỏi với ngôn ngữ {language} và id người quản lý {managerId}");
+            }
+            var questionBankDtos = _mapper.Map<List<QuestionBankDto>>(questionBanks);
+            return questionBankDtos;
+        }
+
         public async Task UpdateAsync(QuestionBankUpdateDto questionBankUpdateDto)
         {
             var questionBank = await _unitOfWork.QuestionBanks.GetByIdAsync(questionBankUpdateDto.Id);
@@ -64,7 +76,7 @@ namespace Application.Services.Implements
             {
                 throw new NotFoundException($"Không tìm thấy ngân hàng câu hỏi có id: {questionBankUpdateDto.Id}");
             }
-            else if (DateTime.Now >= questionBank.CreatedAt.AddMonths(2))
+            else if (DateTime.Now >= questionBank.CreatedDate.AddMonths(2))
             {
                 throw new BadRequestException($"Thời gian cập nhật đã kết thúc");
             }

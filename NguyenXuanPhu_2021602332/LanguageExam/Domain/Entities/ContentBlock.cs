@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,7 @@ namespace Domain.Entities
         public ExamQuestion? ExamQuestion { get; set; }
         public List<Question> Questions { get; set; }
 
-        public List<SimilarQuestion> SimilarQuestions { get; set; }
+        public List<SimilarQuestion> SimilarQuestions1 { get; set; }
+        public List<SimilarQuestion> SimilarQuestions2 { get; set; }
     }
 }

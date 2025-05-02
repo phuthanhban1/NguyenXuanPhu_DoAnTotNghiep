@@ -43,6 +43,7 @@ namespace Application.Mappings
 
             CreateMap<QuestionBankUpdateDto, QuestionBank>();
             CreateMap<QuestionBankCreateDto, QuestionBank>();
+            CreateMap<QuestionBank, QuestionBankDto>();
             CreateMap<SkillCreateDto, Skill>();
             CreateMap<SkillUpdateDto, Skill>();
 

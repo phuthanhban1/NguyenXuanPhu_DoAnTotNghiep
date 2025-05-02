@@ -16,11 +16,11 @@ namespace Infrastructure.Configurations
             builder.ToTable("SimilarQuestion");
             builder.HasKey(sq => new { sq.ContentBlockId1, sq.ContentBlockId2 });
             builder.HasOne(sq => sq.ContentBlock1)
-                   .WithMany(cb => cb.SimilarQuestions)
+                   .WithMany(cb => cb.SimilarQuestions1)
                    .HasForeignKey(sq => sq.ContentBlockId1)
                    .OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(sq => sq.ContentBlock2)
-                   .WithMany(cb => cb.SimilarQuestions)
+                   .WithMany(cb => cb.SimilarQuestions2)
                    .HasForeignKey(sq => sq.ContentBlockId2)
                    .OnDelete(DeleteBehavior.NoAction);
         }

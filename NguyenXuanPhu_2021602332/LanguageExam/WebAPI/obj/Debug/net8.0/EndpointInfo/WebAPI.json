@@ -577,6 +577,45 @@
         }
       }
     },
+    "/api/QuestionBank/{language}": {
+      "get": {
+        "tags": [
+          "QuestionBank"
+        ],
+        "parameters": [
+          {
+            "name": "language",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionBankDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionBankDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionBankDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/QuestionLevel": {
       "get": {
         "tags": [
@@ -1329,35 +1368,6 @@
         },
         "additionalProperties": false
       },
-      "AudioFile": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "fileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileData": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "contentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "skill": {
-            "$ref": "#/components/schemas/Skill"
-          },
-          "contentBlock": {
-            "$ref": "#/components/schemas/ContentBlock"
-          }
-        },
-        "additionalProperties": false
-      },
       "ContentBlock": {
         "type": "object",
         "properties": {
@@ -1365,7 +1375,7 @@
             "type": "string",
             "format": "uuid"
           },
-          "content": {
+          "textContent": {
             "type": "string",
             "nullable": true
           },
@@ -1379,9 +1389,22 @@
           "isUsed": {
             "type": "boolean"
           },
+          "createdDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
           "unConFirmedReason": {
             "type": "string",
             "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
           },
           "questionStruct": {
             "$ref": "#/components/schemas/QuestionStruct"
@@ -1392,14 +1415,22 @@
             "nullable": true
           },
           "audioFile": {
-            "$ref": "#/components/schemas/AudioFile"
+            "$ref": "#/components/schemas/ExamFile"
+          },
+          "imageFileId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "imageFile": {
+            "$ref": "#/components/schemas/ExamFile"
           },
           "questionLevelId": {
             "type": "string",
             "format": "uuid"
           },
           "questionLevel": {
-            "$ref": "#/components/schemas/QuestionLevel"
+            "$ref": "#/components/schemas/QuestionType"
           },
           "examQuestion": {
             "$ref": "#/components/schemas/ExamQuestion"
@@ -1408,6 +1439,20 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Question"
+            },
+            "nullable": true
+          },
+          "similarQuestions1": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimilarQuestion"
+            },
+            "nullable": true
+          },
+          "similarQuestions2": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimilarQuestion"
             },
             "nullable": true
           }
@@ -1575,6 +1620,50 @@
         },
         "additionalProperties": false
       },
+      "ExamFile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileData": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "question": {
+            "$ref": "#/components/schemas/Question"
+          },
+          "imageFace": {
+            "$ref": "#/components/schemas/User"
+          },
+          "imageIdCardBefore": {
+            "$ref": "#/components/schemas/User"
+          },
+          "imageIdCardAfter": {
+            "$ref": "#/components/schemas/User"
+          },
+          "skill": {
+            "$ref": "#/components/schemas/Skill"
+          },
+          "imageContentBlock": {
+            "$ref": "#/components/schemas/ContentBlock"
+          },
+          "audioContentBlock": {
+            "$ref": "#/components/schemas/ContentBlock"
+          }
+        },
+        "additionalProperties": false
+      },
       "ExamQuestion": {
         "type": "object",
         "properties": {
@@ -1627,7 +1716,7 @@
             "format": "uuid"
           },
           "questionLevel": {
-            "$ref": "#/components/schemas/QuestionLevel"
+            "$ref": "#/components/schemas/QuestionType"
           },
           "exam": {
             "$ref": "#/components/schemas/Exam"
@@ -1740,41 +1829,6 @@
         },
         "additionalProperties": false
       },
-      "ImageFile": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "fileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileData": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "contentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "question": {
-            "$ref": "#/components/schemas/Question"
-          },
-          "imageFace": {
-            "$ref": "#/components/schemas/User"
-          },
-          "imageIdCardBefore": {
-            "$ref": "#/components/schemas/User"
-          },
-          "imageIdCardAfter": {
-            "$ref": "#/components/schemas/User"
-          }
-        },
-        "additionalProperties": false
-      },
       "Province": {
         "type": "object",
         "properties": {
@@ -1820,7 +1874,7 @@
             "nullable": true
           },
           "imageFile": {
-            "$ref": "#/components/schemas/ImageFile"
+            "$ref": "#/components/schemas/ExamFile"
           },
           "contentBlockId": {
             "type": "string",
@@ -1847,7 +1901,7 @@
             "type": "string",
             "nullable": true
           },
-          "createdAt": {
+          "createdDate": {
             "type": "string",
             "format": "date-time"
           },
@@ -1859,11 +1913,9 @@
             "type": "string",
             "format": "date-time"
           },
-          "isActive": {
-            "type": "boolean"
-          },
-          "isUpdating": {
-            "type": "boolean"
+          "status": {
+            "type": "integer",
+            "format": "int32"
           },
           "managerId": {
             "type": "string",
@@ -1900,10 +1952,6 @@
           "questionReviewDue": {
             "type": "string",
             "format": "date-time"
-          },
-          "managerId": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -1923,7 +1971,7 @@
             "type": "string",
             "nullable": true
           },
-          "createdAt": {
+          "createdDate": {
             "type": "string",
             "format": "date-time"
           },
@@ -1934,6 +1982,10 @@
           "questionReviewDue": {
             "type": "string",
             "format": "date-time"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1956,49 +2008,6 @@
           "questionReviewDue": {
             "type": "string",
             "format": "date-time"
-          },
-          "language": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuestionLevel": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "skillId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "skill": {
-            "$ref": "#/components/schemas/Skill"
-          },
-          "contentBlocks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentBlock"
-            },
-            "nullable": true
-          },
-          "examStructs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExamStruct"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2049,6 +2058,45 @@
         "type": "integer",
         "format": "int32"
       },
+      "QuestionType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "skillId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "skill": {
+            "$ref": "#/components/schemas/Skill"
+          },
+          "contentBlocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentBlock"
+            },
+            "nullable": true
+          },
+          "examStructs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamStruct"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Role": {
         "type": "object",
         "properties": {
@@ -2066,6 +2114,34 @@
               "$ref": "#/components/schemas/User"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimilarQuestion": {
+        "type": "object",
+        "properties": {
+          "contentBlockId1": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentBlockId2": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "score": {
+            "type": "number",
+            "format": "float"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentBlock1": {
+            "$ref": "#/components/schemas/ContentBlock"
+          },
+          "contentBlock2": {
+            "$ref": "#/components/schemas/ContentBlock"
           }
         },
         "additionalProperties": false
@@ -2108,12 +2184,12 @@
             "nullable": true
           },
           "audioFile": {
-            "$ref": "#/components/schemas/AudioFile"
+            "$ref": "#/components/schemas/ExamFile"
           },
           "questionLevels": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/QuestionLevel"
+              "$ref": "#/components/schemas/QuestionType"
             },
             "nullable": true
           }
@@ -2237,7 +2313,7 @@
             "nullable": true
           },
           "imageFace": {
-            "$ref": "#/components/schemas/ImageFile"
+            "$ref": "#/components/schemas/ExamFile"
           },
           "imageIdCardBeforeId": {
             "type": "string",
@@ -2245,7 +2321,7 @@
             "nullable": true
           },
           "imageIdCardBefore": {
-            "$ref": "#/components/schemas/ImageFile"
+            "$ref": "#/components/schemas/ExamFile"
           },
           "imageIdCardAfterId": {
             "type": "string",
@@ -2253,7 +2329,7 @@
             "nullable": true
           },
           "imageIdCardAfter": {
-            "$ref": "#/components/schemas/ImageFile"
+            "$ref": "#/components/schemas/ExamFile"
           },
           "managedExam": {
             "type": "array",

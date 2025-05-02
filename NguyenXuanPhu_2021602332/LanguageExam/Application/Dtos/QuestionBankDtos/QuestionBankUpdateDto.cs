@@ -13,7 +13,6 @@ namespace Application.Dtos.QuestionBankDtos
         public string Name { get; set; }
         public DateTime QuestionCreateDue { get; set; }
         public DateTime QuestionReviewDue { get; set; }
-        public string Language { get; set; }
 
     }
 }

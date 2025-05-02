@@ -8,7 +8,7 @@ namespace Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<ExamFile> builder)
         {
-            builder.ToTable("ImageFile").HasKey(i => i.Id);
+            builder.ToTable("ExamFile").HasKey(i => i.Id);
         }
     }
 }

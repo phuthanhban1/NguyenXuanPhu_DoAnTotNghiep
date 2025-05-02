@@ -15,6 +15,7 @@ namespace Application.Services
         static readonly HttpClient client = new HttpClient();
         static string apiKey = ""; // Thay bằng API key Gemini của bạn
         static string model = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
+        public static string Sid = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid";
 
         public static async Task SendEmailAsync(string fromEmail, string fromName, string toEmail, string subject, string body)
         {

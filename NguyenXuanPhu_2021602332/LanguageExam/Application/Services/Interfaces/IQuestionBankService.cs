@@ -10,10 +10,10 @@ namespace Application.Services.Interfaces
 {
     public interface IQuestionBankService
     {
-        Task AddAsync(QuestionBankCreateDto questionBankCreateDto);
+        Task AddAsync(QuestionBankCreateDto questionBankCreateDto, Guid managerId);
         Task UpdateAsync(QuestionBankUpdateDto questionBankUpdateDto);
         Task DeleteAsync(Guid id);
-        //Task<QuestionBankDto> GetByIdAsync(Guid id);
+        Task<List<QuestionBankDto>> GetByLanguageManageId(string language, Guid managerId);
         Task<List<QuestionBankDto>> GetAllAsync();
     }
 }
