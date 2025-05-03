@@ -598,6 +598,51 @@
                 searchResults.classList.remove('d-none');
             }
         });
+
+        // Hàm lấy danh sách kỹ năng hiện có
+        function getExistingSkills() {
+            const skillCards = document.querySelectorAll('.skill-card');
+            return Array.from(skillCards).map(card => {
+                const skillName = card.querySelector('h5').textContent.trim();
+                const iconClass = card.querySelector('i').className.split(' ')[1];
+                return {
+                    name: skillName,
+                    icon: iconClass
+                };
+            });
+        }
+
+        // Xử lý hiển thị modal thêm kỹ năng
+        const addSkillModal = document.getElementById('addSkillModal');
+        addSkillModal.addEventListener('show.bs.modal', function() {
+            const existingSkills = getExistingSkills();
+            const iconSelect = this.querySelector('select');
+            
+            // Lưu lại tất cả options
+            const allOptions = Array.from(iconSelect.options);
+            
+            // Ẩn các options tương ứng với kỹ năng đã tồn tại
+            allOptions.forEach(option => {
+                const iconClass = `fa-${option.value}`;
+                const isExisting = existingSkills.some(skill => 
+                    skill.icon.includes(iconClass)
+                );
+                option.disabled = isExisting;
+                if (isExisting) {
+                    option.textContent += ' (Đã tồn tại)';
+                }
+            });
+        });
+
+        // Reset modal khi đóng
+        addSkillModal.addEventListener('hidden.bs.modal', function() {
+            const iconSelect = this.querySelector('select');
+            Array.from(iconSelect.options).forEach(option => {
+                option.disabled = false;
+                option.textContent = option.textContent.replace(' (Đã tồn tại)', '');
+            });
+            this.querySelector('form').reset();
+        });
     </script>
 </body>
 </html>

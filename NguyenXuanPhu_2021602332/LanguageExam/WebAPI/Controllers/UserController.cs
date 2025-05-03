@@ -45,9 +45,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("password")]
-        public async Task<ActionResult> UpdatePassword(UserPassworDto userPassworDto)
+        public async Task<ActionResult> UpdatePassword(UserPassworDto userPasswordDto)
         {
-            await _userService.UpdatePassword(userPassworDto);
+            await _userService.UpdatePassword(userPasswordDto);
             return Ok();
         }
         [HttpPut("role")]

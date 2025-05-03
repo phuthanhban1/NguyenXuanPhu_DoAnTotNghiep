@@ -132,7 +132,7 @@ $(document).ready(function() {
         $('#cropImagePop').modal('hide');
     });
 
-                // Initialize datepicker
+    // Initialize datepicker
     $('.type-date').datepicker({
         format: "dd/mm/yyyy",
         language: "vi",
@@ -140,7 +140,7 @@ $(document).ready(function() {
         endDate: '+0d',
         autoclose: true,
     });
-                // Form validation
+    // Form validation
     $("#UserInfoForm").validate({
         rules: {
             VietnameseName: {
@@ -207,7 +207,9 @@ $(document).ready(function() {
                 error.insertAfter(element);
             }
         }
-    });          // Image upload preview
+    });          
+    
+    // Image upload preview
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

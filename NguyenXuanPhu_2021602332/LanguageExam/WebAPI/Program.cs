@@ -24,7 +24,9 @@ builder.Services.AddTransient<IProvinceService, ProvinceService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IWardService, WardService>();
 builder.Services.AddTransient<IQuestionBankService, QuestionBankService>();
-//builder.Services.AddTransient<IImageFileService, ImageFileService>();
+builder.Services.AddTransient<IImageFileService, ImageFileService>();
+builder.Services.AddTransient<ISkillService, SkillService>();
+
 
 
 // DI auto mapper

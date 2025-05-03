@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm câu hỏi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd;
+        }
+        .question-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .answer-option {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        .answer-option:hover {
+            border-color: #0d6efd;
+            box-shadow: 0 2px 4px rgba(13, 110, 253, 0.1);
+        }
+        .excel-upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .excel-upload-area:hover {
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card question-card">
+                    <div class="card-header bg-white py-3">
+                        <h4 class="mb-0">Thêm câu hỏi mới</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Navigation Pills -->
+                        <ul class="nav nav-pills mb-4" id="questionTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="manual-tab" data-bs-toggle="pill" data-bs-target="#manual" type="button">
+                                    <i class="fas fa-keyboard me-2"></i>Nhập tay
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="excel-tab" data-bs-toggle="pill" data-bs-target="#excel" type="button">
+                                    <i class="fas fa-file-excel me-2"></i>Nhập bằng Excel
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="questionTabsContent">
+                            <!-- Manual Input Tab -->
+                            <div class="tab-pane fade show active" id="manual" role="tabpanel">
+                                <form>
+                                    <div class="mb-4">
+                                        <label class="form-label">Dạng câu hỏi</label>
+                                        <select class="form-select" id="questionType" onchange="toggleQuestionType()">
+                                            <option value="single">Câu hỏi đơn</option>
+                                            <option value="paragraph">Đoạn văn nhiều câu hỏi</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Single Question Form -->
+                                    <div id="singleQuestionForm">
+                                        <div class="mb-4">
+                                            <label class="form-label">Loại câu hỏi</label>
+                                            <select class="form-select">
+                                                <option>Đọc hiểu</option>
+                                                <option>Điền từ</option>
+                                                <option>Tìm từ đồng nghĩa</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Nội dung câu hỏi</label>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="hasSingleImage" onchange="toggleSingleImage()">
+                                                <label class="form-check-label" for="hasSingleImage">Có hình ảnh</label>
+                                            </div>
+                                            <div id="singleQuestionText">
+                                                <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
+                                            </div>
+                                            <div id="singleQuestionImage" style="display:none;">
+                                                <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
+                                                <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Đáp án</label>
+                                            <div id="answerOptions">
+                                                <div class="answer-option">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer" checked>
+                                                        <input type="text" class="form-control" placeholder="Đáp án A">
+                                                    </div>
+                                                </div>
+                                                <div class="answer-option">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer">
+                                                        <input type="text" class="form-control" placeholder="Đáp án B">
+                                                    </div>
+                                                </div>
+                                                <div class="answer-option">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer">
+                                                        <input type="text" class="form-control" placeholder="Đáp án C">
+                                                    </div>
+                                                </div>
+                                                <div class="answer-option">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer">
+                                                        <input type="text" class="form-control" placeholder="Đáp án D">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <!-- Paragraph with Multiple Questions Form -->
+                                    <div id="paragraphQuestionForm" style="display:none;">
+                                        <div class="mb-4">
+                                            <label class="form-label">Đoạn văn</label>
+                                            <textarea class="form-control" rows="4" placeholder="Nhập đoạn văn..."></textarea>
+                                        </div>
+                                        <div id="subQuestions">
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <strong>Câu hỏi nhỏ 1</strong>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <input type="radio" name="subContentType0" value="text" checked onchange="toggleSubContentType(0)"> Text
+                                                        <input type="radio" name="subContentType0" value="image" class="ms-3" onchange="toggleSubContentType(0)"> Ảnh
+                                                    </div>
+                                                    <div id="subQuestionText0">
+                                                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
+                                                    </div>
+                                                    <div id="subQuestionImage0" style="display:none;">
+                                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 0)">
+                                                        <img id="subImagePreview0" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                                                    </div>
+                                                    <div>
+                                                        <label class="form-label">Đáp án</label>
+                                                        <div class="sub-answer-options">
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án A">
+                                                                </div>
+                                                            </div>
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án B">
+                                                                </div>
+                                                            </div>
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án C">
+                                                                </div>
+                                                            </div>
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án D">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <strong>Câu hỏi nhỏ 2</strong>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <input type="radio" name="subContentType1" value="text" checked onchange="toggleSubContentType(1)"> Text
+                                                        <input type="radio" name="subContentType1" value="image" class="ms-3" onchange="toggleSubContentType(1)"> Ảnh
+                                                    </div>
+                                                    <div id="subQuestionText1">
+                                                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
+                                                    </div>
+                                                    <div id="subQuestionImage1" style="display:none;">
+                                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 1)">
+                                                        <img id="subImagePreview1" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                                                    </div>
+                                                    <div>
+                                                        <label class="form-label">Đáp án</label>
+                                                        <div class="sub-answer-options">
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án A">
+                                                                </div>
+                                                            </div>
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án B">
+                                                                </div>
+                                                            </div>
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án C">
+                                                                </div>
+                                                            </div>
+                                                            <div class="answer-option">
+                                                                <div class="d-flex align-items-center mb-2">
+                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
+                                                                    <input type="text" class="form-control" placeholder="Đáp án D">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn btn-secondary">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Lưu câu hỏi</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Excel Import Tab -->
+                            <div class="tab-pane fade" id="excel" role="tabpanel">
+                                <div class="excel-upload-area" onclick="document.getElementById('excelFile').click()">
+                                    <i class="fas fa-file-excel fa-3x text-success mb-3"></i>
+                                    <h5>Kéo thả file Excel vào đây hoặc click để chọn file</h5>
+                                    <p class="text-muted">Hỗ trợ file .xlsx, .xls</p>
+                                    <input type="file" id="excelFile" accept=".xlsx,.xls" class="d-none">
+                                </div>
+
+                                <div class="mt-4">
+                                    <h5>Hướng dẫn nhập Excel:</h5>
+                                    <ol class="text-muted">
+                                        <li>Tải file mẫu Excel tại đây</li>
+                                        <li>Điền thông tin câu hỏi theo mẫu</li>
+                                        <li>Upload file Excel lên hệ thống</li>
+                                        <li>Kiểm tra và xác nhận thông tin</li>
+                                    </ol>
+                                </div>
+
+                                <div class="d-flex justify-content-end gap-2 mt-4">
+                                    <button type="button" class="btn btn-secondary">Hủy</button>
+                                    <button type="button" class="btn btn-success">
+                                        <i class="fas fa-download me-2"></i>Tải file mẫu
+                                    </button>
+                                </div>
+
+                                <!-- Sau khi upload file Excel, hiển thị danh sách ở đây -->
+                                <div id="questionList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        function toggleQuestionType() {
+            const type = document.getElementById('questionType').value;
+            document.getElementById('singleQuestionForm').style.display = type === 'single' ? '' : 'none';
+            document.getElementById('paragraphQuestionForm').style.display = type === 'paragraph' ? '' : 'none';
+        }
+
+        function toggleSingleImage() {
+            const checked = document.getElementById('hasSingleImage').checked;
+            document.getElementById('singleQuestionImage').style.display = checked ? '' : 'none';
+        }
+
+        function previewSingleImage(event) {
+            const img = document.getElementById('singleImagePreview');
+            if (event.target.files && event.target.files[0]) {
+                img.src = URL.createObjectURL(event.target.files[0]);
+                img.style.display = 'block';
+            } else {
+                img.src = '';
+                img.style.display = 'none';
+            }
+        }
+
+        function toggleSubContentType(idx) {
+            const type = document.querySelector(`input[name="subContentType${idx}"]:checked`).value;
+            document.getElementById(`subQuestionText${idx}`).style.display = type === 'text' ? '' : 'none';
+            document.getElementById(`subQuestionImage${idx}`).style.display = type === 'image' ? '' : 'none';
+        }
+
+        function previewSubImage(event, idx) {
+            const img = document.getElementById(`subImagePreview${idx}`);
+            if (event.target.files && event.target.files[0]) {
+                img.src = URL.createObjectURL(event.target.files[0]);
+                img.style.display = 'block';
+            } else {
+                img.src = '';
+                img.style.display = 'none';
+            }
+        }
+
+        let questionList = [];
+
+        function handleExcelFile(file) {
+            // Dùng SheetJS để đọc file
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type: 'array'});
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const rows = XLSX.utils.sheet_to_json(sheet);
+                questionList = rows.map(row => ({
+                    question: row['Câu hỏi'],
+                    image: row['Đường dẫn ảnh'],
+                    correct: row['Đáp án đúng'],
+                    answers: [
+                        row['Đáp án 1'],
+                        row['Đáp án 2'],
+                        row['Đáp án 3'],
+                        row['Đáp án 4']
+                    ]
+                }));
+                renderQuestionList();
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function renderQuestionList() {
+            const container = document.getElementById('questionList');
+            container.innerHTML = '';
+            questionList.forEach((q, idx) => {
+                container.innerHTML += `
+                    <div class="card mb-2">
+                        <div class="card-body">
+                            <strong>Câu hỏi ${idx + 1}:</strong> ${q.question} <br>
+                            <small>Ảnh: ${q.image || 'Không có'}</small><br>
+                            <small>Đáp án đúng: ${q.correct}</small><br>
+                            <ul>
+                                ${q.answers.map((a, i) => `<li>${String.fromCharCode(65+i)}: ${a}</li>`).join('')}
+                            </ul>
+                            <button class="btn btn-sm btn-warning" onclick="editQuestion(${idx})">Sửa</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteQuestion(${idx})">Xóa</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteQuestion(idx) {
+            questionList.splice(idx, 1);
+            renderQuestionList();
+        }
+    </script>
+</body>
+</html>

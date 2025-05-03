@@ -348,8 +348,8 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("CreatedDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Language")
                         .IsRequired()
@@ -398,7 +398,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("QuestionLevel", (string)null);
+                    b.ToTable("QuestionType", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>
@@ -491,6 +491,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsProcess")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -596,12 +599,30 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02c7aedf-29d5-4506-86f8-b00798948ccf"),
+                            Id = new Guid("faff3232-3fbc-4344-9415-de3d357bf79b"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
                             Password = "1",
                             RoleId = new Guid("2959ca56-a667-46a0-acea-eba1e9961419")
+                        },
+                        new
+                        {
+                            Id = new Guid("42afbf60-5754-43ce-9895-0127d4ab9c7f"),
+                            Email = "taocau@gmail.com",
+                            FullName = "Tạo Câu Hỏi",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("93d09639-a7b9-4825-b364-30366908b007")
+                        },
+                        new
+                        {
+                            Id = new Guid("cf5c0639-c6cc-481a-ba0d-8073ddd1ed44"),
+                            Email = "review@gmail.com",
+                            FullName = "Đánh Giá Câu",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
                         });
                 });
 

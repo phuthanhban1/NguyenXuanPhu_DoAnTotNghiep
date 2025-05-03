@@ -20,7 +20,7 @@ namespace Infrastructure.UnitOfWork
         IExamRepository Exams { get; }
         IProvinceRepository Provinces { get; }
         IQuestionBankRepository QuestionBanks { get; }
-        IQuestionLevelRepository QuestionLevels { get; }
+        IQuestionTypeRepository QuestionTypes { get; }
         IQuestionRepository Questions { get; }
         ISkillRepository Skills { get; }
         IUserRepository Users { get; }

@@ -27,7 +27,7 @@ namespace Infrastructure.Context
         public DbSet<Province> Province { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<QuestionBank> QuestionBank { get; set; }
-        public DbSet<QuestionType> QuestionLevel { get; set; }
+        public DbSet<QuestionType> QuestionType { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Skill> Skill { get; set; }
         public DbSet<User> User { get; set; }
@@ -51,8 +51,27 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<User>().HasData(
                 new User { Id = Guid.NewGuid(), FullName = "Nguyễn Xuân Phú", RoleId = Guid.Parse("2959CA56-A667-46A0-ACEA-EBA1E9961419") ,
-                Email = "phuthanhban3@gmail.com", Password = "1"}
-                );
+                Email = "phuthanhban3@gmail.com", Password = "1"},
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    FullName = "Tạo Câu Hỏi",
+                    RoleId = Guid.Parse("93D09639-A7B9-4825-B364-30366908B007"),
+                    Email = "taocau@gmail.com",
+                    Password = "1"
+                },
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    FullName = "Đánh Giá Câu",
+                    RoleId = Guid.Parse("61AF889A-7617-43E7-9CB2-537A01E97A34"),
+                    Email = "review@gmail.com",
+                    Password = "1"
+                }
+
+
+            );
+
         }
     }
 }

@@ -3,83 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Cropper</title>
-    <!-- Cropper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
+    <title>Excel File Reader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .file-input {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <h2>Upload and Crop Image</h2>
-        <input type="file" id="uploadImage" accept="image/*" />
-        <br>
-        <img id="image" style="max-width: 100%;" src="" alt="Image" />
+    <div class="container">
+        <h1>Excel File Reader</h1>
+        <div class="file-input">
+            <input type="file" id="fileInput" accept=".xlsx, .xls" />
+        </div>
+        <div id="output"></div>
     </div>
-    
-    <!-- Crop and Save Button -->
-    <button id="cropButton">Crop Image</button>
 
-    <!-- Cropper.js Script -->
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
     <script>
-        let cropper;
-
-        // Tải ảnh từ file input
-        document.getElementById('uploadImage').addEventListener('change', function (event) {
-            const file = event.target.files[0];
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            console.log(file);
             const reader = new FileReader();
-            
-            reader.onload = function (e) {
-                const imageElement = document.getElementById('image');
-                imageElement.src = e.target.result;
 
-                // Khởi tạo cropper mới khi ảnh thay đổi
-                if (cropper) {
-                    cropper.destroy();  // Hủy cropper cũ nếu có
-                }
-                cropper = new Cropper(imageElement, {
-                    aspectRatio: 1,  // Tỉ lệ cắt, 1:1 để cắt hình vuông
-                    viewMode: 1,
-                    responsive: true,
-                    autoCropArea: 0.8,
-                    cropBoxResizable: true,
-                });
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                // Get the first worksheet
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                
+                // Convert to JSON
+                const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+                
+                // Display the data in a table
+                displayData(jsonData);
             };
 
-            if (file) {
-                reader.readAsDataURL(file);
-            }
+            reader.readAsArrayBuffer(file);
         });
 
-        // Xử lý cắt ảnh và lưu hoặc gửi lên server
-        document.getElementById('cropButton').addEventListener('click', function () {
-            if (cropper) {
-                // Lấy canvas của ảnh đã cắt
-                const canvas = cropper.getCroppedCanvas();
-                
-                if (canvas) {
-                    // Chuyển canvas thành Blob để gửi lên server
-                    canvas.toBlob(function (blob) {
-                        const formData = new FormData();
-                        formData.append('croppedImage', blob, 'croppedImage.png');
+        function displayData(data) {
+           // console.log(data);
+           // console.log(data[0]);
+            if (data.length === 0) {
+                document.getElementById('output').innerHTML = 'No data found in the Excel file.';
+                return;
+            }
 
-                        // Gửi ảnh đã cắt lên server (Ví dụ: thông qua Fetch API)
-                        fetch('/upload', {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Image uploaded successfully:', data);
-                        })
-                        .catch(error => {
-                            console.error('Error uploading image:', error);
-                        });
-                    });
-                } else {
-                    alert('Please crop the image first.');
+            // Create table
+            let table = '<table>';
+            
+            // Add header row
+            table += '<tr>';
+            for (let key in data[0]) {
+                table += `<th>${key}</th>`;
+            }
+            table += '</tr>';
+            
+            // Add data rows
+            data.forEach(row => {
+                table += '<tr>';
+                for (let key in row) {
+                    table += `<td>${row[key]}</td>`;
                 }
-            }
-        });
+                table += '</tr>';
+            });
+            
+            table += '</table>';
+            
+            document.getElementById('output').innerHTML = table;
+        }
     </script>
 </body>
 </html>

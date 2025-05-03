@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Application.Services.Implements
 {
@@ -26,9 +27,9 @@ namespace Application.Services.Implements
 
         public async Task AddAsync(QuestionBankCreateDto userCreateDto, Guid managerId)
         {
-            var questionBank = _mapper.Map<QuestionBank>(userCreateDto);    
+            var questionBank = _mapper.Map<QuestionBank>(userCreateDto);
             questionBank.Id = Guid.NewGuid();
-            questionBank.CreatedDate = DateTime.UtcNow;
+            questionBank.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow); 
             questionBank.ManagerId = managerId;
             questionBank.Status = 0;
             await _unitOfWork.QuestionBanks.AddAsync(questionBank);
@@ -76,13 +77,15 @@ namespace Application.Services.Implements
             {
                 throw new NotFoundException($"Không tìm thấy ngân hàng câu hỏi có id: {questionBankUpdateDto.Id}");
             }
-            else if (DateTime.Now >= questionBank.CreatedDate.AddMonths(2))
-            {
-                throw new BadRequestException($"Thời gian cập nhật đã kết thúc");
-            }
             else
             {
-                _mapper.Map(questionBankUpdateDto, questionBank);
+                if(questionBankUpdateDto.Status == 0)
+                {
+                    questionBank.QuestionCreateDue = (DateTime)questionBankUpdateDto.QuestionCreateDue;
+                    questionBank.QuestionReviewDue = (DateTime)questionBankUpdateDto.QuestionReviewDue;
+                }
+                questionBank.Status = questionBankUpdateDto.Status;
+                questionBank.Name = questionBankUpdateDto.Name;
                 await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
             }

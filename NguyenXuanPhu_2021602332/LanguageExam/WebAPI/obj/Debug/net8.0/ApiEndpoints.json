@@ -386,9 +386,9 @@
     ]
   },
   {
-    "ContainingType": "WebAPI.Controllers.QuestionLevelController",
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "GetAll",
-    "RelativePath": "api/QuestionLevel",
+    "RelativePath": "api/QuestionType",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -402,9 +402,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.QuestionLevelController",
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "Create",
-    "RelativePath": "api/QuestionLevel",
+    "RelativePath": "api/QuestionType",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -418,9 +418,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.QuestionLevelController",
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "GetById",
-    "RelativePath": "api/QuestionLevel/{id}",
+    "RelativePath": "api/QuestionType/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -434,9 +434,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.QuestionLevelController",
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "Update",
-    "RelativePath": "api/QuestionLevel/{id}",
+    "RelativePath": "api/QuestionType/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -455,9 +455,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebAPI.Controllers.QuestionLevelController",
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "Delete",
-    "RelativePath": "api/QuestionLevel/{id}",
+    "RelativePath": "api/QuestionType/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -727,7 +727,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userPassworDto",
+        "Name": "userPasswordDto",
         "Type": "Application.Dtos.UserDtos.UserPassworDto",
         "IsRequired": true
       }

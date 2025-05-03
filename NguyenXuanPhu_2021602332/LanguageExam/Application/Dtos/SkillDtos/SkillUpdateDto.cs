@@ -9,10 +9,10 @@ namespace Application.Dtos.SkillDtos
     public class SkillUpdateDto
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         // created user
-        public Guid CreatedUserId { get; set; }
+        public Guid? CreatedUserId { get; set; }
         // review user
-        public Guid ReviewedUserId { get; set; }
+        public Guid? ReviewedUserId { get; set; }
     }
 }

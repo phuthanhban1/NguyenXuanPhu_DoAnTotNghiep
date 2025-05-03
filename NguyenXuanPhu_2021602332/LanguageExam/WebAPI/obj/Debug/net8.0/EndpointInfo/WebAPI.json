@@ -616,10 +616,10 @@
         }
       }
     },
-    "/api/QuestionLevel": {
+    "/api/QuestionType": {
       "get": {
         "tags": [
-          "QuestionLevel"
+          "QuestionType"
         ],
         "parameters": [
           {
@@ -639,7 +639,7 @@
       },
       "post": {
         "tags": [
-          "QuestionLevel"
+          "QuestionType"
         ],
         "requestBody": {
           "content": {
@@ -667,10 +667,10 @@
         }
       }
     },
-    "/api/QuestionLevel/{id}": {
+    "/api/QuestionType/{id}": {
       "get": {
         "tags": [
-          "QuestionLevel"
+          "QuestionType"
         ],
         "parameters": [
           {
@@ -691,7 +691,7 @@
       },
       "put": {
         "tags": [
-          "QuestionLevel"
+          "QuestionType"
         ],
         "parameters": [
           {
@@ -731,7 +731,7 @@
       },
       "delete": {
         "tags": [
-          "QuestionLevel"
+          "QuestionType"
         ],
         "parameters": [
           {
@@ -1903,7 +1903,7 @@
           },
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "questionCreateDue": {
             "type": "string",
@@ -1973,7 +1973,7 @@
           },
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "questionCreateDue": {
             "type": "string",
@@ -2003,11 +2003,17 @@
           },
           "questionCreateDue": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "questionReviewDue": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2157,6 +2163,9 @@
             "type": "string",
             "nullable": true
           },
+          "isProcess": {
+            "type": "boolean"
+          },
           "createdUserId": {
             "type": "string",
             "format": "uuid"
@@ -2231,11 +2240,13 @@
           },
           "createdUserId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "reviewedUserId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false

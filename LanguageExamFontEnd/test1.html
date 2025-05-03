@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .image-preview {
+            max-width: 300px;
+            margin: 10px 0;
+        }
+        .question-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .image-container {
+            margin: 10px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .no-image {
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="fileInput" accept=".xlsx, .xls" />
+    <div id="imageContainer"></div>
+<img src=".\Users\AD\Downloads\phu.jpg" alt="anh">
+    <div>
+        <h3>Ảnh từ đường dẫn local:</h3>
+        <input type="file" id="localImageInput" accept="image/*" />
+        <div id="localImageContainer">
+            <img id="localImage" class="image-preview" style="display: none;" alt="Local Image">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            e.preventDefault();
+            console.log('start');
+            const file = e.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+                console.log('Excel data:', jsonData);
+                displayQuestions(jsonData);
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+
+        // Xử lý ảnh local
+        document.getElementById('localImageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const localImage = document.getElementById('localImage');
+                    localImage.src = e.target.result;
+                    localImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function displayQuestions(data) {
+            const container = document.getElementById('imageContainer');
+            container.innerHTML = '';
+            
+            data.forEach((row, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                
+                // Create image HTML
+                let imageHtml = '';
+                if (row['Đường dẫn ảnh']) {
+                    const imagePath = row['Đường dẫn ảnh'].replace(/\\/g, '/');
+                    console.log('imagePath ' + imagePath);
+                    // If it's a local path, show file selection dialog
+                    if (imagePath.startsWith('C:/') || imagePath.startsWith('D:/')) {
+                        imageHtml = `
+                            <div class="image-container">
+                                <div class="no-image">
+                                    <p>Đường dẫn ảnh: ${imagePath}</p>
+                                    <input type="file" class="image-input" accept="image/*" data-index="${index}" />
+                                    <img class="image-preview" style="display: none; margin-top: 10px;" />
+                                </div>
+                            </div>`;
+                    } else {
+                        // If it's a URL
+                        imageHtml = `
+                            <div class="image-container">
+                                <img src="${imagePath}" 
+                                     alt="Hình ảnh câu hỏi" 
+                                     class="image-preview"
+                                     onerror="this.onerror=null; this.src=''; this.parentElement.innerHTML='<div class=\'no-image\'>Không thể tải hình ảnh: ${imagePath}</div>'">
+                            </div>`;
+                    }
+                } else {
+                    imageHtml = `<div class="image-container no-image">Không có hình ảnh</div>`;
+                }
+
+                // Create question content
+                questionCard.innerHTML = `
+                    <h4>Câu hỏi ${index + 1}</h4>
+                    <p>${row['Câu hỏi'] || 'Không có câu hỏi'}</p>
+                    ${imageHtml}
+                    <div class="answers">
+                        ${row['Đáp án 1'] ? `<p>Đáp án 1: ${row['Đáp án 1']}</p>` : ''}
+                        ${row['Đáp án 2'] ? `<p>Đáp án 2: ${row['Đáp án 2']}</p>` : ''}
+                        ${row['Đáp án 3'] ? `<p>Đáp án 3: ${row['Đáp án 3']}</p>` : ''}
+                        ${row['Đáp án 4'] ? `<p>Đáp án 4: ${row['Đáp án 4']}</p>` : ''}
+                        ${row['Đáp án đúng'] ? `<p>Đáp án đúng: ${row['Đáp án đúng']}</p>` : ''}
+                    </div>
+                `;
+
+                container.appendChild(questionCard);
+
+                // Add event listener for image input if it exists
+                const imageInput = questionCard.querySelector('.image-input');
+                if (imageInput) {
+                    imageInput.addEventListener('change', function(e) {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const preview = imageInput.nextElementSibling;
+                                preview.src = e.target.result;
+                                preview.style.display = 'block';
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

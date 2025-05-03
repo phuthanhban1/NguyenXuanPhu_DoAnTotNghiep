@@ -9,6 +9,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -162,12 +164,59 @@
             </div>
         </div>
     </div>
-    <!-- <script src="assets/js/QuestionBank/question_bank.js"></script> -->
+    
+     <!-- Modal Sửa Đề Thi -->
+    <div class="modal fade" id="editExamModal" tabindex="-1" aria-labelledby="editExamModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form id="editExamForm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editExamModalLabel">Sửa thông tin kho đề</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" name="Id" id="examId">
+                <div class="mb-3">
+                  <label class="form-label">Tên kho đề</label>
+                  <input type="text" class="form-control" name="Name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Trạng thái</label>
+                  <select class="form-select" name="Status">
+                    <option value="0">Đang tạo</option>
+                    <option value="1">Đang hoạt động</option>
+                    <option value="2">Đã khóa</option>
+                  </select>
+                </div>
+                <div class="mb-3 d-none" id="date-fields">
+                  <label class="form-label">Hạn tạo đề</label>
+                  <input type="text" class="form-control mb-2 type-date" name="QuestionCreateDue">
+                  <label class="form-label">Hạn duyệt đề</label>
+                  <input type="text" class="form-control mb-2 type-date" name="QuestionReviewDue">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary btn-submit-edit">Lưu</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     <script>
         
 
 
 $(document).ready(function() {
+
+    // format date
+    $('.type-date').datepicker({
+        dateFormat: "dd/mm/yy",
+        language: "vi",
+        orientation: "bottom auto",
+        endDate: '+0d',
+        autoclose: true,
+    });
     var examData = [];
     // Bắt sự kiện chọn ngôn ngữ
     $('.language-card').on('click', function() {
@@ -223,6 +272,13 @@ $(document).ready(function() {
         handleDelete(examId);
     });
 
+    // Xử lý nút Exam Link
+    $('tbody').on('click', '.exam-link', function(e) {
+        e.preventDefault();
+        var examId = $(this).closest('tr').data('exam-id');
+        window.location.href = './question_bank_detail.html?id=' + examId;
+    });
+
     // Hàm render danh sách kho đề 
     function renderExamList(exams) {
         var $tbody = $('tbody');
@@ -243,7 +299,7 @@ $(document).ready(function() {
                 return `
                     <tr data-exam-id="${exam.id}">
                         <td>
-                            <a href="exam_bank_detail.html" class="text-decoration-none text-dark">
+                            <a href="#" class="text-decoration-none text-dark exam-link" data-exam-id="${exam.id}">
                                 <div class="d-flex align-items-center">
                                     <span class="me-2"><i class="fas fa-folder text-warning"></i></span>
                                     ${exam.name}
@@ -269,7 +325,7 @@ $(document).ready(function() {
             }).join('')
         );
     }
-
+    
     // Hàm xử lý khi chọn ngôn ngữ
     function selectLanguage(lang) {
         $('#examList').show();
@@ -311,22 +367,17 @@ $(document).ready(function() {
         if (!exam) return;
 
         var $form = $('#editExamForm');
-        $form.find('input[name="name"]').val(exam.name);
-        $form.find('input[name="language"]').val(exam.language);
+        $form.find('input[name="Name"]').val(exam.name);
+        $('#examId').val(examId);
 
-        var $statusSelect = $form.find('select[name="status"]');
-        $statusSelect.empty();
-
-        if (exam.status == 0) {
-            $statusSelect.append('<option value="2">Đã khóa</option>');
-        } else if (exam.status == 2) {
-            $statusSelect.append('<option value="0">Đang tạo</option>');
-        } else if (exam.status == 1) {
-            $statusSelect.append('<option value="0">Đang tạo</option>');
-            $statusSelect.append('<option value="2">Đã khóa</option>');
-        }
-
+        var $statusSelect = $form.find('select[name="Status"]');
         $statusSelect.val(exam.status);
+
+        if (exam.status == 0 || exam.status == 2) {
+            $statusSelect.find('option[value="1"]').hide();
+        } else {
+            $statusSelect.find('option[value="1"]').show();
+        }
 
         // Hiện/ẩn 2 ô ngày khi mở modal
         if ($statusSelect.val() == "0") {
@@ -341,41 +392,46 @@ $(document).ready(function() {
         modal.show();
     }
 
+    // Xử lý submit edit form
     $('#editExamForm').on('submit', function(e) {
         e.preventDefault();
-        var examId = $(this).data('exam-id');
-        var exam = examData.find(e => e.id === examId);
-        var formData = new FormData($('#editExamForm')[0]);
-        if (!exam) return;
+        console.log('submit');
+        
+        var exam = {
+            Id: $('#examId').val(),
+            Name: $('input[name="Name"]').val(),
+            Status: parseInt($('select[name="Status"]').val())
+        };
+        if(exam.Status == 0){
+            exam.QuestionCreateDue = new Date($('input[name="QuestionCreateDue"]').val());
+            exam.QuestionReviewDue = new Date($('input[name="QuestionReviewDue"]').val());
+        }
+        console.log(exam);
         $.ajax({
-            url: `https://localhost:7001/api/questionbank/${examId}`,
-            type: 'POST',
-            xhrFields: {
-                withCredentials: true
+            url: 'https://localhost:7001/api/questionbank',
+            type: 'PUT',
+            data: JSON.stringify(exam),
+            contentType: 'application/json',
+            xhrFields: { withCredentials: true },
+            success: function(response) { 
+                console.log(response); 
+                console.log("ok");
+                var modal = bootstrap.Modal.getInstance(document.getElementById('editExamModal'));
+                modal.hide();
+                selectLanguage($('.language-card').data('lang'));
             },
-            data: formData,
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.error('Error updating data:', error);
+            error: function(error) { 
+                console.error('Error updating data:', error); 
+                console.log(error.responseText);
             }
         });
-        // Cập nhật dữ liệu
-        exam.name = $(this).find('input[name="name"]').val();
-        exam.language = $(this).find('input[name="language"]').val();
-        exam.status = $(this).find('select[name="status"]').val();
-
-        // Cập nhật lại bảng
-        renderExamList(examData);
-
-        // Đóng modal
-        var modal = bootstrap.Modal.getInstance(document.getElementById('editExamModal'));
-        modal.hide();
+        
+        
+        
     });
 
     // Khi thay đổi trạng thái trong modal sửa
-    $('#editExamForm').on('change', 'select[name="status"]', function() {
+    $('#editExamForm').on('change', 'select[name="Status"]', function() {
         if ($(this).val() == "0") { // Đang tạo
             $('#date-fields').removeClass('d-none');
         } else {
@@ -389,42 +445,7 @@ $(document).ready(function() {
  
     </script>
     
-    <!-- Modal Sửa Đề Thi -->
-    <div class="modal fade" id="editExamModal" tabindex="-1" aria-labelledby="editExamModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <form id="editExamForm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editExamModalLabel">Sửa thông tin kho đề</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-            </div>
-            <div class="modal-body">
-              <div class="mb-3">
-                <label class="form-label">Tên kho đề</label>
-                <input type="text" class="form-control" name="name" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Trạng thái</label>
-                <select class="form-select" name="status">
-                  <option value="0">Đang tạo</option>
-                  <option value="2">Đã khóa</option>
-                </select>
-              </div>
-              <div class="mb-3 d-none" id="date-fields">
-                <label class="form-label">Hạn tạo đề</label>
-                <input type="date" class="form-control mb-2" name="han_tao_de">
-                <label class="form-label">Hạn duyệt đề</label>
-                <input type="date" class="form-control" name="han_duyet_de">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-              <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+    
 </body>
 
 

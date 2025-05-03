@@ -1,9 +1,14 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel;
+
+namespace Domain.Entities
 {
     public class Skill
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsProcess { get; set; }
         // created user
         public Guid CreatedUserId { get; set; }
         public User CreatedUser { get; set; }

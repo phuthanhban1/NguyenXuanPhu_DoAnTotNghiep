@@ -30,7 +30,7 @@ namespace Infrastructure.UnitOfWork
             ExamFiles = new ExamFileRepository(_context);
             Provinces = new ProvinceRepository(_context);
             QuestionBanks = new QuestionBankRepository(_context);
-            QuestionLevels = new QuestionLevelRepository(_context);
+            QuestionTypes = new QuestionTypeRepository(_context);
             Questions = new QuestionRepository(_context);
             Skills = new SkillRepository(_context);
             Users = new UserRepository(_context);
@@ -78,7 +78,7 @@ namespace Infrastructure.UnitOfWork
 
         public IQuestionBankRepository QuestionBanks {get; set;}
 
-        public IQuestionLevelRepository QuestionLevels {get; set;}
+        public IQuestionTypeRepository QuestionTypes {get; set;}
 
         public IQuestionRepository Questions {get; set;}
 

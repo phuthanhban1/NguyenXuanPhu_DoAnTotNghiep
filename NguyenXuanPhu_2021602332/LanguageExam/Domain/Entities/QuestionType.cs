@@ -11,7 +11,8 @@ namespace Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
-        
+        public bool IsSingleQuestion { get; set; }
+
         // foreign key: skill
         public Guid SkillId { get; set; }
         public Skill Skill { get; set; }
