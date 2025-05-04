@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,10 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Level { get; set; }
-        public bool IsSingleQuestion { get; set; }
-
+        public string? Description { get; set; }
+        public byte Level { get; set; }
+        public QuestionStruct Struct { get; set; }
+        public bool HasImage { get; set; }
         // foreign key: skill
         public Guid SkillId { get; set; }
         public Skill Skill { get; set; }
@@ -20,6 +22,6 @@ namespace Domain.Entities
         public List<ContentBlock> ContentBlocks { get; set; }
         public List<ExamStruct> ExamStructs { get; set; }
 
-        //Có dạng câu, số lượng câu hỏi, số lượng đáp án
+       
     }
 }

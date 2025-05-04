@@ -1,14 +1,9 @@
-﻿using Application.Dtos.QuestionLevelDtos;
+﻿using Application.Dtos.QuestionTypeDtos;
 using Application.Exceptions;
 using Application.Services.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Implements
 {
@@ -21,7 +16,7 @@ namespace Application.Services.Implements
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task AddAsync(QuestionLevelCreateDto questionLevelCreateDto)
+        public async Task AddAsync(QuestionTypeCreateDto questionLevelCreateDto)
         {
             var questionLevel = _mapper.Map<QuestionType>(questionLevelCreateDto);
             await _unitOfWork.QuestionTypes.AddAsync(questionLevel);
@@ -39,34 +34,40 @@ namespace Application.Services.Implements
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<List<QuestionLevelUpdateDto>> GetAllAsync(Guid skillId)
+        public async Task<List<QuestionTypeUpdateDto>> GetAllAsync(Guid skillId)
         {
             var questionLevels = await _unitOfWork.QuestionTypes.GetAllAsync();
             var questionLevelSkill = questionLevels.Where(x => x.SkillId == skillId).ToList();
-            var questionLevelDtos = _mapper.Map<List<QuestionLevelUpdateDto>>(questionLevelSkill);
+            var questionLevelDtos = _mapper.Map<List<QuestionTypeUpdateDto>>(questionLevelSkill);
             return questionLevelDtos;
         }
 
-        public async Task<QuestionLevelUpdateDto> GetByIdAsync(Guid id)
+        public async Task<QuestionTypeUpdateDto> GetByIdAsync(Guid id)
         {
             var questionLevel = await _unitOfWork.QuestionTypes.GetByIdAsync(id);
             if (questionLevel == null)
             {
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
             }
-            var questionLevelDto = _mapper.Map<QuestionLevelUpdateDto>(questionLevel);
+            var questionLevelDto = _mapper.Map<QuestionTypeUpdateDto>(questionLevel);
             return questionLevelDto;
         }
 
-        public async Task UpdateAsync(QuestionLevelUpdateDto questionLevelUpdateDto)
+        public async Task<List<QuestionTypeDto>> GetsBySkillId(Guid skillId)
         {
-            var questionLevel = await _unitOfWork.QuestionTypes.GetByIdAsync(questionLevelUpdateDto.Id);
+            var list = await _unitOfWork.QuestionTypes.GetsBySkillId(skillId);
+            return _mapper.Map<List<QuestionTypeDto>>(list);
+        }
+
+        public async Task UpdateAsync(QuestionTypeUpdateDto questionTypeUpdateDto)
+        {
+            var questionLevel = await _unitOfWork.QuestionTypes.GetByIdAsync(questionTypeUpdateDto.Id);
             if (questionLevel == null)
             {
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
             }
-            questionLevel.Name = questionLevelUpdateDto.Name;
-            questionLevel.Level = questionLevelUpdateDto.Level;
+            questionLevel.Name = questionTypeUpdateDto.Name;
+            questionLevel.Level = (byte)questionTypeUpdateDto.Level;
             await _unitOfWork.QuestionTypes.UpdateAsync(questionLevel);
             await _unitOfWork.SaveChangeAsync();
 

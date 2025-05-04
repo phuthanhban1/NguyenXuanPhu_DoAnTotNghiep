@@ -14,7 +14,7 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ImageFile",
+                name: "ExamFile",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -24,7 +24,7 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImageFile", x => x.Id);
+                    table.PrimaryKey("PK_ExamFile", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,21 +118,21 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_ImageFile_ImageFaceId",
+                        name: "FK_User_ExamFile_ImageFaceId",
                         column: x => x.ImageFaceId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_User_ImageFile_ImageIdCardAfterId",
+                        name: "FK_User_ExamFile_ImageIdCardAfterId",
                         column: x => x.ImageIdCardAfterId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_User_ImageFile_ImageIdCardBeforeId",
+                        name: "FK_User_ExamFile_ImageIdCardBeforeId",
                         column: x => x.ImageIdCardBeforeId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -155,7 +155,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateOnly>(type: "date", nullable: false),
                     QuestionCreateDue = table.Column<DateTime>(type: "datetime2", nullable: false),
                     QuestionReviewDue = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<byte>(type: "tinyint", nullable: false),
@@ -178,6 +178,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsProcess = table.Column<bool>(type: "bit", nullable: false),
                     CreatedUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReviewedUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     QuestionBankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -187,9 +188,9 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Skill", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Skill_ImageFile_AudioFileId",
+                        name: "FK_Skill_ExamFile_AudioFileId",
                         column: x => x.AudioFileId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Skill_QuestionBank_QuestionBankId",
@@ -212,19 +213,22 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuestionLevel",
+                name: "QuestionType",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Level = table.Column<byte>(type: "tinyint", nullable: false),
+                    Struct = table.Column<int>(type: "int", nullable: false),
+                    HasImage = table.Column<bool>(type: "bit", nullable: false),
                     SkillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuestionLevel", x => x.Id);
+                    table.PrimaryKey("PK_QuestionType", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuestionLevel_Skill_SkillId",
+                        name: "FK_QuestionType_Skill_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skill",
                         principalColumn: "Id",
@@ -253,19 +257,19 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_ContentBlock", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContentBlock_ImageFile_AudioFileId",
+                        name: "FK_ContentBlock_ExamFile_AudioFileId",
                         column: x => x.AudioFileId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ContentBlock_ImageFile_ImageFileId",
+                        name: "FK_ContentBlock_ExamFile_ImageFileId",
                         column: x => x.ImageFileId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ContentBlock_QuestionLevel_QuestionLevelId",
+                        name: "FK_ContentBlock_QuestionType_QuestionLevelId",
                         column: x => x.QuestionLevelId,
-                        principalTable: "QuestionLevel",
+                        principalTable: "QuestionType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -283,9 +287,9 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_ExamStruct", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExamStruct_QuestionLevel_QuestionLevelId",
+                        name: "FK_ExamStruct_QuestionType_QuestionLevelId",
                         column: x => x.QuestionLevelId,
-                        principalTable: "QuestionLevel",
+                        principalTable: "QuestionType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -309,9 +313,9 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Question_ImageFile_ImageFileId",
+                        name: "FK_Question_ExamFile_ImageFileId",
                         column: x => x.ImageFileId,
-                        principalTable: "ImageFile",
+                        principalTable: "ExamFile",
                         principalColumn: "Id");
                 });
 
@@ -490,7 +494,18 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "DateOfBirth", "DateOfIssue", "Email", "FullName", "Gender", "IdCard", "ImageFaceId", "ImageIdCardAfterId", "ImageIdCardBeforeId", "IsActive", "Password", "PhoneNumber", "PlaceOfIssue", "RoleId", "Strict", "WardId" },
-                values: new object[] { new Guid("fc9b50b7-9351-445f-80bf-5ed64255e6f0"), null, null, "phuthanhban3@gmail.com", "Nguyễn Xuân Phú", null, null, null, null, null, true, "1", null, null, new Guid("2959ca56-a667-46a0-acea-eba1e9961419"), null, null });
+                values: new object[,]
+                {
+                    { new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"), null, null, "review@gmail.com", "Đánh Giá Câu", null, null, null, null, null, true, "1", null, null, new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"), null, null },
+                    { new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"), null, null, "quanlybank@gmail.com", "Quản lý bank", null, null, null, null, null, true, "1", null, null, new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62"), null, null },
+                    { new Guid("93d09639-a7b9-4825-b364-30366908b007"), null, null, "taocau@gmail.com", "Tạo Câu Hỏi", null, null, null, null, null, true, "1", null, null, new Guid("93d09639-a7b9-4825-b364-30366908b007"), null, null },
+                    { new Guid("e1c6f265-82bc-4733-abc9-5cfd86b5df36"), null, null, "phuthanhban3@gmail.com", "Nguyễn Xuân Phú", null, null, null, null, null, true, "1", null, null, new Guid("2959ca56-a667-46a0-acea-eba1e9961419"), null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "QuestionBank",
+                columns: new[] { "Id", "CreatedDate", "Language", "ManagerId", "Name", "QuestionCreateDue", "QuestionReviewDue", "Status" },
+                values: new object[] { new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"), new DateOnly(2025, 5, 4), "Hàn", new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"), "Topik 1", new DateTime(2025, 6, 3, 19, 43, 20, 140, DateTimeKind.Local).AddTicks(433), new DateTime(2025, 7, 3, 19, 43, 20, 140, DateTimeKind.Local).AddTicks(437), (byte)0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answer_QuestionId",
@@ -582,8 +597,8 @@ namespace Infrastructure.Migrations
                 column: "ManagerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionLevel_SkillId",
-                table: "QuestionLevel",
+                name: "IX_QuestionType_SkillId",
+                table: "QuestionType",
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
@@ -681,7 +696,7 @@ namespace Infrastructure.Migrations
                 name: "ExamStruct");
 
             migrationBuilder.DropTable(
-                name: "QuestionLevel");
+                name: "QuestionType");
 
             migrationBuilder.DropTable(
                 name: "Skill");
@@ -693,7 +708,7 @@ namespace Infrastructure.Migrations
                 name: "User");
 
             migrationBuilder.DropTable(
-                name: "ImageFile");
+                name: "ExamFile");
 
             migrationBuilder.DropTable(
                 name: "Role");

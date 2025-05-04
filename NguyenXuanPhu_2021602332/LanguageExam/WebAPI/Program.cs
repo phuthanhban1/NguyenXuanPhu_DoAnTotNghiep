@@ -26,6 +26,7 @@ builder.Services.AddTransient<IWardService, WardService>();
 builder.Services.AddTransient<IQuestionBankService, QuestionBankService>();
 builder.Services.AddTransient<IImageFileService, ImageFileService>();
 builder.Services.AddTransient<ISkillService, SkillService>();
+builder.Services.AddTransient<IQuestionTypeService, QuestionTypeService>();
 
 
 

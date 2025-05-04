@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ExamContext))]
-    [Migration("20250503094429_update1")]
-    partial class update1
+    [Migration("20250504135146_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -379,6 +379,19 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ManagerId");
 
                     b.ToTable("QuestionBank", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreatedDate = new DateOnly(2025, 5, 4),
+                            Language = "Hàn",
+                            ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
+                            Name = "Topik 1",
+                            QuestionCreateDue = new DateTime(2025, 6, 3, 20, 51, 46, 78, DateTimeKind.Local).AddTicks(6640),
+                            QuestionReviewDue = new DateTime(2025, 7, 3, 20, 51, 46, 78, DateTimeKind.Local).AddTicks(6644),
+                            Status = (byte)0
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
@@ -387,8 +400,14 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasImage")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Level")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -396,6 +415,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid>("SkillId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Struct")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -489,11 +511,11 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AudioFileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsProcess")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -507,10 +529,6 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AudioFileId")
-                        .IsUnique()
-                        .HasFilter("[AudioFileId] IS NOT NULL");
-
                     b.HasIndex("CreatedUserId");
 
                     b.HasIndex("QuestionBankId");
@@ -518,6 +536,17 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ReviewedUserId");
 
                     b.ToTable("Skill", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
+                            IsProcess = false,
+                            Name = "Đọc",
+                            QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            ReviewedUserId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -599,7 +628,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2be220a7-1560-41fa-84fe-2aed2bb90e4a"),
+                            Id = new Guid("d71eea03-6551-46fb-9e90-b8884ea09987"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -608,7 +637,7 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("202d3aed-9754-4aed-a8f1-37cab0c14d3e"),
+                            Id = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
                             Email = "taocau@gmail.com",
                             FullName = "Tạo Câu Hỏi",
                             IsActive = true,
@@ -617,7 +646,16 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("47a97d59-8662-4499-8beb-d27db7d812c2"),
+                            Id = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
+                            Email = "quanlybank@gmail.com",
+                            FullName = "Quản lý bank",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62")
+                        },
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
                             Email = "review@gmail.com",
                             FullName = "Đánh Giá Câu",
                             IsActive = true,
@@ -838,10 +876,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Skill", b =>
                 {
-                    b.HasOne("Domain.Entities.ExamFile", "AudioFile")
-                        .WithOne("Skill")
-                        .HasForeignKey("Domain.Entities.Skill", "AudioFileId");
-
                     b.HasOne("Domain.Entities.User", "CreatedUser")
                         .WithMany("CreatedQuestions")
                         .HasForeignKey("CreatedUserId")
@@ -859,8 +893,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ReviewedUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("AudioFile");
 
                     b.Navigation("CreatedUser");
 
@@ -963,8 +995,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Question");
-
-                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamStruct", b =>

@@ -78,7 +78,6 @@ namespace WebAPI.Controllers
             }
 
             return Ok(new { Sid = sid });
-            return Ok(); // có thể thêm tài khoản
         }
         [HttpPost("login")]
         public async Task<ActionResult> Login(UserLoginDto userLoginDto)

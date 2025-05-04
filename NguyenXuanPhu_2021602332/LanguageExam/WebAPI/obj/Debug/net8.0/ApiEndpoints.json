@@ -410,8 +410,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "questionLevelCreateDto",
-        "Type": "Application.Dtos.QuestionLevelDtos.QuestionLevelCreateDto",
+        "Name": "questionTypeCreateDto",
+        "Type": "Application.Dtos.QuestionTypeDtos.QuestionTypeCreateDto",
         "IsRequired": true
       }
     ],
@@ -447,8 +447,8 @@
         "IsRequired": true
       },
       {
-        "Name": "questionLevelUpdateDto",
-        "Type": "Application.Dtos.QuestionLevelDtos.QuestionLevelUpdateDto",
+        "Name": "questionTypeUpdateDto",
+        "Type": "Application.Dtos.QuestionTypeDtos.QuestionTypeUpdateDto",
         "IsRequired": true
       }
     ],
@@ -464,6 +464,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
+    "Method": "GetsBySkillId",
+    "RelativePath": "api/QuestionType/skill/{skillId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skillId",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -504,6 +520,16 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.SkillController",
+    "Method": "GetSkill",
+    "RelativePath": "api/Skill",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.SkillController",
     "Method": "Delete",
     "RelativePath": "api/Skill/{id}",
     "HttpMethod": "DELETE",
@@ -513,6 +539,22 @@
       {
         "Name": "id",
         "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.SkillController",
+    "Method": "ConfirmTask",
+    "RelativePath": "api/Skill/confirm",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skillConfirmDto",
+        "Type": "Application.Dtos.SkillDtos.SkillConfirmDto",
         "IsRequired": true
       }
     ],

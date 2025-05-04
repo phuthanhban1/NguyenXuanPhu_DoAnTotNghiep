@@ -17,9 +17,6 @@ namespace Infrastructure.Configurations
                 .WithMany(u => u.ReviewedQuestions)
                 .HasForeignKey(s => s.ReviewedUserId)
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(s => s.AudioFile)
-                .WithOne(a => a.Skill)
-                .HasForeignKey<Skill>(s => s.AudioFileId);
             builder.HasOne(s => s.QuestionBank)
                .WithMany(q => q.Skills)
                .HasForeignKey(s => s.QuestionBankId);

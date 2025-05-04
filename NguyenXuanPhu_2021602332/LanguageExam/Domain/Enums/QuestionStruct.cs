@@ -8,9 +8,8 @@ namespace Domain.Enums
 {
     public enum QuestionStruct
     {  
-        SingleSentence,
-        ImageChoice,
-        SingleFile,
-        MultipleQuestion
+        Single,
+        Multiple,
+        ImageAnswer
     }
 }

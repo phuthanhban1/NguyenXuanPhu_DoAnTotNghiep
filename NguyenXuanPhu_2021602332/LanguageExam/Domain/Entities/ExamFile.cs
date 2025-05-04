@@ -16,7 +16,6 @@ namespace Domain.Entities
         public User ImageFace { get; set; }
         public User ImageIdCardBefore { get; set; }
         public User ImageIdCardAfter { get; set; }
-        public Skill? Skill { get; set; }
         public ContentBlock? ImageContentBlock { get; set; }
         public ContentBlock? AudioContentBlock { get; set; }
 

@@ -15,5 +15,8 @@ namespace Application.Services.Interfaces
         Task DeleteAsync(Guid id);
         Task<QuestionBankDto> GetByIdAsync(Guid id);
         Task<List<SkillDto>> GetByQuestionBankIdAsync(Guid questionBankId);
+        Task<SkillDetailDto> GetByCreate(Guid id);
+        Task<SkillDetailDto> GetByReview(Guid id);
+        Task ConfirmSkill(SkillConfirmDto skillConfirmDto);
     }
 }

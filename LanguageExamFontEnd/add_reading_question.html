@@ -15,6 +15,17 @@
         .question-card {
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        .question-card .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 15px 20px;
+        }
+        .question-card .card-body {
+            padding: 20px;
         }
         .answer-option {
             border: 1px solid #dee2e6;
@@ -22,10 +33,12 @@
             padding: 15px;
             margin-bottom: 10px;
             transition: all 0.3s ease;
+            background-color: #f8f9fa;
         }
         .answer-option:hover {
             border-color: #0d6efd;
             box-shadow: 0 2px 4px rgba(13, 110, 253, 0.1);
+            background-color: #fff;
         }
         .excel-upload-area {
             border: 2px dashed #dee2e6;
@@ -39,13 +52,59 @@
             border-color: #0d6efd;
             background-color: rgba(13, 110, 253, 0.05);
         }
+        /* New styles for question list */
+        #questionList {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+        }
+        .question-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0d6efd;
+        }
+        .question-card .card-header h5 {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .question-card .btn-danger {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .question-card .form-check {
+            margin-bottom: 15px;
+        }
+        .question-card .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+        .question-card textarea,
+        .question-card input[type="text"] {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        .question-card textarea:focus,
+        .question-card input[type="text"]:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
     </style>
 </head>
 <body class="bg-light">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card question-card">
+                <div class="card">
                     <div class="card-header bg-white py-3">
                         <h4 class="mb-0">Thêm câu hỏi mới</h4>
                     </div>
@@ -57,11 +116,7 @@
                                     <i class="fas fa-keyboard me-2"></i>Nhập tay
                                 </button>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="excel-tab" data-bs-toggle="pill" data-bs-target="#excel" type="button">
-                                    <i class="fas fa-file-excel me-2"></i>Nhập bằng Excel
-                                </button>
-                            </li>
+                            
                         </ul>
 
                         <!-- Tab Content -->
@@ -70,209 +125,28 @@
                             <div class="tab-pane fade show active" id="manual" role="tabpanel">
                                 <form>
                                     <div class="mb-4">
-                                        <label class="form-label">Dạng câu hỏi</label>
-                                        <select class="form-select" id="questionType" onchange="toggleQuestionType()">
-                                            <option value="single">Câu hỏi đơn</option>
-                                            <option value="paragraph">Đoạn văn nhiều câu hỏi</option>
+                                        <label class="form-label">Loại câu hỏi</label>
+                                        <select class="form-select" id="questionCategory" onchange="handleQuestionTypeChange()">
                                         </select>
                                     </div>
 
-                                    <!-- Single Question Form -->
-                                    <div id="singleQuestionForm">
-                                        <div class="mb-4">
-                                            <label class="form-label">Loại câu hỏi</label>
-                                            <select class="form-select">
-                                                <option>Đọc hiểu</option>
-                                                <option>Điền từ</option>
-                                                <option>Tìm từ đồng nghĩa</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Nội dung câu hỏi</label>
-                                            <div class="form-check mb-2">
-                                                <input class="form-check-input" type="checkbox" id="hasSingleImage" onchange="toggleSingleImage()">
-                                                <label class="form-check-label" for="hasSingleImage">Có hình ảnh</label>
-                                            </div>
-                                            <div id="singleQuestionText">
-                                                <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
-                                            </div>
-                                            <div id="singleQuestionImage" style="display:none;">
-                                                <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
-                                                <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
-                                            </div>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label class="form-label">Đáp án</label>
-                                            <div id="answerOptions">
-                                                <div class="answer-option">
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer" checked>
-                                                        <input type="text" class="form-control" placeholder="Đáp án A">
-                                                    </div>
-                                                </div>
-                                                <div class="answer-option">
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer">
-                                                        <input type="text" class="form-control" placeholder="Đáp án B">
-                                                    </div>
-                                                </div>
-                                                <div class="answer-option">
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer">
-                                                        <input type="text" class="form-control" placeholder="Đáp án C">
-                                                    </div>
-                                                </div>
-                                                <div class="answer-option">
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <input type="radio" class="form-check-input me-2" name="correctAnswer">
-                                                        <input type="text" class="form-control" placeholder="Đáp án D">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
+                                    <!-- Add Question Buttons -->
+                                    <div class="mb-4">
+                                        <button type="button" class="btn btn-primary" id="add-question">
+                                            <i class="fas fa-plus me-2"></i>Thêm câu hỏi
+                                        </button>
                                     </div>
-
-                                    <!-- Paragraph with Multiple Questions Form -->
-                                    <div id="paragraphQuestionForm" style="display:none;">
-                                        <div class="mb-4">
-                                            <label class="form-label">Đoạn văn</label>
-                                            <textarea class="form-control" rows="4" placeholder="Nhập đoạn văn..."></textarea>
-                                        </div>
-                                        <div id="subQuestions">
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <strong>Câu hỏi nhỏ 1</strong>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <input type="radio" name="subContentType0" value="text" checked onchange="toggleSubContentType(0)"> Text
-                                                        <input type="radio" name="subContentType0" value="image" class="ms-3" onchange="toggleSubContentType(0)"> Ảnh
-                                                    </div>
-                                                    <div id="subQuestionText0">
-                                                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
-                                                    </div>
-                                                    <div id="subQuestionImage0" style="display:none;">
-                                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 0)">
-                                                        <img id="subImagePreview0" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
-                                                    </div>
-                                                    <div>
-                                                        <label class="form-label">Đáp án</label>
-                                                        <div class="sub-answer-options">
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án A">
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án B">
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án C">
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer0">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án D">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                        <strong>Câu hỏi nhỏ 2</strong>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <input type="radio" name="subContentType1" value="text" checked onchange="toggleSubContentType(1)"> Text
-                                                        <input type="radio" name="subContentType1" value="image" class="ms-3" onchange="toggleSubContentType(1)"> Ảnh
-                                                    </div>
-                                                    <div id="subQuestionText1">
-                                                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
-                                                    </div>
-                                                    <div id="subQuestionImage1" style="display:none;">
-                                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 1)">
-                                                        <img id="subImagePreview1" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
-                                                    </div>
-                                                    <div>
-                                                        <label class="form-label">Đáp án</label>
-                                                        <div class="sub-answer-options">
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án A">
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án B">
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án C">
-                                                                </div>
-                                                            </div>
-                                                            <div class="answer-option">
-                                                                <div class="d-flex align-items-center mb-2">
-                                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer1">
-                                                                    <input type="text" class="form-control" placeholder="Đáp án D">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div class="d-flex justify-content-end gap-2">
                                         <button type="button" class="btn btn-secondary">Hủy</button>
-                                        <button type="submit" class="btn btn-primary">Lưu câu hỏi</button>
+                                        <button type="submit" class="btn btn-primary">Lưu</button>
                                     </div>
+                                    <!-- Question List -->
+                                    <div id="questionList" class="mb-4">
+                                    </div>
+
                                 </form>
                             </div>
 
-                            <!-- Excel Import Tab -->
-                            <div class="tab-pane fade" id="excel" role="tabpanel">
-                                <div class="excel-upload-area" onclick="document.getElementById('excelFile').click()">
-                                    <i class="fas fa-file-excel fa-3x text-success mb-3"></i>
-                                    <h5>Kéo thả file Excel vào đây hoặc click để chọn file</h5>
-                                    <p class="text-muted">Hỗ trợ file .xlsx, .xls</p>
-                                    <input type="file" id="excelFile" accept=".xlsx,.xls" class="d-none">
-                                </div>
-
-                                <div class="mt-4">
-                                    <h5>Hướng dẫn nhập Excel:</h5>
-                                    <ol class="text-muted">
-                                        <li>Tải file mẫu Excel tại đây</li>
-                                        <li>Điền thông tin câu hỏi theo mẫu</li>
-                                        <li>Upload file Excel lên hệ thống</li>
-                                        <li>Kiểm tra và xác nhận thông tin</li>
-                                    </ol>
-                                </div>
-
-                                <div class="d-flex justify-content-end gap-2 mt-4">
-                                    <button type="button" class="btn btn-secondary">Hủy</button>
-                                    <button type="button" class="btn btn-success">
-                                        <i class="fas fa-download me-2"></i>Tải file mẫu
-                                    </button>
-                                </div>
-
-                                <!-- Sau khi upload file Excel, hiển thị danh sách ở đây -->
-                                <div id="questionList"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -283,97 +157,754 @@
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     
     <script>
-        function toggleQuestionType() {
-            const type = document.getElementById('questionType').value;
-            document.getElementById('singleQuestionForm').style.display = type === 'single' ? '' : 'none';
-            document.getElementById('paragraphQuestionForm').style.display = type === 'paragraph' ? '' : 'none';
-        }
-
-        function toggleSingleImage() {
-            const checked = document.getElementById('hasSingleImage').checked;
-            document.getElementById('singleQuestionImage').style.display = checked ? '' : 'none';
-        }
-
-        function previewSingleImage(event) {
-            const img = document.getElementById('singleImagePreview');
-            if (event.target.files && event.target.files[0]) {
-                img.src = URL.createObjectURL(event.target.files[0]);
-                img.style.display = 'block';
-            } else {
-                img.src = '';
-                img.style.display = 'none';
-            }
-        }
-
-        function toggleSubContentType(idx) {
-            const type = document.querySelector(`input[name="subContentType${idx}"]:checked`).value;
-            document.getElementById(`subQuestionText${idx}`).style.display = type === 'text' ? '' : 'none';
-            document.getElementById(`subQuestionImage${idx}`).style.display = type === 'image' ? '' : 'none';
-        }
-
-        function previewSubImage(event, idx) {
-            const img = document.getElementById(`subImagePreview${idx}`);
-            if (event.target.files && event.target.files[0]) {
-                img.src = URL.createObjectURL(event.target.files[0]);
-                img.style.display = 'block';
-            } else {
-                img.src = '';
-                img.style.display = 'none';
-            }
-        }
-
-        let questionList = [];
-
-        function handleExcelFile(file) {
-            // Dùng SheetJS để đọc file
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, {type: 'array'});
-                const sheet = workbook.Sheets[workbook.SheetNames[0]];
-                const rows = XLSX.utils.sheet_to_json(sheet);
-                questionList = rows.map(row => ({
-                    question: row['Câu hỏi'],
-                    image: row['Đường dẫn ảnh'],
-                    correct: row['Đáp án đúng'],
-                    answers: [
-                        row['Đáp án 1'],
-                        row['Đáp án 2'],
-                        row['Đáp án 3'],
-                        row['Đáp án 4']
-                    ]
-                }));
-                renderQuestionList();
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        function renderQuestionList() {
-            const container = document.getElementById('questionList');
-            container.innerHTML = '';
-            questionList.forEach((q, idx) => {
-                container.innerHTML += `
-                    <div class="card mb-2">
-                        <div class="card-body">
-                            <strong>Câu hỏi ${idx + 1}:</strong> ${q.question} <br>
-                            <small>Ảnh: ${q.image || 'Không có'}</small><br>
-                            <small>Đáp án đúng: ${q.correct}</small><br>
-                            <ul>
-                                ${q.answers.map((a, i) => `<li>${String.fromCharCode(65+i)}: ${a}</li>`).join('')}
-                            </ul>
-                            <button class="btn btn-sm btn-warning" onclick="editQuestion(${idx})">Sửa</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteQuestion(${idx})">Xóa</button>
+        let questionCounter = 0; // Thêm biến đếm số câu hỏi
+        
+        function createSingleFormHtml() {
+            return `
+            <div id="singleQuestionForm">
+                <div class="card question-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Câu hỏi đọc hiểu <span class="badge bg-primary">Câu ${questionCounter + 1}</span></h5>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteQuestion(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <!-- Thêm hình ảnh -->
+                        <div id="singleQuestionImage" class="mt-2" style="display:none;">
+                            <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
+                            <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                        </div>
+                        <!-- Nội dung câu hỏi text -->
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung câu hỏi</label>
+                            <div id="singleQuestionText">
+                                <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
+                            </div>
+                        </div>
+                        <!-- Âm thanh -->
+                        <div id="singleQuestionAudio" style="display:none;" class="mt-3">
+                            <label class="form-label">File âm thanh</label>
+                            <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event)">
+                            <audio id="audioPreview" controls style="display:none; margin-top:10px;"></audio>
+                        </div>
+                        <!-- Đáp án -->
+                        <div class="mb-3">
+                            <label class="form-label">Đáp án</label>
+                            <div id="answerOptions">
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" checked>
+                                        <input type="text" class="form-control" placeholder="Đáp án A">
+                                    </div>
+                                </div>
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
+                                        <input type="text" class="form-control" placeholder="Đáp án B">
+                                    </div>
+                                </div>
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
+                                        <input type="text" class="form-control" placeholder="Đáp án C">
+                                    </div>
+                                </div>
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
+                                        <input type="text" class="form-control" placeholder="Đáp án D">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                `;
+                </div>
+            </div>
+            `;
+        }
+
+        function createMultipleImageAnswerHtml() {
+            return `
+            <div id="multipleImageAnswer">
+                <div class="card question-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Câu hỏi chọn tranh <span class="badge bg-primary">Câu ${questionCounter + 1}</span></h5>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteQuestion(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <!-- Hình ảnh -->
+                        <div id="singleQuestionImage" class="mt-2" style="display:none;">
+                            <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
+                            <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                        </div>
+                        <!-- Nội dung câu hỏi text -->
+                        <div class="mb-3">
+                            <label class="form-label">Nội dung câu hỏi</label>
+                            <div id="singleQuestionText">
+                                <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
+                            </div>
+                        </div>
+                        <!-- Âm thanh -->
+                        <div id="singleQuestionAudio" style="display:none;" class="mt-3">
+                            <label class="form-label">File âm thanh</label>
+                            <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event)">
+                            <audio id="audioPreview" controls style="display:none; margin-top:10px;"></audio>
+                        </div>
+                        <label class="form-label">Đáp án (chọn hình ảnh)</label>
+                        <div id="answerOptions">
+                            <div class="answer-option">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" checked>
+                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
+                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
+                                </div>
+                            </div>
+                            <div class="answer-option">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
+                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
+                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
+                                </div>
+                            </div>
+                            <div class="answer-option">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
+                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
+                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
+                                </div>
+                            </div>
+                            <div class="answer-option">
+                                <div class="d-flex align-items-center mb-2">
+                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
+                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
+                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        function createDoubleFormHtml() {
+            return `
+            <div id="doubleQuestionForm">
+                <div class="card question-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Câu hỏi đọc chọn ý <span class="badge bg-primary">Câu ${questionCounter + 1}</span></h5>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteQuestion(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <!-- Đoạn văn -->
+                        <div class="mb-4">
+                            <label class="form-label">Đoạn văn</label>
+                            <textarea class="form-control" rows="4" placeholder="Nhập đoạn văn..."></textarea>
+                        </div>
+                        <!-- Hình ảnh -->
+                        <div id="doubleQuestionImage" class="mt-2" style="display:none;">
+                            <input type="file" accept="image/*" class="form-control" onchange="previewDoubleImage(event)">
+                            <img id="doubleQuestionImage" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                        </div>
+                        <!-- Âm thanh -->
+                        <div id="doubleQuestionAudio" style="display:none;" class="mt-3">
+                            <label class="form-label">File âm thanh</label>
+                            <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event)">
+                            <audio id="audioPreview" controls style="display:none; margin-top:10px;"></audio>
+                        </div>
+                        <!-- Câu hỏi nhỏ -->
+                        <div id="subQuestions">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <strong>Câu hỏi nhỏ 1</strong>
+                                    </div>
+                                    <div id="subQuestionText0">
+                                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
+                                    </div>
+                                    <div id="subQuestionImage0" style="display:none;">
+                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 0)">
+                                        <img id="subImagePreview0" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Đáp án</label>
+                                        <div class="sub-answer-options">
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0" checked>
+                                                    <input type="text" class="form-control" placeholder="Đáp án A">
+                                                </div>
+                                            </div>
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0">
+                                                    <input type="text" class="form-control" placeholder="Đáp án B">
+                                                </div>
+                                            </div>
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0">
+                                                    <input type="text" class="form-control" placeholder="Đáp án C">
+                                                </div>
+                                            </div>
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0">
+                                                    <input type="text" class="form-control" placeholder="Đáp án D">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="subQuestions">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <strong>Câu hỏi nhỏ 2</strong>
+                                    </div>
+                                    <div id="subQuestionText1">
+                                        <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
+                                    </div>
+                                    <div id="subQuestionImage1" style="display:none;">
+                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 1)">
+                                        <img id="subImagePreview1" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                                    </div>
+                                    <div>
+                                        <label class="form-label">Đáp án</label>
+                                        <div class="sub-answer-options">
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1" checked>
+                                                    <input type="text" class="form-control" placeholder="Đáp án A">
+                                                </div>
+                                            </div>
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1">
+                                                    <input type="text" class="form-control" placeholder="Đáp án B">
+                                                </div>
+                                            </div>
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1">
+                                                    <input type="text" class="form-control" placeholder="Đáp án C">
+                                                </div>
+                                            </div>
+                                            <div class="answer-option">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1">
+                                                    <input type="text" class="form-control" placeholder="Đáp án D">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        var readingDetail = [{ name: "đọc hiểu", format: 0 }, // câu hỏi đơn đáp án là text
+                            { name: "đọc chọn ý hiểu", format: 1 }, // câu hỏi kép
+                            {name: "chọn tranh đúng", format: 2}] ; // câu hỏi đơn với đáp án hình ảnh
+        $(document).ready(function() {
+            const params = new URLSearchParams(window.location.search);
+            const skill = params.get("skill");
+            console.log(skill);
+            if(skill === 'nghe') {
+                $('#singleQuestionAudio').show();
+            }
+            $('#questionCategory').append(readingDetail.map(item => `<option value="${item.name}_${item.format}">${item.name}</option>`));
+            
+            function addQuestionForm(format) {
+                switch(format) {
+                    case '0':
+                        $('#questionList').prepend(createSingleFormHtml());
+                        questionCounter++;
+                        break;
+                    case '1':
+                        $('#questionList').prepend(createDoubleFormHtml());
+                        questionCounter++;
+                        break;
+                    case '2':
+                        $('#questionList').prepend(createMultipleImageAnswerHtml());
+                        questionCounter++;
+                        break;
+                }
+                updateQuestionNumbers();
+            }
+            const selectedValue = $('#questionCategory').val();
+            const [name, format] = selectedValue.split('_');
+            addQuestionForm(format);
+            
+            // Xử lý chọn loại câu hỏi
+            $('#questionCategory').on('change', function() {
+                $('#questionList').empty();
+                const selectedValue = $(this).val();
+                const [name, format] = selectedValue.split('_');
+                questionCounter = 0;
+                // Show form based on format
+                addQuestionForm(format);
+            });
+
+            // Xử lý thêm câu hỏi
+            $('#add-question').on('click', function() {
+                const selectedValue = $('#questionCategory').val();
+                const [name, format] = selectedValue.split('_');
+                alert(questionCounter);
+                questionCounter++;
+                // alert("clicked")
+                addQuestionForm(format);
+            });
+
+            // Thêm xử lý submit form
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset tất cả viền đỏ trước khi validate
+                resetAllBorders();
+                
+                // Validate trước khi lấy dữ liệu
+                const validationResult = validateAllQuestions();
+                if (!validationResult.isValid) {
+                    alert(validationResult.message);
+                    return;
+                }
+
+                const questionsData = getAllQuestionsData();
+                console.log('Questions Data:', JSON.stringify(questionsData, null, 2));
+                
+                // Kiểm tra dữ liệu trước khi gửi
+                if (questionsData.length === 0) {
+                    alert('Vui lòng thêm ít nhất một câu hỏi');
+                    return;
+                }
+
+                // TODO: Gửi dữ liệu lên server
+                // $.ajax({
+                //     url: '/api/questions',
+                //     method: 'POST',
+                //     data: JSON.stringify(questionsData),
+                //     contentType: 'application/json',
+                //     success: function(response) {
+                //         alert('Lưu câu hỏi thành công');
+                //     },
+                //     error: function(error) {
+                //         alert('Có lỗi xảy ra khi lưu câu hỏi');
+                //     }
+                // });
+            });
+
+            // Thêm xử lý khi người dùng thay đổi giá trị input
+            $(document).on('input', '.answer-option input[type="text"]', function() {
+                resetAllBorders();
+                const validationResult = validateAllQuestions();
+                if (!validationResult.isValid) {
+                    // Không hiển thị alert khi đang nhập
+                    console.log(validationResult.message);
+                }
+            });
+
+            // Thêm xử lý khi người dùng thay đổi file
+            $(document).on('change', '.answer-option input[type="file"]', function() {
+                resetAllBorders();
+                const validationResult = validateAllQuestions();
+                if (!validationResult.isValid) {
+                    // Không hiển thị alert khi đang chọn file
+                    console.log(validationResult.message);
+                }
+            });
+        });
+
+        // Hàm xử lý hiển thị/ẩn hình ảnh cho câu hỏi đơn
+        function toggleSingleImage() {
+            const hasImage = $('#hasSingleImage').is(':checked');
+            $('#singleQuestionImage').toggle(hasImage);
+        }
+
+        // Hàm xử lý hiển thị/ẩn hình ảnh cho câu hỏi kép
+        function toggleDoubleImage() {
+            const hasImage = $('#hasDoubleImage').is(':checked');
+            $('#doubleQuestionImage').toggle(hasImage);
+        }
+
+        // Hàm xem trước hình ảnh cho câu hỏi đơn
+        function previewSingleImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#singleImagePreview').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Hàm xem trước hình ảnh cho câu hỏi kép
+        function previewDoubleImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#doubleImagePreview').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Hàm xem trước hình ảnh cho đáp án
+        function previewAnswerImage(event, element) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $(element).siblings('.answer-image-preview').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Hàm xem trước âm thanh
+        function previewAudio(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                $('#audioPreview').attr('src', url).show();
+            }
+        }
+
+        // Hàm chuyển đổi loại nội dung câu hỏi nhỏ (text/ảnh)
+        function toggleSubContentType(index) {
+            const type = $(`input[name="subContentType${index}"]:checked`).val();
+            $(`#subQuestionText${index}`).toggle(type === 'text');
+            $(`#subQuestionImage${index}`).toggle(type === 'image');
+        }
+
+        // Hàm xem trước hình ảnh cho câu hỏi nhỏ
+        function previewSubImage(event, index) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $(`#subImagePreview${index}`).attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Thêm hàm xử lý xóa câu hỏi
+        function deleteQuestion(button) {
+            if (confirm('Bạn có chắc chắn muốn xóa câu hỏi này?')) {
+                $(button).closest('.question-card').parent().remove();
+                updateQuestionNumbers();
+            }
+        }
+
+        // Thêm hàm cập nhật số thứ tự câu hỏi
+        function updateQuestionNumbers() {
+            $('.question-card').each(function(index) {
+                $(this).find('.badge').text(`Câu ${index + 1}`);
             });
         }
 
-        function deleteQuestion(idx) {
-            questionList.splice(idx, 1);
-            renderQuestionList();
+        // Hàm lấy dữ liệu từ câu hỏi đọc hiểu
+        function getSingleQuestionData(questionElement) {
+            const questionText = questionElement.find('.card-body textarea').first().val();
+            const imageFile = questionElement.find('#singleQuestionImage input[type="file"]').prop('files')[0];
+            const audioFile = questionElement.find('#singleQuestionAudio input[type="file"]').prop('files')[0];
+            const answers = questionElement.find('.answer-option').map(function() {
+                return {
+                    text: $(this).find('input[type="text"]').val(),
+                    isCorrect: $(this).find('input[type="radio"]').is(':checked')
+                };
+            }).get();
+
+            return {
+                type: 'single',
+                questionNumber: questionElement.find('.badge').text().trim(),
+                content: questionText,
+                image: imageFile ? {
+                    name: imageFile.name,
+                    type: imageFile.type,
+                    size: imageFile.size
+                } : null,
+                audio: audioFile ? {
+                    name: audioFile.name,
+                    type: audioFile.type,
+                    size: audioFile.size
+                } : null,
+                answers: answers
+            };
+        }
+
+        // Hàm lấy dữ liệu từ câu hỏi đọc chọn ý
+        function getDoubleQuestionData(questionElement) {
+            const passage = questionElement.find('.card-body textarea').first().val();
+            const imageFile = questionElement.find('#doubleQuestionImage input[type="file"]').prop('files')[0];
+            const audioFile = questionElement.find('#doubleQuestionAudio input[type="file"]').prop('files')[0];
+            const subQuestions = questionElement.find('.card.mb-3').map(function() {
+                const subQuestionElement = $(this);
+                return {
+                    question: subQuestionElement.find('input[type="text"]').first().val(),
+                    image: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0] ? {
+                        name: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0].name,
+                        type: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0].type,
+                        size: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0].size
+                    } : null,
+                    answers: subQuestionElement.find('.answer-option').map(function() {
+                        return {
+                            text: $(this).find('input[type="text"]').val(),
+                            isCorrect: $(this).find('input[type="radio"]').is(':checked')
+                        };
+                    }).get()
+                };
+            }).get();
+
+            return {
+                type: 'double',
+                questionNumber: questionElement.find('.badge').text().trim(),
+                passage: passage,
+                image: imageFile ? {
+                    name: imageFile.name,
+                    type: imageFile.type,
+                    size: imageFile.size
+                } : null,
+                audio: audioFile ? {
+                    name: audioFile.name,
+                    type: audioFile.type,
+                    size: audioFile.size
+                } : null,
+                subQuestions: subQuestions
+            };
+        }
+
+        // Hàm lấy dữ liệu từ câu hỏi chọn tranh
+        function getMultipleImageQuestionData(questionElement) {
+            const questionText = questionElement.find('.card-body textarea').first().val();
+            const imageFile = questionElement.find('#singleQuestionImage input[type="file"]').prop('files')[0];
+            const audioFile = questionElement.find('#singleQuestionAudio input[type="file"]').prop('files')[0];
+            const answers = questionElement.find('.answer-option').map(function() {
+                const imageFile = $(this).find('input[type="file"][accept="image/*"]').prop('files')[0];
+                return {
+                    image: imageFile ? {
+                        name: imageFile.name,
+                        type: imageFile.type,
+                        size: imageFile.size
+                    } : null,
+                    isCorrect: $(this).find('input[type="radio"]').is(':checked')
+                };
+            }).get();
+
+            return {
+                type: 'multiple_image',
+                questionNumber: questionElement.find('.badge').text().trim(),
+                content: questionText,
+                image: imageFile ? {
+                    name: imageFile.name,
+                    type: imageFile.type,
+                    size: imageFile.size
+                } : null,
+                audio: audioFile ? {
+                    name: audioFile.name,
+                    type: audioFile.type,
+                    size: audioFile.size
+                } : null,
+                answers: answers
+            };
+        }
+
+        // Hàm lấy tất cả dữ liệu câu hỏi
+        function getAllQuestionsData() {
+            const questions = [];
+            $('#questionList > div').each(function() {
+                const questionElement = $(this);
+                const questionType = questionElement.find('.card-header h5').text().trim();
+                
+                if (questionType.includes('Câu hỏi đọc hiểu')) {
+                    questions.push(getSingleQuestionData(questionElement));
+                } else if (questionType.includes('Câu hỏi đọc chọn ý')) {
+                    questions.push(getDoubleQuestionData(questionElement));
+                } else if (questionType.includes('Câu hỏi chọn tranh')) {
+                    questions.push(getMultipleImageQuestionData(questionElement));
+                }
+            });
+            return questions;
+        }
+
+        // Hàm kiểm tra đáp án trùng nhau trong câu hỏi đọc hiểu
+        function validateSingleQuestion(questionElement) {
+            const answerInputs = questionElement.find('.answer-option input[type="text"]');
+            const answers = answerInputs.map(function() {
+                return $(this).val().trim();
+            }).get();
+            
+            // Reset viền đỏ
+            answerInputs.closest('.answer-option').css('border-color', '');
+            
+            const duplicateMap = new Map();
+            answers.forEach((answer, index) => {
+                if (answer) {
+                    if (!duplicateMap.has(answer)) {
+                        duplicateMap.set(answer, [index]);
+                    } else {
+                        duplicateMap.get(answer).push(index);
+                    }
+                }
+            });
+
+            let hasDuplicates = false;
+            duplicateMap.forEach((indices, answer) => {
+                if (indices.length > 1) {
+                    hasDuplicates = true;
+                    indices.forEach(index => {
+                        answerInputs.eq(index).closest('.answer-option').css('border-color', 'red');
+                    });
+                }
+            });
+
+            if (hasDuplicates) {
+                return {
+                    isValid: false,
+                    message: 'Các đáp án không được trùng nhau'
+                };
+            }
+            return { isValid: true };
+        }
+
+        // Hàm kiểm tra đáp án trùng nhau trong câu hỏi đọc chọn ý
+        function validateDoubleQuestion(questionElement) {
+            const subQuestions = questionElement.find('.card.mb-3');
+            for (let i = 0; i < subQuestions.length; i++) {
+                const subQuestion = $(subQuestions[i]);
+                const answerInputs = subQuestion.find('.answer-option input[type="text"]');
+                
+                // Reset viền đỏ
+                answerInputs.closest('.answer-option').css('border-color', '');
+                
+                const answers = answerInputs.map(function() {
+                    return $(this).val().trim();
+                }).get();
+
+                const duplicateMap = new Map();
+                answers.forEach((answer, index) => {
+                    if (answer) {
+                        if (!duplicateMap.has(answer)) {
+                            duplicateMap.set(answer, [index]);
+                        } else {
+                            duplicateMap.get(answer).push(index);
+                        }
+                    }
+                });
+
+                let hasDuplicates = false;
+                duplicateMap.forEach((indices, answer) => {
+                    if (indices.length > 1) {
+                        hasDuplicates = true;
+                        indices.forEach(index => {
+                            answerInputs.eq(index).closest('.answer-option').css('border-color', 'red');
+                        });
+                    }
+                });
+
+                if (hasDuplicates) {
+                    return {
+                        isValid: false,
+                        message: `Câu hỏi nhỏ ${i + 1}: Các đáp án không được trùng nhau`
+                    };
+                }
+            }
+            return { isValid: true };
+        }
+
+        // Hàm kiểm tra đáp án trùng nhau trong câu hỏi chọn tranh
+        function validateMultipleImageQuestion(questionElement) {
+            const answerInputs = questionElement.find('.answer-option input[type="file"][accept="image/*"]');
+            
+            // Reset viền đỏ
+            answerInputs.closest('.answer-option').css('border-color', '');
+            
+            const answers = answerInputs.map(function() {
+                return $(this).prop('files')[0]?.name || '';
+            }).get();
+
+            const duplicateMap = new Map();
+            answers.forEach((answer, index) => {
+                if (answer) {
+                    if (!duplicateMap.has(answer)) {
+                        duplicateMap.set(answer, [index]);
+                    } else {
+                        duplicateMap.get(answer).push(index);
+                    }
+                }
+            });
+
+            let hasDuplicates = false;
+            duplicateMap.forEach((indices, answer) => {
+                if (indices.length > 1) {
+                    hasDuplicates = true;
+                    indices.forEach(index => {
+                        answerInputs.eq(index).closest('.answer-option').css('border-color', 'red');
+                    });
+                }
+            });
+
+            if (hasDuplicates) {
+                return {
+                    isValid: false,
+                    message: 'Các hình ảnh đáp án không được trùng nhau'
+                };
+            }
+            return { isValid: true };
+        }
+
+        // Thêm hàm reset viền đỏ cho tất cả câu hỏi
+        function resetAllBorders() {
+            $('.answer-option').css('border-color', '');
+        }
+
+        // Hàm validate tất cả câu hỏi
+        function validateAllQuestions() {
+            const questions = $('#questionList > div');
+            if (questions.length === 0) {
+                return { isValid: true }; // Không có câu hỏi nào thì return true
+            }
+
+            for (let i = 0; i < questions.length; i++) {
+                const questionElement = $(questions[i]);
+                const questionType = questionElement.find('.card-header h5').text().trim();
+                let validationResult = { isValid: true }; // Mặc định là true
+
+                if (questionType.includes('Câu hỏi đọc hiểu')) {
+                    validationResult = validateSingleQuestion(questionElement);
+                } else if (questionType.includes('Câu hỏi đọc chọn ý')) {
+                    validationResult = validateDoubleQuestion(questionElement);
+                } else if (questionType.includes('Câu hỏi chọn tranh')) {
+                    validationResult = validateMultipleImageQuestion(questionElement);
+                }
+
+                if (!validationResult.isValid) {
+                    return {
+                        isValid: false,
+                        message: `Câu hỏi ${i + 1}: ${validationResult.message}`
+                    };
+                }
+            }
+            return { isValid: true };
         }
     </script>
 </body>

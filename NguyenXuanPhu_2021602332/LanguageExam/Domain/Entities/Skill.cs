@@ -6,9 +6,8 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-
-        [DefaultValue(true)]
         public bool IsProcess { get; set; }
+        public bool IsConfirm { get; set; }
         // created user
         public Guid CreatedUserId { get; set; }
         public User CreatedUser { get; set; }
@@ -20,9 +19,6 @@ namespace Domain.Entities
         public Guid QuestionBankId { get; set; }
         public QuestionBank QuestionBank { get; set; }
 
-        // foreign key: audio file
-        public Guid? AudioFileId { get; set; }
-        public ExamFile? AudioFile { get; set; }
         public List<QuestionType> QuestionLevels { get; set; }
 
 

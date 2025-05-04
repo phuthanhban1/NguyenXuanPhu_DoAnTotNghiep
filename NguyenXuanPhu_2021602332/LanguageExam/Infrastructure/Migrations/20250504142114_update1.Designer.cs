@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ExamContext))]
-    [Migration("20250502154205_init2")]
-    partial class init2
+    [Migration("20250504142114_update1")]
+    partial class update1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -351,8 +351,8 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("CreatedDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Language")
                         .IsRequired()
@@ -379,6 +379,19 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ManagerId");
 
                     b.ToTable("QuestionBank", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreatedDate = new DateOnly(2025, 5, 4),
+                            Language = "Hàn",
+                            ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
+                            Name = "Topik 1",
+                            QuestionCreateDue = new DateTime(2025, 6, 3, 21, 21, 14, 141, DateTimeKind.Local).AddTicks(6095),
+                            QuestionReviewDue = new DateTime(2025, 7, 3, 21, 21, 14, 141, DateTimeKind.Local).AddTicks(6105),
+                            Status = (byte)0
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
@@ -387,8 +400,14 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasImage")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Level")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -397,11 +416,14 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("SkillId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Struct")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("QuestionLevel", (string)null);
+                    b.ToTable("QuestionType", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>
@@ -422,42 +444,42 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("2959ca56-a667-46a0-acea-eba1e9961419"),
-                            Name = "Admin"
+                            Name = "quản trị viên"
                         },
                         new
                         {
                             Id = new Guid("85af4517-be3b-4ea9-b2cd-1ad9b4417870"),
-                            Name = "ExamManager"
+                            Name = "quản lý kỳ thi"
                         },
                         new
                         {
                             Id = new Guid("45b76d26-26e2-41d1-a0f7-ed6b55dc2190"),
-                            Name = "TestCreator"
+                            Name = "người tạo đề"
                         },
                         new
                         {
                             Id = new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62"),
-                            Name = "QuestionBankManager"
+                            Name = "quản lý ngân hàng đề"
                         },
                         new
                         {
                             Id = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
-                            Name = "QuestionContributor"
+                            Name = "người tạo câu hỏi"
                         },
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            Name = "QuestionReviewer"
+                            Name = "người đánh giá câu hỏi"
                         },
                         new
                         {
                             Id = new Guid("a0e4f1d5-3c8b-4f2a-8e6c-7d9b5e0a2f1d"),
-                            Name = "Examinee"
+                            Name = "thí sinh"
                         },
                         new
                         {
                             Id = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
-                            Name = "User"
+                            Name = "người dùng"
                         });
                 });
 
@@ -489,11 +511,14 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AudioFileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsConfirm")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsProcess")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -507,10 +532,6 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AudioFileId")
-                        .IsUnique()
-                        .HasFilter("[AudioFileId] IS NOT NULL");
-
                     b.HasIndex("CreatedUserId");
 
                     b.HasIndex("QuestionBankId");
@@ -518,6 +539,18 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ReviewedUserId");
 
                     b.ToTable("Skill", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
+                            IsConfirm = false,
+                            IsProcess = false,
+                            Name = "Đọc",
+                            QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            ReviewedUserId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -599,12 +632,39 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02c7aedf-29d5-4506-86f8-b00798948ccf"),
+                            Id = new Guid("7504f69b-512f-4684-8873-0bfdb1e40564"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
                             Password = "1",
                             RoleId = new Guid("2959ca56-a667-46a0-acea-eba1e9961419")
+                        },
+                        new
+                        {
+                            Id = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
+                            Email = "taocau@gmail.com",
+                            FullName = "Tạo Câu Hỏi",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("93d09639-a7b9-4825-b364-30366908b007")
+                        },
+                        new
+                        {
+                            Id = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
+                            Email = "quanlybank@gmail.com",
+                            FullName = "Quản lý bank",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62")
+                        },
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            Email = "review@gmail.com",
+                            FullName = "Đánh Giá Câu",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
                         });
                 });
 
@@ -820,10 +880,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Skill", b =>
                 {
-                    b.HasOne("Domain.Entities.ExamFile", "AudioFile")
-                        .WithOne("Skill")
-                        .HasForeignKey("Domain.Entities.Skill", "AudioFileId");
-
                     b.HasOne("Domain.Entities.User", "CreatedUser")
                         .WithMany("CreatedQuestions")
                         .HasForeignKey("CreatedUserId")
@@ -841,8 +897,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ReviewedUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("AudioFile");
 
                     b.Navigation("CreatedUser");
 
@@ -945,8 +999,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Question");
-
-                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamStruct", b =>

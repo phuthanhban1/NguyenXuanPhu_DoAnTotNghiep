@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Form động</title>
+  <style>
+    .form-block {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="addForm()">Thêm form</button>
+  <button onclick="submitAll()">Gửi tất cả</button>
+
+  <div id="formContainer"></div>
+
+  <script>
+    let formCount = 0;
+
+    function addForm() {
+      formCount++;
+      const formHTML = `
+        <div class="form-block" id="form-${formCount}">
+          <label>Tên: <input type="text" name="name" /></label><br>
+          <label>Tuổi: <input type="number" name="age" /></label>
+        </div>
+      `;
+      document.getElementById("formContainer").insertAdjacentHTML("beforeend", formHTML);
+    }
+
+    function submitAll() {
+      const allForms = document.querySelectorAll("#formContainer .form-block");
+      const data = [];
+
+      allForms.forEach(form => {
+        const name = form.querySelector('input[name="name"]').value;
+        const age = form.querySelector('input[name="age"]').value;
+        data.push({ name, age });
+      });
+
+      console.log("Dữ liệu gửi:", data);
+      alert(JSON.stringify(data, null, 2)); // Hiển thị cho vui
+    }
+  </script>
+
+</body>
+</html>

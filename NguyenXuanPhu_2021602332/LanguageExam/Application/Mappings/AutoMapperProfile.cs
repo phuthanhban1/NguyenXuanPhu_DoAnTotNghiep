@@ -3,6 +3,7 @@ using Application.Dtos.ExamDtos;
 using Application.Dtos.ExamineeDtos;
 using Application.Dtos.ImageFileDtos;
 using Application.Dtos.QuestionBankDtos;
+using Application.Dtos.QuestionTypeDtos;
 using Application.Dtos.SkillDtos;
 using Application.Dtos.UserDtos;
 using AutoMapper;
@@ -39,7 +40,7 @@ namespace Application.Mappings
                 .ForMember(ud => ud.ImageIdCardBefore, u => u.Ignore())
                 .ForMember(ud => ud.ImageIdCardAfter, u => u.Ignore());
 
-            CreateMap<Domain.Entities.ExamFile, ImageFileDto>();
+            CreateMap<ExamFile, ImageFileDto>();
 
             CreateMap<QuestionBankUpdateDto, QuestionBank>();
             CreateMap<QuestionBankCreateDto, QuestionBank>();
@@ -54,7 +55,15 @@ namespace Application.Mappings
             CreateMap<ExamineeCreateDto, Examinee>();
             CreateMap<ExamineeUpdateDto, Examinee>();
 
-            //CreateMap<ImageFileUpdateDto, ImageFile>();
+            CreateMap<QuestionType, QuestionTypeDto>();
+            CreateMap<QuestionTypeCreateDto, QuestionType>();
+
+            CreateMap<Skill, SkillDetailDto>()
+                .ForMember(sd => sd.CreatedDate, s => s.MapFrom(s => s.QuestionBank.CreatedDate))
+                .ForMember(sd => sd.Language, s => s.MapFrom(s => s.QuestionBank.Language))
+                .ForMember(sd => sd.QuestionCreateDue, s => s.MapFrom(s => s.QuestionBank.QuestionCreateDue))
+                .ForMember(sd => sd.QuestionReviewDue, s => s.MapFrom(s => s.QuestionBank.QuestionReviewDue))
+                .ForMember(sd => sd.BankName, s => s.MapFrom(s => s.QuestionBank.Name));
         }
     }
 }

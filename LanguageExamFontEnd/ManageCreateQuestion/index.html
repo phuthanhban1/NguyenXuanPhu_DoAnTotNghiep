@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý ngân hàng đề thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .bank-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+        .bank-card .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 15px 20px;
+        }
+        .bank-card .card-body {
+            padding: 20px;
+        }
+        .action-button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .action-button i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        .deadline-info {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .deadline-warning {
+            color: #dc3545;
+        }
+        .confirm-button {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bank-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Ngân hàng đề thi: <span class="text-primary" id="examName"></span></h4>
+                        <span class="status-badge bg-success text-white">Đang hoạt động</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <input type="text" id="skillId" style="display: none;">
+                                <div>Ngôn ngữ: <span id="language"></span></div>
+                                <div>Kỹ năng: <span id="skill"></span></div>
+                                <div class="deadline-info">
+                                    <i class="fas fa-clock me-2"></i>
+                                    Hạn tạo: <strong class="deadline-warning" id="questionCreateDue"></strong>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Các nút chức năng -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Quản lý câu hỏi</h5>
+                                <button class="btn btn-primary action-button" onclick="location.href='manage_question_types.html'">
+                                    <i class="fas fa-tasks"></i>
+                                    Quản lý dạng câu hỏi
+                                </button>
+                                <button class="btn btn-success action-button" onclick="location.href='add_reading_question.html'">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Thêm câu hỏi mới
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Xem câu hỏi</h5>
+                                <button class="btn btn-info action-button text-white" onclick="location.href='approved_questions.html'">
+                                    <i class="fas fa-check-circle"></i>
+                                    Câu hỏi đã duyệt
+                                </button>
+                                <button class="btn btn-warning action-button text-white" onclick="location.href='pending_questions.html'">
+                                    <i class="fas fa-clock"></i>
+                                    Câu hỏi chờ duyệt
+                                </button>
+                                <button class="btn btn-danger action-button text-white" onclick="location.href='rejected_questions.html'">
+                                    <i class="fas fa-times-circle"></i>
+                                    Câu hỏi bị từ chối
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Nút xác nhận đã xem -->
+                        <div class="mt-4">
+                            <button class="btn btn-secondary confirm-button" style="display: none;">
+                                <i class="fas fa-check me-2"></i>
+                                Xác nhận nhiệm vụ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            console.log('ok');
+            $.ajax({
+                url: 'https://localhost:7001/api/skill',
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    console.log(response);
+                    $('#language').text(response.language);
+                    $('#skill').text(response.name);    
+                    $('#questionCreateDue').text(response.questionCreateDue);
+                    $('#examName').text(response.bankName);
+                    if(!response.isConfirm){
+                        $('.confirm-button').show();
+                    }
+                    $('#skillId').val(response.id);
+
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching exams:', error);
+                    
+                }
+            })
+
+            $('.confirm-button').click(function(e){
+                e.preventDefault();
+                const skillId = $('#skillId').val();
+                console.log('Skill ID:', skillId);
+                
+                if (!skillId) {
+                    console.error('Skill ID is missing');
+                    return;
+                }
+
+                $.ajax({
+                    url: 'https://localhost:7001/api/skill/confirm',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                            Id: skillId,
+                            IsConfirm: true
+                        }
+                    ),
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response){
+                        console.log('Confirm success:', response);
+                        $('.confirm-button').hide();
+                    },
+                    error: function(xhr, status, error){
+                        console.error('Error:', error);
+                        console.error('Response:', xhr.responseText);
+                        console.error('Status:', status);
+                    }
+                });
+            });
+        })
+    </script>
+</body>
+</html>

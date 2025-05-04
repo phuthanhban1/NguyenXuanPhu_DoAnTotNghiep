@@ -645,17 +645,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/QuestionLevelCreateDto"
+                "$ref": "#/components/schemas/QuestionTypeCreateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/QuestionLevelCreateDto"
+                "$ref": "#/components/schemas/QuestionTypeCreateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/QuestionLevelCreateDto"
+                "$ref": "#/components/schemas/QuestionTypeCreateDto"
               }
             }
           }
@@ -708,17 +708,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/QuestionLevelUpdateDto"
+                "$ref": "#/components/schemas/QuestionTypeUpdateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/QuestionLevelUpdateDto"
+                "$ref": "#/components/schemas/QuestionTypeUpdateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/QuestionLevelUpdateDto"
+                "$ref": "#/components/schemas/QuestionTypeUpdateDto"
               }
             }
           }
@@ -736,6 +736,29 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/QuestionType/skill/{skillId}": {
+      "get": {
+        "tags": [
+          "QuestionType"
+        ],
+        "parameters": [
+          {
+            "name": "skillId",
             "in": "path",
             "required": true,
             "schema": {
@@ -809,6 +832,16 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Skill"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Skill/{id}": {
@@ -827,6 +860,37 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Skill/confirm": {
+      "post": {
+        "tags": [
+          "Skill"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillConfirmDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillConfirmDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillConfirmDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1652,9 +1716,6 @@
           "imageIdCardAfter": {
             "$ref": "#/components/schemas/User"
           },
-          "skill": {
-            "$ref": "#/components/schemas/Skill"
-          },
           "imageContentBlock": {
             "$ref": "#/components/schemas/ContentBlock"
           },
@@ -2018,48 +2079,11 @@
         },
         "additionalProperties": false
       },
-      "QuestionLevelCreateDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "skillId": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "additionalProperties": false
-      },
-      "QuestionLevelUpdateDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "QuestionStruct": {
         "enum": [
           0,
           1,
-          2,
-          3
+          2
         ],
         "type": "integer",
         "format": "int32"
@@ -2075,9 +2099,19 @@
             "type": "string",
             "nullable": true
           },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
           "level": {
             "type": "integer",
             "format": "int32"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/QuestionStruct"
+          },
+          "hasImage": {
+            "type": "boolean"
           },
           "skillId": {
             "type": "string",
@@ -2099,6 +2133,62 @@
               "$ref": "#/components/schemas/ExamStruct"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionTypeCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "struct": {
+            "$ref": "#/components/schemas/QuestionStruct"
+          },
+          "hasImage": {
+            "type": "boolean"
+          },
+          "skillId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "QuestionTypeUpdateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "struct": {
+            "$ref": "#/components/schemas/QuestionStruct"
+          },
+          "hasImage": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -2166,6 +2256,9 @@
           "isProcess": {
             "type": "boolean"
           },
+          "isConfirm": {
+            "type": "boolean"
+          },
           "createdUserId": {
             "type": "string",
             "format": "uuid"
@@ -2187,20 +2280,25 @@
           "questionBank": {
             "$ref": "#/components/schemas/QuestionBank"
           },
-          "audioFileId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "audioFile": {
-            "$ref": "#/components/schemas/ExamFile"
-          },
           "questionLevels": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuestionType"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SkillConfirmDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isConfirm": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

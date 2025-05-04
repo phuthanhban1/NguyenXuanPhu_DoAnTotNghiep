@@ -14,5 +14,11 @@ namespace Infrastructure.Repositories.Implementations
         public QuestionTypeRepository(ExamContext context) : base(context)
         {
         }
+
+        public async Task<List<QuestionType>> GetsBySkillId(Guid skillId)
+        {
+            var list = _context.Set<QuestionType>().Where(x => x.SkillId == skillId).ToList();
+            return list;
+        }
     }
 }

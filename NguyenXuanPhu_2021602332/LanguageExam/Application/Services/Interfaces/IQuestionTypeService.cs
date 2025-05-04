@@ -1,18 +1,14 @@
-﻿using Application.Dtos.QuestionLevelDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Dtos.QuestionTypeDtos;
 
 namespace Application.Services.Interfaces
 {
     public interface IQuestionTypeService
     {
-        Task AddAsync(QuestionLevelCreateDto questionLevelCreateDto);
-        Task UpdateAsync(QuestionLevelUpdateDto questionLevelUpdateDto);
+        Task AddAsync(QuestionTypeCreateDto questionLevelCreateDto);
+        Task UpdateAsync(QuestionTypeUpdateDto questionLevelUpdateDto);
         Task DeleteAsync(Guid id);
-        Task<QuestionLevelUpdateDto> GetByIdAsync(Guid id);
-        Task<List<QuestionLevelUpdateDto>> GetAllAsync(Guid skillId);
+        Task<QuestionTypeUpdateDto> GetByIdAsync(Guid id);
+        Task<List<QuestionTypeUpdateDto>> GetAllAsync(Guid skillId);
+        Task<List<QuestionTypeDto>> GetsBySkillId(Guid skillId);
     }
 }

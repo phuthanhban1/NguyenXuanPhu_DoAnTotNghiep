@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ExamContext))]
-    [Migration("20250502144900_init")]
-    partial class init
+    [Migration("20250504124711_init1")]
+    partial class init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,7 +224,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ImageFile", (string)null);
+                    b.ToTable("ExamFile", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamQuestion", b =>
@@ -351,8 +351,8 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("CreatedDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Language")
                         .IsRequired()
@@ -379,6 +379,19 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ManagerId");
 
                     b.ToTable("QuestionBank", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreatedDate = new DateOnly(2025, 5, 4),
+                            Language = "Hàn",
+                            ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
+                            Name = "Topik 1",
+                            QuestionCreateDue = new DateTime(2025, 6, 3, 19, 47, 11, 411, DateTimeKind.Local).AddTicks(1753),
+                            QuestionReviewDue = new DateTime(2025, 7, 3, 19, 47, 11, 411, DateTimeKind.Local).AddTicks(1758),
+                            Status = (byte)0
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
@@ -387,8 +400,14 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasImage")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Level")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -397,11 +416,14 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("SkillId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Struct")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("QuestionLevel", (string)null);
+                    b.ToTable("QuestionType", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>
@@ -495,6 +517,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsProcess")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -518,6 +543,17 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ReviewedUserId");
 
                     b.ToTable("Skill", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
+                            IsProcess = false,
+                            Name = "Đọc",
+                            QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            ReviewedUserId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -599,12 +635,39 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fc9b50b7-9351-445f-80bf-5ed64255e6f0"),
+                            Id = new Guid("0e187088-4b12-4ea9-8cef-877c7982da9b"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
                             Password = "1",
                             RoleId = new Guid("2959ca56-a667-46a0-acea-eba1e9961419")
+                        },
+                        new
+                        {
+                            Id = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
+                            Email = "taocau@gmail.com",
+                            FullName = "Tạo Câu Hỏi",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("93d09639-a7b9-4825-b364-30366908b007")
+                        },
+                        new
+                        {
+                            Id = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
+                            Email = "quanlybank@gmail.com",
+                            FullName = "Quản lý bank",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62")
+                        },
+                        new
+                        {
+                            Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            Email = "review@gmail.com",
+                            FullName = "Đánh Giá Câu",
+                            IsActive = true,
+                            Password = "1",
+                            RoleId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
                         });
                 });
 
