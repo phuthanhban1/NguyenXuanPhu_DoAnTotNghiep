@@ -10,9 +10,8 @@ namespace Application.Dtos.QuestionTypeDtos
     public class QuestionTypeBase
     {
         public string Name { get; set; }
-        public int Level { get; set; }
         public string? Description { get; set; }
-        public QuestionStruct Struct { get; set; }
+        public bool IsSingle { get; set; }
         public bool HasImage { get; set; }
     }
 }

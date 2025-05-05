@@ -24,9 +24,9 @@ namespace Infrastructure.Configurations
                    .WithOne(af => af.ImageContentBlock)
                    .HasForeignKey<ContentBlock>(cb => cb.ImageFileId);
 
-            builder.HasOne(cb => cb.QuestionLevel)
+            builder.HasOne(cb => cb.QuestionType)
                    .WithMany(ql => ql.ContentBlocks)
-                   .HasForeignKey(cb => cb.QuestionLevelId);
+                   .HasForeignKey(cb => cb.QuestionTypeId);
         }
     }
 

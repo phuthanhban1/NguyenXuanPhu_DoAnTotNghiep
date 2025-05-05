@@ -163,7 +163,7 @@
     <script>
         let questionCounter = 0; // Thêm biến đếm số câu hỏi
         
-        function createSingleFormHtml() {
+        function createSingleFormHtml(hasImage = false) {
             return `
             <div id="singleQuestionForm">
                 <div class="card question-card">
@@ -175,7 +175,8 @@
                     </div>
                     <div class="card-body">
                         <!-- Thêm hình ảnh -->
-                        <div id="singleQuestionImage" class="mt-2" style="display:none;">
+                        <div id="singleQuestionImage" class="mt-2" ${!hasImage ? 'style="display:none;"' : ''}>
+                            <label class="form-label">Hình ảnh câu hỏi</label>
                             <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
                             <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
                         </div>
@@ -228,73 +229,7 @@
             `;
         }
 
-        function createMultipleImageAnswerHtml() {
-            return `
-            <div id="multipleImageAnswer">
-                <div class="card question-card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Câu hỏi chọn tranh <span class="badge bg-primary">Câu ${questionCounter + 1}</span></h5>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteQuestion(this)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <!-- Hình ảnh -->
-                        <div id="singleQuestionImage" class="mt-2" style="display:none;">
-                            <input type="file" accept="image/*" class="form-control" onchange="previewSingleImage(event)">
-                            <img id="singleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
-                        </div>
-                        <!-- Nội dung câu hỏi text -->
-                        <div class="mb-3">
-                            <label class="form-label">Nội dung câu hỏi</label>
-                            <div id="singleQuestionText">
-                                <textarea class="form-control" rows="4" placeholder="Nhập nội dung câu hỏi..."></textarea>
-                            </div>
-                        </div>
-                        <!-- Âm thanh -->
-                        <div id="singleQuestionAudio" style="display:none;" class="mt-3">
-                            <label class="form-label">File âm thanh</label>
-                            <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event)">
-                            <audio id="audioPreview" controls style="display:none; margin-top:10px;"></audio>
-                        </div>
-                        <label class="form-label">Đáp án (chọn hình ảnh)</label>
-                        <div id="answerOptions">
-                            <div class="answer-option">
-                                <div class="d-flex align-items-center mb-2">
-                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" checked>
-                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
-                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
-                                </div>
-                            </div>
-                            <div class="answer-option">
-                                <div class="d-flex align-items-center mb-2">
-                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
-                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
-                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
-                                </div>
-                            </div>
-                            <div class="answer-option">
-                                <div class="d-flex align-items-center mb-2">
-                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
-                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
-                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
-                                </div>
-                            </div>
-                            <div class="answer-option">
-                                <div class="d-flex align-items-center mb-2">
-                                    <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
-                                    <input type="file" accept="image/*" class="form-control" onchange="previewAnswerImage(event, this)">
-                                    <img class="answer-image-preview" src="" alt="Xem trước ảnh" style="max-width:100px; margin-top:10px; display:none;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        }
-
-        function createDoubleFormHtml() {
+        function createDoubleFormHtml(hasImage = false) {
             return `
             <div id="doubleQuestionForm">
                 <div class="card question-card">
@@ -311,9 +246,10 @@
                             <textarea class="form-control" rows="4" placeholder="Nhập đoạn văn..."></textarea>
                         </div>
                         <!-- Hình ảnh -->
-                        <div id="doubleQuestionImage" class="mt-2" style="display:none;">
+                        <div id="doubleQuestionImage" class="mt-2" ${!hasImage ? 'style="display:none;"' : ''}>
+                            <label class="form-label">Hình ảnh câu hỏi</label>
                             <input type="file" accept="image/*" class="form-control" onchange="previewDoubleImage(event)">
-                            <img id="doubleQuestionImage" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
+                            <img id="doubleImagePreview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
                         </div>
                         <!-- Âm thanh -->
                         <div id="doubleQuestionAudio" style="display:none;" class="mt-3">
@@ -331,10 +267,7 @@
                                     <div id="subQuestionText0">
                                         <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
                                     </div>
-                                    <div id="subQuestionImage0" style="display:none;">
-                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 0)">
-                                        <img id="subImagePreview0" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
-                                    </div>
+                                   
                                     <div>
                                         <label class="form-label">Đáp án</label>
                                         <div class="sub-answer-options">
@@ -377,10 +310,7 @@
                                     <div id="subQuestionText1">
                                         <input type="text" class="form-control" placeholder="Nhập nội dung câu hỏi nhỏ...">
                                     </div>
-                                    <div id="subQuestionImage1" style="display:none;">
-                                        <input type="file" accept="image/*" class="form-control" onchange="previewSubImage(event, 1)">
-                                        <img id="subImagePreview1" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display:none;">
-                                    </div>
+                                    
                                     <div>
                                         <label class="form-label">Đáp án</label>
                                         <div class="sub-answer-options">
@@ -419,9 +349,10 @@
             `;
         }
 
-        var readingDetail = [{ name: "đọc hiểu", format: 0 }, // câu hỏi đơn đáp án là text
-                            { name: "đọc chọn ý hiểu", format: 1 }, // câu hỏi kép
-                            {name: "chọn tranh đúng", format: 2}] ; // câu hỏi đơn với đáp án hình ảnh
+        var readingDetail = [{ name: "câu đơn", format: 0, hasImage: false },
+                            { name: "câu đơn hình ảnh", format: 0, hasImage: true },
+                            { name: "câu kép", format: 1, hasImage: false },
+                            { name: "câu kép hình ảnh", format: 1, hasImage: true }]; // câu hỏi kép
         $(document).ready(function() {
             const params = new URLSearchParams(window.location.search);
             const skill = params.get("skill");
@@ -429,47 +360,41 @@
             if(skill === 'nghe') {
                 $('#singleQuestionAudio').show();
             }
-            $('#questionCategory').append(readingDetail.map(item => `<option value="${item.name}_${item.format}">${item.name}</option>`));
+            $('#questionCategory').append(readingDetail.map(item => `<option value="${item.name}_${item.format}_${item.hasImage}">${item.name}</option>`));
             
-            function addQuestionForm(format) {
+            function addQuestionForm(format, hasImage) {
                 switch(format) {
                     case '0':
-                        $('#questionList').prepend(createSingleFormHtml());
+                        $('#questionList').prepend(createSingleFormHtml(hasImage === 'true'));
                         questionCounter++;
                         break;
                     case '1':
-                        $('#questionList').prepend(createDoubleFormHtml());
-                        questionCounter++;
-                        break;
-                    case '2':
-                        $('#questionList').prepend(createMultipleImageAnswerHtml());
+                        $('#questionList').prepend(createDoubleFormHtml(hasImage === 'true'));
                         questionCounter++;
                         break;
                 }
                 updateQuestionNumbers();
             }
             const selectedValue = $('#questionCategory').val();
-            const [name, format] = selectedValue.split('_');
-            addQuestionForm(format);
+            const [name, format, hasImage] = selectedValue.split('_');
+            addQuestionForm(format, hasImage);
             
             // Xử lý chọn loại câu hỏi
             $('#questionCategory').on('change', function() {
                 $('#questionList').empty();
                 const selectedValue = $(this).val();
-                const [name, format] = selectedValue.split('_');
+                const [name, format, hasImage] = selectedValue.split('_');
                 questionCounter = 0;
                 // Show form based on format
-                addQuestionForm(format);
+                addQuestionForm(format, hasImage);
             });
 
             // Xử lý thêm câu hỏi
             $('#add-question').on('click', function() {
                 const selectedValue = $('#questionCategory').val();
-                const [name, format] = selectedValue.split('_');
-                alert(questionCounter);
+                const [name, format, hasImage] = selectedValue.split('_');
                 questionCounter++;
-                // alert("clicked")
-                addQuestionForm(format);
+                addQuestionForm(format, hasImage);
             });
 
             // Thêm xử lý submit form
@@ -495,19 +420,82 @@
                     return;
                 }
 
-                // TODO: Gửi dữ liệu lên server
-                // $.ajax({
-                //     url: '/api/questions',
-                //     method: 'POST',
-                //     data: JSON.stringify(questionsData),
-                //     contentType: 'application/json',
-                //     success: function(response) {
-                //         alert('Lưu câu hỏi thành công');
-                //     },
-                //     error: function(error) {
-                //         alert('Có lỗi xảy ra khi lưu câu hỏi');
-                //     }
-                // });
+                // Xử lý từng câu hỏi và gửi lên server
+                const processQuestions = async () => {
+                    try {
+                        for (const question of questionsData) {
+                            const formData = new FormData();
+                            alert('124')
+                            // Thêm thông tin cơ bản của câu hỏi
+                            formData.append('QuestionTypeId', '14a8ec89-601b-4826-cd4b-08dd8be985dd');
+                            formData.append('Level', 1);
+                            formData.append('Score', 2);                            
+                            if (question.type === 'single') {
+                                // Xử lý câu hỏi đơn
+                                formData.append('TextContent', question.content);
+                                
+                                // Thêm hình ảnh nếu có
+                                if (question.hasImage && question.image) {
+                                    formData.append('ImageFile', question.image.file);
+                                }
+                                
+                                
+                                // Thêm đáp án
+                                question.answers.forEach((answer, index) => {
+                                    formData.append(`Answers[${index}][content]`, answer.text);
+                                    formData.append(`Answers[${index}][isCorrect]`, answer.isCorrect);
+                                });
+                                
+                                // Gửi câu hỏi đơn
+                                await $.ajax({
+                                    url: 'https://localhost:7001/api/contentblock/single',
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false
+                                });
+                                
+                            } else if (question.type === 'double') {
+                                // Xử lý câu hỏi kép
+                                formData.append('passage', question.passage);
+                                
+                                // Thêm hình ảnh nếu có
+                                if (question.hasImage && question.image) {
+                                    formData.append('image', question.image.file);
+                                }
+                                
+                                // Thêm câu hỏi nhỏ và đáp án
+                                question.subQuestions.forEach((subQuestion, subIndex) => {
+                                    formData.append(`subQuestions[${subIndex}][question]`, subQuestion.question);
+                                    
+                                    subQuestion.answers.forEach((answer, ansIndex) => {
+                                        formData.append(`subQuestions[${subIndex}][answers][${ansIndex}][text]`, answer.text);
+                                        formData.append(`subQuestions[${subIndex}][answers][${ansIndex}][isCorrect]`, answer.isCorrect);
+                                    });
+                                });
+                                
+                                // Gửi câu hỏi kép
+                                await $.ajax({
+                                    url: '/api/questions/double',
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false
+                                });
+                            }
+                        }
+                        
+                        alert('Lưu câu hỏi thành công');
+                        window.location.href = '/questions'; // Chuyển hướng sau khi lưu thành công
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra khi lưu câu hỏi');
+                    }
+                };
+
+                // Thực thi xử lý
+                processQuestions();
             });
 
             // Thêm xử lý khi người dùng thay đổi giá trị input
@@ -562,18 +550,6 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     $('#doubleImagePreview').attr('src', e.target.result).show();
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Hàm xem trước hình ảnh cho đáp án
-        function previewAnswerImage(event, element) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    $(element).siblings('.answer-image-preview').attr('src', e.target.result).show();
                 }
                 reader.readAsDataURL(file);
             }
@@ -634,19 +610,31 @@
                 };
             }).get();
 
+            const formData = new FormData();
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+            if (audioFile) {
+                formData.append('audio', audioFile);
+            }
+
             return {
                 type: 'single',
                 questionNumber: questionElement.find('.badge').text().trim(),
                 content: questionText,
+                hasImage: imageFile !== undefined,
                 image: imageFile ? {
                     name: imageFile.name,
                     type: imageFile.type,
-                    size: imageFile.size
+                    size: imageFile.size,
+                    file: imageFile
                 } : null,
+                hasAudio: audioFile !== undefined,
                 audio: audioFile ? {
                     name: audioFile.name,
                     type: audioFile.type,
-                    size: audioFile.size
+                    size: audioFile.size,
+                    file: audioFile
                 } : null,
                 answers: answers
             };
@@ -659,12 +647,15 @@
             const audioFile = questionElement.find('#doubleQuestionAudio input[type="file"]').prop('files')[0];
             const subQuestions = questionElement.find('.card.mb-3').map(function() {
                 const subQuestionElement = $(this);
+                const subImageFile = subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0];
                 return {
                     question: subQuestionElement.find('input[type="text"]').first().val(),
-                    image: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0] ? {
-                        name: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0].name,
-                        type: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0].type,
-                        size: subQuestionElement.find('input[type="file"][accept="image/*"]').prop('files')[0].size
+                    hasImage: subImageFile !== undefined,
+                    image: subImageFile ? {
+                        name: subImageFile.name,
+                        type: subImageFile.type,
+                        size: subImageFile.size,
+                        file: subImageFile
                     } : null,
                     answers: subQuestionElement.find('.answer-option').map(function() {
                         return {
@@ -679,52 +670,21 @@
                 type: 'double',
                 questionNumber: questionElement.find('.badge').text().trim(),
                 passage: passage,
+                hasImage: imageFile !== undefined,
                 image: imageFile ? {
                     name: imageFile.name,
                     type: imageFile.type,
-                    size: imageFile.size
+                    size: imageFile.size,
+                    file: imageFile
                 } : null,
+                hasAudio: audioFile !== undefined,
                 audio: audioFile ? {
                     name: audioFile.name,
                     type: audioFile.type,
-                    size: audioFile.size
+                    size: audioFile.size,
+                    file: audioFile
                 } : null,
                 subQuestions: subQuestions
-            };
-        }
-
-        // Hàm lấy dữ liệu từ câu hỏi chọn tranh
-        function getMultipleImageQuestionData(questionElement) {
-            const questionText = questionElement.find('.card-body textarea').first().val();
-            const imageFile = questionElement.find('#singleQuestionImage input[type="file"]').prop('files')[0];
-            const audioFile = questionElement.find('#singleQuestionAudio input[type="file"]').prop('files')[0];
-            const answers = questionElement.find('.answer-option').map(function() {
-                const imageFile = $(this).find('input[type="file"][accept="image/*"]').prop('files')[0];
-                return {
-                    image: imageFile ? {
-                        name: imageFile.name,
-                        type: imageFile.type,
-                        size: imageFile.size
-                    } : null,
-                    isCorrect: $(this).find('input[type="radio"]').is(':checked')
-                };
-            }).get();
-
-            return {
-                type: 'multiple_image',
-                questionNumber: questionElement.find('.badge').text().trim(),
-                content: questionText,
-                image: imageFile ? {
-                    name: imageFile.name,
-                    type: imageFile.type,
-                    size: imageFile.size
-                } : null,
-                audio: audioFile ? {
-                    name: audioFile.name,
-                    type: audioFile.type,
-                    size: audioFile.size
-                } : null,
-                answers: answers
             };
         }
 
@@ -739,8 +699,6 @@
                     questions.push(getSingleQuestionData(questionElement));
                 } else if (questionType.includes('Câu hỏi đọc chọn ý')) {
                     questions.push(getDoubleQuestionData(questionElement));
-                } else if (questionType.includes('Câu hỏi chọn tranh')) {
-                    questions.push(getMultipleImageQuestionData(questionElement));
                 }
             });
             return questions;
@@ -831,47 +789,6 @@
             return { isValid: true };
         }
 
-        // Hàm kiểm tra đáp án trùng nhau trong câu hỏi chọn tranh
-        function validateMultipleImageQuestion(questionElement) {
-            const answerInputs = questionElement.find('.answer-option input[type="file"][accept="image/*"]');
-            
-            // Reset viền đỏ
-            answerInputs.closest('.answer-option').css('border-color', '');
-            
-            const answers = answerInputs.map(function() {
-                return $(this).prop('files')[0]?.name || '';
-            }).get();
-
-            const duplicateMap = new Map();
-            answers.forEach((answer, index) => {
-                if (answer) {
-                    if (!duplicateMap.has(answer)) {
-                        duplicateMap.set(answer, [index]);
-                    } else {
-                        duplicateMap.get(answer).push(index);
-                    }
-                }
-            });
-
-            let hasDuplicates = false;
-            duplicateMap.forEach((indices, answer) => {
-                if (indices.length > 1) {
-                    hasDuplicates = true;
-                    indices.forEach(index => {
-                        answerInputs.eq(index).closest('.answer-option').css('border-color', 'red');
-                    });
-                }
-            });
-
-            if (hasDuplicates) {
-                return {
-                    isValid: false,
-                    message: 'Các hình ảnh đáp án không được trùng nhau'
-                };
-            }
-            return { isValid: true };
-        }
-
         // Thêm hàm reset viền đỏ cho tất cả câu hỏi
         function resetAllBorders() {
             $('.answer-option').css('border-color', '');
@@ -893,8 +810,6 @@
                     validationResult = validateSingleQuestion(questionElement);
                 } else if (questionType.includes('Câu hỏi đọc chọn ý')) {
                     validationResult = validateDoubleQuestion(questionElement);
-                } else if (questionType.includes('Câu hỏi chọn tranh')) {
-                    validationResult = validateMultipleImageQuestion(questionElement);
                 }
 
                 if (!validationResult.isValid) {

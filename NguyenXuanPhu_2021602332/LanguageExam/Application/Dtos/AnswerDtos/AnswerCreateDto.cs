@@ -9,6 +9,6 @@ namespace Application.Dtos.AnswerDtos
     public class AnswerCreateDto
     {
         public string Content { get; set; }
-        public bool? IsCorrect { get; set; }
+        public bool IsCorrect { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dtos.AnswerDtos;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -8,25 +9,20 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.ContentBlockDtos
 {
-    public class ContentBlockCreateDto
+    public class ContentBlockSingleTextDto
     {
-        public Guid Id { get; set; }
-        public string? TextContent { get; set; }
-       
-        public byte Level { get; set; }
+        public string TextContent { get; set; }
         //public bool IsConfirm { get; set; }
+        public byte Level { get; set; }
+        public byte Score { get; set; }
         //public bool IsUsed { get; set; }
         //public DateOnly CreatedDate { get; set; }
         //public DateOnly? UpdatedDate { get; set; }
         //public string? RejectionReason { get; set; }
         // foreign key audio file
-        public IFormFile? AudioFile { get; set; }
-
-        // foreign key image file
-        public IFormFile? ImageFile { get; set; }
 
         // foreign key question level
         public Guid QuestionTypeId { get; set; }
-        public List<Answer> Answers { get; set; }
+        public List<AnswerCreateDto> Answers { get; set; }
     }
 }

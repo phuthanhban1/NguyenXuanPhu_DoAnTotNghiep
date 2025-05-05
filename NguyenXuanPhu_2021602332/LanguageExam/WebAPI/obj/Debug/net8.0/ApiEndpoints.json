@@ -1,5 +1,37 @@
 [
   {
+    "ContainingType": "WebAPI.Controllers.ContentBlockController",
+    "Method": "AddSingle",
+    "RelativePath": "api/ContentBlock/single",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lists",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockSingleFileDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ContentBlockController",
+    "Method": "AddSingleText",
+    "RelativePath": "api/ContentBlock/single-text",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contentBlockSingleTextDto",
+        "Type": "Application.Dtos.ContentBlockDtos.ContentBlockSingleTextDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.DistrictController",
     "Method": "Add",
     "RelativePath": "api/District",
@@ -392,13 +424,7 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "skillId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

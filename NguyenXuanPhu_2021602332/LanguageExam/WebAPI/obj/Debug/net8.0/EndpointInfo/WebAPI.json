@@ -6,6 +6,77 @@
     "version": "v1"
   },
   "paths": {
+    "/api/ContentBlock/single-text": {
+      "post": {
+        "tags": [
+          "ContentBlock"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBlockSingleTextDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBlockSingleTextDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBlockSingleTextDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ContentBlock/single": {
+      "post": {
+        "tags": [
+          "ContentBlock"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContentBlockSingleFileDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContentBlockSingleFileDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContentBlockSingleFileDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/District/province/{provinceId}": {
       "get": {
         "tags": [
@@ -620,16 +691,6 @@
       "get": {
         "tags": [
           "QuestionType"
-        ],
-        "parameters": [
-          {
-            "name": "skillId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -1432,6 +1493,19 @@
         },
         "additionalProperties": false
       },
+      "AnswerCreateDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCorrect": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ContentBlock": {
         "type": "object",
         "properties": {
@@ -1446,7 +1520,7 @@
           "isConfirm": {
             "type": "boolean"
           },
-          "questionAmount": {
+          "level": {
             "type": "integer",
             "format": "int32"
           },
@@ -1462,16 +1536,9 @@
             "format": "date",
             "nullable": true
           },
-          "unConFirmedReason": {
+          "rejectionReason": {
             "type": "string",
             "nullable": true
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "questionStruct": {
-            "$ref": "#/components/schemas/QuestionStruct"
           },
           "audioFileId": {
             "type": "string",
@@ -1489,11 +1556,11 @@
           "imageFile": {
             "$ref": "#/components/schemas/ExamFile"
           },
-          "questionLevelId": {
+          "questionTypeId": {
             "type": "string",
             "format": "uuid"
           },
-          "questionLevel": {
+          "questionType": {
             "$ref": "#/components/schemas/QuestionType"
           },
           "examQuestion": {
@@ -1517,6 +1584,74 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SimilarQuestion"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentBlockSingleFileDto": {
+        "type": "object",
+        "properties": {
+          "textContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imageFile": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "audioFile": {
+            "type": "string",
+            "format": "binary",
+            "nullable": true
+          },
+          "questionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerCreateDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContentBlockSingleTextDto": {
+        "type": "object",
+        "properties": {
+          "textContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerCreateDto"
             },
             "nullable": true
           }
@@ -1704,9 +1839,6 @@
             "type": "string",
             "nullable": true
           },
-          "question": {
-            "$ref": "#/components/schemas/Question"
-          },
           "imageFace": {
             "$ref": "#/components/schemas/User"
           },
@@ -1830,7 +1962,8 @@
             "format": "uuid"
           },
           "location": {
-            "type": "string",
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "room": {
@@ -1838,7 +1971,16 @@
             "format": "int32",
             "nullable": true
           },
-          "score": {
+          "examineeNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "readingScore": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "listeningScore": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -1922,20 +2064,16 @@
             "type": "string",
             "nullable": true
           },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
           "answers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Answer"
             },
             "nullable": true
-          },
-          "imageFileId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "imageFile": {
-            "$ref": "#/components/schemas/ExamFile"
           },
           "contentBlockId": {
             "type": "string",
@@ -2079,15 +2217,6 @@
         },
         "additionalProperties": false
       },
-      "QuestionStruct": {
-        "enum": [
-          0,
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
       "QuestionType": {
         "type": "object",
         "properties": {
@@ -2103,12 +2232,8 @@
             "type": "string",
             "nullable": true
           },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "struct": {
-            "$ref": "#/components/schemas/QuestionStruct"
+          "isSingle": {
+            "type": "boolean"
           },
           "hasImage": {
             "type": "boolean"
@@ -2144,16 +2269,12 @@
             "type": "string",
             "nullable": true
           },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
           "description": {
             "type": "string",
             "nullable": true
           },
-          "struct": {
-            "$ref": "#/components/schemas/QuestionStruct"
+          "isSingle": {
+            "type": "boolean"
           },
           "hasImage": {
             "type": "boolean"
@@ -2172,16 +2293,12 @@
             "type": "string",
             "nullable": true
           },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
           "description": {
             "type": "string",
             "nullable": true
           },
-          "struct": {
-            "$ref": "#/components/schemas/QuestionStruct"
+          "isSingle": {
+            "type": "boolean"
           },
           "hasImage": {
             "type": "boolean"

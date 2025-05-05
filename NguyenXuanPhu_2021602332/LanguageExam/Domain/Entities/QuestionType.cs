@@ -12,8 +12,7 @@ namespace Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public byte Level { get; set; }
-        public QuestionStruct Struct { get; set; }
+        public bool IsSingle { get; set; }
         public bool HasImage { get; set; }
         // foreign key: skill
         public Guid SkillId { get; set; }

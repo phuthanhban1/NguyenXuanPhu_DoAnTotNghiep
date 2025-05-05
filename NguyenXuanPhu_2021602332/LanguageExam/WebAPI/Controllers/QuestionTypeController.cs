@@ -17,9 +17,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(Guid skillId)
+        public async Task<IActionResult> GetAll()
         {
-            var questionLevels = await _questionTypeService.GetAllAsync(skillId);
+            var questionLevels = await _questionTypeService.GetAllAsync();
             return Ok(questionLevels);
         }
 

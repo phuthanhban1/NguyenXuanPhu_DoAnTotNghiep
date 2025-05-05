@@ -34,12 +34,10 @@ namespace Application.Services.Implements
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task<List<QuestionTypeUpdateDto>> GetAllAsync(Guid skillId)
+        public async Task<List<QuestionType>> GetAllAsync()
         {
             var questionLevels = await _unitOfWork.QuestionTypes.GetAllAsync();
-            var questionLevelSkill = questionLevels.Where(x => x.SkillId == skillId).ToList();
-            var questionLevelDtos = _mapper.Map<List<QuestionTypeUpdateDto>>(questionLevelSkill);
-            return questionLevelDtos;
+            return questionLevels.ToList(); // Explicitly convert IEnumerable to List
         }
 
         public async Task<QuestionTypeUpdateDto> GetByIdAsync(Guid id)
@@ -67,7 +65,6 @@ namespace Application.Services.Implements
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
             }
             questionLevel.Name = questionTypeUpdateDto.Name;
-            questionLevel.Level = (byte)questionTypeUpdateDto.Level;
             await _unitOfWork.QuestionTypes.UpdateAsync(questionLevel);
             await _unitOfWork.SaveChangeAsync();
 

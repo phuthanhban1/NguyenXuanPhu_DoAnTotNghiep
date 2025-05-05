@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ExamContext))]
-    partial class ExamContextModelSnapshot : ModelSnapshot
+    [Migration("20250505145603_updateAll")]
+    partial class updateAll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,12 +331,19 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ContentBlockId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ImageFileId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<byte>("Score")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContentBlockId");
+
+                    b.HasIndex("ImageFileId")
+                        .IsUnique()
+                        .HasFilter("[ImageFileId] IS NOT NULL");
 
                     b.ToTable("Question", (string)null);
                 });
@@ -381,8 +391,8 @@ namespace Infrastructure.Migrations
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
-                            QuestionCreateDue = new DateTime(2025, 6, 4, 22, 27, 15, 754, DateTimeKind.Local).AddTicks(4042),
-                            QuestionReviewDue = new DateTime(2025, 7, 4, 22, 27, 15, 754, DateTimeKind.Local).AddTicks(4047),
+                            QuestionCreateDue = new DateTime(2025, 6, 4, 21, 56, 3, 47, DateTimeKind.Local).AddTicks(3433),
+                            QuestionReviewDue = new DateTime(2025, 7, 4, 21, 56, 3, 47, DateTimeKind.Local).AddTicks(3438),
                             Status = (byte)0
                         });
                 });
@@ -401,6 +411,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("IsSingle")
                         .HasColumnType("bit");
+
+                    b.Property<byte>("Level")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -622,7 +635,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("92edbc74-66b0-471c-a042-31c79d4739a3"),
+                            Id = new Guid("752636d2-02a0-4d99-bdba-789279ac7fa7"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -818,7 +831,13 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.ExamFile", "ImageFile")
+                        .WithOne("Question")
+                        .HasForeignKey("Domain.Entities.Question", "ImageFileId");
+
                     b.Navigation("ContentBlock");
+
+                    b.Navigation("ImageFile");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionBank", b =>
@@ -981,6 +1000,8 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("ImageIdCardBefore")
                         .IsRequired();
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamStruct", b =>

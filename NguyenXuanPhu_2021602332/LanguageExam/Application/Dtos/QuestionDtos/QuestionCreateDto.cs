@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.Dtos.QuestionDtos
 {
-    public class Question
+    public class QuestionCreateDto
     {
-        public Guid Id { get; set; }
         public string? Content { get; set; }
         public byte Score { get; set; }
         public List<Answer> Answers { get; set; }
@@ -16,6 +16,5 @@ namespace Domain.Entities
         //foreign key content block
         public Guid ContentBlockId { get; set; }
         public ContentBlock ContentBlock { get; set; }
-
     }
 }

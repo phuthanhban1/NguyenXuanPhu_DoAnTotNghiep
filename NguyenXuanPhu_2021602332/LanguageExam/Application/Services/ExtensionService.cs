@@ -41,7 +41,7 @@ namespace Application.Services
                 await smtp.SendMailAsync(message);
             }
         }
-        public static async Task<Domain.Entities.ExamFile> GetImageFile(IFormFile file)
+        public static async Task<ExamFile> GetImageFile(IFormFile file)
         {
             using var memoryStream = new MemoryStream();
             await file.CopyToAsync(memoryStream);

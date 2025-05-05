@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dtos.ContentBlockDtos;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace Application.Services.Interfaces
     {
         IEnumerable<ContentBlock> GetAllAsync();
         Task<ContentBlock> GetByIdAsync(Guid id);
-        //Task AddAsync(ContentBlockCreateDto contentBlockCreateDto);
+        Task AddSingleText(ContentBlockSingleTextDto contentBlockSingleTextDto);
+        Task AddSingle(ContentBlockSingleFileDto contentBlockSingleFileDto);
         //Task DeleteAsync(Guid id);
         //Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto);
     }
