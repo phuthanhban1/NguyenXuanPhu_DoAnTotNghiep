@@ -16,9 +16,14 @@ namespace Domain.Entities
         public Guid ExamId { get; set; }
         public Exam Exam { get; set; }
 
-        // foreign key content block
-        public Guid ContentBlockId { get; set; }
-        public ContentBlock ContentBlock { get; set; }
+        // foreign key exam struct
+        public Guid ExamStructId { get; set; }
+        public ExamStruct ExamStruct { get; set; }
+
+        // fk: audio
+        public Guid AudioFileId { get; set; }
+        public ExamFile AudioFile { get; set; }
+
 
     }
 }

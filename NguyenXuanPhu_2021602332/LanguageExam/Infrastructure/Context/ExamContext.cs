@@ -45,8 +45,7 @@ namespace Infrastructure.Context
                 new Role { Id = Guid.Parse("316F8C9C-A9A2-4B17-B4C4-6434D165BC62"), Name = "quản lý ngân hàng đề" },
                 new Role { Id = Guid.Parse("93D09639-A7B9-4825-B364-30366908B007"), Name = "người tạo câu hỏi" },
                 new Role { Id = Guid.Parse("61AF889A-7617-43E7-9CB2-537A01E97A34"), Name = "người đánh giá câu hỏi" },
-                new Role { Id = Guid.Parse("A0E4F1D5-3C8B-4F2A-8E6C-7D9B5E0A2F1D"), Name = "thí sinh" },
-                new Role { Id = Guid.Parse("8A7DD16F-85BF-4143-BE0B-A31DA3BBE44A"), Name = "người dùng" }
+                new Role { Id = Guid.Parse("A0E4F1D5-3C8B-4F2A-8E6C-7D9B5E0A2F1D"), Name = "thí sinh" }
             );
 
             modelBuilder.Entity<User>().HasData(
@@ -85,8 +84,7 @@ namespace Infrastructure.Context
                    Language = "Hàn",
                    ManagerId = Guid.Parse("8A7DD16F-85BF-4143-BE0B-A31DA3BBE44A"),
                    Name = "Topik 1",
-                   QuestionCreateDue = DateTime.Now.AddDays(30),
-                   QuestionReviewDue = DateTime.Now.AddDays(60),
+
                    Status = 0
                }
             );

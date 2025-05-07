@@ -61,9 +61,10 @@ namespace Application.Mappings
             CreateMap<Skill, SkillDetailDto>()
                 .ForMember(sd => sd.CreatedDate, s => s.MapFrom(s => s.QuestionBank.CreatedDate))
                 .ForMember(sd => sd.Language, s => s.MapFrom(s => s.QuestionBank.Language))
-                .ForMember(sd => sd.QuestionCreateDue, s => s.MapFrom(s => s.QuestionBank.QuestionCreateDue))
-                .ForMember(sd => sd.QuestionReviewDue, s => s.MapFrom(s => s.QuestionBank.QuestionReviewDue))
                 .ForMember(sd => sd.BankName, s => s.MapFrom(s => s.QuestionBank.Name));
+
+            
+
         }
     }
 }

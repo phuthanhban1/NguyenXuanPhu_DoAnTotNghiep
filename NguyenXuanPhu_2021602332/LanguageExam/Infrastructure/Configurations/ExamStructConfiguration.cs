@@ -10,10 +10,10 @@ namespace Infrastructure.Configurations
         {
             builder.ToTable("ExamStruct");
             builder.HasKey(q => q.Id);
-            builder.HasOne(q => q.QuestionLevel)
+            builder.HasOne(q => q.QuestionBank)
                 .WithMany(q => q.ExamStructs)
-                .HasForeignKey(q => q.QuestionLevelId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(q => q.QuestionBankId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         

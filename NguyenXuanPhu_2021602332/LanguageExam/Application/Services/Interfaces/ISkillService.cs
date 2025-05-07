@@ -17,6 +17,8 @@ namespace Application.Services.Interfaces
         Task<List<SkillDto>> GetByQuestionBankIdAsync(Guid questionBankId);
         Task<SkillDetailDto> GetByCreate(Guid id);
         Task<SkillDetailDto> GetByReview(Guid id);
-        Task ConfirmSkill(SkillConfirmDto skillConfirmDto);
+        Task ConfirmSkill(Guid skillId, string role);
+        Task<SkillOverViewDto> GetCreateSkill(Guid skillId);
+        Task<SkillOverViewDto> GetReviewSkill(Guid skillId);
     }
 }

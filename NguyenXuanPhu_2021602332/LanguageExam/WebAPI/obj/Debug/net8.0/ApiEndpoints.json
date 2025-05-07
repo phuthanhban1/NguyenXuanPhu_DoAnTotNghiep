@@ -9,23 +9,7 @@
     "Parameters": [
       {
         "Name": "lists",
-        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockSingleFileDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.ContentBlockController",
-    "Method": "AddSingleText",
-    "RelativePath": "api/ContentBlock/single-text",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "contentBlockSingleTextDto",
-        "Type": "Application.Dtos.ContentBlockDtos.ContentBlockSingleTextDto",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockSingleDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],
@@ -573,17 +557,27 @@
   {
     "ContainingType": "WebAPI.Controllers.SkillController",
     "Method": "ConfirmTask",
-    "RelativePath": "api/Skill/confirm",
+    "RelativePath": "api/Skill/confirm/{skillId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "skillConfirmDto",
-        "Type": "Application.Dtos.SkillDtos.SkillConfirmDto",
+        "Name": "skillId",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.SkillController",
+    "Method": "GetCreateSkill",
+    "RelativePath": "api/Skill/skill",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -816,6 +810,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "GetRole",
+    "RelativePath": "api/User/role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

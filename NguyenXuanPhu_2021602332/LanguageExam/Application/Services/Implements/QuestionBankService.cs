@@ -79,11 +79,7 @@ namespace Application.Services.Implements
             }
             else
             {
-                if(questionBankUpdateDto.Status == 0)
-                {
-                    questionBank.QuestionCreateDue = (DateTime)questionBankUpdateDto.QuestionCreateDue;
-                    questionBank.QuestionReviewDue = (DateTime)questionBankUpdateDto.QuestionReviewDue;
-                }
+                
                 questionBank.Status = questionBankUpdateDto.Status;
                 questionBank.Name = questionBankUpdateDto.Name;
                 await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);

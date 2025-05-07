@@ -16,9 +16,10 @@ namespace Infrastructure.Configurations
             builder.ToTable("Answer");
             builder.HasKey(a => a.Id);
 
-            builder.HasOne(a => a.Question)
-                   .WithMany(q => q.Answers)
-                   .HasForeignKey(a => a.QuestionId);
+            builder.HasMany(dr => dr.DetailResults)
+                .WithOne(a => a.Answer)
+                .HasForeignKey(dr => dr.AnswerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

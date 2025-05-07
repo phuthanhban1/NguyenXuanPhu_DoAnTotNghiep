@@ -3,15 +3,10 @@ using Application.Services.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using System.Text.Json;
-using WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

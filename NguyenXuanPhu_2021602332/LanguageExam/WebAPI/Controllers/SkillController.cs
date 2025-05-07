@@ -3,6 +3,7 @@ using Application.Services;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace WebAPI.Controllers
 {
@@ -51,11 +52,27 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("confirm")]
-        public async Task<IActionResult> ConfirmTask(SkillConfirmDto skillConfirmDto)
+        [HttpPost("confirm/{skillId}")]
+        public async Task<IActionResult> ConfirmTask(Guid skillId)
         {
-            await _skillService.ConfirmSkill(skillConfirmDto);
+            var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+            await _skillService.ConfirmSkill(skillId, role);
             return Ok();
+        }
+        [HttpGet("skill")]
+        public async Task<IActionResult> GetCreateSkill()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            var role = HttpContext.User.FindFirst(ClaimTypes.Role)?.Value;
+            var skill = new SkillOverViewDto();
+           if(role == ExtensionService.RoleCreate)
+            {
+                skill = await _skillService.GetCreateSkill(Guid.Parse(sid));
+            } else
+            {
+                skill = await _skillService.GetReviewSkill(Guid.Parse(sid));
+            }
+            return Ok(skill);
         }
     }
 }

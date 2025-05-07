@@ -17,7 +17,7 @@ namespace Infrastructure.Configurations
             builder.HasKey(a => a.Id);
 
             builder.HasOne(a => a.Skill)
-                   .WithMany(q => q.QuestionLevels)
+                   .WithMany(q => q.QuestionTypes)
                    .HasForeignKey(a => a.SkillId);
         }
     }

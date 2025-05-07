@@ -17,6 +17,6 @@ namespace Domain.Entities
         public User ImageIdCardAfter { get; set; }
         public ContentBlock? ImageContentBlock { get; set; }
         public ContentBlock? AudioContentBlock { get; set; }
-
+        public ExamQuestion ExamQuestion { get; set; }
     }
 }

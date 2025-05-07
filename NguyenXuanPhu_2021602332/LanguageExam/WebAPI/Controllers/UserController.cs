@@ -3,6 +3,7 @@ using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace WebAPI.Controllers
 {
@@ -98,6 +99,11 @@ namespace WebAPI.Controllers
             Response.Cookies.Append("token", token, cookieOptions);
 
             return Ok(token);
+        }
+        [HttpGet("role")]
+        public async Task<ActionResult> GetRole()
+        {
+            return Ok(HttpContext.User.FindFirst(ClaimTypes.Role)?.Value);
         }
     }
 }

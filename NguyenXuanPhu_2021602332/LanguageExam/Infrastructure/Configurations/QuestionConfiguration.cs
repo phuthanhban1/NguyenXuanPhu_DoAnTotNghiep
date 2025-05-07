@@ -10,9 +10,12 @@ namespace Infrastructure.Configurations
         {
             builder.ToTable("Question")
                .HasKey(q => q.Id);
+            
             builder.HasOne(q => q.ContentBlock)
                 .WithMany(cb => cb.Questions)
                 .HasForeignKey(q => q.ContentBlockId);
+
+
         }
     }
 }

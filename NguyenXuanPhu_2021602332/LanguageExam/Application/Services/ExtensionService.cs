@@ -12,6 +12,7 @@ namespace Application.Services
 {
     public class ExtensionService
     {
+        public static string RoleCreate = "người tạo câu hỏi";
         static readonly HttpClient client = new HttpClient();
         static string apiKey = ""; // Thay bằng API key Gemini của bạn
         static string model = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";

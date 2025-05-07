@@ -77,10 +77,28 @@
                         withCredentials: true
                     },
                     success: function(response) {
-                        
+                        $.ajax({
+                            url: 'https://localhost:7001/api/user/role',
+                            type: 'GET',
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            success: function(response) {
+                                console.log('Role:', response);
+                                if(response === 'người tạo câu hỏi') {
+                                    window.location.href = 'ManageCreateQuestion/question_create_overview.html';
+                                } else {
+                                    //window.location.href = 'main.html';
+                                    console.log('Không có quyền');
+                                }
+                            },
+                            error: function(error) {
+                                console.log('Error:', error);
+                            }
+                        });
                         console.log('OK');
                         //console.log(response);
-                        window.location.href = 'main.html';
+                        //window.location.href = 'main.html';
                     },
                     error: function(error) {
                         console.log('Error');
@@ -89,7 +107,7 @@
                         }
                         if(error.status) {
                             console.log(error.status);
-                            c
+                            
                         }
                     }
                 });

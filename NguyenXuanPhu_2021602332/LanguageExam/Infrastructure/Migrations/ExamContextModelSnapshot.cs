@@ -57,6 +57,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateOnly>("CreatedDate")
                         .HasColumnType("date");
 
+                    b.Property<Guid?>("ExamQuestionId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("ImageFileId")
                         .HasColumnType("uniqueidentifier");
 
@@ -86,6 +89,8 @@ namespace Infrastructure.Migrations
                     b.HasIndex("AudioFileId")
                         .IsUnique()
                         .HasFilter("[AudioFileId] IS NOT NULL");
+
+                    b.HasIndex("ExamQuestionId");
 
                     b.HasIndex("ImageFileId")
                         .IsUnique()
@@ -160,9 +165,6 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("CreatedQuestionUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExamStructId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Fee")
                         .HasColumnType("int");
 
@@ -186,9 +188,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedQuestionUserId");
-
-                    b.HasIndex("ExamStructId")
-                        .IsUnique();
 
                     b.HasIndex("ManagerId");
 
@@ -224,10 +223,13 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ContentBlockId")
+                    b.Property<Guid>("AudioFileId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamStructId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Order")
@@ -239,11 +241,13 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContentBlockId")
+                    b.HasIndex("AudioFileId")
                         .IsUnique();
 
                     b.HasIndex("ExamId")
                         .IsUnique();
+
+                    b.HasIndex("ExamStructId");
 
                     b.ToTable("ExamQuestion", (string)null);
                 });
@@ -254,10 +258,40 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateOnly>("CreatedDate")
+                        .HasColumnType("date");
+
+                    b.Property<Guid>("QuestionBankId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("QuestionTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateOnly>("UpdatedDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionBankId");
+
+                    b.HasIndex("QuestionTypeId");
+
+                    b.ToTable("ExamStruct", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.ExamStructDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExamStructId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("QuestionLevelId")
+                    b.Property<Guid>("QuestionTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Skill")
@@ -266,9 +300,11 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionLevelId");
+                    b.HasIndex("ExamStructId");
 
-                    b.ToTable("ExamStruct", (string)null);
+                    b.HasIndex("QuestionTypeId");
+
+                    b.ToTable("ExamStructDetail", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Examinee", b =>
@@ -358,12 +394,6 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("QuestionCreateDue")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("QuestionReviewDue")
-                        .HasColumnType("datetime2");
-
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
 
@@ -377,12 +407,10 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreatedDate = new DateOnly(2025, 5, 5),
+                            CreatedDate = new DateOnly(2025, 5, 7),
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
-                            QuestionCreateDue = new DateTime(2025, 6, 4, 22, 27, 15, 754, DateTimeKind.Local).AddTicks(4042),
-                            QuestionReviewDue = new DateTime(2025, 7, 4, 22, 27, 15, 754, DateTimeKind.Local).AddTicks(4047),
                             Status = (byte)0
                         });
                 });
@@ -465,11 +493,6 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("a0e4f1d5-3c8b-4f2a-8e6c-7d9b5e0a2f1d"),
                             Name = "thí sinh"
-                        },
-                        new
-                        {
-                            Id = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
-                            Name = "người dùng"
                         });
                 });
 
@@ -501,13 +524,19 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreateDue")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsConfirm")
+                    b.Property<bool>("IsCreateConfirm")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsProcess")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReviewConfirm")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -516,6 +545,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid>("QuestionBankId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ReviewDue")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("ReviewedUserId")
                         .HasColumnType("uniqueidentifier");
@@ -534,11 +566,14 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            CreateDue = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
-                            IsConfirm = false,
+                            IsCreateConfirm = false,
                             IsProcess = false,
+                            IsReviewConfirm = false,
                             Name = "Đọc",
                             QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
+                            ReviewDue = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewedUserId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
                         });
                 });
@@ -622,7 +657,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("92edbc74-66b0-471c-a042-31c79d4739a3"),
+                            Id = new Guid("4da9c7cf-c58f-4520-83db-11e6cb156ea7"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -697,6 +732,10 @@ namespace Infrastructure.Migrations
                         .WithOne("AudioContentBlock")
                         .HasForeignKey("Domain.Entities.ContentBlock", "AudioFileId");
 
+                    b.HasOne("Domain.Entities.ExamQuestion", "ExamQuestion")
+                        .WithMany()
+                        .HasForeignKey("ExamQuestionId");
+
                     b.HasOne("Domain.Entities.ExamFile", "ImageFile")
                         .WithOne("ImageContentBlock")
                         .HasForeignKey("Domain.Entities.ContentBlock", "ImageFileId");
@@ -708,6 +747,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("AudioFile");
+
+                    b.Navigation("ExamQuestion");
 
                     b.Navigation("ImageFile");
 
@@ -752,12 +793,6 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ExamStruct", "ExamStruct")
-                        .WithOne("Exam")
-                        .HasForeignKey("Domain.Entities.Exam", "ExamStructId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.User", "Manager")
                         .WithMany("ManagedExam")
                         .HasForeignKey("ManagerId")
@@ -766,16 +801,14 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("CreatedQuestionUser");
 
-                    b.Navigation("ExamStruct");
-
                     b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamQuestion", b =>
                 {
-                    b.HasOne("Domain.Entities.ContentBlock", "ContentBlock")
+                    b.HasOne("Domain.Entities.ExamFile", "AudioFile")
                         .WithOne("ExamQuestion")
-                        .HasForeignKey("Domain.Entities.ExamQuestion", "ContentBlockId")
+                        .HasForeignKey("Domain.Entities.ExamQuestion", "AudioFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -785,20 +818,51 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ContentBlock");
+                    b.HasOne("Domain.Entities.ExamStruct", "ExamStruct")
+                        .WithMany("ExamQuestions")
+                        .HasForeignKey("ExamStructId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AudioFile");
 
                     b.Navigation("Exam");
+
+                    b.Navigation("ExamStruct");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamStruct", b =>
                 {
-                    b.HasOne("Domain.Entities.QuestionType", "QuestionLevel")
+                    b.HasOne("Domain.Entities.QuestionBank", "QuestionBank")
                         .WithMany("ExamStructs")
-                        .HasForeignKey("QuestionLevelId")
+                        .HasForeignKey("QuestionBankId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.QuestionType", null)
+                        .WithMany("ExamStructs")
+                        .HasForeignKey("QuestionTypeId");
+
+                    b.Navigation("QuestionBank");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ExamStructDetail", b =>
+                {
+                    b.HasOne("Domain.Entities.ExamStruct", "ExamStruct")
+                        .WithMany("ExamStructDetails")
+                        .HasForeignKey("ExamStructId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("QuestionLevel");
+                    b.HasOne("Domain.Entities.QuestionType", "QuestionType")
+                        .WithMany("ExamStructDetails")
+                        .HasForeignKey("QuestionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExamStruct");
+
+                    b.Navigation("QuestionType");
                 });
 
             modelBuilder.Entity("Domain.Entities.Examinee", b =>
@@ -835,7 +899,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
                 {
                     b.HasOne("Domain.Entities.Skill", "Skill")
-                        .WithMany("QuestionLevels")
+                        .WithMany("QuestionTypes")
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -945,8 +1009,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.ContentBlock", b =>
                 {
-                    b.Navigation("ExamQuestion");
-
                     b.Navigation("Questions");
 
                     b.Navigation("SimilarQuestions1");
@@ -971,6 +1033,9 @@ namespace Infrastructure.Migrations
                 {
                     b.Navigation("AudioContentBlock");
 
+                    b.Navigation("ExamQuestion")
+                        .IsRequired();
+
                     b.Navigation("ImageContentBlock");
 
                     b.Navigation("ImageFace")
@@ -985,8 +1050,9 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.ExamStruct", b =>
                 {
-                    b.Navigation("Exam")
-                        .IsRequired();
+                    b.Navigation("ExamQuestions");
+
+                    b.Navigation("ExamStructDetails");
                 });
 
             modelBuilder.Entity("Domain.Entities.Examinee", b =>
@@ -1006,12 +1072,16 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.QuestionBank", b =>
                 {
+                    b.Navigation("ExamStructs");
+
                     b.Navigation("Skills");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
                 {
                     b.Navigation("ContentBlocks");
+
+                    b.Navigation("ExamStructDetails");
 
                     b.Navigation("ExamStructs");
                 });
@@ -1023,7 +1093,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Skill", b =>
                 {
-                    b.Navigation("QuestionLevels");
+                    b.Navigation("QuestionTypes");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

@@ -289,7 +289,6 @@ C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.AssemblyInfoInputs.cache
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.AssemblyInfo.cs
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.csproj.CoreCompileInputs.cache
-C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.sourcelink.json
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\scopedcss\bundle\WebAPI.styles.css
@@ -310,3 +309,4 @@ C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Code\GitHubDoAnTotNghiep\NguyenXuanPhu_DoAnTotNghiep\NguyenXuanPhu_2021602332\LanguageExam\WebAPI\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs

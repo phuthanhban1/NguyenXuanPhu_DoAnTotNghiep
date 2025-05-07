@@ -12,9 +12,9 @@ namespace Application.Services.Interfaces
     {
         IEnumerable<ContentBlock> GetAllAsync();
         Task<ContentBlock> GetByIdAsync(Guid id);
-        Task AddSingleText(ContentBlockSingleTextDto contentBlockSingleTextDto);
-        Task AddSingle(ContentBlockSingleFileDto contentBlockSingleFileDto);
-        //Task DeleteAsync(Guid id);
+        Task AddDouble(ContentBlockDoubleDto contentBlockDoubleDto);
+        Task AddSingle(List<ContentBlockSingleDto> list);
+        Task DeleteAsync(Guid id);
         //Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto);
     }
 }

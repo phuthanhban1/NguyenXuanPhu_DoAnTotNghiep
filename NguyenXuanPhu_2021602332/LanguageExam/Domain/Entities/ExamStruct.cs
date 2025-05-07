@@ -9,13 +9,14 @@ namespace Domain.Entities
     public class ExamStruct
     {
         public Guid Id { get; set; }
-        public string Skill { get; set; }
-        public int Order { get; set; }
+        public DateOnly CreatedDate { get; set; }
+        public DateOnly UpdatedDate { get; set; }
 
-        public Guid QuestionLevelId { get; set; }
-        public QuestionType QuestionLevel { get; set; }
+        public Guid QuestionBankId { get; set; }
+        public QuestionBank QuestionBank { get; set; }
 
-        public Exam Exam { get; set; }
+        public List<ExamStructDetail> ExamStructDetails { get; set; }
+        public List<ExamQuestion> ExamQuestions { get; set; }
 
     }
 }

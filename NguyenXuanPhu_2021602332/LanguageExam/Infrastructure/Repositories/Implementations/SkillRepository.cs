@@ -38,6 +38,20 @@ namespace Infrastructure.Repositories.Implementations
             return skill;
         }
 
-        
+        public async Task<Skill> GetSkillByCreate(Guid id)
+        {
+            var skill = _context.Set<Skill>()
+                .Include(x => x.QuestionBank)
+                .FirstOrDefault(x => x.CreatedUserId == id && x.IsProcess == true);
+            return skill;
+        }
+
+        public async Task<Skill> GetSkillByReview(Guid id)
+        {
+            Skill skill = _context.Set<Skill>()
+                .Include(x => x.QuestionBank)
+                .FirstOrDefault(x => x.ReviewedUserId == id && x.IsProcess == true);
+            return skill;
+        }
     }
 }

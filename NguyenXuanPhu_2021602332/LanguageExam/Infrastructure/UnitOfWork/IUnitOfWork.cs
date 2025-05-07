@@ -26,6 +26,7 @@ namespace Infrastructure.UnitOfWork
         IUserRepository Users { get; }
         IRoleRepository Roles { get; }
         IWardRepository Wards { get; }
+        
         Task<int> SaveChangeAsync();
         Task BeginTransactionAsync();
         Task CommitAsync();

@@ -20,7 +20,9 @@ namespace Domain.Entities
 
         public List<ContentBlock> ContentBlocks { get; set; }
         public List<ExamStruct> ExamStructs { get; set; }
+        public List<ExamStructDetail> ExamStructDetails { get; set; }
 
-       
+
+
     }
 }

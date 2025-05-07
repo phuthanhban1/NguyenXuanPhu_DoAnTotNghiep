@@ -30,15 +30,22 @@ namespace Application.Services.Implements
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public async Task ConfirmSkill(SkillConfirmDto skillConfirmDto)
+        public async Task ConfirmSkill(Guid skillId, string role)
         {
-            var skill = await _unitOfWork.Skills.GetByIdAsync(skillConfirmDto.Id);
+            var skill = await _unitOfWork.Skills.GetByIdAsync(skillId);
             if (skill == null)
             {
-                throw new NotFoundException($"Không tìm thấy kỹ năng có id {skillConfirmDto.Id}");
+                throw new NotFoundException($"Không tìm thấy kỹ năng có id {skill.Id}");
             }
-            skill.IsConfirm = skillConfirmDto.IsConfirm;
-            await _unitOfWork.Skills.ConfirmSkill(skill);
+            
+            if(role == "người tạo câu hỏi")
+            {
+                skill.IsCreateConfirm = true;
+            } else
+            {
+                skill.IsReviewConfirm = true;
+            }
+                await _unitOfWork.Skills.ConfirmSkill(skill);
             await _unitOfWork.SaveChangeAsync();
         }
 
@@ -92,6 +99,46 @@ namespace Application.Services.Implements
             }
             var skillDto = _mapper.Map<SkillDetailDto>(skill);
             return skillDto;
+        }
+
+        public async Task<SkillOverViewDto> GetCreateSkill(Guid CreatedUserId)
+        {
+            var skill = await _unitOfWork.Skills.GetSkillByCreate(CreatedUserId);
+            if (skill == null)
+            {
+                throw new NotFoundException($"Không tìm thấy kỹ năng nào cho người tạo câu hỏi có id {CreatedUserId}");
+            }
+            var skillOverViewDto = new SkillOverViewDto
+            {
+                Id = skill.Id,
+                Name = skill.Name,
+                IsConfirm = skill.IsCreateConfirm,
+                QuestionBankName = skill.QuestionBank.Name,
+                Language = skill.QuestionBank.Language,
+                DueDate = skill.CreateDue,
+                Task = "Tạo câu hỏi"
+            };
+            return skillOverViewDto;
+        }
+
+        public async Task<SkillOverViewDto> GetReviewSkill(Guid ReviewUserId)
+        {
+            var skill = await _unitOfWork.Skills.GetSkillByReview(ReviewUserId);
+            if (skill == null)
+            {
+                throw new NotFoundException($"Không tìm thấy kỹ năng nào cho người tạo câu hỏi có id {ReviewUserId}");
+            }
+            var skillOverViewDto = new SkillOverViewDto
+            {
+                Id = skill.Id,
+                Name = skill.Name,
+                IsConfirm = skill.IsReviewConfirm,
+                QuestionBankName = skill.QuestionBank.Name,
+                Language = skill.QuestionBank.Language,
+                DueDate = skill.ReviewDue,
+                Task = "Duyệt câu hỏi"
+            };
+            return skillOverViewDto;
         }
 
         public async Task UpdateAsync(SkillUpdateDto skillDto)

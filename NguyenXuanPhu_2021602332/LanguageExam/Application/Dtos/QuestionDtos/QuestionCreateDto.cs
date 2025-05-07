@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dtos.AnswerDtos;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,6 @@ namespace Application.Dtos.QuestionDtos
     {
         public string? Content { get; set; }
         public byte Score { get; set; }
-        public List<Answer> Answers { get; set; }
-
-        //foreign key content block
-        public Guid ContentBlockId { get; set; }
-        public ContentBlock ContentBlock { get; set; }
+        public List<AnswerCreateDto> Answers { get; set; }
     }
 }

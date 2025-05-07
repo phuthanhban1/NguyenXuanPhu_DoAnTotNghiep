@@ -14,10 +14,12 @@ namespace Infrastructure.Configurations
             builder.HasOne(eq => eq.Exam)
                 .WithOne(e => e.ExamQuestion)
                 .HasForeignKey<ExamQuestion>(eq => eq.ExamId);
-
-            builder.HasOne(eq => eq.ContentBlock)
-                .WithOne(cb => cb.ExamQuestion)
-                .HasForeignKey<ExamQuestion>(eq => eq.ContentBlockId);
+            builder.HasOne(eq => eq.AudioFile)
+                .WithOne(e => e.ExamQuestion)
+                .HasForeignKey<ExamQuestion>(eq => eq.AudioFileId);
+            builder.HasOne(eq => eq.ExamStruct)
+                .WithMany(es => es.ExamQuestions)
+                .HasForeignKey(eq => eq.ExamStructId);
         }
     }
 }

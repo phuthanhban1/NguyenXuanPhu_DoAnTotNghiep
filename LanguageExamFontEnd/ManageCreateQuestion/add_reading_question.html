@@ -143,7 +143,6 @@
                                     <!-- Question List -->
                                     <div id="questionList" class="mb-4">
                                     </div>
-
                                 </form>
                             </div>
 
@@ -200,25 +199,25 @@
                                 <div class="answer-option">
                                     <div class="d-flex align-items-center mb-2">
                                         <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" checked>
-                                        <input type="text" class="form-control" placeholder="Đáp án A">
+                                        <input type="text" class="form-control" placeholder="Đáp án A" required>
                                     </div>
                                 </div>
                                 <div class="answer-option">
                                     <div class="d-flex align-items-center mb-2">
                                         <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
-                                        <input type="text" class="form-control" placeholder="Đáp án B">
+                                        <input type="text" class="form-control" placeholder="Đáp án B" required>
                                     </div>
                                 </div>
                                 <div class="answer-option">
                                     <div class="d-flex align-items-center mb-2">
                                         <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
-                                        <input type="text" class="form-control" placeholder="Đáp án C">
+                                        <input type="text" class="form-control" placeholder="Đáp án C" required>
                                     </div>
                                 </div>
                                 <div class="answer-option">
                                     <div class="d-flex align-items-center mb-2">
                                         <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}">
-                                        <input type="text" class="form-control" placeholder="Đáp án D">
+                                        <input type="text" class="form-control" placeholder="Đáp án D" required>
                                     </div>
                                 </div>
                             </div>
@@ -412,7 +411,7 @@
                 }
 
                 const questionsData = getAllQuestionsData();
-                console.log('Questions Data:', JSON.stringify(questionsData, null, 2));
+                console.log('Questions Data: 414', JSON.stringify(questionsData, null, 2));
                 
                 // Kiểm tra dữ liệu trước khi gửi
                 if (questionsData.length === 0) {
@@ -420,72 +419,38 @@
                     return;
                 }
 
-                // Xử lý từng câu hỏi và gửi lên server
+                // Xử lý gửi danh sách câu hỏi
                 const processQuestions = async () => {
                     try {
-                        for (const question of questionsData) {
-                            const formData = new FormData();
-                            alert('124')
-                            // Thêm thông tin cơ bản của câu hỏi
-                            formData.append('QuestionTypeId', '14a8ec89-601b-4826-cd4b-08dd8be985dd');
-                            formData.append('Level', 1);
-                            formData.append('Score', 2);                            
-                            if (question.type === 'single') {
-                                // Xử lý câu hỏi đơn
-                                formData.append('TextContent', question.content);
-                                
-                                // Thêm hình ảnh nếu có
-                                if (question.hasImage && question.image) {
-                                    formData.append('ImageFile', question.image.file);
-                                }
-                                
-                                
-                                // Thêm đáp án
-                                question.answers.forEach((answer, index) => {
-                                    formData.append(`Answers[${index}][content]`, answer.text);
-                                    formData.append(`Answers[${index}][isCorrect]`, answer.isCorrect);
-                                });
-                                
-                                // Gửi câu hỏi đơn
-                                await $.ajax({
-                                    url: 'https://localhost:7001/api/contentblock/single',
-                                    method: 'POST',
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false
-                                });
-                                
-                            } else if (question.type === 'double') {
-                                // Xử lý câu hỏi kép
-                                formData.append('passage', question.passage);
-                                
-                                // Thêm hình ảnh nếu có
-                                if (question.hasImage && question.image) {
-                                    formData.append('image', question.image.file);
-                                }
-                                
-                                // Thêm câu hỏi nhỏ và đáp án
-                                question.subQuestions.forEach((subQuestion, subIndex) => {
-                                    formData.append(`subQuestions[${subIndex}][question]`, subQuestion.question);
-                                    
-                                    subQuestion.answers.forEach((answer, ansIndex) => {
-                                        formData.append(`subQuestions[${subIndex}][answers][${ansIndex}][text]`, answer.text);
-                                        formData.append(`subQuestions[${subIndex}][answers][${ansIndex}][isCorrect]`, answer.isCorrect);
-                                    });
-                                });
-                                
-                                // Gửi câu hỏi kép
-                                await $.ajax({
-                                    url: '/api/questions/double',
-                                    method: 'POST',
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false
-                                });
+                        // Tạo mảng chứa các câu hỏi
+                        const questions = questionsData.map(question => {
+                            const questionData = {
+                                QuestionTypeId: '14a8ec89-601b-4826-cd4b-08dd8be985dd',
+                                Level: 1,
+                                Score: 2,
+                                TextContent: question.content,
+                                Answers: question.answers.map(answer => ({
+                                    Content: answer.text,
+                                    IsCorrect: answer.isCorrect
+                                }))
+                            };
+
+                            // Thêm hình ảnh nếu có
+                            if (question.hasImage && question.image) {
+                                questionData.ImageFile = question.image.file;
                             }
-                        }
+
+                            return questionData;
+                        });
                         
-                        alert('Lưu câu hỏi thành công');
+                        // Gửi danh sách câu hỏi
+                        const response = await $.ajax({
+                            url: 'https://localhost:7001/api/contentblock/single',
+                            method: 'POST',
+                            data: JSON.stringify(questions),
+                            contentType: 'application/json'
+                        });
+                        
                         window.location.href = '/questions'; // Chuyển hướng sau khi lưu thành công
                         
                     } catch (error) {
@@ -598,7 +563,7 @@
             });
         }
 
-        // Hàm lấy dữ liệu từ câu hỏi đọc hiểu
+        // Hàm lấy dữ liệu từ câu hỏi đơn
         function getSingleQuestionData(questionElement) {
             const questionText = questionElement.find('.card-body textarea').first().val();
             const imageFile = questionElement.find('#singleQuestionImage input[type="file"]').prop('files')[0];
@@ -609,15 +574,6 @@
                     isCorrect: $(this).find('input[type="radio"]').is(':checked')
                 };
             }).get();
-
-            const formData = new FormData();
-            if (imageFile) {
-                formData.append('image', imageFile);
-            }
-            if (audioFile) {
-                formData.append('audio', audioFile);
-            }
-
             return {
                 type: 'single',
                 questionNumber: questionElement.find('.badge').text().trim(),
@@ -640,7 +596,7 @@
             };
         }
 
-        // Hàm lấy dữ liệu từ câu hỏi đọc chọn ý
+        // Hàm lấy dữ liệu từ câu hỏi kép
         function getDoubleQuestionData(questionElement) {
             const passage = questionElement.find('.card-body textarea').first().val();
             const imageFile = questionElement.find('#doubleQuestionImage input[type="file"]').prop('files')[0];
@@ -667,7 +623,7 @@
             }).get();
 
             return {
-                type: 'double',
+
                 questionNumber: questionElement.find('.badge').text().trim(),
                 passage: passage,
                 hasImage: imageFile !== undefined,

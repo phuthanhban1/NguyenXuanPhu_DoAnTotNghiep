@@ -6,37 +6,6 @@
     "version": "v1"
   },
   "paths": {
-    "/api/ContentBlock/single-text": {
-      "post": {
-        "tags": [
-          "ContentBlock"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContentBlockSingleTextDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContentBlockSingleTextDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContentBlockSingleTextDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/ContentBlock/single": {
       "post": {
         "tags": [
@@ -48,7 +17,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ContentBlockSingleFileDto"
+                  "$ref": "#/components/schemas/ContentBlockSingleDto"
                 }
               }
             },
@@ -56,7 +25,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ContentBlockSingleFileDto"
+                  "$ref": "#/components/schemas/ContentBlockSingleDto"
                 }
               }
             },
@@ -64,7 +33,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/ContentBlockSingleFileDto"
+                  "$ref": "#/components/schemas/ContentBlockSingleDto"
                 }
               }
             }
@@ -928,30 +897,34 @@
         }
       }
     },
-    "/api/Skill/confirm": {
+    "/api/Skill/confirm/{skillId}": {
       "post": {
         "tags": [
           "Skill"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SkillConfirmDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SkillConfirmDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SkillConfirmDto"
-              }
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
           }
-        },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Skill/skill": {
+      "get": {
+        "tags": [
+          "Skill"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1260,6 +1233,16 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1590,7 +1573,7 @@
         },
         "additionalProperties": false
       },
-      "ContentBlockSingleFileDto": {
+      "ContentBlockSingleDto": {
         "type": "object",
         "properties": {
           "textContent": {
@@ -1614,35 +1597,6 @@
             "type": "string",
             "format": "binary",
             "nullable": true
-          },
-          "questionTypeId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "answers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AnswerCreateDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ContentBlockSingleTextDto": {
-        "type": "object",
-        "properties": {
-          "textContent": {
-            "type": "string",
-            "nullable": true
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "score": {
-            "type": "integer",
-            "format": "int32"
           },
           "questionTypeId": {
             "type": "string",
@@ -1766,13 +1720,6 @@
           "createdQuestionUser": {
             "$ref": "#/components/schemas/User"
           },
-          "examStructId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "examStruct": {
-            "$ref": "#/components/schemas/ExamStruct"
-          },
           "examinees": {
             "type": "array",
             "items": {
@@ -1853,6 +1800,9 @@
           },
           "audioContentBlock": {
             "$ref": "#/components/schemas/ContentBlock"
+          },
+          "examQuestion": {
+            "$ref": "#/components/schemas/ExamQuestion"
           }
         },
         "additionalProperties": false
@@ -1879,17 +1829,63 @@
           "exam": {
             "$ref": "#/components/schemas/Exam"
           },
-          "contentBlockId": {
+          "examStructId": {
             "type": "string",
             "format": "uuid"
           },
-          "contentBlock": {
-            "$ref": "#/components/schemas/ContentBlock"
+          "examStruct": {
+            "$ref": "#/components/schemas/ExamStruct"
+          },
+          "audioFileId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "audioFile": {
+            "$ref": "#/components/schemas/ExamFile"
           }
         },
         "additionalProperties": false
       },
       "ExamStruct": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "updatedDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "questionBankId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "questionBank": {
+            "$ref": "#/components/schemas/QuestionBank"
+          },
+          "examStructDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamStructDetail"
+            },
+            "nullable": true
+          },
+          "examQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamQuestion"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamStructDetail": {
         "type": "object",
         "properties": {
           "id": {
@@ -1904,15 +1900,19 @@
             "type": "integer",
             "format": "int32"
           },
-          "questionLevelId": {
+          "questionTypeId": {
             "type": "string",
             "format": "uuid"
           },
-          "questionLevel": {
+          "questionType": {
             "$ref": "#/components/schemas/QuestionType"
           },
-          "exam": {
-            "$ref": "#/components/schemas/Exam"
+          "examStructId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "examStruct": {
+            "$ref": "#/components/schemas/ExamStruct"
           }
         },
         "additionalProperties": false
@@ -2104,14 +2104,6 @@
             "type": "string",
             "format": "date"
           },
-          "questionCreateDue": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "questionReviewDue": {
-            "type": "string",
-            "format": "date-time"
-          },
           "status": {
             "type": "integer",
             "format": "int32"
@@ -2127,6 +2119,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Skill"
+            },
+            "nullable": true
+          },
+          "examStructs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamStruct"
             },
             "nullable": true
           }
@@ -2258,6 +2257,13 @@
               "$ref": "#/components/schemas/ExamStruct"
             },
             "nullable": true
+          },
+          "examStructDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamStructDetail"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2373,7 +2379,10 @@
           "isProcess": {
             "type": "boolean"
           },
-          "isConfirm": {
+          "isCreateConfirm": {
+            "type": "boolean"
+          },
+          "isReviewConfirm": {
             "type": "boolean"
           },
           "createdUserId": {
@@ -2382,6 +2391,14 @@
           },
           "createdUser": {
             "$ref": "#/components/schemas/User"
+          },
+          "createDue": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewDue": {
+            "type": "string",
+            "format": "date-time"
           },
           "reviewedUserId": {
             "type": "string",
@@ -2397,25 +2414,12 @@
           "questionBank": {
             "$ref": "#/components/schemas/QuestionBank"
           },
-          "questionLevels": {
+          "questionTypes": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuestionType"
             },
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SkillConfirmDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "isConfirm": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -2434,6 +2438,14 @@
           "reviewedUserId": {
             "type": "string",
             "format": "uuid"
+          },
+          "createDue": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewDue": {
+            "type": "string",
+            "format": "date-time"
           },
           "questionBankId": {
             "type": "string",
