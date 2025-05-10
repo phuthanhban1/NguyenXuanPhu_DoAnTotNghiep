@@ -695,6 +695,16 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "QuestionType"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/QuestionType/{id}": {
@@ -719,7 +729,7 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "tags": [
           "QuestionType"
         ],
@@ -733,6 +743,18 @@
               "format": "uuid"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/QuestionType/update": {
+      "post": {
+        "tags": [
+          "QuestionType"
         ],
         "requestBody": {
           "content": {
@@ -753,27 +775,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "QuestionType"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -924,6 +925,29 @@
       "get": {
         "tags": [
           "Skill"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Skill/bankid/{id}": {
+      "get": {
+        "tags": [
+          "Skill"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -2142,14 +2166,6 @@
           "language": {
             "type": "string",
             "nullable": true
-          },
-          "questionCreateDue": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "questionReviewDue": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -2312,6 +2328,10 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          },
+          "skillId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -2387,22 +2407,26 @@
           },
           "createdUserId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "createdUser": {
             "$ref": "#/components/schemas/User"
           },
           "createDue": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "reviewDue": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "reviewedUserId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "reviewedUser": {
             "$ref": "#/components/schemas/User"
@@ -2430,22 +2454,6 @@
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "createdUserId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "reviewedUserId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createDue": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "reviewDue": {
-            "type": "string",
-            "format": "date-time"
           },
           "questionBankId": {
             "type": "string",

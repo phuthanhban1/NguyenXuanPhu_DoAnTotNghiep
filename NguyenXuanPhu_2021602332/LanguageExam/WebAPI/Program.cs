@@ -3,10 +3,13 @@ using Application.Services.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json;
+using WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -124,30 +127,44 @@ var app = builder.Build();
 //app.UseCors("AllowAll")
 app.UseCors("AllowFrontend");
 // DI Exception
-//app.UseMiddleware<ExceptionMiddleware>();
-//app.UseExceptionHandler(errorApp =>
-//{
-//    errorApp.Run(async context =>
-//    {
-//        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-//        var exception = exceptionHandlerPathFeature?.Error;
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+        var exception = exceptionHandlerPathFeature?.Error;
 
-//        // Ghi log chi ti?t:
-//        //logger.LogError();
+        // Ghi log chi ti?t:
+        //logger.LogError();
 
-//        var result = JsonSerializer.Serialize(new
-//        {
-//            StatusCode = 500,
-//            Message = exception?.Message,
-//            Detail = exception?.InnerException?.Message,
-//            Exception = exception?.StackTrace?.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
-//        });
+        var result = JsonSerializer.Serialize(new
+        {
+            StatusCode = 500,
+            Message = exception?.Message,
+            Detail = exception?.InnerException?.Message,
+            Exception = exception?.StackTrace?.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+        });
 
-//        context.Response.ContentType = "application/json";
-//        await context.Response.WriteAsync(result);
-//    });
-//});
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync(result);
+    });
+});
 // Configure the HTTP request pipeline.
+app.Use(async (context, next) =>
+{
+    if (context.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase)
+        && context.Request.Headers.TryGetValue("X-HTTP-Method-Override", out var overrideMethod))
+    {
+        var newMethod = overrideMethod.ToString().ToUpperInvariant();
+        if (newMethod == "PUT")
+        {
+            context.Request.Method = newMethod;
+        }
+    }
+
+    await next();
+});
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -14,5 +14,6 @@ namespace Infrastructure.Repositories.Interfaces
         Task ConfirmSkill(Skill skill);
         Task<Skill> GetSkillByCreate(Guid id);
         Task<Skill> GetSkillByReview(Guid id);
+        Task<List<Skill>> GetSkillsByBankId(Guid id);
     }
 }

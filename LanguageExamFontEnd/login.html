@@ -62,6 +62,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var roleExamManager = 'quản lý kỳ thi';
+            var roleCreateQuestion = 'người tạo câu hỏi';
+            var roleReviewQuestion = 'người đánh giá câu hỏi';
+            var roleBankManager = 'quản lý ngân hàng đề';
+            var roleAdmin = 'quản trị viên';
+            var roleExamCreate = 'người tạo đề';
+            var roleExaminee = 'thí sinh';
             $('#form-login').on('submit', function(e) {
                 e.preventDefault(); // Prevent form from submitting normally
                 
@@ -85,8 +92,14 @@
                             },
                             success: function(response) {
                                 console.log('Role:', response);
-                                if(response === 'người tạo câu hỏi') {
+                                if(response === roleCreateQuestion) {
                                     window.location.href = 'ManageCreateQuestion/question_create_overview.html';
+                                } else if(response === roleBankManager) {
+                                    window.location.href = 'QuestionBankManagement/question_bank.html';
+                                } else if(response === roleExamCreate) {
+                                    window.location.href = 'ExamCreate/exam_create_overview.html';
+                                } else if(response === roleExaminee) {
+                                    window.location.href = 'ExamCreate/exam_create_overview.html';
                                 } else {
                                     //window.location.href = 'main.html';
                                     console.log('Không có quyền');

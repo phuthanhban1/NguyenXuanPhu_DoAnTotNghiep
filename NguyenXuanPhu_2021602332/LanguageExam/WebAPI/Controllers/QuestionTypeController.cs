@@ -45,13 +45,10 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] QuestionTypeUpdateDto questionTypeUpdateDto)
+        [HttpPost("update")]
+        public async Task<IActionResult> Update(QuestionTypeUpdateDto questionTypeUpdateDto)
         {
-            if (id != questionTypeUpdateDto.Id)
-            {
-                return BadRequest();
-            }
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -72,6 +69,12 @@ namespace WebAPI.Controllers
         {
             var list = await _questionTypeService.GetsBySkillId(skillId);
             return Ok(list);
+        }
+        [HttpPut]
+        public async Task<IActionResult> GetsBySkillIde()
+        {
+            //var list = await _questionTypeService.GetsBySkillId(skillId);
+            return Ok();
         }
     }
 }

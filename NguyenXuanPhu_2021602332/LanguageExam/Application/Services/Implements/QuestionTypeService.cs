@@ -19,6 +19,11 @@ namespace Application.Services.Implements
         public async Task AddAsync(QuestionTypeCreateDto questionLevelCreateDto)
         {
             var questionLevel = _mapper.Map<QuestionType>(questionLevelCreateDto);
+            var check = await _unitOfWork.QuestionTypes.CheckNameBySkillId(questionLevelCreateDto.SkillId, questionLevelCreateDto.Name);
+            if (check)
+            {
+                throw new BadRequestException("Không thể thêm do loại câu hỏi đã tồn tại");
+            }
             await _unitOfWork.QuestionTypes.AddAsync(questionLevel);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -37,6 +42,7 @@ namespace Application.Services.Implements
         public async Task<List<QuestionType>> GetAllAsync()
         {
             var questionLevels = await _unitOfWork.QuestionTypes.GetAllAsync();
+           
             return questionLevels.ToList(); // Explicitly convert IEnumerable to List
         }
 
@@ -46,6 +52,11 @@ namespace Application.Services.Implements
             if (questionLevel == null)
             {
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
+            }
+            var listContent = await _unitOfWork.ContentBlocks.GetByQuestionTypeId(id);
+            if(listContent != null && listContent.Count > 0)
+            {
+                throw new BadRequestException("Không thể xóa do dạng câu hỏi này đã có câu hỏi");
             }
             var questionLevelDto = _mapper.Map<QuestionTypeUpdateDto>(questionLevel);
             return questionLevelDto;
@@ -60,11 +71,22 @@ namespace Application.Services.Implements
         public async Task UpdateAsync(QuestionTypeUpdateDto questionTypeUpdateDto)
         {
             var questionLevel = await _unitOfWork.QuestionTypes.GetByIdAsync(questionTypeUpdateDto.Id);
+            
             if (questionLevel == null)
             {
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
             }
-            questionLevel.Name = questionTypeUpdateDto.Name;
+            if(questionLevel.Name != questionTypeUpdateDto.Name)
+            {
+                var check = await _unitOfWork.QuestionTypes.CheckNameBySkillId(questionTypeUpdateDto.SkillId, questionTypeUpdateDto.Name);
+                if (check)
+                {
+                    throw new BadRequestException("Không thể sửa do loại câu hỏi đã tồn tại");
+                }
+            }
+            
+            _mapper.Map(questionTypeUpdateDto, questionLevel);
+
             await _unitOfWork.QuestionTypes.UpdateAsync(questionLevel);
             await _unitOfWork.SaveChangeAsync();
 

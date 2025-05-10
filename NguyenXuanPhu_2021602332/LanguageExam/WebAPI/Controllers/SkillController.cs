@@ -16,6 +16,7 @@ namespace WebAPI.Controllers
         {
             _skillService = skillService;
         }
+        
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SkillCreateDto skillCreateDto)
         {
@@ -34,11 +35,15 @@ namespace WebAPI.Controllers
             await _skillService.DeleteAsync(id);
             return Ok();
         }
-        [Authorize(Roles = "người tạo câu hỏi, người đánh giá câu hỏi")]
+        //[Authorize(Roles = "người tạo câu hỏi, người đánh giá câu hỏi")]
         [HttpGet]
         public async Task<IActionResult> GetSkill()
         {
             var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if(sid == null)
+            {
+                return Unauthorized();
+            }
             if (User.IsInRole("người tạo câu hỏi"))
             {
                 Console.WriteLine(ExtensionService.Sid);
@@ -73,6 +78,12 @@ namespace WebAPI.Controllers
                 skill = await _skillService.GetReviewSkill(Guid.Parse(sid));
             }
             return Ok(skill);
+        }
+        [HttpGet("bankid/{id}")]
+        public async Task<IActionResult> GetSkillByBankId(Guid id)
+        {
+            var list = await _skillService.GetSkillByBankId(id);
+            return Ok(list);
         }
     }
 }

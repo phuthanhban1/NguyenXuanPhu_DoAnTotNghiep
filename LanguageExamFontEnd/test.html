@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excel File Reader</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <!-- XLSX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         .container {
@@ -93,6 +99,62 @@
             
             document.getElementById('output').innerHTML = table;
         }
+        var formData = {}
+        function updateProduct(productId, updatedData) {
+            // fetch(`https://localhost:7001/api/questiontype`, {
+            //     method: 'PUT',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(updatedData)
+            // })
+            // .then(response => {
+            //     if (!response.ok) {
+            //         throw new Error(`HTTP error! Status: ${response.status}`);
+            //     }
+            //     return response.json();
+            // })
+            // .then(data => {
+            //     console.log('Update successful:', data);
+            // })
+            // .catch(error => {
+            //     console.error('Error updating product:', error);
+            // });
+            
+            $.ajax({
+                url: 'https://localhost:7001/api/questiontype',
+                type: 'PUT',
+                contentType: 'application/json',
+                
+                data: JSON.stringify(formData),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    hideModal();
+                    loadQuestionTypes(); // Tải lại danh sách
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: currentEditId ? 'Cập nhật thành công!' : 'Thêm mới thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    currentEditId = null; // Reset currentEditId sau khi lưu thành công
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: error.responseJSON ? error.responseJSON['Message'] : 'Có lỗi xảy ra. Vui lòng thử lại!'
+                    });
+                }
+            })
+        
+        }       
+updateProduct(1, 3);
+
     </script>
 </body>
 </html>

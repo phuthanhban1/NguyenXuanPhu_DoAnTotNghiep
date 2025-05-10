@@ -13,6 +13,7 @@ namespace Infrastructure.Configurations
             builder.HasOne(q => q.Manager)
                 .WithMany(u => u.QuestionBanks)
                 .HasForeignKey(q => q.ManagerId);
+            builder.HasIndex(q => q.Name).IsUnique();
  
         }
     }

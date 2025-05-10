@@ -10,5 +10,6 @@ namespace Infrastructure.Repositories.Interfaces
     public interface IQuestionTypeRepository : IGenericRepository<QuestionType>
     {
         Task<List<QuestionType>> GetsBySkillId(Guid skillId);
+        Task<bool> CheckNameBySkillId(Guid id, string name);
     }
 }

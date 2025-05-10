@@ -53,5 +53,14 @@ namespace Infrastructure.Repositories.Implementations
                 .FirstOrDefault(x => x.ReviewedUserId == id && x.IsProcess == true);
             return skill;
         }
+
+        public async Task<List<Skill>> GetSkillsByBankId(Guid id)
+        {
+            var list = _context.Set<Skill>()
+                .Include(s => s.QuestionBank)
+                .Where(s => s.QuestionBankId == id).ToList();
+            return list;
+        }
+
     }
 }

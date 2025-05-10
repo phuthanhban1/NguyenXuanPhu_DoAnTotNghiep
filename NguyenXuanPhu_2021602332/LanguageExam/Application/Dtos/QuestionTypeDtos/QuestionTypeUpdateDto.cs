@@ -11,6 +11,7 @@ namespace Application.Dtos.QuestionTypeDtos
     public class QuestionTypeUpdateDto : QuestionTypeBase
     {
         public Guid Id { get; set; }
+        public Guid SkillId { get; set; }
         
     }
 }

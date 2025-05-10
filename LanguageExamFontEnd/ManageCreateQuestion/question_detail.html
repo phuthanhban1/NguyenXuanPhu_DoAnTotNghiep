@@ -44,21 +44,21 @@
         <!-- Header with Breadcrumb -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <nav aria-label="breadcrumb">
+                <!-- <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">TOEIC 2024</a></li>
                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Listening</a></li>
                         <li class="breadcrumb-item active">Part 1: Photographs</li>
                     </ol>
-                </nav>
+                </nav> -->
                 <h2 class="mt-2">
                     <i class="fas fa-question-circle text-primary me-2"></i>
                     Danh sách câu hỏi
                 </h2>
             </div>
-            <button class="btn btn-primary" onclick="showAddQuestionForm()">
-                <i class="fas fa-plus me-2"></i>Thêm câu hỏi
+            <button class="btn btn-primary rounded-circle" onclick="showAddQuestionForm()" title="Thêm câu hỏi">
+                <i class="fas fa-plus"></i>
             </button>
         </div>
 
@@ -136,113 +136,25 @@
 
                         <!-- Additional Information -->
                         <div class="row g-3">
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="d-flex align-items-center text-muted">
                                     <i class="fas fa-clock me-2"></i>
                                     <span>Thời gian: 30 giây</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-4">
                                 <div class="d-flex align-items-center text-muted">
                                     <i class="fas fa-signal me-2"></i>
                                     <span>Độ khó: Trung bình</span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="d-flex align-items-center text-muted">
-                                    <i class="fas fa-calendar-alt me-2"></i>
-                                    <span>Ngày tạo: 15/03/2024</span>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Question 2 -->
-            <div class="col-12">
-                <div class="card question-card">
-                    <!-- Tương tự như Question 1 nhưng với nội dung khác -->
-                    <div class="card-header bg-white">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Câu hỏi 2</h5>
-                            <div>
-                                <button class="btn btn-sm btn-outline-primary me-2">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <!-- Question Content -->
-                        <div class="mb-4">
-                            <h6 class="fw-bold">Nội dung câu hỏi:</h6>
-                            <p>Listen to the question and choose the best response.</p>
-                        </div>
-
-                        <!-- Audio Only -->
-                        <div class="mb-4">
-                            <audio controls class="audio-preview">
-                                <source src="path_to_audio2.mp3" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-
-                        <!-- Answer Options -->
-                        <div class="mb-3">
-                            <h6 class="fw-bold mb-3">Các đáp án:</h6>
-                            <div class="list-group">
-                                <div class="list-group-item answer-option">
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-3">A.</div>
-                                        <div>Yes, I'll be there at 2 PM.</div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item answer-option correct-answer">
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-3">B.</div>
-                                        <div>No, the meeting was rescheduled.</div>
-                                        <div class="ms-auto">
-                                            <span class="badge bg-success">Đáp án đúng</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item answer-option">
-                                    <div class="d-flex align-items-center">
-                                        <div class="me-3">C.</div>
-                                        <div>I prefer coffee, thank you.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Additional Information -->
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <div class="d-flex align-items-center text-muted">
-                                    <i class="fas fa-clock me-2"></i>
-                                    <span>Thời gian: 20 giây</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="d-flex align-items-center text-muted">
-                                    <i class="fas fa-signal me-2"></i>
-                                    <span>Độ khó: Dễ</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="d-flex align-items-center text-muted">
-                                    <i class="fas fa-calendar-alt me-2"></i>
-                                    <span>Ngày tạo: 16/03/2024</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
         </div>
     </div>
 

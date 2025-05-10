@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,18 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
+        public async Task<bool> CheckNameBySkillId(Guid id, string name)
+        {
+             
+            var check = _context.QuestionType.FirstOrDefault(x => x.Name == name && x.SkillId == id);
+            return check != null;
+        }
+
         public async Task<List<QuestionType>> GetsBySkillId(Guid skillId)
         {
-            var list = _context.Set<QuestionType>().Where(x => x.SkillId == skillId).ToList();
+            var list = _context.Set<QuestionType>()
+                .Include(x => x.Skill)
+                .Where(x => x.SkillId == skillId).ToList();
             return list;
         }
     }

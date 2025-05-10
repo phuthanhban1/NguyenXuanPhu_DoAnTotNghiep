@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý kỳ thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-width: 250px;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .sidebar-menu li {
+            padding: 0;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .sidebar-menu a.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        
+        .exam-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        
+        .status-upcoming {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-ongoing {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-completed {
+            background-color: #f5f5f5;
+            color: #616161;
+        }
+        
+        .search-box {
+            padding-left: 35px;
+            border-radius: 20px;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .stats-card i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .stats-card h3 {
+            font-size: 1.8em;
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .stats-card p {
+            color: #7f8c8d;
+            margin: 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4 class="mb-0">Quản lý kỳ thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="active">
+                    <i class="fas fa-chart-line"></i>
+                    Tổng quan
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-users"></i>
+                    Danh sách thí sinh
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-file-alt"></i>
+                    Quản lý tạo đề
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-id-card"></i>
+                    Tạo số báo danh
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-door-open"></i>
+                    Phòng thi
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Tổng quan kỳ thi</h2>
+                <p class="text-muted mb-0">Thống kê và quản lý kỳ thi</p>
+            </div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExamModal">
+                <i class="fas fa-plus me-2"></i>Tạo kỳ thi mới
+            </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>12</h3>
+                    <p>Kỳ thi đang diễn ra</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-users"></i>
+                    <h3>150</h3>
+                    <p>Tổng số thí sinh</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-door-open"></i>
+                    <h3>8</h3>
+                    <p>Phòng thi</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>24</h3>
+                    <p>Đề thi đã tạo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="position-relative">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="form-control search-box" placeholder="Tìm kiếm kỳ thi...">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="statusFilter">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="upcoming">Sắp diễn ra</option>
+                    <option value="ongoing">Đang diễn ra</option>
+                    <option value="completed">Đã kết thúc</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="sortBy">
+                    <option value="">Sắp xếp theo</option>
+                    <option value="newest">Mới nhất</option>
+                    <option value="oldest">Cũ nhất</option>
+                    <option value="name">Tên A-Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Exam List -->
+        <div class="row g-4" id="examList">
+            <!-- Exam cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Add Exam Modal -->
+    <div class="modal fade" id="addExamModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tạo kỳ thi mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addExamForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tên kỳ thi</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày bắt đầu</label>
+                            <input type="datetime-local" class="form-control" name="startDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày kết thúc</label>
+                            <input type="datetime-local" class="form-control" name="endDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="createExam()">Tạo mới</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Format date to Vietnamese locale
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Get exam status based on dates
+        function getExamStatus(startDate, endDate) {
+            const now = new Date();
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+
+            if (now < start) return 'upcoming';
+            if (now > end) return 'completed';
+            return 'ongoing';
+        }
+
+        // Get status text and class
+        function getStatusInfo(status) {
+            switch(status) {
+                case 'upcoming':
+                    return {
+                        text: 'Sắp diễn ra',
+                        class: 'status-upcoming'
+                    };
+                case 'ongoing':
+                    return {
+                        text: 'Đang diễn ra',
+                        class: 'status-ongoing'
+                    };
+                case 'completed':
+                    return {
+                        text: 'Đã kết thúc',
+                        class: 'status-completed'
+                    };
+            }
+        }
+
+        // Render exam card
+        function renderExamCard(exam) {
+            const status = getExamStatus(exam.startDate, exam.endDate);
+            const statusInfo = getStatusInfo(status);
+            
+            return `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card exam-card" onclick="viewExamDetail('${exam.id}')">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h5 class="card-title mb-0">${exam.name}</h5>
+                                <span class="badge ${statusInfo.class}">${statusInfo.text}</span>
+                            </div>
+                            <p class="text-muted small mb-3">${exam.description || 'Không có mô tả'}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted d-block">Bắt đầu</small>
+                                    <div>${formatDate(exam.startDate)}</div>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Kết thúc</small>
+                                    <div>${formatDate(exam.endDate)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load exams
+        function loadExams() {
+            $.ajax({
+                url: 'https://localhost:7001/api/exams',
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    const examList = document.getElementById('examList');
+                    examList.innerHTML = response.map(exam => renderExamCard(exam)).join('');
+                },
+                error: function(error) {
+                    console.error('Error loading exams:', error);
+                }
+            });
+        }
+
+        // Create new exam
+        function createExam() {
+            const form = document.getElementById('addExamForm');
+            const formData = new FormData(form);
+            const examData = {
+                name: formData.get('name'),
+                startDate: formData.get('startDate'),
+                endDate: formData.get('endDate'),
+                description: formData.get('description')
+            };
+
+            $.ajax({
+                url: 'https://localhost:7001/api/exams',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(examData),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Close modal and reset form
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addExamModal'));
+                    modal.hide();
+                    form.reset();
+
+                    // Reload exams
+                    loadExams();
+
+                    // Show success message
+                    alert('Tạo kỳ thi thành công!');
+                },
+                error: function(error) {
+                    console.error('Error creating exam:', error);
+                    alert('Có lỗi xảy ra khi tạo kỳ thi. Vui lòng thử lại!');
+                }
+            });
+        }
+
+        // View exam detail
+        function viewExamDetail(examId) {
+            window.location.href = `exam_detail.html?id=${examId}`;
+        }
+
+        // Search and filter functionality
+        document.querySelector('.search-box').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const examCards = document.querySelectorAll('.exam-card');
+            
+            examCards.forEach(card => {
+                const examName = card.querySelector('.card-title').textContent.toLowerCase();
+                const examDesc = card.querySelector('.text-muted').textContent.toLowerCase();
+                
+                if (examName.includes(searchTerm) || examDesc.includes(searchTerm)) {
+                    card.closest('.col-md-6').style.display = '';
+                } else {
+                    card.closest('.col-md-6').style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('statusFilter').addEventListener('change', function(e) {
+            const status = e.target.value;
+            const examCards = document.querySelectorAll('.exam-card');
+            
+            examCards.forEach(card => {
+                const cardStatus = card.querySelector('.badge').textContent.toLowerCase();
+                if (!status || cardStatus.includes(status)) {
+                    card.closest('.col-md-6').style.display = '';
+                } else {
+                    card.closest('.col-md-6').style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('sortBy').addEventListener('change', function(e) {
+            const sortBy = e.target.value;
+            const examList = document.getElementById('examList');
+            const examCards = Array.from(examList.children);
+            
+            examCards.sort((a, b) => {
+                const cardA = a.querySelector('.exam-card');
+                const cardB = b.querySelector('.exam-card');
+                
+                switch(sortBy) {
+                    case 'newest':
+                        return new Date(cardB.querySelector('div:last-child div:first-child').textContent) - 
+                               new Date(cardA.querySelector('div:last-child div:first-child').textContent);
+                    case 'oldest':
+                        return new Date(cardA.querySelector('div:last-child div:first-child').textContent) - 
+                               new Date(cardB.querySelector('div:last-child div:first-child').textContent);
+                    case 'name':
+                        return cardA.querySelector('.card-title').textContent.localeCompare(
+                            cardB.querySelector('.card-title').textContent
+                        );
+                    default:
+                        return 0;
+                }
+            });
+            
+            examCards.forEach(card => examList.appendChild(card));
+        });
+
+        // Load exams when page loads
+        $(document).ready(function() {
+            loadExams();
+        });
+    </script>
+</body>
+</html>

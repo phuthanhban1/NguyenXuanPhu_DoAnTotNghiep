@@ -429,6 +429,16 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.QuestionTypeController",
+    "Method": "GetsBySkillIde",
+    "RelativePath": "api/QuestionType",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "GetById",
     "RelativePath": "api/QuestionType/{id}",
     "HttpMethod": "GET",
@@ -438,27 +448,6 @@
       {
         "Name": "id",
         "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
-    "Method": "Update",
-    "RelativePath": "api/QuestionType/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "questionTypeUpdateDto",
-        "Type": "Application.Dtos.QuestionTypeDtos.QuestionTypeUpdateDto",
         "IsRequired": true
       }
     ],
@@ -491,6 +480,22 @@
       {
         "Name": "skillId",
         "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
+    "Method": "Update",
+    "RelativePath": "api/QuestionType/update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "questionTypeUpdateDto",
+        "Type": "Application.Dtos.QuestionTypeDtos.QuestionTypeUpdateDto",
         "IsRequired": true
       }
     ],
@@ -543,6 +548,22 @@
     "Method": "Delete",
     "RelativePath": "api/Skill/{id}",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.SkillController",
+    "Method": "GetSkillByBankId",
+    "RelativePath": "api/Skill/bankid/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [

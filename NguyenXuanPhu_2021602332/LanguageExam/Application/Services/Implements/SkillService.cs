@@ -22,10 +22,29 @@ namespace Application.Services.Implements
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+        public async Task<List<string>> GetSkillNamesByBankId(Guid id)
+        {
+            var list = await _unitOfWork.Skills.GetSkillsByBankId(id);
+            return list.Select(s => s.Name).ToList();
+        }
+
+        //public Task<List<SkillDetailDto>> GetSkillsByBankId(Guid id)
+        //{
+        //    var list = _unitOfWork.Skills.GetSkillsByBankId(id);
+        //    return list
+        //}
         public async Task AddAsync(SkillCreateDto skillDto)
         {
+            var listSkill = await _unitOfWork.Skills.GetSkillsByBankId(skillDto.QuestionBankId);
+            if(listSkill.Any(x => x.Name == skillDto.Name))
+            {
+                throw new BadRequestException("Kĩ năng đã tồn tại");
+            }
             var skill = _mapper.Map<Skill>(skillDto);
             skill.Id = Guid.NewGuid();
+            skill.IsProcess = true;
+            skill.IsCreateConfirm = false;
+            skill.IsReviewConfirm = false;
             await _unitOfWork.Skills.AddAsync(skill);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -115,7 +134,7 @@ namespace Application.Services.Implements
                 IsConfirm = skill.IsCreateConfirm,
                 QuestionBankName = skill.QuestionBank.Name,
                 Language = skill.QuestionBank.Language,
-                DueDate = skill.CreateDue,
+                DueDate = (DateTime)skill.CreateDue,
                 Task = "Tạo câu hỏi"
             };
             return skillOverViewDto;
@@ -135,7 +154,7 @@ namespace Application.Services.Implements
                 IsConfirm = skill.IsReviewConfirm,
                 QuestionBankName = skill.QuestionBank.Name,
                 Language = skill.QuestionBank.Language,
-                DueDate = skill.ReviewDue,
+                DueDate = (DateTime)skill.ReviewDue,
                 Task = "Duyệt câu hỏi"
             };
             return skillOverViewDto;
@@ -154,6 +173,11 @@ namespace Application.Services.Implements
                 await _unitOfWork.Skills.UpdateAsync(skill);
                 await _unitOfWork.SaveChangeAsync();
             }
+        }
+
+        public Task<List<string>> GetSkillByBankId(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

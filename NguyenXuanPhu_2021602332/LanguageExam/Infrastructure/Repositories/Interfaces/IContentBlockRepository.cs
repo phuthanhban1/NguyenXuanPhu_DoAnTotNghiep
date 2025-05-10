@@ -9,5 +9,6 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IContentBlockRepository : IGenericRepository<ContentBlock>
     {
+        Task<List<ContentBlock>> GetByQuestionTypeId(Guid id);
     }
 }

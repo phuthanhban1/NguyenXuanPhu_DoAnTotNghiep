@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết kỳ thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-width: 250px;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .sidebar-menu li {
+            padding: 0;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .sidebar-menu a.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h5 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h5 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .status-upcoming {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-ongoing {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-completed {
+            background-color: #f5f5f5;
+            color: #616161;
+        }
+
+        .action-button {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-edit {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .student-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .student-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .student-item:hover {
+            background: #f8f9fa;
+        }
+
+        .room-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .room-card:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4 class="mb-0">Quản lý kỳ thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="index.html">
+                    <i class="fas fa-chart-line"></i>
+                    Tổng quan
+                </a>
+            </li>
+            <li>
+                <a href="#" class="active">
+                    <i class="fas fa-users"></i>
+                    Danh sách thí sinh
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-file-alt"></i>
+                    Quản lý tạo đề
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-id-card"></i>
+                    Tạo số báo danh
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-door-open"></i>
+                    Phòng thi
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Chi tiết kỳ thi</h2>
+                <p class="text-muted mb-0">Thông tin chi tiết và quản lý kỳ thi</p>
+            </div>
+            <div>
+                <button class="action-button btn-edit" onclick="editExam()">
+                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                </button>
+                <button class="action-button btn-delete" onclick="deleteExam()">
+                    <i class="fas fa-trash me-2"></i>Xóa
+                </button>
+            </div>
+        </div>
+
+        <!-- Exam Information -->
+        <div class="row">
+            <!-- Basic Info -->
+            <div class="col-md-8">
+                <div class="info-card">
+                    <h5><i class="fas fa-info-circle"></i>Thông tin cơ bản</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Tên kỳ thi</p>
+                            <h4 id="examName">Kỳ thi tiếng Anh B1</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Trạng thái</p>
+                            <span class="status-badge status-ongoing">Đang diễn ra</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Ngày bắt đầu</p>
+                            <p id="startDate">01/01/2024 08:00</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Ngày kết thúc</p>
+                            <p id="endDate">01/01/2024 11:00</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="mb-1 text-muted">Mô tả</p>
+                            <p id="description">Kỳ thi đánh giá năng lực tiếng Anh trình độ B1 theo khung tham chiếu châu Âu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students List -->
+                <div class="info-card">
+                    <h5><i class="fas fa-users"></i>Danh sách thí sinh</h5>
+                    <div class="student-list">
+                        <div class="student-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Nguyễn Văn A</h6>
+                                <small class="text-muted">SBD: 2024001</small>
+                            </div>
+                            <span class="badge bg-success">Đã đăng ký</span>
+                        </div>
+                        <div class="student-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Trần Thị B</h6>
+                                <small class="text-muted">SBD: 2024002</small>
+                            </div>
+                            <span class="badge bg-warning">Chờ xác nhận</span>
+                        </div>
+                        <!-- More students... -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Progress -->
+            <div class="col-md-4">
+                <div class="info-card">
+                    <h5><i class="fas fa-chart-pie"></i>Tiến độ</h5>
+                    <div class="mb-4">
+                        <p class="mb-2">Đăng ký thí sinh</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 75%"></div>
+                        </div>
+                        <small class="text-muted">75/100 thí sinh</small>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mb-2">Tạo đề thi</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" style="width: 100%"></div>
+                        </div>
+                        <small class="text-muted">Đã hoàn thành</small>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mb-2">Phân phòng thi</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        </div>
+                        <small class="text-muted">4/8 phòng</small>
+                    </div>
+                </div>
+
+                <!-- Exam Rooms -->
+                <div class="info-card">
+                    <h5><i class="fas fa-door-open"></i>Phòng thi</h5>
+                    <div class="room-card">
+                        <h6>Phòng 101</h6>
+                        <p class="mb-1">Sức chứa: 30 thí sinh</p>
+                        <p class="mb-0">Đã phân: 25 thí sinh</p>
+                    </div>
+                    <div class="room-card">
+                        <h6>Phòng 102</h6>
+                        <p class="mb-1">Sức chứa: 30 thí sinh</p>
+                        <p class="mb-0">Đã phân: 20 thí sinh</p>
+                    </div>
+                    <!-- More rooms... -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Exam Modal -->
+    <div class="modal fade" id="editExamModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa thông tin kỳ thi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editExamForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tên kỳ thi</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày bắt đầu</label>
+                            <input type="datetime-local" class="form-control" name="startDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày kết thúc</label>
+                            <input type="datetime-local" class="form-control" name="endDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="saveExamChanges()">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Get exam ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const examId = urlParams.get('id');
+
+        // Load exam details
+        function loadExamDetails() {
+            $.ajax({
+                url: `https://localhost:7001/api/exams/${examId}`,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Update exam information
+                    document.getElementById('examName').textContent = response.name;
+                    document.getElementById('startDate').textContent = formatDate(response.startDate);
+                    document.getElementById('endDate').textContent = formatDate(response.endDate);
+                    document.getElementById('description').textContent = response.description;
+
+                    // Update status badge
+                    const status = getExamStatus(response.startDate, response.endDate);
+                    const statusInfo = getStatusInfo(status);
+                    const statusBadge = document.querySelector('.status-badge');
+                    statusBadge.className = `status-badge ${statusInfo.class}`;
+                    statusBadge.textContent = statusInfo.text;
+                },
+                error: function(error) {
+                    console.error('Error loading exam details:', error);
+                }
+            });
+        }
+
+        // Format date to Vietnamese locale
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Get exam status based on dates
+        function getExamStatus(startDate, endDate) {
+            const now = new Date();
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+
+            if (now < start) return 'upcoming';
+            if (now > end) return 'completed';
+            return 'ongoing';
+        }
+
+        // Get status text and class
+        function getStatusInfo(status) {
+            switch(status) {
+                case 'upcoming':
+                    return {
+                        text: 'Sắp diễn ra',
+                        class: 'status-upcoming'
+                    };
+                case 'ongoing':
+                    return {
+                        text: 'Đang diễn ra',
+                        class: 'status-ongoing'
+                    };
+                case 'completed':
+                    return {
+                        text: 'Đã kết thúc',
+                        class: 'status-completed'
+                    };
+            }
+        }
+
+        // Edit exam
+        function editExam() {
+            const modal = new bootstrap.Modal(document.getElementById('editExamModal'));
+            modal.show();
+        }
+
+        // Save exam changes
+        function saveExamChanges() {
+            const form = document.getElementById('editExamForm');
+            const formData = new FormData(form);
+            const examData = {
+                name: formData.get('name'),
+                startDate: formData.get('startDate'),
+                endDate: formData.get('endDate'),
+                description: formData.get('description')
+            };
+
+            $.ajax({
+                url: `https://localhost:7001/api/exams/${examId}`,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(examData),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editExamModal'));
+                    modal.hide();
+
+                    // Reload exam details
+                    loadExamDetails();
+
+                    // Show success message
+                    alert('Cập nhật thông tin kỳ thi thành công!');
+                },
+                error: function(error) {
+                    console.error('Error updating exam:', error);
+                    alert('Có lỗi xảy ra khi cập nhật thông tin kỳ thi. Vui lòng thử lại!');
+                }
+            });
+        }
+
+        // Delete exam
+        function deleteExam() {
+            if (confirm('Bạn có chắc chắn muốn xóa kỳ thi này?')) {
+                $.ajax({
+                    url: `https://localhost:7001/api/exams/${examId}`,
+                    type: 'DELETE',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        // Redirect to exam list
+                        window.location.href = 'index.html';
+                    },
+                    error: function(error) {
+                        console.error('Error deleting exam:', error);
+                        alert('Có lỗi xảy ra khi xóa kỳ thi. Vui lòng thử lại!');
+                    }
+                });
+            }
+        }
+
+        // Load exam details when page loads
+        $(document).ready(function() {
+            loadExamDetails();
+        });
+    </script>
+</body>
+</html>

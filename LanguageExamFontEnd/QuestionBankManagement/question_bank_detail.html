@@ -60,32 +60,6 @@
             </button>
         </div>
 
-        <!-- Date Range Card -->
-        <div class="card date-range-card mb-4">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3 mb-md-0">
-                            <h6 class="text-white-50">Ngày bắt đầu</h6>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-calendar-alt me-2"></i>
-                                <h4 class="mb-0">01/03/2024</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div>
-                            <h6 class="text-white-50">Ngày kết thúc</h6>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-calendar-check me-2"></i>
-                                <h4 class="mb-0">31/12/2024</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Skills Section -->
         <div class="card">
             <div class="card-body">
@@ -99,96 +73,86 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="mb-0"><i class="fas fa-headphones text-primary me-2"></i>Listening</h5>
-                                    <span class="badge bg-primary">125 câu hỏi</span>
+                                    
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A" class="rounded-circle me-2" width="24" height="24">
-                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user1">
-                                            Nguyễn Văn A
-                                        </a>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="listening">
-                                        <i class="fas fa-exchange-alt"></i>
-                                    </button>
-                                </div>
+                                
+                                <!-- Thông tin người tạo và reviewer -->
                                 <div class="mb-3">
-                                    <span class="skill-badge bg-light text-dark">Part 1 <span class="badge bg-secondary ms-1">30</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 2 <span class="badge bg-secondary ms-1">25</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 3 <span class="badge bg-secondary ms-1">35</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 4 <span class="badge bg-secondary ms-1">35</span></span>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-user-edit text-primary me-2"></i>
+                                        <div class="flex-grow-1">
+                                            <small class="text-muted d-block">Người tạo câu hỏi</small>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A" class="rounded-circle me-2" width="24" height="24">
+                                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user1">
+                                                        Nguyễn Văn A
+                                                    </a>
+                                                </div>
+                                                <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('creator', 'listening')">
+                                                    <i class="fas fa-exchange-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-clock text-warning me-2"></i>
+                                            <div class="flex-grow-1">
+                                                <small class="text-muted d-block">Hạn tạo đề</small>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="text-danger" id="createDueDate">31/12/2024</div>
+                                                    <button class="btn btn-sm btn-outline-primary" onclick="showEditDeadlineModal('create')">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-user-check text-success me-2"></i>
+                                        <div class="flex-grow-1">
+                                            <small class="text-muted d-block">Người review</small>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://ui-avatars.com/api/?name=Tran+Thi+B" class="rounded-circle me-2" width="24" height="24">
+                                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user2">
+                                                        Trần Thị B
+                                                    </a>
+                                                </div>
+                                                <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('reviewer', 'listening')">
+                                                    <i class="fas fa-exchange-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="progress mb-3" style="height: 8px;">
-                                    <div class="progress-bar bg-success" style="width: 75%"></div>
+
+                                <!-- Hạn chót -->
+                                <div class="mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-clock text-warning me-2"></i>
+                                        <div class="flex-grow-1">
+                                            <small class="text-muted d-block">Hạn duyệt đề</small>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="text-danger" id="reviewDueDate">31/12/2024</div>
+                                                <button class="btn btn-sm btn-outline-primary" onclick="showEditDeadlineModal('review')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="text-muted">Hoàn thành: 75%</div>
+
+                                
                             </div>
                         </div>
                     </div>
 
-                    <!-- Reading Skill -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card skill-card" data-skill="reading">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0"><i class="fas fa-book-reader text-success me-2"></i>Reading</h5>
-                                    <span class="badge bg-success">125 câu hỏi</span>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://ui-avatars.com/api/?name=Tran+Thi+B" class="rounded-circle me-2" width="24" height="24">
-                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user2">
-                                            Trần Thị B
-                                        </a>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="reading">
-                                        <i class="fas fa-exchange-alt"></i>
-                                    </button>
-                                </div>
-                                <div class="mb-3">
-                                    <span class="skill-badge bg-light text-dark">Part 5 <span class="badge bg-secondary ms-1">40</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 6 <span class="badge bg-secondary ms-1">35</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 7 <span class="badge bg-secondary ms-1">50</span></span>
-                                </div>
-                                <div class="progress mb-3" style="height: 8px;">
-                                    <div class="progress-bar bg-success" style="width: 60%"></div>
-                                </div>
-                                <div class="text-muted">Hoàn thành: 60%</div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
-                    <!-- Speaking Skill -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card skill-card" data-skill="speaking">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0"><i class="fas fa-microphone text-warning me-2"></i>Speaking</h5>
-                                    <span class="badge bg-warning text-dark">50 câu hỏi</span>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://ui-avatars.com/api/?name=Le+Van+C" class="rounded-circle me-2" width="24" height="24">
-                                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user3">
-                                            Lê Văn C
-                                        </a>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="speaking">
-                                        <i class="fas fa-exchange-alt"></i>
-                                    </button>
-                                </div>
-                                <div class="mb-3">
-                                    <span class="skill-badge bg-light text-dark">Part 1 <span class="badge bg-secondary ms-1">15</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 2 <span class="badge bg-secondary ms-1">20</span></span>
-                                    <span class="skill-badge bg-light text-dark">Part 3 <span class="badge bg-secondary ms-1">15</span></span>
-                                </div>
-                                <div class="progress mb-3" style="height: 8px;">
-                                    <div class="progress-bar bg-success" style="width: 40%"></div>
-                                </div>
-                                <div class="text-muted">Hoàn thành: 40%</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -203,33 +167,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="addSkillForm">
                         <div class="mb-3">
-                            <label class="form-label">Tên kỹ năng</label>
-                            <input type="text" class="form-control" placeholder="Nhập tên kỹ năng">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Icon</label>
-                            <select class="form-select">
-                                <option value="headphones">Listening</option>
-                                <option value="book-reader">Reading</option>
-                                <option value="microphone">Speaking</option>
-                                <option value="pen">Writing</option>
+                            <label class="form-label">Kỹ năng</label>
+                            <select class="form-select" id="skillSelect" required>
+                                <option value="">Chọn kỹ năng</option>
+                                <option value="listening" data-icon="fa-headphones">Nghe</option>
+                                <option value="speaking" data-icon="fa-microphone">Nói</option>
+                                <option value="reading" data-icon="fa-book">Đọc</option>
+                                <option value="writing" data-icon="fa-pen">Viết</option>
                             </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Số phần (Parts)</label>
-                            <input type="number" class="form-control" min="1" value="1">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Màu sắc</label>
-                            <input type="color" class="form-control form-control-color w-100" value="#0d6efd">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Thêm mới</button>
+                    <button type="button" class="btn btn-primary" onclick="addNewSkill()">Thêm mới</button>
                 </div>
             </div>
         </div>
@@ -272,7 +225,7 @@
         </div>
     </div>
 
-    <!-- Change User Modal -->
+    <!-- Update Change User Modal -->
     <div class="modal fade" id="changeUserModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -284,6 +237,10 @@
                     <div class="mb-3">
                         <label class="form-label">Kỹ năng</label>
                         <input type="text" class="form-control" id="skillName" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Vai trò</label>
+                        <input type="text" class="form-control" id="userRole" readonly>
                     </div>
                     
                     <!-- Thêm thanh tìm kiếm email -->
@@ -340,9 +297,39 @@
         </div>
     </div>
 
+    <!-- Edit Deadline Modal -->
+    <div class="modal fade" id="editDeadlineModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa hạn chót</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editDeadlineForm">
+                        <input type="hidden" id="deadlineType">
+                        <div class="mb-3">
+                            <label class="form-label">Ngày hết hạn</label>
+                            <input type="date" class="form-control" id="deadlineDate" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="saveDeadline()">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Lấy ID từ URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const examId = urlParams.get('id');
+        console.log('Exam ID:', examId); // Để kiểm tra ID đã lấy được
+
         // Data mẫu cho người dùng
         const userData = {
             user1: {
@@ -405,43 +392,31 @@
         const newUserSelect = document.getElementById('newUserSelect');
         const newUserPreview = document.getElementById('newUserPreview');
         let currentSkill = '';
+        let currentRole = '';
+        let selectedUserId = null;
 
-        changeUserModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const skill = button.getAttribute('data-skill');
+        function showChangeUserModal(role, skill) {
             currentSkill = skill;
+            currentRole = role;
             
-            // Cập nhật tên kỹ năng trong modal
-            document.getElementById('skillName').value = skill.charAt(0).toUpperCase() + skill.slice(1);
+            // Cập nhật tiêu đề và thông tin trong modal
+            const modal = document.getElementById('changeUserModal');
+            modal.querySelector('#skillName').value = skill.charAt(0).toUpperCase() + skill.slice(1);
+            modal.querySelector('#userRole').value = role === 'creator' ? 'Người tạo câu hỏi' : 'Người review';
             
             // Reset form
-            newUserSelect.value = '';
-            newUserPreview.classList.add('d-none');
-        });
-
-        // Xử lý khi chọn người phụ trách mới
-        newUserSelect.addEventListener('change', function() {
-            const selectedUserId = this.value;
-            if (!selectedUserId) {
-                newUserPreview.classList.add('d-none');
-                return;
-            }
-
-            const user = userData[selectedUserId];
-            if (user) {
-                // Hiển thị preview
-                document.getElementById('previewAvatar').src = user.avatar;
-                document.getElementById('previewName').textContent = user.name;
-                document.getElementById('previewSpecialty').textContent = user.specialty;
-                document.getElementById('previewEmail').textContent = user.email;
-                document.getElementById('previewExperience').textContent = user.experience;
-                newUserPreview.classList.remove('d-none');
-            }
-        });
+            document.getElementById('searchEmail').value = '';
+            document.getElementById('searchResults').classList.add('d-none');
+            document.getElementById('newUserPreview').classList.add('d-none');
+            selectedUserId = null;
+            
+            // Hiển thị modal
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
 
         // Xử lý khi xác nhận thay đổi
         document.getElementById('confirmChangeUser').addEventListener('click', function() {
-            const selectedUserId = newUserSelect.value;
             if (!selectedUserId) {
                 alert('Vui lòng chọn người phụ trách mới');
                 return;
@@ -449,28 +424,49 @@
 
             const user = userData[selectedUserId];
             if (user) {
-                // Cập nhật UI
-                const skillCard = document.querySelector(`[data-skill="${currentSkill}"]`).closest('.skill-card');
-                const userSection = skillCard.querySelector('.d-flex.align-items-center.justify-content-between.mb-3');
-                
-                userSection.innerHTML = `
-                    <div class="d-flex align-items-center">
-                        <img src="${user.avatar}" class="rounded-circle me-2" width="24" height="24">
-                        <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${selectedUserId}">
-                            ${user.name}
-                        </a>
-                    </div>
-                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#changeUserModal" data-skill="${currentSkill}">
-                        <i class="fas fa-exchange-alt"></i>
-                    </button>
-                `;
+                // Gọi API để cập nhật người phụ trách
+                $.ajax({
+                    url: `https://localhost:7001/api/skill/${currentSkill}/change-user`,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        role: currentRole,
+                        userId: selectedUserId
+                    }),
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        // Cập nhật UI
+                        const skillCard = document.querySelector(`[data-skill="${currentSkill}"]`);
+                        const userSection = currentRole === 'creator' 
+                            ? skillCard.querySelector('.fa-user-edit').closest('.d-flex').querySelector('.d-flex.align-items-center')
+                            : skillCard.querySelector('.fa-user-check').closest('.d-flex').querySelector('.d-flex.align-items-center');
+                        
+                        userSection.innerHTML = `
+                            <div class="d-flex align-items-center">
+                                <img src="${user.avatar}" class="rounded-circle me-2" width="24" height="24">
+                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${selectedUserId}">
+                                    ${user.name}
+                                </a>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('${currentRole}', '${currentSkill}')">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        `;
 
-                // Đóng modal
-                const modal = bootstrap.Modal.getInstance(changeUserModal);
-                modal.hide();
+                        // Đóng modal
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('changeUserModal'));
+                        modal.hide();
 
-                // Hiển thị thông báo thành công
-                alert('Đã thay đổi người phụ trách thành công!');
+                        // Hiển thị thông báo thành công
+                        alert('Đã thay đổi người phụ trách thành công!');
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra khi thay đổi người phụ trách. Vui lòng thử lại!');
+                    }
+                });
             }
         });
 
@@ -478,7 +474,6 @@
         const searchEmail = document.getElementById('searchEmail');
         const searchResults = document.getElementById('searchResults');
         const userSearchList = document.getElementById('userSearchList');
-        let selectedUserId = null;
 
         // Thêm debounce function để tránh gọi quá nhiều lần khi người dùng đang nhập
         function debounce(func, wait) {
@@ -616,33 +611,213 @@
         const addSkillModal = document.getElementById('addSkillModal');
         addSkillModal.addEventListener('show.bs.modal', function() {
             const existingSkills = getExistingSkills();
-            const iconSelect = this.querySelector('select');
+            const skillSelect = document.getElementById('skillSelect');
             
             // Lưu lại tất cả options
-            const allOptions = Array.from(iconSelect.options);
+            const allOptions = Array.from(skillSelect.options);
             
             // Ẩn các options tương ứng với kỹ năng đã tồn tại
             allOptions.forEach(option => {
-                const iconClass = `fa-${option.value}`;
-                const isExisting = existingSkills.some(skill => 
-                    skill.icon.includes(iconClass)
-                );
-                option.disabled = isExisting;
-                if (isExisting) {
-                    option.textContent += ' (Đã tồn tại)';
+                if (option.value) { // Bỏ qua option mặc định "Chọn kỹ năng"
+                    const iconClass = `fa-${option.dataset.icon}`;
+                    const isExisting = existingSkills.some(skill => 
+                        skill.icon.includes(iconClass)
+                    );
+                    option.disabled = isExisting;
+                    if (isExisting) {
+                        option.textContent += ' (Đã tồn tại)';
+                    }
                 }
             });
         });
 
         // Reset modal khi đóng
         addSkillModal.addEventListener('hidden.bs.modal', function() {
-            const iconSelect = this.querySelector('select');
-            Array.from(iconSelect.options).forEach(option => {
+            const skillSelect = document.getElementById('skillSelect');
+            Array.from(skillSelect.options).forEach(option => {
                 option.disabled = false;
                 option.textContent = option.textContent.replace(' (Đã tồn tại)', '');
             });
-            this.querySelector('form').reset();
+            document.getElementById('addSkillForm').reset();
         });
+
+        // Hàm thêm kỹ năng mới
+        function addNewSkill() {
+            const skillSelect = document.getElementById('skillSelect');
+            const selectedOption = skillSelect.options[skillSelect.selectedIndex];
+            
+            if (!selectedOption.value) {
+                alert('Vui lòng chọn kỹ năng');
+                return;
+            }
+
+            const skillData = {
+                name: selectedOption.textContent.replace(' (Đã tồn tại)', ''),
+                icon: `fa-${selectedOption.dataset.icon}`,
+                type: selectedOption.value
+            };
+
+            // Gọi API để thêm kỹ năng mới
+            $.ajax({
+                url: `https://localhost:7001/api/skill`,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(skillData),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Thêm card kỹ năng mới vào UI
+                    const skillsGrid = document.querySelector('.row.g-4');
+                    const newSkillCard = createSkillCard(skillData);
+                    skillsGrid.appendChild(newSkillCard);
+
+                    // Đóng modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addSkillModal'));
+                    modal.hide();
+
+                    // Hiển thị thông báo thành công
+                    alert('Đã thêm kỹ năng mới thành công!');
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi thêm kỹ năng mới. Vui lòng thử lại!');
+                }
+            });
+        }
+
+        // Hàm tạo card kỹ năng mới
+        function createSkillCard(skillData) {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4';
+            col.innerHTML = `
+                <div class="card skill-card" data-skill="${skillData.type}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0"><i class="fas ${skillData.icon} text-primary me-2"></i>${skillData.name}</h5>
+                        </div>
+                        <!-- Thêm các phần khác của card tương tự như card mẫu -->
+                    </div>
+                </div>
+            `;
+            return col;
+        }
+
+        // Format date to dd/mm/yyyy
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN');
+        }
+
+        // Update deadline displays
+        function updateDeadlines(createDue, reviewDue) {
+            document.getElementById('createDueDate').textContent = formatDate(createDue);
+            document.getElementById('reviewDueDate').textContent = formatDate(reviewDue);
+        }
+
+        // Get exam details from API
+        function getExamDetails(examId) {
+            $.ajax({
+                url: `https://localhost:7001/api/questionbank/${examId}`,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Update deadlines
+                    if (response.questionCreateDue && response.questionReviewDue) {
+                        updateDeadlines(response.questionCreateDue, response.questionReviewDue);
+                    }
+                    // ... existing code for other exam details ...
+                },
+                error: function(error) {
+                    console.error('Error fetching exam details:', error);
+                }
+            });
+        }
+
+        // Call getExamDetails when page loads
+        $(document).ready(function() {
+            $.ajax({
+                url: `https://localhost:7001/api/skill/${getBankId()}`,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    getExamDetails(response.id);
+                },
+                error: function(error) {
+                    console.error('Error fetching exam details:', error);
+                }
+            });
+        });
+
+        // Hàm hiển thị modal chỉnh sửa hạn chót
+        function showEditDeadlineModal(type) {
+            const modal = document.getElementById('editDeadlineModal');
+            const deadlineType = document.getElementById('deadlineType');
+            const deadlineDate = document.getElementById('deadlineDate');
+            
+            // Lưu loại hạn chót đang chỉnh sửa
+            deadlineType.value = type;
+            
+            // Lấy ngày hiện tại từ UI
+            const currentDate = document.getElementById(type === 'create' ? 'createDueDate' : 'reviewDueDate').textContent;
+            const [day, month, year] = currentDate.split('/');
+            deadlineDate.value = `${year}-${month}-${day}`;
+            
+            // Hiển thị modal
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        // Hàm lưu thay đổi hạn chót
+        function saveDeadline() {
+            const deadlineType = document.getElementById('deadlineType').value;
+            const deadlineDate = document.getElementById('deadlineDate').value;
+            
+            if (!deadlineDate) {
+                alert('Vui lòng chọn ngày hết hạn');
+                return;
+            }
+
+            // Gọi API để cập nhật hạn chót
+            $.ajax({
+                url: `https://localhost:7001/api/questionbank/${getExamId()}/deadline`,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    type: deadlineType,
+                    date: deadlineDate
+                }),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Cập nhật UI
+                    const formattedDate = formatDate(deadlineDate);
+                    document.getElementById(deadlineType === 'create' ? 'createDueDate' : 'reviewDueDate').textContent = formattedDate;
+                    
+                    // Đóng modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editDeadlineModal'));
+                    modal.hide();
+                    
+                    // Hiển thị thông báo thành công
+                    alert('Đã cập nhật hạn chót thành công!');
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi cập nhật hạn chót. Vui lòng thử lại!');
+                }
+            });
+        }
+
+        // Hàm lấy ID của exam từ URL
+        function getBankId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
     </script>
 </body>
 </html>

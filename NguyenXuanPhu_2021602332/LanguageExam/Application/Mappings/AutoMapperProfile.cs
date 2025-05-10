@@ -59,12 +59,13 @@ namespace Application.Mappings
             CreateMap<QuestionTypeCreateDto, QuestionType>();
 
             CreateMap<Skill, SkillDetailDto>()
-                .ForMember(sd => sd.CreatedDate, s => s.MapFrom(s => s.QuestionBank.CreatedDate))
+                
                 .ForMember(sd => sd.Language, s => s.MapFrom(s => s.QuestionBank.Language))
                 .ForMember(sd => sd.BankName, s => s.MapFrom(s => s.QuestionBank.Name));
 
-            
-
+            CreateMap<QuestionType, QuestionTypeDto>()
+                .ForMember(qtd => qtd.SkillName, qt => qt.MapFrom(qt => qt.Skill.Name));
+            CreateMap<QuestionType, QuestionTypeUpdateDto>().ReverseMap();
         }
     }
 }

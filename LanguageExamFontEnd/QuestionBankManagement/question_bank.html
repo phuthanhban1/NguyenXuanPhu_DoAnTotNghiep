@@ -72,6 +72,9 @@
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Ngân hàng đề thi</h2>    
+            <button class="btn btn-primary rounded-circle" title="Thêm ngân hàng đề" onclick="showAddExamModal()">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
 
         <!-- Language Selection -->
@@ -95,7 +98,7 @@
                 </div>
             </div> -->
             <div class="col-md-3">
-                <div class="card language-card" data-lang="korean">
+                <div class="card language-card" data-lang="Tiếng Hàn">
                     <div class="card-body text-center">
                         <img src="https://flagcdn.com/w80/kr.png" alt="Korean" class="mb-3">
                         <h5>Tiếng Hàn</h5>
@@ -126,9 +129,9 @@
                 <div class="col-md-3">
                     <select class="form-select">
                         <option value="">Tất cả trạng thái</option>
-                        <option value="active">Đang hoạt động</option>
-                        <option value="draft">Đang tạo</option>
-                        <option value="draft">Đã khóa</option>
+                        <option value="hoạt động">Hoạt động</option>
+                        <option value="đang tạo">Đang tạo</option>
+                        <option value="đã khóa">Đã khóa</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -184,15 +187,9 @@
                   <label class="form-label">Trạng thái</label>
                   <select class="form-select" name="Status">
                     <option value="0">Đang tạo</option>
-                    <option value="1">Đang hoạt động</option>
+                    <option value="1">Hoạt động</option>
                     <option value="2">Đã khóa</option>
                   </select>
-                </div>
-                <div class="mb-3 d-none" id="date-fields">
-                  <label class="form-label">Hạn tạo đề</label>
-                  <input type="text" class="form-control mb-2 type-date" name="QuestionCreateDue">
-                  <label class="form-label">Hạn duyệt đề</label>
-                  <input type="text" class="form-control mb-2 type-date" name="QuestionReviewDue">
                 </div>
               </div>
               <div class="modal-footer">
@@ -203,9 +200,47 @@
           </form>
         </div>
       </div>
-    <script>
-        
 
+    <!-- Modal Thêm Ngân Hàng Đề -->
+    <div class="modal fade" id="addExamModal" tabindex="-1" aria-labelledby="addExamModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="addExamForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addExamModalLabel">Thêm ngân hàng đề mới</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Tên ngân hàng đề</label>
+                            <input type="text" class="form-control" name="Name" requiredc id="questionBankName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngôn ngữ</label>
+                            <select class="form-select" name="Language" required>
+                                <option value="">Chọn ngôn ngữ</option>
+                                <option value="Tiếng Hàn">Tiếng Hàn</option>
+                                <!-- <option value="english">Tiếng Anh</option>
+                                <option value="japanese">Tiếng Nhật</option>
+                                <option value="chinese">Tiếng Trung</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+// Hàm hiển thị modal thêm mới - đặt ở global scope
+function showAddExamModal() {
+    var modal = new bootstrap.Modal(document.getElementById('addExamModal'));
+    modal.show();
+}
 
 $(document).ready(function() {
 
@@ -287,7 +322,7 @@ $(document).ready(function() {
                 var statusText = '';
                 var statusClass = '';
                 if (exam.status == 1) {
-                    statusText = 'Đang hoạt động';
+                    statusText = 'Hoạt động';
                     statusClass = 'status-active';
                 } else if (exam.status == 0) {
                     statusText = 'Đang tạo';
@@ -402,10 +437,7 @@ $(document).ready(function() {
             Name: $('input[name="Name"]').val(),
             Status: parseInt($('select[name="Status"]').val())
         };
-        if(exam.Status == 0){
-            exam.QuestionCreateDue = new Date($('input[name="QuestionCreateDue"]').val());
-            exam.QuestionReviewDue = new Date($('input[name="QuestionReviewDue"]').val());
-        }
+        
         console.log(exam);
         $.ajax({
             url: 'https://localhost:7001/api/questionbank',
@@ -439,11 +471,47 @@ $(document).ready(function() {
         }
     });
 
+    // Xử lý submit form thêm question bank mới
+    $('#addExamForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        var examData = {
+            Name: $('#questionBankName').val(),
+            Language: $('select[name="Language"]').val()
+        };
+        console.log(examData);
+        $.ajax({
+            url: 'https://localhost:7001/api/questionbank',
+            type: 'POST',
+            data: JSON.stringify(examData),
+            contentType: 'application/json',
+            xhrFields: { withCredentials: true },
+            success: function(response) {
+                console.log('Thêm mới thành công:', response);
+                var modal = bootstrap.Modal.getInstance(document.getElementById('addExamModal'));
+                modal.hide();
+                // Reset form
+                $('#addExamForm')[0].reset();
+                // Refresh danh sách
+                selectLanguage($('.language-card').data('lang'));
+            },
+            error: function(error) {
+                console.error('Lỗi khi thêm mới:', error);
+                alert('Có lỗi xảy ra khi thêm mới ngân hàng đề. Vui lòng thử lại!');
+            }
+        });
+    });
+
+    // Reset form khi đóng modal
+    $('#addExamModal').on('hidden.bs.modal', function () {
+        $('#addExamForm')[0].reset();
+    });
+
 });
 
 
  
-    </script>
+</script>
     
     
 </body>

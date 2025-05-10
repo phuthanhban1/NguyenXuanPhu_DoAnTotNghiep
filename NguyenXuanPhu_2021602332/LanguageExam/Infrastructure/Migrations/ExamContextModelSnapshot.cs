@@ -392,7 +392,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
@@ -401,13 +401,16 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ManagerId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("QuestionBank", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreatedDate = new DateOnly(2025, 5, 7),
+                            CreatedDate = new DateOnly(2025, 5, 8),
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
@@ -657,7 +660,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4da9c7cf-c58f-4520-83db-11e6cb156ea7"),
+                            Id = new Guid("07e95d49-fd96-43cf-bd0f-97acb28edce6"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,

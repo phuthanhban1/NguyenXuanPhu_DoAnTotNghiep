@@ -20,5 +20,6 @@ namespace Application.Services.Interfaces
         Task ConfirmSkill(Guid skillId, string role);
         Task<SkillOverViewDto> GetCreateSkill(Guid skillId);
         Task<SkillOverViewDto> GetReviewSkill(Guid skillId);
+        Task<List<string>> GetSkillByBankId(Guid id);
     }
 }

@@ -9,5 +9,11 @@ namespace Infrastructure.Repositories.Implementations
         public ContentBlockRepository(ExamContext context) : base(context)
         {
         }
+
+        public async Task<List<ContentBlock>> GetByQuestionTypeId(Guid id)
+        {
+            var list = _context.Set<ContentBlock>().ToList();
+            return list;
+        }
     }
 }
