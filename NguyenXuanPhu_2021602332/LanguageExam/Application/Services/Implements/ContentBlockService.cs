@@ -1,6 +1,8 @@
 ﻿using Application.Dtos.ContentBlockDtos;
+using Application.Dtos.QuestionDtos;
 using Application.Exceptions;
 using Application.Services.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using Infrastructure.UnitOfWork;
 using System;
@@ -14,9 +16,11 @@ namespace Application.Services.Implements
     public class ContentBlockService : IContentBlockService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ContentBlockService(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public ContentBlockService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task AddDouble(List<ContentBlockDoubleDto> list)
         {
@@ -28,7 +32,7 @@ namespace Application.Services.Implements
                     Content = contentBlockDoubleDto.Content,
                     Level = contentBlockDoubleDto.Level,
                     QuestionTypeId = contentBlockDoubleDto.QuestionTypeId,
-                    IsConfirm = false,
+                    Status = 0,
                     IsUsed = false,
                     CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                     UpdatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
@@ -95,7 +99,7 @@ namespace Application.Services.Implements
                     Content = contentBlockSingleDto.TextContent,
                     Level = contentBlockSingleDto.Level,
                     QuestionTypeId = contentBlockSingleDto.QuestionTypeId,
-                    IsConfirm = false,
+                    Status = 0,
                     IsUsed = false,
                     CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                     UpdatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
@@ -144,23 +148,35 @@ namespace Application.Services.Implements
             await _unitOfWork.SaveChangeAsync();
         }
 
-        public Task DeleteAsync(Guid id)
+
+        public async Task<List<ContentBlockDto>> GetByStatus(Guid questionTypeId, byte status)
         {
-            var contentBlock = _unitOfWork.ContentBlocks.GetByIdAsync(id);
-            if(contentBlock == null)
-            {
-                throw new NotFoundException($"Không có khối câu hỏi id: có {id}");
-            }
-            throw new NotFoundException($"Không có khối câu hỏi id: có {id}");
+            var list = await _unitOfWork.ContentBlocks.GetByStatus(questionTypeId, status);
+            var contentBlockDtos = _mapper.Map<List<ContentBlockDto>>(list);
+            return contentBlockDtos;
         }
-        //public Task DeleteAsync(Guid id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var contentBlock = await _unitOfWork.ContentBlocks.GetByIdAsync(id);
+            if(contentBlock.ImageFileId != null)
+            {
+                var image = await _unitOfWork.ExamFiles.GetByIdAsync((Guid)contentBlock.ImageFileId);
+                _unitOfWork.ExamFiles.DeleteAsync(image);
+            }
+            if (contentBlock.AudioFileId != null)
+            {
+                var audio = await _unitOfWork.ExamFiles.GetByIdAsync((Guid)contentBlock.AudioFileId);
+                _unitOfWork.ExamFiles.DeleteAsync(audio);
+            }
+
+            await _unitOfWork.ContentBlocks.DeleteAsync(contentBlock);
+            await _unitOfWork.SaveChangeAsync();
+        }
+        public Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto)
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }

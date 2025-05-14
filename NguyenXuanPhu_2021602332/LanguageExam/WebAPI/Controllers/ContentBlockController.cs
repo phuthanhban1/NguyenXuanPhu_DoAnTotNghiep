@@ -36,7 +36,21 @@ namespace WebAPI.Controllers
             await _contentBlockService.AddDouble(lists);
             return Ok();
         }
-
-
+        [HttpGet("{questionTypeId}/{status}")]
+        public async Task<IActionResult> GetByStatus(Guid questionTypeId, byte status)
+        {
+            var lists = await _contentBlockService.GetByStatus(questionTypeId, status);
+            if (lists == null)
+            {
+                return BadRequest("ContentBlock is null");
+            }
+            return Ok(lists);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _contentBlockService.DeleteAsync(id);
+            return Ok();
+        }
     }
 }

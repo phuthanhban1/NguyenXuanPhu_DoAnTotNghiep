@@ -74,6 +74,61 @@
         }
       }
     },
+    "/api/ContentBlock/{questionTypeId}/{status}": {
+      "get": {
+        "tags": [
+          "ContentBlock"
+        ],
+        "parameters": [
+          {
+            "name": "questionTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ContentBlock/{id}": {
+      "delete": {
+        "tags": [
+          "ContentBlock"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/District/province/{provinceId}": {
       "get": {
         "tags": [
@@ -1548,12 +1603,13 @@
             "type": "string",
             "format": "uuid"
           },
-          "textContent": {
+          "content": {
             "type": "string",
             "nullable": true
           },
-          "isConfirm": {
-            "type": "boolean"
+          "status": {
+            "type": "integer",
+            "format": "int32"
           },
           "level": {
             "type": "integer",

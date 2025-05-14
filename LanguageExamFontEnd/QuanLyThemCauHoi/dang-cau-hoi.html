@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý ngân hàng đề thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <style>
+        body { background: #f8f9fa; }
+        .sidebar {
+            min-width: 220px;
+            max-width: 240px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 24px 0;
+            height: 100vh;
+        }
+        .sidebar .nav-link {
+            color: #333;
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #e9ecef;
+        }
+        .sidebar .nav-link.active {
+            background: #e9ecef;
+            color: #0d6efd;
+        }
+        .sidebar .nav .nav {
+            margin-left: 1rem;
+        }
+        .content-area {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 32px;
+            min-height: 400px;
+        }
+        .sidebar .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+        .info-section {
+            margin-bottom: 25px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .info-section:hover {
+            transform: translateY(-5px);
+        }
+        .info-section h2 {
+            color: #34495e;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            font-weight: 600;
+        }
+        .info-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .info-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        .info-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+        .info-item h3 {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .info-item p {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin: 0;
+        }
+        .confirm-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .confirm-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        #no-task-message {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        #no-task-message i {
+            font-size: 3em;
+            color: #bdc3c7;
+            margin-bottom: 15px;
+        }
+        #no-task-message h3 {
+            color: #7f8c8d;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        #no-task-message p {
+            color: #95a5a6;
+            font-size: 1em;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .skill-info {
+            padding: 10px;
+        }
+        .skill-info .d-flex {
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .skill-info .d-flex:hover {
+            background-color: #f8f9fa;
+        }
+        .skill-info i {
+            font-size: 1.2em;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        .skill-info h3 {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-bottom: 4px;
+        }
+        .skill-info p {
+            font-size: 1em;
+            color: #2c3e50;
+            font-weight: 500;
+            margin: 0;
+        }
+        .bank-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+        .bank-card .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 15px 20px;
+        }
+        .bank-card .card-body {
+            padding: 20px;
+        }
+        .action-button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .action-button i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        .deadline-info {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .deadline-warning {
+            color: #dc3545;
+        }
+        .confirm-button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 5px;
+            z-index: 1000;
+        }
+        .dropdown-item {
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .dropdown-item:hover {
+            background-color: #e9ecef;
+        }
+        .dropdown-item.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd;
+        }
+        .question-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        .question-card .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 15px 20px;
+        }
+        .question-card .card-body {
+            padding: 20px;
+        }
+        .answer-option {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        .answer-option:hover {
+            border-color: #0d6efd;
+            box-shadow: 0 2px 4px rgba(13, 110, 253, 0.1);
+            background-color: #fff;
+        }
+        #questionList {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+        }
+        .question-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0d6efd;
+        }
+        .question-card .card-header h5 {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .question-card .btn-danger {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .question-card .form-check {
+            margin-bottom: 15px;
+        }
+        .question-card .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+        .question-card textarea,
+        .question-card input[type="text"] {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        .question-card textarea:focus,
+        .question-card input[type="text"]:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+        /* Modal styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+        }
+        .modal-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1051;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-popup.show {
+            display: block;
+            animation: modalFadeIn 0.3s;
+        }
+        .modal-overlay.show {
+            display: block;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+        .question-type-card {
+            transition: all 0.3s ease;
+        }
+        .question-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link active" id="menu-dashboard" href="trang-chu.html">
+                            <i class="fas fa-home"></i>Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" id="menu-question-type" href="dang-cau-hoi.html" >
+                            <i class="fas fa-list-ul"></i>Quản lý dạng câu hỏi
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" id="menu-question" href="#" onclick="toggleSubMenu(event)">
+                            <i class="fas fa-tasks"></i>Quản lý câu hỏi
+                            <i class="fas fa-chevron-down float-end"></i>
+                        </a>
+                        <ul class="nav flex-column ms-3 mt-2 d-none" id="submenu-question">
+                            <li class="nav-item mb-1">
+                                <a class="nav-link" id="menu-add-question" href="them-cau-hoi.html">
+                                    <i class="fas fa-plus-circle"></i>Thêm câu hỏi
+                                </a>
+                            </li>
+                            <li class="nav-item mb-1">
+                                <a class="nav-link" id="menu-approved-questions" href="da-duyet.html" >
+                                    <i class="fas fa-check-circle"></i>Câu hỏi đã duyệt
+                                </a>
+                            </li>
+                            <li class="nav-item mb-1">
+                                <a class="nav-link" id="menu-pending-questions" href="cho-duyet.html" >
+                                    <i class="fas fa-clock"></i>Câu hỏi chờ duyệt
+                                </a>
+                            </li>
+                            <li class="nav-item mb-1">
+                                <a class="nav-link" id="menu-rejected-questions" href="bi-tu-choi.html">
+                                    <i class="fas fa-times-circle"></i>Câu hỏi bị từ chối
+                                </a>
+                            </li>
+                            <li class="nav-item mb-1">
+                                <a class="nav-link" id="menu-used-questions" href="da-dung.html">
+                                    <i class="fas fa-times-circle"></i>Câu hỏi đã dùng
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 col-lg-10">
+                
+                
+                <div id="approved-questions" class="content-section" style="display: none;">
+                    <!-- Content for approved questions -->
+                </div>
+                <div id="pending-questions" class="content-section" style="display: none;">
+                    <!-- Content for pending questions -->
+                </div>
+                <div id="rejected-questions" class="content-section" style="display: none;">
+                    <!-- Content for rejected questions -->
+                </div>
+                <div id="question-type" class="content-section" style="display: none;">
+                    <div class="container-fluid py-5">
+                        <!-- Header with Breadcrumb -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
+                                        <li class="breadcrumb-item" id="bank-name"></li>
+                                        <li class="breadcrumb-item" id="skillName"></li>
+                                        <li class="breadcrumb-item active">Quản lý dạng câu hỏi</li>
+                                    </ol>
+                                </nav>
+                                <h2 class="mt-2">
+                                    <i class="fas fa-list-ul text-primary me-2"></i>
+                                    Quản lý dạng câu hỏi
+                                </h2>
+                            </div>
+                            <button class="btn btn-primary" onclick="showAddTypeForm()">
+                                <i class="fas fa-plus me-2"></i>Thêm dạng mới
+                            </button>
+                        </div>
+
+                        <!-- Danh sách dạng câu hỏi -->
+                        <div class="row g-4 mb-4">
+                           
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- modal thêm dạng câu hỏi -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-popup" id="questionTypeModal">
+        <div class="card border-0">
+            <div class="card-header bg-white border-bottom-0 pt-4 px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="modal-title mb-0">Thêm dạng câu hỏi mới</h4>
+                    <button type="button" class="btn-close" onclick="hideModal()"></button>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <form id="add-question-type-form">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label">Tên dạng câu hỏi</label>
+                            <input type="text" class="form-control" placeholder="Ví dụ:">
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="form-label">Mô tả</label>
+                            <textarea class="form-control" rows="2" placeholder="Mô tả ngắn gọn về dạng câu hỏi"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Cấu trúc câu hỏi</label>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="hasImage">
+                                        <label class="form-check-label" for="hasImage">
+                                            <i class="fas fa-image me-2"></i>Có hình ảnh
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="isSingle">
+                                        <label class="form-check-label" for="isSingle">
+                                            <i class="fas fa-list text-primary me-2"></i>Câu đơn
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0 px-4 pb-4">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" onclick="hideModal()">Hủy</button>
+                        <button type="button" class="btn btn-primary" onclick="saveQuestionType()">Lưu</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+   
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    
+    <script>
+        var url = 'https://localhost:7001/api'
+        $(document).ready(function() {
+            var addQuestionUrl = 'add_reading_question.html';
+            var skillId = '';
+            var skillName = '';
+            var bankName = '';
+            let questionCounter = 0;
+            let currentEditId = null;
+// js tổng quan
+            // Show content function
+            window.showContent = function(section) {
+                $('.content-section').hide();
+                $(`#${section}`).show();
+                
+                // Update active state
+                $('.nav-link').removeClass('active');
+                $(`#menu-${section}`).addClass('active');
+            }
+
+            // Toggle submenu function
+            window.toggleSubMenu = function(e) {
+                e.preventDefault();
+                $('#submenu-question').toggleClass('d-none');
+            }
+
+            // Modal functions
+            window.showModal = function() {
+                $('#modalOverlay').addClass('show');
+                $('#questionTypeModal').addClass('show');
+                $('body').css('overflow', 'hidden');
+            }
+
+            window.hideModal = function() {
+                $('#modalOverlay').removeClass('show');
+                $('#questionTypeModal').removeClass('show');
+                $('body').css('overflow', '');
+            }
+
+            window.showAddTypeForm = function() {
+                currentEditId = null;
+                $('#questionTypeModal .modal-title').text('Thêm dạng câu hỏi mới');
+                $('#questionTypeModal form')[0].reset();
+                showModal();
+            }
+
+// js dạng câu hỏi
+
+// js sửa dạng câu hỏi (lấy dữ liệu)
+
+            var editQuestionType = function(id) {
+                currentEditId = id;
+                $('#questionTypeModal .modal-title').text('Sửa dạng câu hỏi');
+                
+                // Load dữ liệu của dạng câu hỏi
+                $.ajax({
+                    url: `https://localhost:7001/api/questiontype/${id}`,
+                    type: 'GET',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(typeData) {
+                        // Điền dữ liệu vào form
+                        const form = $('#questionTypeModal form');
+                        form.find('input[type="text"]').val(typeData.name);
+                        form.find('textarea').val(typeData.description);
+                        form.find('#hasImage').prop('checked', typeData.hasImage);
+                        form.find('#isSingle').prop('checked', typeData.isSingle);
+
+                        showModal();
+                    },
+                    error: function(error) {
+                        console.error('Error:', error.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Không thể tải thông tin dạng câu hỏi!'
+                        });
+                    }
+                });
+            }
+
+            // js xóa dạng câu hỏi
+            
+            var deleteQuestionType = function(id) {
+                console.log(id);
+                Swal.fire({
+                    title: 'Xác nhận xóa',
+                    text: "Bạn có chắc chắn muốn xóa dạng câu hỏi này?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `https://localhost:7001/api/questiontype/${id}`,
+                            type: 'DELETE',
+                            xhrFields: {
+                                withCredentials: true
+                            },
+                            success: function(response) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Thành công!',
+                                    text: 'Đã xóa dạng câu hỏi thành công!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    // Tải lại danh sách sau khi xóa thành công
+                                    loadQuestionTypes();
+                                });
+                            },
+                            error: function(error) {
+                                console.error('Error:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi!',
+                                    text: 'Không thể xóa dạng câu hỏi. Vui lòng thử lại!'
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+
+// hàm xử lý sửa dạng câu hỏi
+            window.saveQuestionType = function() {
+                const form = $('#add-question-type-form');
+                const formData = {
+                    name: form.find('input[type="text"]').val(),
+                    description: form.find('textarea').val(),
+                    isSingle: form.find('#isSingle').prop('checked'),
+                    hasImage: form.find('#hasImage').prop('checked'),
+                    skillId: skillId
+                };
+
+                // Validate dữ liệu
+                if (!formData.name || !formData.description) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo!',
+                        text: 'Vui lòng điền đầy đủ thông tin!'
+                    });
+                    return;
+                }
+
+                // Xác định URL và data dựa vào currentEditId
+                let url = 'https://localhost:7001/api/questiontype';
+                
+                if (currentEditId) {
+                    url = 'https://localhost:7001/api/questiontype/update';
+                    formData.id = currentEditId;
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        hideModal();
+                        loadQuestionTypes(); // Tải lại danh sách
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công!',
+                            text: currentEditId ? 'Cập nhật thành công!' : 'Thêm mới thành công!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        currentEditId = null; // Reset currentEditId sau khi lưu thành công
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: error.responseJSON ? error.responseJSON['Message'] : 'Có lỗi xảy ra. Vui lòng thử lại!'
+                        });
+                    }
+                });
+            }
+
+            // Load danh sách dạng câu hỏi
+            function loadQuestionTypes() {
+                $.ajax({
+                    url: `https://localhost:7001/api/questiontype/skill/${skillId}`,
+                    type: 'GET',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        // Xóa nội dung cũ
+                        $('.row.g-4.mb-4').empty();
+                        
+                        // Kiểm tra nếu không có dữ liệu
+                        if (!response || response.length === 0) {
+                            $('.row.g-4.mb-4').html(`
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        Chưa có dạng câu hỏi nào. Hãy thêm dạng câu hỏi mới!
+                                    </div>
+                                </div>
+                            `);
+                            return;
+                        }
+                        console.log(response);
+                        $('#skillName').text(skillName);
+                        $('#bank-name').text(bankName);
+                        // Thêm từng dạng câu hỏi vào giao diện
+                        response.forEach(function(type) {
+                            $('.row.g-4.mb-4').append(createQuestionTypeCard(type));
+                        });
+
+                        // Gắn sự kiện sau khi tạo các nút
+                        attachEventHandlers();
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                        $('.row.g-4.mb-4').html(`
+                            <div class="col-12">
+                                <div class="alert alert-danger">
+                                    <i class="fas fa-exclamation-circle me-2"></i>
+                                    Không thể tải danh sách dạng câu hỏi. Vui lòng thử lại sau!
+                                </div>
+                            </div>
+                        `);
+                    }
+                });
+            }
+
+            // Tạo card dạng câu hỏi
+            function createQuestionTypeCard(type) {
+                return `
+                    <div class="col-md-6">
+                        <div class="card question-type-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <h5 class="card-title mb-1">${type.name}</h5>
+                                        <p class="text-muted mb-0">${type.description || 'Không có mô tả'}</p>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary me-1 btn-edit" data-id="${type.id}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${type.id}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    ${type.hasImage ? `
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-image text-primary me-2"></i>
+                                                <span>Có ảnh</span>
+                                            </div>
+                                        </div>
+                                    ` : `
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-image text-muted me-2"></i>
+                                                <span class="text-muted">Không ảnh</span>
+                                            </div>
+                                        </div>
+                                    `}
+                                    ${type.isSingle ? `
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-list text-primary me-2"></i>
+                                                <span>Dạng câu hỏi đơn</span>
+                                            </div>
+                                        </div>
+                                    ` : `
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-list-ol text-primary me-2"></i>
+                                                <span>Dạng câu hỏi kép</span>
+                                            </div>
+                                        </div>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Hàm gắn sự kiện cho các nút của dạng câu hỏi
+            function attachEventHandlers() {
+                // Gắn sự kiện cho nút edit
+                $(document).on('click', '.btn-edit', function() {
+                    const id = $(this).attr('data-id');
+                    console.log(id);
+                    editQuestionType(id);
+                });
+
+                // Gắn sự kiện cho nút delete
+                $(document).on('click', '.btn-delete', function() {
+                    const id = $(this).data('id');
+                    deleteQuestionType(id);
+                });
+            }
+
+            // click ra ngoài để đóng modal
+            $('#modalOverlay').click(hideModal);
+            $('.modal-popup').click(function(e) {
+                e.stopPropagation();
+            });
+
+            
+            showContent('question-type');
+
+            // Rest of your existing JavaScript code...
+            $('#detail-btn').click(function(e) {
+                e.preventDefault();
+                window.location.href = addQuestionUrl;
+            });
+
+            
+            // Load initial data
+            $.ajax({
+                url: 'https://localhost:7001/api/skill/skill',
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    
+                    skillName = response.name;
+                    bankName = response.questionBankName;
+                    $('#skillName').text(skillName);
+                    
+                    
+                    skillId = response.id;
+                    loadQuestionTypes();
+                },
+                error: function(error) {
+                    console.log('Error:', error.responseText);
+                    
+                }
+            });
+
+
+           
+        });
+    </script>
+
+</body>
+</html>

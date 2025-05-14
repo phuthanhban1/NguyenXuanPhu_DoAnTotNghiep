@@ -13,7 +13,8 @@ namespace Infrastructure.Configurations
             
             builder.HasOne(q => q.ContentBlock)
                 .WithMany(cb => cb.Questions)
-                .HasForeignKey(q => q.ContentBlockId);
+                .HasForeignKey(q => q.ContentBlockId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
         }

@@ -35,6 +35,12 @@ namespace Application.Services.Implements
             {
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
             }
+            
+            var listContent = await _unitOfWork.ContentBlocks.GetByQuestionTypeId(id);
+            if (listContent != null && listContent.Count > 0)
+            {
+                throw new BadRequestException("Không thể xóa do dạng câu hỏi này đã có câu hỏi");
+            }
             await _unitOfWork.QuestionTypes.DeleteAsync(questionLevel);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -53,11 +59,7 @@ namespace Application.Services.Implements
             {
                 throw new NotFoundException("Không tìm thấy loại câu hỏi");
             }
-            var listContent = await _unitOfWork.ContentBlocks.GetByQuestionTypeId(id);
-            if(listContent != null && listContent.Count > 0)
-            {
-                throw new BadRequestException("Không thể xóa do dạng câu hỏi này đã có câu hỏi");
-            }
+            
             var questionLevelDto = _mapper.Map<QuestionTypeUpdateDto>(questionLevel);
             return questionLevelDto;
         }

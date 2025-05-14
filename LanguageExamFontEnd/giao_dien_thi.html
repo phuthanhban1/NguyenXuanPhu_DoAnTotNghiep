@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giao diện thi trắc nghiệm</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafbfc;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+      position: relative;
+    }
+    .main-content {
+
+      flex: 3;
+      padding: 32px 24px;
+      margin-left: 220px; /* Thêm margin để tránh bị che bởi sidebar */
+    }
+    .sidebar {
+      position: fixed;
+      right: 10px; /* Căn lề phải dựa vào container */
+      top: 20px;
+      width: 300px;
+      background: #f7f7f7;
+      padding: 24px 16px;
+      border-left: 1px solid #eee;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      height: calc(100vh - 40px); /* Chiều cao bằng viewport trừ đi margin */
+      overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+    }
+    .question-block {
+      margin-bottom: 32px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 24px;
+    }
+    .question-number {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #2d6cdf;
+      margin-bottom: 8px;
+    }
+    .question-text {
+      margin-bottom: 12px;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .reading-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: #2d6cdf;
+    }
+    .highlight-toggle {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .highlight-toggle input {
+      margin-right: 8px;
+    }
+    .sidebar .timer {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 16px;
+    }
+    .sidebar button {
+      width: 100%;
+      padding: 10px;
+      background: #2d6cdf;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .question-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .question-list button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #bbb;
+      background: #fff;
+      color: #000;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.2s;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .question-list button.active {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+    .question-list button:hover {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="main-content col-10">
+      
+        <div class="reading-title">Reading</div>
+        <div id="list-question">
+  
+        </div>
+        
+        
+        <!-- Thêm các câu hỏi khác ở đây, nhớ tăng id và name tương ứng -->
+      </div>
+      <div class="sidebar col-2" >
+        <div>Thời gian làm bài:</div>
+        <div class="timer" id="timer">1:00:00</div>
+        <button>NỘP BÀI</button>
+        <div style="font-weight:bold; margin-bottom:8px;">Reading</div>
+        <div class="question-list">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</body>
+<script>
+  var questionList = [
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>아버지는 의사입니다. 어머니는 은행원입니다.',
+      answers: ['고향', '부모', '병원', '오빠']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    },
+    {
+      question: '무엇에 대한 이야기입니까? 알맞은 것을 고르십시오.<br>오늘은 1월 1일입니다. 내일은 1월 2일입니다.',
+      answers: ['날짜', '방학', '아침', '하루']
+    }
+  ];
+
+  // Hàm hiển thị tất cả câu hỏi
+  function displayQuestions() {
+    const $listQuestion = $('#list-question');
+    $listQuestion.empty(); // Xóa nội dung cũ
+    
+    // Hiển thị từng câu hỏi
+    questionList.forEach((q, index) => {
+      const questionHtml = `
+        <div class="question-block" id="question-${index + 1}">
+          <div class="question-number">${index + 1}</div>
+          <div class="question-text">${q.question}</div>
+          <div class="answers">
+            <label><input type="radio" name="q${index + 1}"> A. ${q.answers[0]}</label>
+            <label><input type="radio" name="q${index + 1}"> B. ${q.answers[1]}</label>
+            <label><input type="radio" name="q${index + 1}"> C. ${q.answers[2]}</label>
+            <label><input type="radio" name="q${index + 1}"> D. ${q.answers[3]}</label>
+          </div>
+        </div>
+      `;
+      $listQuestion.append(questionHtml);
+    });
+
+    // Cập nhật danh sách nút điều hướng
+    const $questionList = $('.question-list');
+    $questionList.empty();
+    questionList.forEach((_, index) => {
+      $questionList.append(`
+        <button class="question-nav" data-q="${index + 1}">${index + 1}</button>
+      `);
+    });
+  }
+
+  // Gọi hàm hiển thị câu hỏi khi trang được tải
+  $(document).ready(function() {
+    displayQuestions();
+
+    // Hàm đếm ngược thời gian
+    function startTimer(duration) {
+      // Lấy thời gian còn lại từ localStorage hoặc sử dụng duration mặc định
+      let timer = localStorage.getItem('remainingTime') ? 
+                 parseInt(localStorage.getItem('remainingTime')) : 
+                 duration;
+      
+      const timerDisplay = $('#timer');
+      
+      const countdown = setInterval(function() {
+        const minutes = parseInt(timer / 60, 10);
+        const seconds = parseInt(timer % 60, 10);
+
+        // Format thời gian thành MM:SS
+        const displayTime = minutes.toString().padStart(2, '0') + ':' + 
+                          seconds.toString().padStart(2, '0');
+        
+        timerDisplay.text(displayTime);
+
+        // Lưu thời gian còn lại vào localStorage
+        localStorage.setItem('remainingTime', timer);
+
+        if (--timer < 0) {
+          clearInterval(countdown);
+          timerDisplay.text('00:00');
+          // Xóa thời gian trong localStorage khi hết giờ
+          localStorage.removeItem('remainingTime');
+          // Thêm xử lý khi hết thời gian ở đây
+          alert('Hết thời gian làm bài!');
+        }
+      }, 1000);
+
+      // Lưu ID của interval để có thể clear khi cần
+      localStorage.setItem('timerInterval', countdown);
+    }
+
+    // Xóa interval cũ nếu có
+    const oldInterval = localStorage.getItem('timerInterval');
+    if (oldInterval) {
+      clearInterval(parseInt(oldInterval));
+    }
+
+    // Bắt đầu đếm ngược từ 60 phút (3600 giây)
+    startTimer(60 * 60);
+
+    // Xử lý active nút khi chọn đáp án
+    $(document).on('change', '.answers input[type="radio"]', function() {
+      const $radio = $(this);
+      const $questionBlock = $radio.closest('.question-block');
+      const questionId = $questionBlock.attr('id').split('-')[1];
+      
+      // Active nút bên phải
+      // $('.question-nav').removeClass('active');
+      $(`.question-nav[data-q="${questionId}"]`).addClass('active');
+    });
+
+    // Xử lý cuộn đến câu hỏi khi nhấn nút số
+    $(document).on('click', '.question-nav', function() {
+      const qId = $(this).data('q');
+      const $qBlock = $(`#question-${qId}`);
+      if ($qBlock.length) {
+        $('html, body').animate({
+          scrollTop: $qBlock.offset().top - 20
+        }, 100);
+      }
+    });
+  });
+</script>
+</html>

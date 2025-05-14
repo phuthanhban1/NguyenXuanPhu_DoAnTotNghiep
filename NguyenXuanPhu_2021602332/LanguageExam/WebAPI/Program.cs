@@ -16,13 +16,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ExamContext>(ops => ops.UseSqlServer(builder.Configuration.GetConnectionString("ExamConnection")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddTransient<IImageFileService, ImageFileService>();
+builder.Services.AddTransient<IExamFileService, ExamFileService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IProvinceService, ProvinceService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IWardService, WardService>();
 builder.Services.AddTransient<IQuestionBankService, QuestionBankService>();
-builder.Services.AddTransient<IImageFileService, ImageFileService>();
+builder.Services.AddTransient<IExamFileService, ExamFileService>();
 builder.Services.AddTransient<ISkillService, SkillService>();
 builder.Services.AddTransient<IQuestionTypeService, QuestionTypeService>();
 builder.Services.AddTransient<IContentBlockService, ContentBlockService>();

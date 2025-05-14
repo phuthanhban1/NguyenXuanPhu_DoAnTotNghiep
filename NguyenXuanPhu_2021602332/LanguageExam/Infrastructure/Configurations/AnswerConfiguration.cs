@@ -20,6 +20,11 @@ namespace Infrastructure.Configurations
                 .WithOne(a => a.Answer)
                 .HasForeignKey(dr => dr.AnswerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(q => q.Question)
+                .WithMany(a => a.Answers)
+                .HasForeignKey(a => a.QuestionId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

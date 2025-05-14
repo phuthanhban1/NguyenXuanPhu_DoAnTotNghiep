@@ -5,6 +5,7 @@ using Application.Services.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.UnitOfWork;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -134,9 +135,13 @@ namespace Application.Services.Implements
                 IsConfirm = skill.IsCreateConfirm,
                 QuestionBankName = skill.QuestionBank.Name,
                 Language = skill.QuestionBank.Language,
-                DueDate = (DateTime)skill.CreateDue,
+                
                 Task = "Tạo câu hỏi"
             };
+            if(skill.CreateDue != null)
+            {
+                skillOverViewDto.DueDate = (DateTime)skill.CreateDue;
+            }
             return skillOverViewDto;
         }
 
@@ -154,9 +159,12 @@ namespace Application.Services.Implements
                 IsConfirm = skill.IsReviewConfirm,
                 QuestionBankName = skill.QuestionBank.Name,
                 Language = skill.QuestionBank.Language,
-                DueDate = (DateTime)skill.ReviewDue,
                 Task = "Duyệt câu hỏi"
             };
+            if(skill.ReviewDue != null)
+            {
+                skillOverViewDto.DueDate = (DateTime)skill.ReviewDue;
+            }
             return skillOverViewDto;
         }
 

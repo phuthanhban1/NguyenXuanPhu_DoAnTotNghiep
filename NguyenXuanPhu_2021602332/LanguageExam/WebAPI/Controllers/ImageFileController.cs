@@ -8,8 +8,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ImageFileController : ControllerBase
     {
-        private readonly IImageFileService _imageFileService;
-        public ImageFileController(IImageFileService imageFileService)
+        private readonly IExamFileService _imageFileService;
+        public ImageFileController(IExamFileService imageFileService)
         {
             _imageFileService = imageFileService;
         }

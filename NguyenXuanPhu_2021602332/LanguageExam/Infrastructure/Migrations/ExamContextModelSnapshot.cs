@@ -54,6 +54,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("AudioFileId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly>("CreatedDate")
                         .HasColumnType("date");
 
@@ -62,9 +65,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid?>("ImageFileId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsConfirm")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
@@ -78,8 +78,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("RejectionReason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TextContent")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateOnly?>("UpdatedDate")
                         .HasColumnType("date");
@@ -410,7 +410,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreatedDate = new DateOnly(2025, 5, 8),
+                            CreatedDate = new DateOnly(2025, 5, 15),
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
@@ -527,10 +527,10 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDue")
+                    b.Property<DateTime?>("CreateDue")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedUserId")
+                    b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsCreateConfirm")
@@ -549,10 +549,10 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("QuestionBankId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ReviewDue")
+                    b.Property<DateTime?>("ReviewDue")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ReviewedUserId")
+                    b.Property<Guid?>("ReviewedUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -569,14 +569,12 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreateDue = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
                             IsCreateConfirm = false,
                             IsProcess = false,
                             IsReviewConfirm = false,
                             Name = "Đọc",
                             QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            ReviewDue = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReviewedUserId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
                         });
                 });
@@ -660,7 +658,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("07e95d49-fd96-43cf-bd0f-97acb28edce6"),
+                            Id = new Guid("5edbf27a-de94-43d7-b172-7b60973dd04b"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -934,8 +932,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.User", "CreatedUser")
                         .WithMany("CreatedQuestions")
                         .HasForeignKey("CreatedUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.QuestionBank", "QuestionBank")
                         .WithMany("Skills")
@@ -946,8 +943,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.User", "ReviewedUser")
                         .WithMany("ReviewedQuestions")
                         .HasForeignKey("ReviewedUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("CreatedUser");
 

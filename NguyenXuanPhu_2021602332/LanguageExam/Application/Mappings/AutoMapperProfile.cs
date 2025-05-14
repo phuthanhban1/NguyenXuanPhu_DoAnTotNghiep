@@ -1,8 +1,10 @@
 ﻿using Application.Dtos.AnswerDtos;
+using Application.Dtos.ContentBlockDtos;
 using Application.Dtos.ExamDtos;
 using Application.Dtos.ExamineeDtos;
 using Application.Dtos.ImageFileDtos;
 using Application.Dtos.QuestionBankDtos;
+using Application.Dtos.QuestionDtos;
 using Application.Dtos.QuestionTypeDtos;
 using Application.Dtos.SkillDtos;
 using Application.Dtos.UserDtos;
@@ -15,7 +17,7 @@ namespace Application.Mappings
     {
         public AutoMapperProfile()
         {
-            CreateMap<AnswerCreateDto, Answer>();
+            CreateMap<AnswerCreateDto, Answer>().ReverseMap();
             CreateMap<UserCreateDto, User>()
                 .ForMember(u => u.ImageFaceId, ucd=> ucd.Ignore())
                 .ForMember(u => u.ImageFace, ucd => ucd.Ignore())
@@ -66,6 +68,17 @@ namespace Application.Mappings
             CreateMap<QuestionType, QuestionTypeDto>()
                 .ForMember(qtd => qtd.SkillName, qt => qt.MapFrom(qt => qt.Skill.Name));
             CreateMap<QuestionType, QuestionTypeUpdateDto>().ReverseMap();
+
+            CreateMap<ContentBlock, ContentBlockDto>()
+                .ForMember(cbd => cbd.AudioBase64, cb => cb.MapFrom(cb => Convert.ToBase64String(cb.AudioFile.FileData)))
+                .ForMember(cbd => cbd.ImageBase64, cb => cb.MapFrom(cb => Convert.ToBase64String(cb.ImageFile.FileData)))
+                .ForMember(cbd => cbd.Questions, cb => cb.MapFrom(cb => cb.Questions))
+                .ForMember(cbd => cbd.IsSingle, cb => cb.MapFrom(cb => cb.QuestionType.IsSingle))
+                ;
+
+               // .ForMember(cbd => cbd.Questions.Answers, cb => cb.MapFrom(cb => cb.Questions.Answers));
+
+            CreateMap<Question, QuestionCreateDto>().ReverseMap();
         }
     }
 }

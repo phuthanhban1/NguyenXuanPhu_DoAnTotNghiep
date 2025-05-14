@@ -159,7 +159,7 @@ namespace Application.Services.Implements
                     new Claim(ClaimTypes.Sid, user.Id + ""),
                     new Claim(ClaimTypes.Role, user.Role.Name + "")
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddHours(3),
                 Issuer = _configuration["JwtSettings:Issuer"],
                 Audience = _configuration["JwtSettings:Audience"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
