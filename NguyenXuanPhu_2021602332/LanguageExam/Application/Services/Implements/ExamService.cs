@@ -22,12 +22,14 @@ namespace Application.Services.Implements
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task AddAsync(ExamCreateDto examCreateDto)
+        public async Task AddAsync(Guid managerId, ExamCreateDto examCreateDto)
         {
             var exam = _mapper.Map<Exam>(examCreateDto);
+            exam.ManagerId = managerId;
             exam.Id = Guid.NewGuid();
             exam.CreatedDate = DateTime.UtcNow;
             exam.IsActive = true;
+            exam.IsCreating = true;
             exam.UpdatedDate = DateTime.UtcNow;
             await _unitOfWork.Exams.AddAsync(exam);
             await _unitOfWork.SaveChangeAsync();
@@ -54,12 +56,28 @@ namespace Application.Services.Implements
             return examDtos;
         }
 
+        public Task<ExamDto> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<ExamDto>> GetByManagerIdAsync(Guid id)
         {
             var exams = await _unitOfWork.Exams.GetAllAsync();
             var examByManagers = exams.Where(exams => exams.ManagerId == id).ToList();
             var examDtos = _mapper.Map<List<ExamDto>>(examByManagers);
             return examDtos;
+        }
+
+        public async Task<ExamDto> GetExamByCreate(Guid id)
+        {
+            var exam = await _unitOfWork.Exams.GetExamByCreate(id);
+            if (exam == null)
+            {
+                throw new NotFoundException($"Không tìm thấy kì thi mà người tạo đề có nhiệm vụ");
+            }
+            var examDto = _mapper.Map<ExamDto>(exam);
+            return examDto;
         }
 
         public async Task UpdateAsync(ExamUpdateDto examUpdateDto)

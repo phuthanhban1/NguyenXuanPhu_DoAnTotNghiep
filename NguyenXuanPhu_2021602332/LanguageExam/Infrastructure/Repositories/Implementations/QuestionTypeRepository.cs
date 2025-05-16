@@ -27,8 +27,19 @@ namespace Infrastructure.Repositories.Implementations
         {
             var list = _context.Set<QuestionType>()
                 .Include(x => x.Skill)
+                .Include(x => x.ContentBlocks)
                 .Where(x => x.SkillId == skillId).ToList();
             return list;
         }
+
+        public async Task<List<QuestionType>> GetsBySkillIdName(Guid skillId, string name)
+        {
+            var list = _context.Set<QuestionType>()
+                .Include(x => x.Skill)
+                .Include(x => x.ContentBlocks)
+                .Where(x => x.SkillId == skillId && x.Name == name).ToList();
+            return list;
+        }
+
     }
 }

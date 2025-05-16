@@ -9,5 +9,6 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IExamStructRepository : IGenericRepository<ExamStruct>
     {
+        Task<List<ExamStruct>> GetListsByBankId(Guid id);
     }
 }

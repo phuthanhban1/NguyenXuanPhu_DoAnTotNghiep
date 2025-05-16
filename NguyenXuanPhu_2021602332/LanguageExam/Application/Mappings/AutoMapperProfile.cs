@@ -2,10 +2,13 @@
 using Application.Dtos.ContentBlockDtos;
 using Application.Dtos.ExamDtos;
 using Application.Dtos.ExamineeDtos;
+using Application.Dtos.ExamStruct;
+using Application.Dtos.ExamStructDetail;
 using Application.Dtos.ImageFileDtos;
 using Application.Dtos.QuestionBankDtos;
 using Application.Dtos.QuestionDtos;
 using Application.Dtos.QuestionTypeDtos;
+using Application.Dtos.RoleDtos;
 using Application.Dtos.SkillDtos;
 using Application.Dtos.UserDtos;
 using AutoMapper;
@@ -17,8 +20,16 @@ namespace Application.Mappings
     {
         public AutoMapperProfile()
         {
+            CreateMap<ExamStructDetailCreateDto, ExamStructDetail>();
+            CreateMap<ExamStructDetail, ExamStructDetailDto>().ForMember(esdd => esdd.QuestionTypeName, s => s.MapFrom(s => s.QuestionType.Name));
+            CreateMap<ExamStruct, ExamStructDto>();
+            CreateMap<Skill, SkillDto>()
+                .ForMember(sd => sd.CreatedUserName, s => s.MapFrom(s => s.CreatedUser.FullName))
+                .ForMember(sd => sd.ReviewedUserName, s => s.MapFrom(s => s.ReviewedUser.FullName))
+                ;
+            CreateMap<Role, RoleDto>();
             CreateMap<AnswerCreateDto, Answer>().ReverseMap();
-            CreateMap<UserCreateDto, User>()
+            CreateMap<UserUpdateDto, User>()
                 .ForMember(u => u.ImageFaceId, ucd=> ucd.Ignore())
                 .ForMember(u => u.ImageFace, ucd => ucd.Ignore())
                 .ForMember(u => u.ImageIdCardAfterId, ucd=> ucd.Ignore())
@@ -37,10 +48,12 @@ namespace Application.Mappings
 
             CreateMap<User, GetAllUserDto>();
             CreateMap<User, UserDto>()
-                .ForMember(ud => ud.Address, u => u.Ignore())
-                .ForMember(ud => ud.ImageFace, u => u.Ignore())
-                .ForMember(ud => ud.ImageIdCardBefore, u => u.Ignore())
-                .ForMember(ud => ud.ImageIdCardAfter, u => u.Ignore());
+                .ForMember(ud => ud.ImageFaceBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageFace.FileData)))
+                .ForMember(ud => ud.ImageIdCardBeforeBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageIdCardBefore.FileData)))
+                .ForMember(ud => ud.ImageIdCardAfterBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageIdCardAfter.FileData)));
+                
+
+            
 
             CreateMap<ExamFile, ImageFileDto>();
 
@@ -79,6 +92,11 @@ namespace Application.Mappings
                // .ForMember(cbd => cbd.Questions.Answers, cb => cb.MapFrom(cb => cb.Questions.Answers));
 
             CreateMap<Question, QuestionCreateDto>().ReverseMap();
+            CreateMap<QuestionType, QuestionTypeCountDto>()
+                .ForMember(qtc => qtc.Count, qt => qt.Ignore());
+
+            CreateMap<User, GetAllUserDto>()
+                .ForMember(g => g.RoleName, u => u.MapFrom(u => u.Role.Name));
         }
     }
 }

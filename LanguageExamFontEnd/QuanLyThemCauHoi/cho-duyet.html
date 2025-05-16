@@ -555,7 +555,10 @@
     
     <script>
        
-    
+       window.toggleSubMenu = function(e) {
+                e.preventDefault();
+                $('#submenu-question').toggleClass('d-none');
+            }
     let questionCounter = 0; // Thêm biến đếm số câu hỏi
     var skillName = '';
    var getQuestions = function() {

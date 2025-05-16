@@ -43,7 +43,7 @@ namespace Application.Services.Implements
             }
             var skill = _mapper.Map<Skill>(skillDto);
             skill.Id = Guid.NewGuid();
-            skill.IsProcess = true;
+            
             skill.IsCreateConfirm = false;
             skill.IsReviewConfirm = false;
             await _unitOfWork.Skills.AddAsync(skill);
@@ -101,7 +101,8 @@ namespace Application.Services.Implements
 
         public async Task<List<SkillDto>> GetByQuestionBankIdAsync(Guid questionBankId)
         {
-            var skills = await _unitOfWork.Skills.FindAsync(s => s.QuestionBankId == questionBankId);
+
+            var skills = await _unitOfWork.Skills.GetSkillsByBankId(questionBankId);
             if (skills == null || !skills.Any())
             {
                 throw new NotFoundException($"Không tìm thấy kỹ năng nào cho ngân hàng câu hỏi có id {questionBankId}");
@@ -140,7 +141,7 @@ namespace Application.Services.Implements
             };
             if(skill.CreateDue != null)
             {
-                skillOverViewDto.DueDate = (DateTime)skill.CreateDue;
+                skillOverViewDto.DueDate = (DateOnly)skill.CreateDue;
             }
             return skillOverViewDto;
         }
@@ -163,21 +164,40 @@ namespace Application.Services.Implements
             };
             if(skill.ReviewDue != null)
             {
-                skillOverViewDto.DueDate = (DateTime)skill.ReviewDue;
+                skillOverViewDto.DueDate = (DateOnly)skill.ReviewDue;
             }
             return skillOverViewDto;
         }
 
-        public async Task UpdateAsync(SkillUpdateDto skillDto)
+        public async Task UpdateAsync(SkillUpdateDto skillUpdateDto)
         {
-            var skill = await _unitOfWork.Skills.GetByIdAsync(skillDto.Id);
+            var skill = await _unitOfWork.Skills.GetByIdAsync(skillUpdateDto.Id);
             if (skill == null)
             {
-                throw new NotFoundException($"Không tìm thấy kỹ năng có id {skillDto.Id}");
+                throw new NotFoundException($"Không tìm thấy kỹ năng có id {skillUpdateDto.Id}");
             }
             else
             {
-                _mapper.Map(skillDto, skill);
+                if(skillUpdateDto.CreatedUserId != null) {
+                    var skillCreate = await _unitOfWork.Skills.GetSkillByCreate((Guid)skillUpdateDto.CreatedUserId);
+                    if(skillCreate != null)
+                    {
+                        throw new BadRequestException($"Không thể bổ nhiệm do cán bộ này đang có nhiệm vụ");
+                    }
+                    skill.CreatedUserId = skillUpdateDto.CreatedUserId; 
+                }
+                if(skillUpdateDto.ReviewedUserId != null) {
+                    var skillCreate = await _unitOfWork.Skills.GetSkillByReview((Guid)skillUpdateDto.ReviewedUserId);
+                    if (skillCreate != null)
+                    {
+                        throw new BadRequestException($"Không thể bổ nhiệm do cán bộ này đang có nhiệm vụ");
+                    }
+                    skill.ReviewedUserId = skillUpdateDto.ReviewedUserId; 
+                }
+                if(skillUpdateDto.ReviewedDue != DateOnly.MinValue) { skill.ReviewDue = skillUpdateDto.ReviewedDue; }
+                if(skillUpdateDto.CreatedDue != DateOnly.MinValue) { skill.CreateDue = skillUpdateDto.CreatedDue; }
+
+
                 await _unitOfWork.Skills.UpdateAsync(skill);
                 await _unitOfWork.SaveChangeAsync();
             }

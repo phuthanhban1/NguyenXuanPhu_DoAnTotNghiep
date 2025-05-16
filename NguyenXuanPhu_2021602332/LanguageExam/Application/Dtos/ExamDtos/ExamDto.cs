@@ -13,6 +13,7 @@ namespace Application.Dtos.ExamDtos
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public DateTime BeginDate { get; set; }
+        public DateOnly CreateDue { get; set; }
         public int Fee { get; set; }
         public bool IsActive { get; set; }
     }

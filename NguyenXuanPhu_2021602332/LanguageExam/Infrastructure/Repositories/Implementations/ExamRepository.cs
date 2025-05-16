@@ -14,5 +14,11 @@ namespace Infrastructure.Repositories.Implementations
         public ExamRepository(ExamContext context) : base(context)
         {
         }
+
+        public async Task<Exam> GetExamByCreate(Guid id)
+        {
+            var exam = _context.Set<Exam>().FirstOrDefault(x => x.CreatedQuestionUserId == id && x.IsCreating == true);
+            return exam;
+        }
     }
 }

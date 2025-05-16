@@ -20,7 +20,7 @@ namespace Infrastructure.UnitOfWork
         {
             _context = context;
             Answers = new AnswerRepository(_context);
-            
+            SimilarQuestions = new SimilarQuestionRepository(_context);
             ContentBlocks = new ContentBlockRepository(_context);
             DetailResults = new DetailResultRepository(_context);
             Districts = new DistrictRepository(_context);
@@ -28,6 +28,8 @@ namespace Infrastructure.UnitOfWork
             ExamQuestions = new ExamQuestionRepository(_context);
             Exams = new ExamRepository(_context);
             ExamFiles = new ExamFileRepository(_context);
+            ExamStructs = new ExamStructRepository(_context);
+            ExamStructDetails = new ExamStructDetailRepository(_context);
             Provinces = new ProvinceRepository(_context);
             QuestionBanks = new QuestionBankRepository(_context);
             QuestionTypes = new QuestionTypeRepository(_context);
@@ -36,6 +38,7 @@ namespace Infrastructure.UnitOfWork
             Users = new UserRepository(_context);
             Roles = new RoleRepository(_context);
             Wards = new WardRepository(_context);
+            
         }
         
 
@@ -89,6 +92,12 @@ namespace Infrastructure.UnitOfWork
         public IRoleRepository Roles {get; set;}
 
         public IWardRepository Wards {get; set;}
+
+        public ISimilarQuestionRepository SimilarQuestions { get; set; }
+
+        public IExamStructRepository ExamStructs { get; set; }
+
+        public IExamStructDetailRepository ExamStructDetails { get; set; }
 
         public void Dispose()
         {

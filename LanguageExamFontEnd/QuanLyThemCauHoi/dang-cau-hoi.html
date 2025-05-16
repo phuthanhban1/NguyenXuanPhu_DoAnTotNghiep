@@ -573,6 +573,8 @@
     <script>
         var url = 'https://localhost:7001/api'
         $(document).ready(function() {
+            // Load initial data
+            
             var addQuestionUrl = 'add_reading_question.html';
             var skillId = '';
             var skillName = '';
@@ -580,6 +582,27 @@
             let questionCounter = 0;
             let currentEditId = null;
 // js tổng quan
+$.ajax({
+                url: 'https://localhost:7001/api/skill/skill',
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    
+                    skillName = response.name;
+                    bankName = response.questionBankName;
+                    $('#skillName').text(skillName);
+                    
+                    
+                    skillId = response.id;
+                    loadQuestionTypes();
+                },
+                error: function(error) {
+                    console.log('Error:', error.responseText);
+                    
+                }
+            });
             // Show content function
             window.showContent = function(section) {
                 $('.content-section').hide();
@@ -897,28 +920,7 @@
             });
 
             
-            // Load initial data
-            $.ajax({
-                url: 'https://localhost:7001/api/skill/skill',
-                type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    
-                    skillName = response.name;
-                    bankName = response.questionBankName;
-                    $('#skillName').text(skillName);
-                    
-                    
-                    skillId = response.id;
-                    loadQuestionTypes();
-                },
-                error: function(error) {
-                    console.log('Error:', error.responseText);
-                    
-                }
-            });
+            
 
 
            

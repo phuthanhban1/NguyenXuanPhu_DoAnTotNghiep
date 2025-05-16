@@ -9,5 +9,6 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IExamRepository : IGenericRepository<Exam>
     {
+        Task<Exam> GetExamByCreate(Guid id);
     }
 }

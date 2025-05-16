@@ -10,12 +10,12 @@ namespace Application.Services.Interfaces
 {
     public interface IExamService
     {
-        Task AddAsync(ExamCreateDto examCreateDto);
+        Task AddAsync(Guid managerId, ExamCreateDto examCreateDto);
         Task UpdateAsync(ExamUpdateDto examUpdateDto);
         Task DeleteAsync(Guid id);
         
         Task<List<ExamDto>> GetAllAsync();
         Task<List<ExamDto>> GetByManagerIdAsync(Guid id);
-
+        Task<ExamDto> GetExamByCreate(Guid id);
     }
 }

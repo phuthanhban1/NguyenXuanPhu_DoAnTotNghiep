@@ -10,5 +10,7 @@ namespace Infrastructure.Repositories.Interfaces
     public interface IUserRepository : IGenericRepository<User>
     {
         Task<User> Login(string email, string password);
+        Task<List<User>> GetAccounts(Guid id);
+        Task<List<User>> GetUsersByRole(int role);
     }
 }

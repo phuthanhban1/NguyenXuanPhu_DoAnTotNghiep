@@ -18,6 +18,7 @@ namespace Infrastructure.Configurations
                 .WithMany(u => u.CreatedQuestionExam)
                 .HasForeignKey(e => e.CreatedQuestionUserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

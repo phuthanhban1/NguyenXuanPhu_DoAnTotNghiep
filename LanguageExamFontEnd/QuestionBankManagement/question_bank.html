@@ -65,7 +65,9 @@
         border: 1px solid #000;
     }
     </style>
-    
+    <!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body class="bg-light">
     <div class="container py-5">
@@ -307,6 +309,54 @@ $(document).ready(function() {
         handleDelete(examId);
     });
 
+    var xoaDuLieu = function(id) {
+        $.ajax({
+            url: `https://localhost:7001/api/questionbank/${id}`,
+            type: 'DELETE',
+            xhrFields: { withCredentials: true },
+            success: function(response) { 
+                Swal.fire({
+  title: 'Xóa thành công!',
+  icon: 'success',
+  timer: 1500, // Hiển thị trong 1.5 giây
+  showConfirmButton: false
+}).then(() => {
+  // Đợi thêm một chút rồi reload trang
+  setTimeout(() => {
+    location.reload();
+  }, 200); // thêm 200ms để đảm bảo hoàn tất hiệu ứng
+});
+            },
+            error: function(error) { 
+                console.log('Error updating data:', error.responseJSON['Message']); 
+                Swal.fire(
+                'Có lỗi xảy ra!',
+                error.responseJSON['Message'],
+                'false'
+                )
+            }
+        })
+    }
+    var handleDelete = function(id) {
+        
+        Swal.fire({
+  title: 'Bạn có chắc chắn muốn xóa?',
+  text: "Hành động này không thể hoàn tác!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'Xóa',
+  cancelButtonText: 'Hủy'
+}).then((result) => {
+  if (result.isConfirmed) {
+    // Gọi hàm xóa ở đây
+    xoaDuLieu(id);
+    
+  }
+});
+
+    }
     // Xử lý nút Exam Link
     $('tbody').on('click', '.exam-link', function(e) {
         e.preventDefault();
@@ -408,11 +458,11 @@ $(document).ready(function() {
         var $statusSelect = $form.find('select[name="Status"]');
         $statusSelect.val(exam.status);
 
-        if (exam.status == 0 || exam.status == 2) {
-            $statusSelect.find('option[value="1"]').hide();
-        } else {
-            $statusSelect.find('option[value="1"]').show();
-        }
+        // if (exam.status == 0 || exam.status == 2) {
+        //     $statusSelect.find('option[value="1"]').hide();
+        // } else {
+        //     $statusSelect.find('option[value="1"]').show();
+        // }
 
         // Hiện/ẩn 2 ô ngày khi mở modal
         if ($statusSelect.val() == "0") {
@@ -455,6 +505,11 @@ $(document).ready(function() {
             error: function(error) { 
                 console.error('Error updating data:', error); 
                 console.log(error.responseText);
+                Swal.fire(
+                'Có lỗi xảy ra!',
+                error.responseJSON['Message'],
+                'false'
+                )
             }
         });
         

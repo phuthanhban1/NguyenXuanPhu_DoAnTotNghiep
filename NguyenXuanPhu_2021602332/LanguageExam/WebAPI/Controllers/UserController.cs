@@ -31,16 +31,28 @@ namespace WebAPI.Controllers
             var user = _userService.GetById(id);
             return Ok(user);
         }
+        //[HttpPost]
+        //public async Task<ActionResult> Add([FromForm] UserCreateDto userCreateDto)
+        //{
+        //    await _userService.AddAsync(userCreateDto);
+        //    return Ok();
+        //}
+
         [HttpPost]
-        public async Task<ActionResult> Add([FromForm] UserCreateDto userCreateDto)
+        public async Task<ActionResult> Add(UserCreateDto userCreateDto)
         {
             await _userService.AddAsync(userCreateDto);
             return Ok();
         }
-
         [HttpPut]
         public async Task<ActionResult> Update(UserUpdateDto userUpdateDto)
         {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            userUpdateDto.Id = Guid.Parse(sid);
             await _userService.UpdateAsync(userUpdateDto);
             return Ok();
         }
@@ -51,7 +63,9 @@ namespace WebAPI.Controllers
             await _userService.UpdatePassword(userPasswordDto);
             return Ok();
         }
-        [HttpPut("role")]
+
+        [Authorize(Roles = "quản trị viên")]
+        [HttpPut("update-role")]
         public async Task<ActionResult> UpdateRole(UserRoleUpdateDto userRoleUpdateDto)
         {
             await _userService.UpdateRole(userRoleUpdateDto);
@@ -62,11 +76,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> CheckEmail(string email)
         {
             var check = await _userService.CheckUserByEmail(email);
-            if(check == true)
-            {
-                return BadRequest(); // user existed
-            }
-            return Ok(); // có thể thêm tài khoản
+            return Ok(new { exists = check }); // Trả về { exists: true } nếu email tồn tại, { exists: false } nếu không
         }
 
         [HttpGet("test")]
@@ -84,7 +94,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> Login(UserLoginDto userLoginDto)
         {
             var token = await _userService.Login(userLoginDto);
-            if(token == null)
+            if (token == null)
             {
                 return Unauthorized("Email và mật khẩu không hợp lệ");
             }
@@ -105,5 +115,38 @@ namespace WebAPI.Controllers
         {
             return Ok(HttpContext.User.FindFirst(ClaimTypes.Role)?.Value);
         }
+
+        //[Authorize(Roles = "quản trị viên")]
+        [HttpGet("account")]
+        public async Task<ActionResult> GetAccounts()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            var users = await _userService.GetAccounts(Guid.Parse(sid));
+            return Ok(users);
+        }
+
+        [HttpGet("account-by-role/{role}")]
+        public async Task<ActionResult> GetByRole(int role)
+        {
+            var users = await _userService.GetUserByRole(role);
+            return Ok(users);
+        }
+
+        [HttpGet("user-id")]
+        public async Task<ActionResult> GetUserId()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            return Ok(sid);
+        }
+
+
     }
 }

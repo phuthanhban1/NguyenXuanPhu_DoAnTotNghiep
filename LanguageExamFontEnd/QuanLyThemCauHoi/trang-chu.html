@@ -525,7 +525,10 @@
     <script>
         var url = 'https://localhost:7001/api'
         $(document).ready(function() {
-            
+            window.toggleSubMenu = function(e) {
+                e.preventDefault();
+                $('#submenu-question').toggleClass('d-none');
+            }
             var skillId = '';
             var skillName = '';
             var bankName = '';
@@ -569,7 +572,7 @@
                     bankName = response.questionBankName;
                     $('#skillName').text(skillName);
                     
-                    if(!response.isConfirm) {
+                    if(!response) {
                         $('#confirm-btn').show();
                         $('#detail-btn').hide();
                         // Ẩn các menu quản lý khi chưa xác nhận
@@ -609,4 +612,3 @@
 
 </body>
 </html>
-Giao diện xấu quá, hãy sửa lại cho tôi

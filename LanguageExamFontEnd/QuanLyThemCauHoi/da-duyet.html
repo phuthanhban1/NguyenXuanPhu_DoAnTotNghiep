@@ -577,6 +577,10 @@
    }
     
     $(document).ready(function() {
+        window.toggleSubMenu = function(e) {
+                e.preventDefault();
+                $('#submenu-question').toggleClass('d-none');
+            }
         var addQuestionUrl = 'add_reading_question.html';
         var skillId = '';
         var skillName = '';

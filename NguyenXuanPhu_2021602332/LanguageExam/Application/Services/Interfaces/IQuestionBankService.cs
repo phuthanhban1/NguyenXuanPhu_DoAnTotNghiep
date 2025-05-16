@@ -15,5 +15,6 @@ namespace Application.Services.Interfaces
         Task DeleteAsync(Guid id);
         Task<List<QuestionBankDto>> GetByLanguageManageId(string language, Guid managerId);
         Task<List<QuestionBankDto>> GetAllAsync();
+        Task<QuestionBankDetailDto> GetDetail(Guid id);
     }
 }

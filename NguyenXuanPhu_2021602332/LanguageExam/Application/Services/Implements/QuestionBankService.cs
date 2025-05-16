@@ -25,9 +25,14 @@ namespace Application.Services.Implements
             _mapper = mapper;
         }
 
-        public async Task AddAsync(QuestionBankCreateDto userCreateDto, Guid managerId)
+        public async Task AddAsync(QuestionBankCreateDto questionBankCreateDto, Guid managerId)
         {
-            var questionBank = _mapper.Map<QuestionBank>(userCreateDto);
+            var check = await _unitOfWork.QuestionBanks.FindByName("Tiếng Hàn", questionBankCreateDto.Name);
+            if (check)
+            {
+                throw new BadRequestException($"Không thể thêm do tên ngân hàng đã tồn tại");
+            }
+            var questionBank = _mapper.Map<QuestionBank>(questionBankCreateDto);
             questionBank.Id = Guid.NewGuid();
             questionBank.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow); 
             questionBank.ManagerId = managerId;
@@ -45,8 +50,15 @@ namespace Application.Services.Implements
             }
             else
             {
-                questionBank.Status = 1;
-                await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);
+                var currentDate = DateOnly.FromDateTime(DateTime.Now);
+                if ((currentDate.DayNumber - questionBank.CreatedDate.DayNumber) > 3)
+                {
+                    throw new NotFoundException("Không thể xóa ngân hàng câu hỏi do đã được tạo hơn 3 ngày");
+                } else if(questionBank.Status == 1)
+                {
+                    throw new NotFoundException("Không thể xóa do ngân hàng câu hỏi đang hoạt động");
+                }
+                await _unitOfWork.QuestionBanks.DeleteAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
             }
         }
@@ -54,7 +66,7 @@ namespace Application.Services.Implements
         public async Task<List<QuestionBankDto>> GetAllAsync()
         {
             var banks = await _unitOfWork.QuestionBanks.GetAllAsync();
-            var activeBanks = banks.Where(b => b.Status == 0).ToList();
+            var activeBanks = banks.Where(b => b.Status == 1).ToList();
             var questionBankDtos = _mapper.Map<List<QuestionBankDto>>(activeBanks);
             return questionBankDtos;
         }
@@ -70,6 +82,18 @@ namespace Application.Services.Implements
             return questionBankDtos;
         }
 
+        public async Task<QuestionBankDetailDto> GetDetail(Guid id)
+        {
+            var qb = _unitOfWork.QuestionBanks.GetById(id).ToList();
+            var questionBankDto = new QuestionBankDetailDto
+            {
+                Id = qb[0].Id,
+                Name = qb[0].Name,
+                Status = qb[0].Status
+            };
+            return questionBankDto;
+        }
+
         public async Task UpdateAsync(QuestionBankUpdateDto questionBankUpdateDto)
         {
             var questionBank = await _unitOfWork.QuestionBanks.GetByIdAsync(questionBankUpdateDto.Id);
@@ -79,12 +103,21 @@ namespace Application.Services.Implements
             }
             else
             {
-                
+                if(questionBank.Name != questionBankUpdateDto.Name)
+                {
+                    var check = await _unitOfWork.QuestionBanks.FindByName("Tiếng Hàn", questionBankUpdateDto.Name);
+                    if(check)
+                    {
+                        throw new BadRequestException($"Không thể sửa do tên ngân hàng đã tồn tại");
+                    }
+                }
                 questionBank.Status = questionBankUpdateDto.Status;
                 questionBank.Name = questionBankUpdateDto.Name;
                 await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
             }
         }
+
+        
     }
 }

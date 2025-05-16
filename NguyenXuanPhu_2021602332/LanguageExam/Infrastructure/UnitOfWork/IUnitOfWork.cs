@@ -18,11 +18,14 @@ namespace Infrastructure.UnitOfWork
         IExamineeRepository Examinees { get; }
         IExamQuestionRepository ExamQuestions { get; }
         IExamRepository Exams { get; }
+        IExamStructRepository ExamStructs { get; }
+        IExamStructDetailRepository ExamStructDetails { get; }
         IProvinceRepository Provinces { get; }
         IQuestionBankRepository QuestionBanks { get; }
         IQuestionTypeRepository QuestionTypes { get; }
         IQuestionRepository Questions { get; }
         ISkillRepository Skills { get; }
+        ISimilarQuestionRepository SimilarQuestions { get; }
         IUserRepository Users { get; }
         IRoleRepository Roles { get; }
         IWardRepository Wards { get; }

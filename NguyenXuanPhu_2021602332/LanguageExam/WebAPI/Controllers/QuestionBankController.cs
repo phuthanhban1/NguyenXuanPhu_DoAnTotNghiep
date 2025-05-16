@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
         [HttpGet]
-        public async Task<ActionResult<List<QuestionBankDto>>> GetAll()
+        public async Task<ActionResult> GetAll()
         {
             var questionBanks = await _questionBankService.GetAllAsync();
             return Ok(questionBanks);
@@ -55,6 +55,12 @@ namespace WebAPI.Controllers
                 return BadRequest("Invalid token");
             }
             var questionBank = await _questionBankService.GetByLanguageManageId(language, new Guid(sid));
+            return Ok(questionBank);
+        }
+        [HttpGet("detail/{id}")]
+        public async Task<ActionResult> GetDetail(Guid id)
+        {
+            var questionBank = await _questionBankService.GetDetail(id);
             return Ok(questionBank);
         }
     }

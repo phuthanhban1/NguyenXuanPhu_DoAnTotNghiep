@@ -21,5 +21,11 @@ namespace Infrastructure.Repositories.Implementations
             var role = roles.FirstOrDefault();
             return role == null ? Guid.Empty : role.Id;
         }
+
+        public async Task<List<Role>> GetUserRole()
+        {
+            var roles = _context.Set<Role>().Where(r => r.Name != "quản trị viên").ToList();
+            return roles;
+        }
     }
 }

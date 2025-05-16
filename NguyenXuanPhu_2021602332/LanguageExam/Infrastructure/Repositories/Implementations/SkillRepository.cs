@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories.Implementations
         {
             var skill = _context.Set<Skill>()
                 .Include(x => x.QuestionBank)
-                .FirstOrDefault(x => x.CreatedUserId == id && x.IsProcess == true);
+                .FirstOrDefault(x => x.CreatedUserId == id && x.QuestionBank.Status == 0);
             return skill;
         }
 
@@ -34,7 +34,7 @@ namespace Infrastructure.Repositories.Implementations
         {
             var skill = _context.Set<Skill>()
                 .Include(x => x.QuestionBank)
-                .FirstOrDefault(x => x.ReviewedUserId == id && x.IsProcess == true);
+                .FirstOrDefault(x => x.ReviewedUserId == id && x.QuestionBank.Status == 0);
             return skill;
         }
 
@@ -42,7 +42,7 @@ namespace Infrastructure.Repositories.Implementations
         {
             var skill = _context.Set<Skill>()
                 .Include(x => x.QuestionBank)
-                .FirstOrDefault(x => x.CreatedUserId == id && x.IsProcess == true);
+                .FirstOrDefault(x => x.CreatedUserId == id && x.QuestionBank.Status == 0);
             return skill;
         }
 
@@ -50,7 +50,7 @@ namespace Infrastructure.Repositories.Implementations
         {
             Skill skill = _context.Set<Skill>()
                 .Include(x => x.QuestionBank)
-                .FirstOrDefault(x => x.ReviewedUserId == id && x.IsProcess == true);
+                .FirstOrDefault(x => x.ReviewedUserId == id && x.QuestionBank.Status == 0);
             return skill;
         }
 
@@ -58,6 +58,8 @@ namespace Infrastructure.Repositories.Implementations
         {
             var list = _context.Set<Skill>()
                 .Include(s => s.QuestionBank)
+                .Include(s => s.CreatedUser)
+                .Include(s => s.ReviewedUser)
                 .Where(s => s.QuestionBankId == id).ToList();
             return list;
         }

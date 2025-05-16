@@ -14,5 +14,11 @@ namespace Infrastructure.Repositories.Implementations
         public ExamStructRepository(ExamContext context) : base(context)
         {
         }
+
+        public async Task<List<ExamStruct>> GetListsByBankId(Guid id)
+        {
+            var list = _context.Set<ExamStruct>().Where(e => e.QuestionBankId == id).ToList();
+            return list;
+        }
     }
 }

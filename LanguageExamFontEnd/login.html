@@ -65,7 +65,7 @@
             var roleExamManager = 'quản lý kỳ thi';
             var roleCreateQuestion = 'người tạo câu hỏi';
             var roleReviewQuestion = 'người đánh giá câu hỏi';
-            var roleBankManager = 'quản lý ngân hàng đề';
+            var roleBankManager = 'quản lý ngân hàng câu hỏi';
             var roleAdmin = 'quản trị viên';
             var roleExamCreate = 'người tạo đề';
             var roleExaminee = 'thí sinh';
@@ -93,13 +93,15 @@
                             success: function(response) {
                                 console.log('Role:', response);
                                 if(response === roleCreateQuestion) {
-                                    window.location.href = 'ManageCreateQuestion/question_create_overview.html';
+                                    window.location.href = 'QuanLyThemCauHoi/trang-chu.html';
                                 } else if(response === roleBankManager) {
                                     window.location.href = 'QuestionBankManagement/question_bank.html';
                                 } else if(response === roleExamCreate) {
-                                    window.location.href = 'ExamCreate/exam_create_overview.html';
+                                    window.location.href = 'QuanLyCauTrucDe/index.html';
                                 } else if(response === roleExaminee) {
                                     window.location.href = 'ExamCreate/exam_create_overview.html';
+                                } if(response === roleAdmin){
+                                    window.location.href = 'Admin/index.html';
                                 } else {
                                     //window.location.href = 'main.html';
                                     console.log('Không có quyền');

@@ -16,10 +16,12 @@ namespace Domain.Entities
         public DateTime BeginDate { get; set; }
         public string Password { get; set; }
         public int Fee { get; set; }
+        public bool IsCreating { get; set; }
         public bool IsActive { get; set; }
         // id manager
         public Guid ManagerId { get; set; }
         public User Manager { get; set; }
+        public DateOnly CreateDue { get; set; }
 
         // id created exam question
         public Guid CreatedQuestionUserId { get; set; }

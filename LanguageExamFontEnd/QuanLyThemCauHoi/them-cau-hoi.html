@@ -566,7 +566,7 @@
                         <input type="number" class="form-control score-input" min="0" max="10" step="0.5" value="1">
                     </div>
                     <!-- Âm thanh -->
-                    <div id="singleQuestionAudio_${questionCounter}" class="mt-3 audio-input" ${skillName !== 'nghe' ? 'style="display:none;"' : ''}>
+                    <div id="singleQuestionAudio" class="mt-3 audio-input" ${skillName !== 'nghe' ? 'style="display:none;"' : ''}>
                         <label class="form-label">File âm thanh</label>
                         <input type="file" accept="audio/*" class="form-control" onchange="previewAudio(event, ${questionCounter})">
                         <audio id="audioPreview_${questionCounter}" controls style="display:none; margin-top:10px;"></audio>
@@ -737,6 +737,10 @@
 
     
     $(document).ready(function() {
+        window.toggleSubMenu = function(e) {
+                e.preventDefault();
+                $('#submenu-question').toggleClass('d-none');
+            }
         var addQuestionUrl = 'add_reading_question.html';
         var skillId = '';
         var skillName = '';

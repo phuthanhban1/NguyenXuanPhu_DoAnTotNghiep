@@ -9,6 +9,6 @@ namespace Application.Dtos.UserDtos
     public class UserRoleUpdateDto
     {
         public Guid Id { get; set; }
-        public string RoleName { get; set; }
+        public Guid RoleId { get; set; }
     }
 }

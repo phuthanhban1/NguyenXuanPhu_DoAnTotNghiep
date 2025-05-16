@@ -239,41 +239,25 @@ $(document).ready(function() {
                 console.log('ok2');
                 var formData = new FormData($('#UserInfoForm')[0]);
                 $.ajax({
-                    url: 'https://localhost:7001/api/user/check-email',
-                    type: 'GET',
-                    data: {
-                        email: formData.get('Email')
-                    },
+                    url: 'https://localhost:7001/api/user',
+                    type: 'PUT',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    xhrFields: { withCredentials: true },
                     success: function(response) {
-                        console.log('email is ok' + response);
-                        $.ajax({
-                            url: 'https://localhost:7001/api/user',
-                            type: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                console.log('Thêm thành công' + response);
-                            },
-                            error: function(error) {
-                                console.log('Error: ' + error);
-                                if (error.responseText) {
-                                    console.log('ResponseText:', error.responseText); // Nội dung trả về từ server
-                                }
-                                if (error.status) {
-                                    console.log('Status:', error.status); // Mã lỗi HTTP (404, 500, 405, ...)
-                                }
-                            }
-                        })
+                        console.log('Thêm thành công' + response);
                     },
                     error: function(error) {
-                        console.log('email is not ok ' + error);
-                        let validator = $("#UserInfoForm").validate();
-                        validator.showErrors({
-                            "Email": "Email đã tồn tại, vui lòng chọn email khác."
-                        });
+                        console.log('Error: ' + error);
+                        if (error.responseText) {
+                            console.log('ResponseText:', error.responseText); // Nội dung trả về từ server
+                        }
+                        if (error.status) {
+                            console.log('Status:', error.status); // Mã lỗi HTTP (404, 500, 405, ...)
+                        } 
                     }
-                })            
+                })        
         } else {
             var error = $('.error:visible').first();
             if (error) {

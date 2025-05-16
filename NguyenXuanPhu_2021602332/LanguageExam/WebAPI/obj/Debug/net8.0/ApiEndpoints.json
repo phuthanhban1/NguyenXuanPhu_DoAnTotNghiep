@@ -239,6 +239,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ExamController",
+    "Method": "GetExamByCreate",
+    "RelativePath": "api/Exam/create-exam",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ExamineeController",
     "Method": "CreateExaminee",
     "RelativePath": "api/Examinee",
@@ -265,6 +275,107 @@
       {
         "Name": "examineeUpdateDto",
         "Type": "Application.Dtos.ExamineeDtos.ExamineeUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamStructController",
+    "Method": "Add",
+    "RelativePath": "api/ExamStruct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examStructCreateDto",
+        "Type": "Application.Dtos.ExamStruct.ExamStructCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamStructController",
+    "Method": "UpdateStruct",
+    "RelativePath": "api/ExamStruct",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examStructUpdateDto",
+        "Type": "Application.Dtos.ExamStruct.ExamStructUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamStructController",
+    "Method": "GetByBankId",
+    "RelativePath": "api/ExamStruct/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamStructController",
+    "Method": "DeleteStruct",
+    "RelativePath": "api/ExamStruct/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamStructDetailController",
+    "Method": "Add",
+    "RelativePath": "api/ExamStructDetail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "list",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ExamStructDetail.ExamStructDetailCreateDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamStructDetailController",
+    "Method": "GetStruct",
+    "RelativePath": "api/ExamStructDetail/{structId}/{skill}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "structId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "skill",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -400,17 +511,7 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.QuestionBankDtos.QuestionBankDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebAPI.Controllers.QuestionBankController",
@@ -453,6 +554,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionBankController",
+    "Method": "GetDetail",
+    "RelativePath": "api/QuestionBank/detail/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "WebAPI.Controllers.QuestionTypeController",
@@ -524,6 +641,43 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.QuestionTypeController",
+    "Method": "CountQuestionTypeById",
+    "RelativePath": "api/QuestionType/count-question-type/{skillId}/{structId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skillId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "structId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
+    "Method": "CountQuestionType",
+    "RelativePath": "api/QuestionType/count/{skillId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skillId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
     "Method": "GetsBySkillId",
     "RelativePath": "api/QuestionType/skill/{skillId}",
     "HttpMethod": "GET",
@@ -552,6 +706,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.RoleController",
+    "Method": "GetRoles",
+    "RelativePath": "api/Role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -615,7 +779,7 @@
   {
     "ContainingType": "WebAPI.Controllers.SkillController",
     "Method": "GetSkillByBankId",
-    "RelativePath": "api/Skill/bankid/{id}",
+    "RelativePath": "api/Skill/bank-id/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -673,6 +837,27 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "userCreateDto",
+        "Type": "Application.Dtos.UserDtos.UserCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "Update",
+    "RelativePath": "api/User",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
         "Name": "IdCard",
         "Type": "System.String",
         "IsRequired": false
@@ -698,17 +883,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
         "Name": "FullName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Email",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -740,67 +915,6 @@
       {
         "Name": "ImageIdCardAfter",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.UserController",
-    "Method": "Update",
-    "RelativePath": "api/User",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "ImageFace",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "ImageIdCardBefore",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "ImageIdCardAfter",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "Gender",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      },
-      {
-        "Name": "DateOfBirth",
-        "Type": "System.DateOnly",
-        "IsRequired": false
-      },
-      {
-        "Name": "FullName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "PhoneNumber",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Strict",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "WardId",
-        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -817,6 +931,32 @@
       {
         "Name": "id",
         "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "GetAccounts",
+    "RelativePath": "api/User/account",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "GetByRole",
+    "RelativePath": "api/User/account-by-role/{role}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "role",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -872,8 +1012,28 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.UserController",
-    "Method": "UpdateRole",
+    "Method": "GetRole",
     "RelativePath": "api/User/role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "Test",
+    "RelativePath": "api/User/test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/User/update-role",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -888,18 +1048,8 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.UserController",
-    "Method": "GetRole",
-    "RelativePath": "api/User/role",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.UserController",
-    "Method": "Test",
-    "RelativePath": "api/User/test",
+    "Method": "GetUserId",
+    "RelativePath": "api/User/user-id",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Tài khoản</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .page-item.active a{
+            color: white;
+        }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+            color: white;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 15px 20px;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table th {
+            font-weight: 600;
+            color: #4e73df;
+            border-bottom: 2px solid #e3e6f0;
+        }
+        .btn-edit {
+            background-color: #4e73df;
+            border-color: #4e73df;
+        }
+        .btn-edit:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .table tbody tr:hover {
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #4e73df;
+            border-color: #4e73df;
+        }
+        .pagination .page-link {
+            color: #4e73df;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .status-active {
+            background-color: #1cc88a;
+            color: white;
+        }
+        .status-inactive {
+            background-color: #e74a3b;
+            color: white;
+        }
+        .status-pending {
+            background-color: #f6c23e;
+            color: white;
+        }
+        .search-box {
+            border-radius: 20px;
+            padding-left: 20px;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+            color: white;
+        }
+        .modal-title {
+            font-weight: bold;
+        }
+        .btn-close {
+            filter: brightness(0) invert(1);
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h2 class="fw-bold text-primary"><i class="fas fa-users me-2"></i>Quản lý Tài khoản</h2>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-end">
+                    <input type="text" class="form-control search-box me-2" placeholder="Tìm kiếm tài khoản..." style="max-width: 250px;">
+                    <select name="" id="">
+                        <option value=""><a href="" class="btn btn-success">Trang chủ</a></option>
+                        <option value=""><a href="" class="btn btn-success">Đăng xuất</a></option>
+                    </select>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-list me-2"></i>Danh sách Tài khoản</span>
+                <div class="dropdown">
+                    <!-- <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-filter me-1"></i>Lọc
+                    </button> -->
+                    <div class="col-md-6">
+    <select id="itemsPerPage" class="form-select" style="width: 100px;">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+</div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Tất cả</a></li>
+                        <li><a class="dropdown-item" href="#">Đang hoạt động</a></li>
+                        <li><a class="dropdown-item" href="#">Không hoạt động</a></li>
+                        <li><a class="dropdown-item" href="#">Đang chờ duyệt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="5%">#</th>
+                                <th scope="col" width="15%">Họ và tên</th>
+                                <th scope="col" width="20%">Email</th>
+                                <th scope="col" width="15%">Ngày sinh</th>
+                                <th scope="col" width="15%">Số điện thoại</th>
+                                <th scope="col" width="15%">Vai trò</th>
+                                <th scope="col" width="15%">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <nav>
+                    <ul class="pagination justify-content-end mb-0" id="pagination">
+                        <!-- Các nút phân trang sẽ được thêm động bằng JavaScript -->
+                    </ul>
+                </nav>
+            </div>
+            <!-- <div class="card-footer">
+                <nav>
+                    <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+                    </ul>
+                </nav>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Modal Sửa Tài khoản -->
+    <!-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel"><i class="fas fa-user-edit me-2"></i>Sửa thông tin tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-4 text-center">
+                                <div class="mb-3">
+                                    <img src="/api/placeholder/200/200" alt="User Avatar" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                                </div>
+                                <button type="button" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-camera me-1"></i>Thay đổi ảnh
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="username" value="nguyenvanA">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" value="nguyenvana@example.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fullname" class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" id="fullname" value="Nguyễn Văn A">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="phone" value="0901234567">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="birthday" class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" id="birthday" value="1990-01-01">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">Vai trò</label>
+                                    <select class="form-select" id="role">
+                                        <option value="admin" selected>Quản trị viên</option>
+                                        <option value="editor">Biên tập viên</option>
+                                        <option value="user">Người dùng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Trạng thái</label>
+                                    <select class="form-select" id="status">
+                                        <option value="active" selected>Hoạt động</option>
+                                        <option value="inactive">Không hoạt động</option>
+                                        <option value="pending">Chờ duyệt</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa chỉ</label>
+                            <textarea class="form-control" id="address" rows="2">123 Đường ABC, Quận 1, TP. Hồ Chí Minh</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="note" class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="note" rows="2"></textarea>
+                        </div>
+                        <hr>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="changePassword">
+                            <label class="form-check-label" for="changePassword">
+                                Thay đổi mật khẩu
+                            </label>
+                        </div>
+                        <div class="row password-fields" style="display: none;">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Hủy
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i>Lưu thay đổi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel"><i class="fas fa-user-edit me-2"></i>Sửa vai trò tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="text" id="user-id" style="display: none;">
+                        <div>Họ và tên: <span id="editName"></span></div>
+                        <div>Email: <span id="editEmail"></span></div>
+                        <div>Chọn vai trò</div>
+                        <select name="" id="selectRole">
+                            
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Hủy
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnSubmit">
+                        <i class="fas fa-save me-1"></i>Lưu thay đổi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+
+$(document).ready(function() {
+    var body = $('#table-body');
+    var pagination = $('#pagination');
+    var searchInput = $('.search-box');
+    var itemsPerPageSelect = $('#itemsPerPage'); // Thêm tham chiếu đến dropdown
+    var listRole = []; // Biến để lưu trữ danh sách vai trò
+    var users = []; // Biến để lưu trữ toàn bộ danh sách tài khoản
+    var filteredUsers = []; // Biến để lưu trữ danh sách tài khoản sau khi lọc
+    var currentPage = 1; // Trang hiện tại
+    var itemsPerPage = parseInt(itemsPerPageSelect.val()) || 5; // Khởi tạo từ dropdown, mặc định 5
+    var searchQuery = ''; // Chuỗi tìm kiếm
+
+    // Hàm lấy danh sách tài khoản
+    function loadUsers() {
+        $.ajax({
+            url: 'https://localhost:7001/api/user/account',
+            type: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(response) {
+                console.log('Users:', response);
+                users = response; // Lưu danh sách tài khoản
+                filteredUsers = users; // Ban đầu, danh sách lọc giống danh sách gốc
+                renderPage(currentPage); // Hiển thị trang đầu tiên
+            }, 
+            error: function(error) {
+                console.error('Error loading users:', error.responseText);
+            }
+        });
+    }
+
+    // Hàm lọc danh sách tài khoản dựa trên chuỗi tìm kiếm
+    function filterUsers(query) {
+        if (!query) {
+            filteredUsers = users; // Nếu không có chuỗi tìm kiếm, hiển thị tất cả
+        } else {
+            query = query.toLowerCase();
+            filteredUsers = users.filter(user =>
+                (user.fullName || '').toLowerCase().includes(query) || // Xử lý null/undefined
+                (user.email || '').toLowerCase().includes(query)
+            );
+        }
+    }
+
+    // Hàm hiển thị dữ liệu cho một trang cụ thể
+    function renderPage(page) {
+        body.empty(); // Xóa bảng
+        var start = (page - 1) * itemsPerPage;
+        var end = start + itemsPerPage;
+        var paginatedUsers = filteredUsers.slice(start, end); // Lấy danh sách bản ghi cho trang hiện tại
+
+        // Hiển thị bản ghi
+        if (paginatedUsers.length === 0) {
+            body.append('<tr><td colspan="7" class="text-center">Không tìm thấy tài khoản nào.</td></tr>');
+        } else {
+            paginatedUsers.forEach((user, index) => {
+                body.append(`
+                    <tr>
+                        <td>${start + index + 1}</td>
+                        <td>${user.fullName || ''}</td> <!-- Xử lý null/undefined -->
+                        <td>${user.email || ''}</td>
+                        <td>${user.dateOfBirth || ''}</td>
+                        <td>${user.phoneNumber || ''}</td>
+                        <td>${user.roleName || ''}</td>
+                        <td>
+                            <button class="btn btn-sm btn-edit text-white" data-bs-toggle="modal" data-bs-target="#editModal" 
+                            data-id="${user.id}" data-fullname="${user.fullName || ''}" data-email="${user.email || ''}">
+                                <i class="fas fa-edit me-1"></i>Sửa
+                            </button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        // Cập nhật thanh phân trang
+        renderPagination();
+    }
+
+    // Hàm tạo thanh phân trang
+    function renderPagination() {
+        pagination.empty(); // Xóa thanh phân trang cũ
+        var totalPages = Math.ceil(filteredUsers.length / itemsPerPage); // Tính tổng số trang
+
+        // Nút "Trước"
+        pagination.append(`
+            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                <a class="page-link" href="#" data-page="prev"><i class="fas fa-chevron-left"></i></a>
+            </li>
+        `);
+
+        // Các nút số trang
+        for (var i = 1; i <= totalPages; i++) {
+            pagination.append(`
+                <li class="page-item ${i === currentPage ? 'active' : ''}">
+                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                </li>
+            `);
+        }
+
+        // Nút "Sau"
+        pagination.append(`
+            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                <a class="page-link" href="#" data-page="next"><i class="fas fa-chevron-right"></i></a>
+            </li>
+        `);
+    }
+
+    // Hàm lấy danh sách vai trò
+    function loadRoles(callback) {
+        if (listRole.length > 0) {
+            populateRoles(listRole);
+            if (callback) callback();
+        } else {
+            $.ajax({
+                url: 'https://localhost:7001/api/role',
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    console.log('Roles:', response);
+                    listRole = response;
+                    populateRoles(response);
+                    if (callback) callback();
+                }, 
+                error: function(error) {
+                    console.error('Error loading roles:', error.responseText);
+                }
+            });
+        }
+    }
+
+    // Hàm điền danh sách vai trò vào dropdown
+    function populateRoles(roles) {
+        $('#selectRole').empty(); // Xóa các option cũ
+        roles.forEach((role) => {
+            $('#selectRole').append(`
+                <option value="${role.id}">${role.name}</option>
+            `);
+        });
+    }
+
+    // Gọi hàm loadUsers khi trang được tải
+    loadUsers();
+
+    // Xử lý sự kiện khi nhấn nút "Sửa"
+    $(document).on('click', '.btn-edit', function(e) {
+        e.preventDefault();
+        $('#editName').text($(this).data('fullname'));  
+        $('#editEmail').text($(this).data('email'));  
+        $('#user-id').val($(this).data('id'));
+        loadRoles();
+    });
+
+    // Xử lý sự kiện khi nhấn nút "Lưu thay đổi"
+    $('#btnSubmit').on('click', function(e) {
+        e.preventDefault();
+        const userId = $('#user-id').val();
+        const roleId = $('#selectRole').val();
+        
+        if (!userId || !roleId) {
+            alert('Vui lòng điền đầy đủ thông tin!');
+            return;
+        }
+        
+        const updateData = {
+            Id: userId,
+            RoleId: roleId
+        };
+        
+        $.ajax({
+            url: 'https://localhost:7001/api/user/update-role',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(updateData),
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(response) {
+                console.log('Update successful:', response);
+                alert('Cập nhật vai trò thành công!');
+                $('#editModal').modal('hide');
+                searchQuery = ''; // Xóa chuỗi tìm kiếm sau khi cập nhật
+                searchInput.val(''); // Xóa ô tìm kiếm
+                loadUsers(); // Tải lại danh sách người dùng
+            },
+            error: function(error) {
+                console.error('Error updating role:', error.responseText);
+                alert('Có lỗi xảy ra khi cập nhật vai trò. Vui lòng thử lại!');
+            }
+        });
+    });
+
+    // Xử lý sự kiện khi nhấn các nút phân trang
+    $(document).on('click', '.page-link', function(e) {
+        e.preventDefault();
+        var page = $(this).data('page');
+        var totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+
+        if (page === 'prev' && currentPage > 1) {
+            currentPage--;
+        } else if (page === 'next' && currentPage < totalPages) {
+            currentPage++;
+        } else if (typeof page === 'number') {
+            currentPage = page;
+        }
+
+        renderPage(currentPage);
+    });
+
+    // Xử lý sự kiện khi nhập vào ô tìm kiếm
+    searchInput.on('input', function() {
+        searchQuery = $(this).val().trim();
+        currentPage = 1; // Quay về trang đầu khi tìm kiếm
+        filterUsers(searchQuery);
+        renderPage(currentPage);
+    });
+
+    // Xử lý sự kiện khi thay đổi số bản ghi trên mỗi trang
+    itemsPerPageSelect.on('change', function() {
+        itemsPerPage = parseInt($(this).val()); // Cập nhật itemsPerPage
+        currentPage = 1; // Quay về trang đầu
+        renderPage(currentPage);
+    });
+});
+</script>
+</body>
+</html>

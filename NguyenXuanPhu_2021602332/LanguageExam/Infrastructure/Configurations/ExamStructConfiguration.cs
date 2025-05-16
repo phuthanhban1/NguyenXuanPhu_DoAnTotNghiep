@@ -14,9 +14,15 @@ namespace Infrastructure.Configurations
                 .WithMany(q => q.ExamStructs)
                 .HasForeignKey(q => q.QuestionBankId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(e => e.UserCreate)
+                .WithMany(u => u.ExamStructs)
+                .HasForeignKey(e => e.UserCreateId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
+    }
 
         
-    }
+    
     
 }

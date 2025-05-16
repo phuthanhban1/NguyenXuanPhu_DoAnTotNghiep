@@ -16,6 +16,16 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
+        public async Task<bool> FindByName(string language, string name)
+        {
+            var qb = await _context.Set<QuestionBank>().FirstOrDefaultAsync(q => q.Language == language && q.Name == name);
+            if(qb != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public async Task<IEnumerable<QuestionBank>> GetByLanguageManager(string language, Guid managerId)
         {
             var list = await _context.Set<QuestionBank>().Where(q => q.Language == language && q.ManagerId == managerId).ToListAsync();

@@ -36,26 +36,52 @@
             padding: 0 2px;
             border-radius: 2px;
         }
+        .toast-container {
+            z-index: 9999;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" />
+
+<!-- jQuery và Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap Datepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
+
+<!-- Ngôn ngữ tiếng Việt cho datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/locales/bootstrap-datepicker.vi.min.js"></script>
 </head>
 <body class="bg-light">
     <div class="container py-5">
+        <!-- Toast Container -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Thông báo</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body"></div>
+            </div>
+        </div>
+
         <!-- Header with Breadcrumb -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
-                        <li class="breadcrumb-item active">TOEIC 2024</li>
+                        <li class="breadcrumb-item active question-bank-name"></li>
                     </ol>
                 </nav>
-                <h2 class="mt-2 mb-1">Ngân hàng câu hỏi TOEIC 2024</h2>
+                <h2 class="mt-2 mb-1">Ngân hàng câu hỏi <span class="question-bank-name"></span></h2>
                 <div class="d-flex align-items-center">
-                    <span class="badge bg-success me-2">Đang hoạt động</span>
-                    <small class="text-muted">Cập nhật lần cuối: 01/03/2024</small>
+                    <span class="badge bg-success me-2" id="status"></span>
                 </div>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal" id="btnAddSkill">
                 <i class="fas fa-plus me-2"></i>Thêm kỹ năng mới
             </button>
         </div>
@@ -64,96 +90,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Danh sách kỹ năng</h4>
-                
-                <!-- Skills Grid -->
-                <div class="row g-4">
-                    <!-- Listening Skill -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card skill-card" data-skill="listening">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="mb-0"><i class="fas fa-headphones text-primary me-2"></i>Listening</h5>
-                                    
-                                </div>
-                                
-                                <!-- Thông tin người tạo và reviewer -->
-                                <div class="mb-3">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="fas fa-user-edit text-primary me-2"></i>
-                                        <div class="flex-grow-1">
-                                            <small class="text-muted d-block">Người tạo câu hỏi</small>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A" class="rounded-circle me-2" width="24" height="24">
-                                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user1">
-                                                        Nguyễn Văn A
-                                                    </a>
-                                                </div>
-                                                <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('creator', 'listening')">
-                                                    <i class="fas fa-exchange-alt"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex align-items-center mb-2">
-                                            <i class="fas fa-clock text-warning me-2"></i>
-                                            <div class="flex-grow-1">
-                                                <small class="text-muted d-block">Hạn tạo đề</small>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <div class="text-danger" id="createDueDate">31/12/2024</div>
-                                                    <button class="btn btn-sm btn-outline-primary" onclick="showEditDeadlineModal('create')">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-user-check text-success me-2"></i>
-                                        <div class="flex-grow-1">
-                                            <small class="text-muted d-block">Người review</small>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="https://ui-avatars.com/api/?name=Tran+Thi+B" class="rounded-circle me-2" width="24" height="24">
-                                                    <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="user2">
-                                                        Trần Thị B
-                                                    </a>
-                                                </div>
-                                                <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('reviewer', 'listening')">
-                                                    <i class="fas fa-exchange-alt"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Hạn chót -->
-                                <div class="mb-3">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-clock text-warning me-2"></i>
-                                        <div class="flex-grow-1">
-                                            <small class="text-muted d-block">Hạn duyệt đề</small>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="text-danger" id="reviewDueDate">31/12/2024</div>
-                                                <button class="btn btn-sm btn-outline-primary" onclick="showEditDeadlineModal('review')">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                    
-                </div>
+                <div class="row g-4 list-skill"></div>
             </div>
         </div>
     </div>
@@ -172,10 +109,10 @@
                             <label class="form-label">Kỹ năng</label>
                             <select class="form-select" id="skillSelect" required>
                                 <option value="">Chọn kỹ năng</option>
-                                <option value="listening" data-icon="fa-headphones">Nghe</option>
-                                <option value="speaking" data-icon="fa-microphone">Nói</option>
-                                <option value="reading" data-icon="fa-book">Đọc</option>
-                                <option value="writing" data-icon="fa-pen">Viết</option>
+                                <option value="nghe" data-icon="fa-headphones" id="listeningSkill">nghe</option>
+                                <option value="nói" data-icon="fa-microphone" id="speakingSkill">nói</option>
+                                <option value="đọc" data-icon="fa-book" id="readingSkill">đọc</option>
+                                <option value="viết" data-icon="fa-pen" id="writingSkill">viết</option>
                             </select>
                         </div>
                     </form>
@@ -200,7 +137,7 @@
                     <div class="text-center mb-4">
                         <img src="" id="userAvatar" class="rounded-circle mb-3" width="100" height="100">
                         <h4 id="userName" class="mb-0"></h4>
-                        <p class="text-muted" id="userRole">Giáo viên</p>
+                        <p class="text-muted" id="userRole"></p>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -225,7 +162,7 @@
         </div>
     </div>
 
-    <!-- Update Change User Modal -->
+    <!-- Change User Modal -->
     <div class="modal fade" id="changeUserModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -240,31 +177,22 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Vai trò</label>
-                        <input type="text" class="form-control" id="userRole" readonly>
+                        <input type="text" class="form-control" id="userRoleChange" readonly>
                     </div>
-                    
-                    <!-- Thêm thanh tìm kiếm email -->
                     <div class="mb-3">
                         <label class="form-label">Tìm kiếm người phụ trách</label>
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="fas fa-envelope"></i>
                             </span>
-                            <input type="email" class="form-control" id="searchEmail" 
-                                   placeholder="Nhập email để tìm kiếm...">
+                            <input type="email" class="form-control" id="searchEmail" placeholder="Nhập email để tìm kiếm...">
                         </div>
                     </div>
-
-                    <!-- Thêm danh sách kết quả tìm kiếm -->
                     <div id="searchResults" class="mb-3 d-none">
                         <label class="form-label">Kết quả tìm kiếm</label>
-                        <div class="list-group" id="userSearchList">
-                            <!-- Kết quả tìm kiếm sẽ được thêm vào đây -->
-                        </div>
+                        <div class="list-group" id="userSearchList"></div>
                     </div>
-
-                    <!-- Preview người được chọn -->
-                    <div id="newUserPreview" class="d-none">
+                    <!-- <div id="newUserPreview" class="d-none">
                         <label class="form-label">Người được chọn</label>
                         <div class="card">
                             <div class="card-body">
@@ -287,7 +215,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -308,9 +236,11 @@
                 <div class="modal-body">
                     <form id="editDeadlineForm">
                         <input type="hidden" id="deadlineType">
+                        <input type="hidden" id="skillId">
                         <div class="mb-3">
                             <label class="form-label">Ngày hết hạn</label>
-                            <input type="date" class="form-control" id="deadlineDate" required>
+                            <input type="text" placeholder="DD/MM/YYYY" class="form-control" id="deadlineDate" required>
+                            
                         </div>
                     </form>
                 </div>
@@ -325,157 +255,34 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Lấy ID từ URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const examId = urlParams.get('id');
-        console.log('Exam ID:', examId); // Để kiểm tra ID đã lấy được
-
-        // Data mẫu cho người dùng
-        const userData = {
-            user1: {
-                name: 'Nguyễn Văn A',
-                avatar: 'https://ui-avatars.com/api/?name=Nguyen+Van+A',
-                role: 'Giáo viên TOEIC',
-                email: 'nguyenvana@example.com',
-                phone: '0123456789',
-                specialty: 'Listening & Speaking',
-                experience: '5 năm kinh nghiệm giảng dạy TOEIC'
-            },
-            user2: {
-                name: 'Trần Thị B',
-                avatar: 'https://ui-avatars.com/api/?name=Tran+Thi+B',
-                role: 'Giáo viên TOEIC',
-                email: 'tranthib@example.com',
-                phone: '0987654321',
-                specialty: 'Reading & Writing',
-                experience: '7 năm kinh nghiệm giảng dạy TOEIC'
-            },
-            user3: {
-                name: 'Lê Văn C',
-                avatar: 'https://ui-avatars.com/api/?name=Le+Van+C',
-                role: 'Giáo viên TOEIC',
-                email: 'levanc@example.com',
-                phone: '0369852147',
-                specialty: 'Speaking & Pronunciation',
-                experience: '3 năm kinh nghiệm giảng dạy TOEIC'
-            },
-            user4: {
-                name: 'Phạm Thị D',
-                avatar: 'https://ui-avatars.com/api/?name=Pham+Thi+D',
-                role: 'Giáo viên TOEIC',
-                email: 'phamthid@example.com',
-                phone: '0123456789',
-                specialty: 'All Skills',
-                experience: '10 năm kinh nghiệm'
-            }
-        };
-
-        // Xử lý hiển thị thông tin trong modal
-        const userDetailModal = document.getElementById('userDetailModal');
-        userDetailModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const userId = button.getAttribute('data-user');
-            const user = userData[userId];
-
-            // Cập nhật thông tin trong modal
-            this.querySelector('#userAvatar').src = user.avatar;
-            this.querySelector('#userName').textContent = user.name;
-            this.querySelector('#userRole').textContent = user.role;
-            this.querySelector('#userEmail').textContent = user.email;
-            this.querySelector('#userPhone').textContent = user.phone;
-            this.querySelector('#userSpecialty').textContent = user.specialty;
-            this.querySelector('#userExperience').textContent = user.experience;
+        $('#deadlineDate').datepicker({
+            dateFormat: "dd/mm/yy",
+            language: "vi",
+            orientation: "bottom auto",
+            autoclose: true,
         });
+        // Configuration
+        const API_BASE_URL = 'https://localhost:7001';
+        let skills = [];
 
-        // Xử lý modal thay đổi người phụ trách
-        const changeUserModal = document.getElementById('changeUserModal');
-        const newUserSelect = document.getElementById('newUserSelect');
-        const newUserPreview = document.getElementById('newUserPreview');
-        let currentSkill = '';
-        let currentRole = '';
-        let selectedUserId = null;
-
-        function showChangeUserModal(role, skill) {
-            currentSkill = skill;
-            currentRole = role;
-            
-            // Cập nhật tiêu đề và thông tin trong modal
-            const modal = document.getElementById('changeUserModal');
-            modal.querySelector('#skillName').value = skill.charAt(0).toUpperCase() + skill.slice(1);
-            modal.querySelector('#userRole').value = role === 'creator' ? 'Người tạo câu hỏi' : 'Người review';
-            
-            // Reset form
-            document.getElementById('searchEmail').value = '';
-            document.getElementById('searchResults').classList.add('d-none');
-            document.getElementById('newUserPreview').classList.add('d-none');
-            selectedUserId = null;
-            
-            // Hiển thị modal
-            const modalInstance = new bootstrap.Modal(modal);
-            modalInstance.show();
+        // Utility Functions
+        function showToast(message, type = 'success') {
+            const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+            const toastElement = document.getElementById('liveToast');
+            toastElement.classList.remove('bg-success', 'bg-danger', 'bg-warning');
+            toastElement.classList.add(`bg-${type}`);
+            document.querySelector('.toast-body').textContent = message;
+            toast.show();
         }
 
-        // Xử lý khi xác nhận thay đổi
-        document.getElementById('confirmChangeUser').addEventListener('click', function() {
-            if (!selectedUserId) {
-                alert('Vui lòng chọn người phụ trách mới');
-                return;
-            }
+        function formatDate(input) {
+            const parts = input.split('-'); // ['0001', '01', '01']
+            const year = parts[0];
+            const month = parts[1];
+            const day = parts[2];
 
-            const user = userData[selectedUserId];
-            if (user) {
-                // Gọi API để cập nhật người phụ trách
-                $.ajax({
-                    url: `https://localhost:7001/api/skill/${currentSkill}/change-user`,
-                    type: 'PUT',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        role: currentRole,
-                        userId: selectedUserId
-                    }),
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    success: function(response) {
-                        // Cập nhật UI
-                        const skillCard = document.querySelector(`[data-skill="${currentSkill}"]`);
-                        const userSection = currentRole === 'creator' 
-                            ? skillCard.querySelector('.fa-user-edit').closest('.d-flex').querySelector('.d-flex.align-items-center')
-                            : skillCard.querySelector('.fa-user-check').closest('.d-flex').querySelector('.d-flex.align-items-center');
-                        
-                        userSection.innerHTML = `
-                            <div class="d-flex align-items-center">
-                                <img src="${user.avatar}" class="rounded-circle me-2" width="24" height="24">
-                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${selectedUserId}">
-                                    ${user.name}
-                                </a>
-                            </div>
-                            <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('${currentRole}', '${currentSkill}')">
-                                <i class="fas fa-exchange-alt"></i>
-                            </button>
-                        `;
-
-                        // Đóng modal
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('changeUserModal'));
-                        modal.hide();
-
-                        // Hiển thị thông báo thành công
-                        alert('Đã thay đổi người phụ trách thành công!');
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                        alert('Có lỗi xảy ra khi thay đổi người phụ trách. Vui lòng thử lại!');
-                    }
-                });
-            }
-        });
-
-        // Cập nhật phần xử lý tìm kiếm email
-        const searchEmail = document.getElementById('searchEmail');
-        const searchResults = document.getElementById('searchResults');
-        const userSearchList = document.getElementById('userSearchList');
-
-        // Thêm debounce function để tránh gọi quá nhiều lần khi người dùng đang nhập
+            return `${day}-${month}-${year}`; // '01-01-0001'
+        }
         function debounce(func, wait) {
             let timeout;
             return function executedFunction(...args) {
@@ -488,43 +295,354 @@
             };
         }
 
-        // Hàm tìm kiếm và hiển thị kết quả
-        function searchUsers(searchTerm) {
-            searchTerm = searchTerm.toLowerCase();
+        function getExamId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Skill Card Template
+        function formSkill(skill) {
+            return `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card skill-card" data-skill="${skill.name}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">${skill.name}</h5>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-user-edit text-primary me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <small class="text-muted d-block">Người tạo câu hỏi</small>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img src="${skill.createdUserAvatar || 'https://ui-avatars.com/api/?name=Unknown'}" class="rounded-circle me-2" width="24" height="24">
+                                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${skill.createdUserId || 'unknown'}">
+                                                    ${skill.createdUserName || 'Chưa có'}
+                                                </a>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('creator', '${skill.name}', '${skill.id}')">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-clock text-warning me-2"></i>
+                                        <div class="flex-grow-1">
+                                            <small class="text-muted d-block">Hạn tạo câu hỏi</small>
+                                            <div class="d-flex align    align-items-center justify-content-between">
+                                                <div class="text-danger" id="createDueDate-${skill.id}">${formatDate(skill.createDue)}</div>
+                                                <button class="btn btn-sm btn-outline-primary" onclick="showEditDeadlineModal('create', '${skill.id}', '${skill.createDue}')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-user-check text-success me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <small class="text-muted d-block">Người đánh giá</small>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img src="${skill.reviewedUserAvatar || 'https://ui-avatars.com/api/?name=Unknown'}" class="rounded-circle me-2" width="24" height="24">
+                                                <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${skill.reviewedUserId || 'unknown'}">
+                                                    ${skill.reviewedUserName || 'Chưa có'}
+                                                </a>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('reviewer', '${skill.name}', '${skill.id}')">
+                                                <i class="fas fa-exchange-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-clock text-warning me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <small class="text-muted d-block">Hạn duyệt đề</small>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="text-danger" id="reviewDueDate-${skill.id}">${formatDate(skill.reviewDue)}</div>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="showEditDeadlineModal('review', '${skill.id}', '${skill.createDue}')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // API Functions
+        function fetchQuestionBank(id) {
+            return $.ajax({
+                url: `${API_BASE_URL}/api/questionbank/detail/${id}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true }
+            });
+        }
+
+        function fetchGetAccount(roleNumber) {
+            return $.ajax({
+                url: `${API_BASE_URL}/api/user/account-by-role/${roleNumber}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true }
+            });
+        }
+        function fetchSkills(bankId) {
+            return $.ajax({
+                url: `${API_BASE_URL}/api/skill/bank-id/${bankId}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true }
+            });
+        }
+
+        function addSkill(skillData) {
+            return $.ajax({
+                url: `${API_BASE_URL}/api/skill`,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(skillData),
+                xhrFields: { withCredentials: true }
+            });
+        }
+
+        // api đổi user id trong skill
+        function changeUser(skillId, type, userId) {
+            var skill = null
+            console.log('418', type)
+            if(type == 'creator') {
+                skill = {
+                    Id: skillId,
+                    CreatedUserId: userId
+                }
+            } else {
+                skill = {
+                    Id: skillId,
+                    ReviewedUserId: userId
+                }
+            }
+            return $.ajax({
+                url: `${API_BASE_URL}/api/skill/`,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(skill),
+                xhrFields: { withCredentials: true }
+            });
+        }
+
+        function updateDeadline(id, type, date) {
+            var skill = null
+            // alert(date)
+            function convertToDateOnlyFormat(dateStr) {
+                const [day, month, year] = dateStr.split('/');
+                return `${year}-${month}-${day}`;
+            }
+            if(type == 'create') {
+                skill = {
+                    Id: id,
+                    CreatedDue: convertToDateOnlyFormat(date)
+                }
+            } else {
+                skill = {
+                    Id: id,
+                    ReviewedDue: convertToDateOnlyFormat(date)
+                }
+            }
             
-            // Nếu input rỗng, ẩn kết quả
-            if (!searchTerm) {
-                searchResults.classList.add('d-none');
+            return $.ajax({
+                url: `${API_BASE_URL}/api/skill`,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(skill),
+                xhrFields: { withCredentials: true }
+            });
+        }
+
+        // Mock user data (thay bằng API trong thực tế)
+        var userData = [];
+        // Initialize Page
+        $(document).ready(function() {
+            $('#deadlineDate').datepicker({
+                format: "dd/mm/yyyy",
+                language: "vi",
+                orientation: "bottom auto",
+                endDate: '+0d',
+                autoclose: true
+            });
+            const examId = getExamId();
+            if (!examId) {
+                showToast('Không tìm thấy ID ngân hàng câu hỏi', 'danger');
                 return;
             }
 
-            // Tìm kiếm trong userData
-            const matchedUsers = Object.entries(userData).filter(([id, user]) => {
-                return user.email.toLowerCase().includes(searchTerm) || 
-                       user.name.toLowerCase().includes(searchTerm);
-            });
+            // Load question bank details
+            fetchQuestionBank(examId)
+                .done(response => {
+                    $('.question-bank-name').text(response.name);
+                    $('#status').text({
+                        0: 'Đang tạo',
+                        1: 'Đang hoạt động',
+                        2: 'Đã khóa'
+                    }[response.status] || 'Không xác định');
+                })
+                .fail(error => {
+                    console.error('Error fetching question bank:', error);
+                    showToast('Không thể tải thông tin ngân hàng câu hỏi', 'danger');
+                });
 
-            // Hiển thị kết quả với highlight từ khóa tìm kiếm
+            // Load skills
+            fetchSkills(examId)
+                .done(response => {
+                    skills = response.map(s => s.name);
+                    console.log('479', skills)
+                    if (skills.length >= 4) {
+                        $('#btnAddSkill').hide();
+                    }
+                    response.forEach(skill => $('.list-skill').append(formSkill(skill)));
+                })
+                .fail(error => {
+                    console.error('Error fetching skills:', error);
+                    showToast('Không thể tải danh sách kỹ năng', 'danger');
+                });
+        });
+
+        // User Detail Modal
+        $('#userDetailModal').on('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const userId = button.getAttribute('data-user');
+            const user = userData[userId] || {
+                name: 'Chưa có',
+                avatar: 'https://ui-avatars.com/api/?name=Unknown',
+                role: 'N/A',
+                email: 'N/A',
+                phone: 'N/A',
+                specialty: 'N/A',
+                experience: 'N/A'
+            };
+
+            this.querySelector('#userAvatar').src = user.avatar;
+            this.querySelector('#userName').textContent = user.name;
+            this.querySelector('#userRole').textContent = user.role;
+            this.querySelector('#userEmail').textContent = user.email;
+            this.querySelector('#userPhone').textContent = user.phone;
+            this.querySelector('#userSpecialty').textContent = user.specialty;
+            this.querySelector('#userExperience').textContent = user.experience;
+        });
+
+        // Change User Modal
+        let currentSkill = '';
+        let currentRole = '';
+        let selectedUserId = null;
+
+        var roleName = '';
+        var userChangeId = null;
+        var skillId = null;
+        function showChangeUserModal(role, skill, id) {
+            
+            currentRole = role;
+            roleName = role;
+            skillId = id;
+            fetchGetAccount(role === 'creator' ? 1 : 2)
+                .done(response => {
+                    userData = response
+                    console.log('588', userData)
+
+                })
+                .fail(error => {
+                    console.error('Error fetching skills:', error);
+                    showToast('Không thể tải danh sách kỹ năng', 'danger');
+                });
+            $('#skillName').val(skill.charAt(0).toUpperCase() + skill.slice(1));
+            $('#userRoleChange').val(role === 'creator' ? 'Người tạo câu hỏi' : 'Người đánh giá');
+            $('#searchEmail').val('');
+            $('#searchResults').addClass('d-none');
+            $('#newUserPreview').addClass('d-none');
+            selectedUserId = null;
+
+            new bootstrap.Modal($('#changeUserModal')).show();
+        }
+
+        $('#confirmChangeUser').on('click', function() {
+            if (!selectedUserId) {
+                showToast('Vui lòng chọn người phụ trách mới', 'warning');
+                return;
+            }
+
+            changeUser(skillId, roleName, selectedUserId)
+                .done(response => {
+                    const user = userData.find(u => u.id == selectedUserId);
+                    const skillCard = $(`.skill-card[data-skill="${currentSkill}"]`);
+                    const userSection = currentRole === 'creator'
+                        ? skillCard.find('.fa-user-edit').closest('.d-flex').find('.d-flex.align-items-center')
+                        : skillCard.find('.fa-user-check').closest('.d-flex').find('.d-flex.align-items-center');
+
+                    userSection.html(`
+                        <div class="d-flex align-items-center">
+                            
+                            <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#userDetailModal" data-user="${selectedUserId}">
+                                ${user.fullName == null ? "" : user.fullName}
+                            </a>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary" onclick="showChangeUserModal('${currentRole}', '${currentSkill}')">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    `);
+
+                    bootstrap.Modal.getInstance($('#changeUserModal')[0]).hide();
+                    Swal.fire({
+                        title: 'Xóa thành công!',
+                        icon: 'success',
+                        timer: 1500, // Hiển thị trong 1.5 giây
+                        showConfirmButton: false
+                        }).then(() => {
+                        // Đợi thêm một chút rồi reload trang
+                        setTimeout(() => {
+                        location.reload();
+                        }, 200); // thêm 200ms để đảm bảo hoàn tất hiệu ứng
+                    });
+                })
+                .fail(error => {
+                    console.log('Error changing user:', error.textContent);
+                    showToast('Có lỗi khi thay đổi người phụ trách', 'danger');
+                });
+        });
+
+        // User Search
+        const debouncedSearch = debounce(searchTerm => {
+            searchTerm = searchTerm.toLowerCase();
+            const searchResults = $('#searchResults');
+            const userSearchList = $('#userSearchList');
+
+            if (!searchTerm) {
+                searchResults.addClass('d-none');
+                return;
+            }
+
+            const matchedUsers = userData.filter(user =>
+                user.email.toLowerCase().includes(searchTerm)
+            );
+            console.log('613', matchedUsers)
             if (matchedUsers.length > 0) {
-                userSearchList.innerHTML = matchedUsers.map(([id, user]) => {
-                    // Highlight phần email match với searchTerm
+                userSearchList.empty()
+                userSearchList.append(matchedUsers.map(user => {
                     const highlightedEmail = user.email.replace(
                         new RegExp(searchTerm, 'gi'),
                         match => `<span class="bg-warning">${match}</span>`
                     );
+                    const highlightedName = 
+                        `<span class="bg-warning">${user.fullName == null ? "" : user.fullName}</span>`
                     
-                    // Highlight phần tên match với searchTerm
-                    const highlightedName = user.name.replace(
-                        new RegExp(searchTerm, 'gi'),
-                        match => `<span class="bg-warning">${match}</span>`
-                    );
-
                     return `
-                        <button type="button" 
-                                class="list-group-item list-group-item-action user-search-item"
-                                data-user-id="${id}">
+                        <button type="button" class="list-group-item list-group-item-action user-search-item" data-user-id="${user.id}">
                             <div class="d-flex align-items-center">
-                                <img src="${user.avatar}" class="rounded-circle me-2" width="32" height="32">
+                                <img src="${user.imageFaceBase64 != null ? user.imageFaceBase64 : ""}" class="rounded-circle me-2" width="32" height="32">
                                 <div>
                                     <div class="fw-bold">${highlightedName}</div>
                                     <small class="text-muted">${highlightedEmail}</small>
@@ -532,295 +650,131 @@
                             </div>
                         </button>
                     `;
-                }).join('');
-                
-                searchResults.classList.remove('d-none');
+                }).join(''));
+                searchResults.removeClass('d-none');
 
-                // Thêm event listeners cho các kết quả
-                document.querySelectorAll('.user-search-item').forEach(item => {
-                    item.addEventListener('click', function() {
-                        const userId = this.getAttribute('data-user-id');
-                        const user = userData[userId];
-                        selectedUserId = userId;
+                $('.user-search-item').on('click', function() {
+                    const userId = $(this).data('user-id');
+                    const user = userData.find(u => u.id === userId);
+                    selectedUserId = userId;
+                    userChangeId = userId;
+                    
+                    $('#previewEmail').text(user.email);
+                    
 
-                        // Hiển thị preview
-                        document.getElementById('previewAvatar').src = user.avatar;
-                        document.getElementById('previewName').textContent = user.name;
-                        document.getElementById('previewSpecialty').textContent = user.specialty;
-                        document.getElementById('previewEmail').textContent = user.email;
-                        document.getElementById('previewExperience').textContent = user.experience;
-                        document.getElementById('newUserPreview').classList.remove('d-none');
-
-                        // Đánh dấu item được chọn và bỏ đánh dấu các item khác
-                        document.querySelectorAll('.user-search-item').forEach(i => 
-                            i.classList.remove('active'));
-                        this.classList.add('active');
-
-                        // Cập nhật giá trị input search
-                        searchEmail.value = user.email;
-                    });
+                    $('.user-search-item').removeClass('active');
+                    $(this).addClass('active');
+                    $('#searchEmail').val(user.email);
+                    $('#userSearchList').empty()
                 });
             } else {
-                userSearchList.innerHTML = `
+                userSearchList.html(`
                     <div class="list-group-item text-center text-muted">
                         Không tìm thấy kết quả cho "${searchTerm}"
                     </div>
-                `;
-                searchResults.classList.remove('d-none');
+                `);
+                searchResults.removeClass('d-none');
+                
             }
-        }
+        }, 300);
 
-        // Sử dụng debounce để tối ưu hiệu suất
-        const debouncedSearch = debounce((searchTerm) => {
-            searchUsers(searchTerm);
-        }, 300); // Đợi 300ms sau khi người dùng ngừng gõ
-
-        // Xử lý sự kiện input
-        searchEmail.addEventListener('input', function(e) {
-            debouncedSearch(e.target.value);
-        });
-
-        // Thêm xử lý click outside để ẩn kết quả tìm kiếm
-        document.addEventListener('click', function(e) {
-            if (!searchEmail.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.classList.add('d-none');
-            }
-        });
-
-        // Thêm xử lý focus vào input để hiển thị lại kết quả
-        searchEmail.addEventListener('focus', function() {
+        $('#searchEmail').on('input', function() {
+            console.log('665', this.value)
+            debouncedSearch(this.value);
+        }).on('focus', function() {
             if (this.value) {
-                searchResults.classList.remove('d-none');
+                $('#searchResults').removeClass('d-none');
             }
         });
 
-        // Hàm lấy danh sách kỹ năng hiện có
-        function getExistingSkills() {
-            const skillCards = document.querySelectorAll('.skill-card');
-            return Array.from(skillCards).map(card => {
-                const skillName = card.querySelector('h5').textContent.trim();
-                const iconClass = card.querySelector('i').className.split(' ')[1];
-                return {
-                    name: skillName,
-                    icon: iconClass
-                };
-            });
-        }
-
-        // Xử lý hiển thị modal thêm kỹ năng
-        const addSkillModal = document.getElementById('addSkillModal');
-        addSkillModal.addEventListener('show.bs.modal', function() {
-            const existingSkills = getExistingSkills();
-            const skillSelect = document.getElementById('skillSelect');
-            
-            // Lưu lại tất cả options
-            const allOptions = Array.from(skillSelect.options);
-            
-            // Ẩn các options tương ứng với kỹ năng đã tồn tại
-            allOptions.forEach(option => {
-                if (option.value) { // Bỏ qua option mặc định "Chọn kỹ năng"
-                    const iconClass = `fa-${option.dataset.icon}`;
-                    const isExisting = existingSkills.some(skill => 
-                        skill.icon.includes(iconClass)
-                    );
-                    option.disabled = isExisting;
-                    if (isExisting) {
-                        option.textContent += ' (Đã tồn tại)';
-                    }
-                }
-            });
+        $(document).on('click', e => {
+            if (!$('#searchEmail')[0].contains(e.target) && !$('#searchResults')[0].contains(e.target)) {
+                $('#searchResults').addClass('d-none');
+            }
         });
 
-        // Reset modal khi đóng
-        addSkillModal.addEventListener('hidden.bs.modal', function() {
-            const skillSelect = document.getElementById('skillSelect');
-            Array.from(skillSelect.options).forEach(option => {
-                option.disabled = false;
-                option.textContent = option.textContent.replace(' (Đã tồn tại)', '');
-            });
-            document.getElementById('addSkillForm').reset();
+        // Add Skill Modal
+        $('#addSkillModal').on('show.bs.modal', function() {
+            const skillSelect = $('#skillSelect');
+            skillSelect.find('option').prop('disabled', false);
+            console.log('651', skills)
+            if(skills.includes('đọc')) $('#readingSkill').hide();
+            if(skills.includes('nghe')) $('#listeningSkill').hide();
+            if(skills.includes('nói')) $('#speakingSkill').hide();
+            if(skills.includes('viết')) $('#writingSkill').hide();
+
+           
+        }).on('hidden.bs.modal', function() {
+            $('#addSkillForm')[0].reset();
         });
 
-        // Hàm thêm kỹ năng mới
         function addNewSkill() {
-            const skillSelect = document.getElementById('skillSelect');
-            const selectedOption = skillSelect.options[skillSelect.selectedIndex];
-            
+            const skillSelect = $('#skillSelect');
+            const selectedOption = skillSelect[0].options[skillSelect[0].selectedIndex];
+
             if (!selectedOption.value) {
-                alert('Vui lòng chọn kỹ năng');
+                showToast('Vui lòng chọn kỹ năng', 'warning');
                 return;
             }
 
             const skillData = {
-                name: selectedOption.textContent.replace(' (Đã tồn tại)', ''),
-                icon: `fa-${selectedOption.dataset.icon}`,
-                type: selectedOption.value
+                Name: selectedOption.textContent,
+                QuestionBankId: getExamId()
             };
 
-            // Gọi API để thêm kỹ năng mới
-            $.ajax({
-                url: `https://localhost:7001/api/skill`,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(skillData),
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    // Thêm card kỹ năng mới vào UI
-                    const skillsGrid = document.querySelector('.row.g-4');
-                    const newSkillCard = createSkillCard(skillData);
-                    skillsGrid.appendChild(newSkillCard);
-
-                    // Đóng modal
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addSkillModal'));
-                    modal.hide();
-
-                    // Hiển thị thông báo thành công
-                    alert('Đã thêm kỹ năng mới thành công!');
-                },
-                error: function(error) {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi thêm kỹ năng mới. Vui lòng thử lại!');
-                }
-            });
-        }
-
-        // Hàm tạo card kỹ năng mới
-        function createSkillCard(skillData) {
-            const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-4';
-            col.innerHTML = `
-                <div class="card skill-card" data-skill="${skillData.type}">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0"><i class="fas ${skillData.icon} text-primary me-2"></i>${skillData.name}</h5>
-                        </div>
-                        <!-- Thêm các phần khác của card tương tự như card mẫu -->
-                    </div>
-                </div>
-            `;
-            return col;
-        }
-
-        // Format date to dd/mm/yyyy
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('vi-VN');
-        }
-
-        // Update deadline displays
-        function updateDeadlines(createDue, reviewDue) {
-            document.getElementById('createDueDate').textContent = formatDate(createDue);
-            document.getElementById('reviewDueDate').textContent = formatDate(reviewDue);
-        }
-
-        // Get exam details from API
-        function getExamDetails(examId) {
-            $.ajax({
-                url: `https://localhost:7001/api/questionbank/${examId}`,
-                type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    // Update deadlines
-                    if (response.questionCreateDue && response.questionReviewDue) {
-                        updateDeadlines(response.questionCreateDue, response.questionReviewDue);
+            addSkill(skillData)
+                .done(response => {
+                    skills.push(skillData.Name);
+                    if (skills.length >= 4) {
+                        $('#btnAddSkill').hide();
                     }
-                    // ... existing code for other exam details ...
-                },
-                error: function(error) {
-                    console.error('Error fetching exam details:', error);
-                }
-            });
+                    $('.list-skill').append(formSkill(skillData));
+                    bootstrap.Modal.getInstance($('#addSkillModal')[0]).hide();
+                    showToast('Đã thêm kỹ năng mới thành công!', 'success');
+                })
+                .fail(error => {
+                    console.error('Error adding skill:', error);
+                    showToast('Có lỗi khi thêm kỹ năng mới', 'danger');
+                });
         }
 
-        // Call getExamDetails when page loads
-        $(document).ready(function() {
-            $.ajax({
-                url: `https://localhost:7001/api/skill/${getBankId()}`,
-                type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    getExamDetails(response.id);
-                },
-                error: function(error) {
-                    console.error('Error fetching exam details:', error);
-                }
-            });
-        });
-
-        // Hàm hiển thị modal chỉnh sửa hạn chót
-        function showEditDeadlineModal(type) {
-            const modal = document.getElementById('editDeadlineModal');
-            const deadlineType = document.getElementById('deadlineType');
-            const deadlineDate = document.getElementById('deadlineDate');
-            
-            // Lưu loại hạn chót đang chỉnh sửa
-            deadlineType.value = type;
-            
-            // Lấy ngày hiện tại từ UI
-            const currentDate = document.getElementById(type === 'create' ? 'createDueDate' : 'reviewDueDate').textContent;
-            const [day, month, year] = currentDate.split('/');
-            deadlineDate.value = `${year}-${month}-${day}`;
-            
-            // Hiển thị modal
-            const modalInstance = new bootstrap.Modal(modal);
-            modalInstance.show();
+        // Edit Deadline Modal
+        function showEditDeadlineModal(type, id, date) {
+            $('#deadlineType').val(type);
+            $('#skillId').val(id);
+            const currentDate = date;
+            if (currentDate && currentDate !== 'Chưa có') {
+                const [day, month, year] = currentDate.split('-');
+                $('#deadlineDate').val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
+            } else {
+                $('#deadlineDate').val('');
+            }
+            new bootstrap.Modal($('#editDeadlineModal')).show();
         }
 
-        // Hàm lưu thay đổi hạn chót
         function saveDeadline() {
-            const deadlineType = document.getElementById('deadlineType').value;
-            const deadlineDate = document.getElementById('deadlineDate').value;
-            
-            if (!deadlineDate) {
-                alert('Vui lòng chọn ngày hết hạn');
+            const type = $('#deadlineType').val();
+            const id = $('#skillId').val();
+            const date = $('#deadlineDate').val();
+
+            if (!date) {
+                showToast('Vui lòng chọn ngày hết hạn', 'warning');
                 return;
             }
 
-            // Gọi API để cập nhật hạn chót
-            $.ajax({
-                url: `https://localhost:7001/api/questionbank/${getExamId()}/deadline`,
-                type: 'PUT',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    type: deadlineType,
-                    date: deadlineDate
-                }),
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    // Cập nhật UI
-                    const formattedDate = formatDate(deadlineDate);
-                    document.getElementById(deadlineType === 'create' ? 'createDueDate' : 'reviewDueDate').textContent = formattedDate;
-                    
-                    // Đóng modal
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('editDeadlineModal'));
-                    modal.hide();
-                    
-                    // Hiển thị thông báo thành công
-                    alert('Đã cập nhật hạn chót thành công!');
-                },
-                error: function(error) {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi cập nhật hạn chót. Vui lòng thử lại!');
-                }
-            });
-        }
-
-        // Hàm lấy ID của exam từ URL
-        function getBankId() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('id');
+            updateDeadline(id, type, date)
+                .done(response => {
+                    console.log('12', date)
+                    const formattedDate = formatDate(date);
+                    $(`#${type}DueDate-${id}`).text(date);
+                    bootstrap.Modal.getInstance($('#editDeadlineModal')[0]).hide();
+                    showToast('Đã cập nhật hạn chót thành công!', 'success');
+                })
+                .fail(error => {
+                    console.error('Error updating deadline:', error);
+                    showToast('Có lỗi khi cập nhật hạn chót', 'danger');
+                });
         }
     </script>
 </body>
 </html>
-
-
-

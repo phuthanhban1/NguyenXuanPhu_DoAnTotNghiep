@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Dtos.RoleDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Interfaces
 {
-    interface IRoleService
+    public interface IRoleService
     {
+        Task<List<RoleDto>> GetRoles();
     }
 }

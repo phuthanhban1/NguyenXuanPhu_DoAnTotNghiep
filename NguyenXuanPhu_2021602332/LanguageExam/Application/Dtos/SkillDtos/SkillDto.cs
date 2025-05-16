@@ -12,8 +12,12 @@ namespace Application.Dtos.SkillDtos
         public string Name { get; set; }
         // created user
         public Guid CreatedUserId { get; set; }
+        public string CreatedUserName { get; set; }
         // review user
         public Guid ReviewedUserId { get; set; }
+        public string ReviewedUserName { get; set; }
+        public DateOnly CreateDue { get; set; }
+        public DateOnly ReviewDue { get; set; }
     }
    
 }

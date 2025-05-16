@@ -40,25 +40,23 @@ namespace Application.Services.Implements
         {
             try
             {
-                if(await CheckUserByEmail(userCreateDto.Email))
-                {
-                    throw new BadRequestException("Email đã tồn tại");
-                }
-                var user = _mapper.Map<User>(userCreateDto);
+                var user = new User();
+                //var user = _mapper.Map<User>(userCreateDto);
                 user.Id = Guid.NewGuid();
-                user.RoleId = new Guid("8A7DD16F-85BF-4143-BE0B-A31DA3BBE44A");
+                user.RoleId = new Guid("A0E4F1D5-3C8B-4F2A-8E6C-7D9B5E0A2F1D");
+                user.Email = userCreateDto.Email;
+                user.Password = userCreateDto.Password;
+                //var imageFace = await ExtensionService.GetImageFile(userCreateDto.ImageFace);
+                //user.ImageFaceId = imageFace.Id;
+                //await _unitOfWork.ExamFiles.AddAsync(imageFace);
 
-                var imageFace = await ExtensionService.GetImageFile(userCreateDto.ImageFace);
-                user.ImageFaceId = imageFace.Id;
-                await _unitOfWork.ExamFiles.AddAsync(imageFace);
+                //var imageBefore = await ExtensionService.GetImageFile(userCreateDto.ImageIdCardBefore);
+                //user.ImageIdCardBeforeId = imageBefore.Id;
+                //await _unitOfWork.ExamFiles.AddAsync(imageBefore);
 
-                var imageBefore = await ExtensionService.GetImageFile(userCreateDto.ImageIdCardBefore);
-                user.ImageIdCardBeforeId = imageBefore.Id;
-                await _unitOfWork.ExamFiles.AddAsync(imageBefore);
-
-                var imageAfter = await ExtensionService.GetImageFile(userCreateDto.ImageIdCardAfter);
-                user.ImageIdCardAfterId = imageAfter.Id;
-                await _unitOfWork.ExamFiles.AddAsync(imageAfter);
+                //var imageAfter = await ExtensionService.GetImageFile(userCreateDto.ImageIdCardAfter);
+                //user.ImageIdCardAfterId = imageAfter.Id;
+                //await _unitOfWork.ExamFiles.AddAsync(imageAfter);
 
                 user.IsActive = true;
                 await _unitOfWork.Users.AddAsync(user);
@@ -82,21 +80,18 @@ namespace Application.Services.Implements
                 else
                 {
                     // image face
-                    var imageFace = await ExtensionService.GetImageFile(userUpdateDto.ImageFace);
-                    imageFace.Id = (Guid)user.ImageFaceId;
-                    await _unitOfWork.ExamFiles.UpdateAsync(imageFace);
-
-                    //image before
-                    var imageBefore = await ExtensionService.GetImageFile(userUpdateDto.ImageIdCardBefore);
-                    imageBefore.Id = (Guid)user.ImageIdCardBeforeId;
-                    await _unitOfWork.ExamFiles.UpdateAsync(imageBefore);
-
-                    // image after
-                    var imageAfter = await ExtensionService.GetImageFile(userUpdateDto.ImageIdCardAfter);
-                    imageAfter.Id = (Guid)user.ImageIdCardAfterId;
-                    await _unitOfWork.ExamFiles.UpdateAsync(imageAfter);
-
                     _mapper.Map(userUpdateDto, user);
+                    var imageFace = await ExtensionService.GetImageFile(userUpdateDto.ImageFace);
+                    user.ImageFaceId = imageFace.Id;
+                    await _unitOfWork.ExamFiles.AddAsync(imageFace);
+
+                    var imageBefore = await ExtensionService.GetImageFile(userUpdateDto.ImageIdCardBefore);
+                    user.ImageIdCardBeforeId = imageBefore.Id;
+                    await _unitOfWork.ExamFiles.AddAsync(imageBefore);
+
+                    var imageAfter = await ExtensionService.GetImageFile(userUpdateDto.ImageIdCardAfter);
+                    user.ImageIdCardAfterId = imageAfter.Id;
+                    await _unitOfWork.ExamFiles.AddAsync(imageAfter);
                     await _unitOfWork.Users.UpdateAsync(user);
 
                     await _unitOfWork.SaveChangeAsync();
@@ -133,10 +128,7 @@ namespace Application.Services.Implements
             } else
             {
                 var userDto = _mapper.Map<UserDto>(user);
-                userDto.ImageFace = _mapper.Map<ImageFileDto>(user.ImageFace);
-                userDto.ImageIdCardBefore = _mapper.Map<ImageFileDto>(user.ImageIdCardBefore);
-                userDto.ImageIdCardAfter = _mapper.Map<ImageFileDto>(user.ImageIdCardAfter);
-                userDto.Address = _unitOfWork.Wards.GetAddress((int)user.WardId);
+                
                 return userDto;
             }
         }
@@ -198,13 +190,9 @@ namespace Application.Services.Implements
             }
             else
             {
-                var roleId = await _unitOfWork.Roles.GetIdByName(userRoleUpdateDto.RoleName);
-                if(roleId != Guid.Empty)
-                {
-                    user.RoleId = roleId;
-                    await _unitOfWork.Users.UpdateAsync(user);
-                    await _unitOfWork.SaveChangeAsync();
-                }
+                user.RoleId = userRoleUpdateDto.RoleId;
+                await _unitOfWork.Users.UpdateAsync(user);
+                await _unitOfWork.SaveChangeAsync();
             }
         }
 
@@ -213,6 +201,20 @@ namespace Application.Services.Implements
             var user = await _unitOfWork.Users.FindAsync(x => x.Email.Contains(email));
             var getAllUser = _mapper.Map<List<GetAllUserDto>>(user);
             return getAllUser;
+        }
+
+        public async Task<List<GetAllUserDto>> GetAccounts(Guid id)
+        {
+            var list = await _unitOfWork.Users.GetAccounts(id);
+            var listDto = _mapper.Map<List<GetAllUserDto>>(list);
+            return listDto;
+        }
+
+        public async Task<List<UserDto>> GetUserByRole(int roleNumber)
+        {
+            var list = await _unitOfWork.Users.GetUsersByRole(roleNumber);
+            var listDto = _mapper.Map<List<UserDto>>(list);
+            return listDto;
         }
     }
 }

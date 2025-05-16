@@ -76,5 +76,19 @@ namespace WebAPI.Controllers
             //var list = await _questionTypeService.GetsBySkillId(skillId);
             return Ok();
         }
+
+        [HttpGet("count/{skillId}")]
+        public async Task<IActionResult> CountQuestionType(Guid skillId)
+        {
+            var list = await _questionTypeService.CountQuestionType(skillId);
+            return Ok(list);
+        }
+
+        [HttpGet("count-question-type/{skillId}/{structId}")]
+        public async Task<IActionResult> CountQuestionTypeById(Guid skillId, Guid structId)
+        {
+            var list = await _questionTypeService.CountQuestionType2(skillId, structId);
+            return Ok(list);
+        }
     }
 }

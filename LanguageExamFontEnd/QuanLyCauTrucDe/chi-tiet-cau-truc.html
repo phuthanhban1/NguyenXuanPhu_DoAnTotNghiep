@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý cấu trúc đề thi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+            border-right: 1px solid #e5e7eb;
+        }
+        .sidebar a {
+            border-radius: 0.375rem;
+            margin: 0.25rem 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .sidebar a:hover {
+            background-color: #2563eb;
+            color: white;
+            transform: translateX(5px);
+        }
+        .sidebar a.active {
+            background-color: #2563eb;
+            color: white;
+        }
+        .card {
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background-color: #16a34a;
+            border-color: #16a34a;
+        }
+        .btn-success:hover {
+            background-color: #15803d;
+            border-color: #15803d;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+</head>
+<body class="bg-gray-100 flex">
+    <!-- Sidebar Menu -->
+    <aside class="sidebar w-64 bg-white shadow-lg h-screen fixed">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-gray-800">Chi tiết cấu trúc</h1>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 flex-1 p-8">
+        <section id="dashboard" class="mt-8">
+            <h3 class="text-lg font-semibold text-gray-800">Cấu trúc đề thi</h3>
+            <div class="mt-4">
+                <label class="text-gray-600">Chọn kỹ năng</label>
+                <select id="listSkill" class="form-select mt-2 w-full p-2 border rounded-lg"></select>
+            </div>
+            <div class="mt-4">
+                <divוש="flex justify-between items-center">
+                    <h4 class="text-gray-600">Danh sách cấu trúc đề</h4>
+                    <div>
+                        <button id="addStruct" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStructModal">Thêm</button>
+                        <button id="saveAllStruct" class="btn btn-success ml-2">Lưu tất cả</button>
+                    </div>
+                </div>
+                <table class="mt-4 bg-white rounded-lg shadow">
+                    <thead>
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>Tên kiểu câu hỏi</th>
+                            <th>Số lượng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="structList"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Modal for adding/editing structure -->
+        <div class="modal fade" id="addStructModal" tabindex="-1" aria-labelledby="addStructModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addStructModalLabel">Thêm cấu trúc mới</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="listQuestionType" class="form-label">Tên kiểu câu hỏi</label>
+                            <select id="listQuestionType" class="form-select"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Số lượng</label>
+                            <input type="number" class="form-control" id="amount" placeholder="1, 2, 3" min="1">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" id="saveStruct">Lưu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        var listSkill = [];
+        var skillName = '';
+        const urlParams = new URLSearchParams(window.location.search);
+        var bankId = urlParams.get('bankId');
+        var structId = urlParams.get('structId');
+        var listQuestionType = [];
+        var tempStructList = []; // Danh sách cấu trúc tạm thời
+        var initialStructList = []; // Lưu danh sách ban đầu để so sánh khi lưu
+
+        // Hàm cập nhật dropdown loại câu hỏi với số lượng còn lại
+        function SetOptionModel(skillId) {
+            $.ajax({
+                url: `https://localhost:7001/api/questionType/count-question-type/${skillId}/${structId}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    $('#listQuestionType').empty();
+                    listQuestionType = response.filter(qt => qt.count > 0);
+                    listQuestionType.forEach(qt => {
+                        // Tính tổng số lượng đã sử dụng trong tempStructList
+                        const usedAmount = tempStructList
+                            .filter(s => s.questionTypeId == qt.id)
+                            .reduce((sum, s) => sum + s.amount, 0);
+                        // Số lượng còn lại
+                        const availableCount = qt.count - usedAmount;
+                        if (availableCount > 0) {
+                            $('#listQuestionType').append(
+                                `<option value='${qt.id}'>${qt.name} (${qt.description}) (còn lại: ${availableCount})</option>`
+                            );
+                        }
+                    });
+                    if ($('#listQuestionType').children().length === 0) {
+                        $('#listQuestionType').append(
+                            `<option value='' disabled selected>Không có loại câu hỏi nào khả dụng</option>`
+                        );
+                    }
+                },
+                error: function(error) {
+                    console.error('Error loading question types:', error.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Không thể tải danh sách loại câu hỏi',
+                    });
+                }
+            });
+        }
+
+        // Render danh sách cấu trúc từ tempStructList
+        function RenderStructList() {
+            $('#structList').empty();
+            if (tempStructList.length === 0) {
+                $('#structList').append(`
+                    <tr>
+                        <td colspan="4" class="text-center text-gray-600">Không có cấu trúc nào</td>
+                    </tr>
+                `);
+                return;
+            }
+            tempStructList.forEach((s, index) => {
+                const questionType = listQuestionType.find(qt => qt.id == s.questionTypeId);
+                const questionTypeName = questionType ? questionType.name : s.questionTypeName || 'Unknown';
+                $('#structList').append(`
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${s.questionTypeName}</td>
+                        <td>${s.amount}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning edit-struct" 
+                                data-struct-id='${s.id}' 
+                                data-question-type-id='${s.questionTypeId}' 
+                                data-amount='${s.amount}' 
+                                data-bs-toggle='modal' 
+                                data-bs-target='#addStructModal'>Sửa</button>
+                            <button class="btn btn-sm btn-danger delete-struct" 
+                                data-struct-id='${s.id}' 
+                                data-question-type-name='${questionTypeName}'>Xóa</button>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        // Lấy danh sách cấu trúc chi tiết từ API
+        function GetListStructDetail(skillId, skillName) {
+            $.ajax({
+                url: `https://localhost:7001/api/examStructDetail/${structId}/${skillName}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    tempStructList = response.map(item => ({
+                        id: item.id,
+                        questionTypeId: item.questionTypeId,
+                        questionTypeName: item.questionTypeName,
+                        amount: item.amount,
+                        examStructId: item.examStructId,
+                        skill: item.skill
+                    }));
+                    initialStructList = [...tempStructList];
+                    RenderStructList();
+                },
+                error: function(error) {
+                    console.error('Error loading struct details:', error.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Không thể tải danh sách cấu trúc chi tiết',
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            var userId = '';
+
+            // Reset modal khi mở
+            $('#addStructModal').on('show.bs.modal', function(event) {
+                const button = $(event.relatedTarget);
+                const isEdit = button.hasClass('edit-struct');
+                const skillId = $('#listSkill').val();
+
+                // Cập nhật dropdown
+                SetOptionModel(skillId);
+
+                if (isEdit) {
+                    const structId = button.data('struct-id');
+                    const questionTypeId = button.data('question-type-id');
+                    const amount = button.data('amount');
+                    $('#addStructModalLabel').text('Sửa cấu trúc');
+                    setTimeout(() => {
+                        $('#listQuestionType').val(questionTypeId);
+                        $('#amount').val(amount);
+                    }, 100);
+                    $('#saveStruct').data('struct-id', structId);
+                } else {
+                    $('#addStructModalLabel').text('Thêm cấu trúc mới');
+                    $('#listQuestionType').val('');
+                    $('#amount').val('');
+                    $('#saveStruct').removeData('struct-id');
+                }
+            });
+
+            // Tải danh sách kỹ năng
+            $.ajax({
+                url: `https://localhost:7001/api/skill/bank-id/${bankId}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    listSkill = response;
+                    skillName = response[0].name;
+                    response.forEach(s => {
+                        $('#listSkill').append(
+                            `<option value='${s.id}'>${s.name}</option>`
+                        );
+                    });
+                    var skillId = $('#listSkill').val();
+                    SetOptionModel(skillId);
+                    GetListStructDetail(skillId, skillName);
+                },
+                error: function(error) {
+                    console.error('Error loading skills:', error.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Không thể tải danh sách kỹ năng',
+                    });
+                }
+            });
+
+            // Xử lý thay đổi kỹ năng
+            $('#listSkill').on('change', function() {
+                var skillId = $(this).val();
+                var selectedSkill = listSkill.find(s => s.id == skillId);
+                skillName = selectedSkill ? selectedSkill.name : '';
+                tempStructList = [];
+                initialStructList = [];
+                GetListStructDetail(skillId, skillName);
+                SetOptionModel(skillId);
+            });
+
+            // Tải user ID
+            $.ajax({
+                url: `https://localhost:7001/api/user/user-id`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    userId = response;
+                },
+                error: function(error) {
+                    console.error('Error loading user ID:', error.responseText);
+                }
+            });
+
+            // Xử lý lưu cấu trúc trong modal
+            $('#saveStruct').on('click', function() {
+                const questionTypeId = $('#listQuestionType').val();
+                const amount = $('#amount').val().trim();
+                const structDetailId = $(this).data('struct-id');
+                const isEdit = !!structDetailId;
+
+                // Kiểm tra hợp lệ
+                if (!questionTypeId) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo',
+                        text: 'Vui lòng chọn loại câu hỏi',
+                    });
+                    return;
+                }
+                if (!amount || amount <= 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo',
+                        text: 'Vui lòng nhập số lượng hợp lệ',
+                    });
+                    return;
+                }
+
+                // Kiểm tra số lượng còn lại
+                const selectedQuestionType = listQuestionType.find(qt => qt.id == questionTypeId);
+                const usedAmount = tempStructList
+                    .filter(s => s.questionTypeId == questionTypeId && s.id != structDetailId)
+                    .reduce((sum, s) => sum + s.amount, 0);
+                const availableCount = selectedQuestionType.count - usedAmount;
+
+                if (amount > availableCount) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo',
+                        text: `Số lượng yêu cầu (${amount}) vượt quá số câu hỏi còn lại (${availableCount})`,
+                    });
+                    return;
+                }
+
+                if (isEdit) {
+                    const index = tempStructList.findIndex(s => s.id == structDetailId);
+                    if (index !== -1) {
+                        tempStructList[index] = {
+                            ...tempStructList[index],
+                            questionTypeId: questionTypeId,
+                            questionTypeName: selectedQuestionType ? selectedQuestionType.name : tempStructList[index].questionTypeName,
+                            amount: parseInt(amount)
+                        };
+                    }
+                } else {
+                    tempStructList.push({
+                        id: `temp_${Date.now()}_${Math.random()}`,
+                        questionTypeId: questionTypeId,
+                        questionTypeName: selectedQuestionType ? selectedQuestionType.name : '',
+                        amount: parseInt(amount),
+                        examStructId: structId,
+                        skill: skillName
+                    });
+                }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: isEdit ? 'Cập nhật cấu trúc tạm thời thành công' : 'Thêm cấu trúc tạm thời thành công',
+                });
+                $('#addStructModal').modal('hide');
+                $('#listQuestionType').val('');
+                $('#amount').val('');
+                $('#saveStruct').removeData('struct-id');
+                $('#addStructModalLabel').text('Thêm cấu trúc mới');
+                RenderStructList();
+                SetOptionModel($('#listSkill').val());
+            });
+
+            // Xử lý xóa cấu trúc
+            $(document).on('click', '.delete-struct', function() {
+                const structDetailId = $(this).data('struct-id');
+                const questionTypeName = $(this).data('question-type-name');
+
+                Swal.fire({
+                    title: 'Xác nhận xóa',
+                    text: `Bạn có chắc chắn muốn xóa cấu trúc "${questionTypeName}" không?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#2563eb',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        tempStructList = tempStructList.filter(s => s.id != structDetailId);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công',
+                            text: 'Xóa cấu trúc tạm thời thành công',
+                        });
+                        RenderStructList();
+                        SetOptionModel($('#listSkill').val());
+                    }
+                });
+            });
+
+            // Xử lý lưu tất cả vào API
+            $('#saveAllStruct').on('click', function() {
+                if (tempStructList.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo',
+                        text: 'Không có cấu trúc nào để lưu',
+                    });
+                    return;
+                }
+
+                // Kiểm tra số lượng hợp lệ
+                let isValid = true;
+                listQuestionType.forEach(qt => {
+                    const usedAmount = tempStructList
+                        .filter(s => s.questionTypeId == qt.id)
+                        .reduce((sum, s) => sum + s.amount, 0);
+                    if (usedAmount > qt.count) {
+                        isValid = false;
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Cảnh báo',
+                            text: `Số lượng câu hỏi cho "${qt.name}" (${usedAmount}) vượt quá số lượng còn lại (${qt.count})`,
+                        });
+                    }
+                });
+
+                if (!isValid) return;
+
+                const promises = [];
+                var data = []
+                tempStructList.forEach((s, index) => {
+                    data.push({
+                        Order: index + 1,
+                        ExamStructId: structId,
+                        QuestionTypeId: s.questionTypeId,
+                        Amount: s.amount,
+                        Skill: s.skill
+                    })
+                    
+                });
+                
+                promises.push(
+                    $.ajax({
+                        url: `https://localhost:7001/api/examStructDetail`,
+                        type: 'POST',
+                        xhrFields: { withCredentials: true },
+                        contentType: 'application/json',
+                        data: JSON.stringify(data)
+                    })
+                );
+                Promise.all(promises)
+                    .then(() => {
+                       Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công',
+                            text: 'Lưu tất cả cấu trúc thành công',
+                            timer: 1500, // Tự động đóng sau 1.5 giây
+                            showConfirmButton: false // Ẩn nút "OK"
+                        }).then(() => {
+                            window.location.reload(); // Tải lại trang
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: error.responseText || 'Không thể lưu cấu trúc',
+                        });
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

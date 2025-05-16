@@ -133,6 +133,12 @@
     <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/jquery.toast.min.js"></script>
 
     <script>
+        var email = sessionStorage.getItem("email");
+        var password = sessionStorage.getItem("password");
+        var examData = {
+            Email: email,
+            Password: password
+        }
         // Sinh mã xác nhận 6 chữ số và lưu thời điểm sinh ra vào localStorage
         function generate6DigitCode() {
             return Math.floor(100000 + Math.random() * 900000).toString();
@@ -244,16 +250,16 @@
                 });
                 return;
             }
-            if (code !== verifyCode) {
-                $.toast({
-                    heading: 'Lỗi',
-                    text: 'Mã xác nhận không đúng!',
-                    showHideTransition: 'fade',
-                    icon: 'error',
-                    position: 'top-right'
-                });
-                return;
-            }
+            // if (code !== verifyCode) {
+            //     $.toast({
+            //         heading: 'Lỗi',
+            //         text: 'Mã xác nhận không đúng!',
+            //         showHideTransition: 'fade',
+            //         icon: 'error',
+            //         position: 'top-right'
+            //     });
+            //     return;
+            // }
             // Gọi API xác nhận mã thành công
             $.toast({
                 heading: 'Thông báo',
@@ -263,9 +269,23 @@
                 position: 'top-right'
             });
             // Chuyển hướng sau khi xác nhận thành công
-            setTimeout(() => {
-                window.location.href = '/login.html';
-            }, 2000);
+            
+            console.log(examData)
+            $.ajax({
+                url: 'https://localhost:7001/api/user',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(examData),
+                success: function() {
+                    setTimeout(() => {
+                        window.location.href = '/login.html';
+                    }, 2000);
+                }, 
+                error: function(error) {
+                    console.log(error.responseText)
+                }
+            })
+            
         });
 
         // Bắt đầu đếm ngược khi trang được tải

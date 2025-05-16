@@ -14,6 +14,6 @@ namespace Application.Dtos.SkillDtos
         public string Task { get; set; }
         public string QuestionBankName { get; set; }
         public string Language { get; set; }
-        public DateTime DueDate { get; set; }
+        public DateOnly DueDate { get; set; }
     }
 }

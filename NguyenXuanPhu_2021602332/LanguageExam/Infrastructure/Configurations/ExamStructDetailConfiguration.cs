@@ -17,7 +17,8 @@ namespace Infrastructure.Configurations
             builder.HasKey(e => e.Id);
             builder.HasOne(e => e.ExamStruct)
                 .WithMany(es => es.ExamStructDetails)
-                .HasForeignKey(e => e.ExamStructId);
+                .HasForeignKey(e => e.ExamStructId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.QuestionType)
                 .WithMany(es => es.ExamStructDetails)
                 .HasForeignKey(e => e.QuestionTypeId);

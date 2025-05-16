@@ -384,6 +384,18 @@
         }
       }
     },
+    "/api/Exam/create-exam": {
+      "get": {
+        "tags": [
+          "Exam"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Examinee": {
       "post": {
         "tags": [
@@ -433,6 +445,181 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ExamineeUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExamStruct": {
+      "post": {
+        "tags": [
+          "ExamStruct"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamStructCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamStructCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamStructCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExamStruct"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamStructUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamStructUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamStructUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExamStruct/{id}": {
+      "get": {
+        "tags": [
+          "ExamStruct"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExamStruct"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExamStructDetail/{structId}/{skill}": {
+      "get": {
+        "tags": [
+          "ExamStructDetail"
+        ],
+        "parameters": [
+          {
+            "name": "structId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "skill",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExamStructDetail": {
+      "post": {
+        "tags": [
+          "ExamStructDetail"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExamStructDetailCreateDto"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExamStructDetailCreateDto"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ExamStructDetailCreateDto"
+                }
               }
             }
           }
@@ -646,33 +833,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/QuestionBankDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/QuestionBankDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/QuestionBankDto"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -735,6 +896,29 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/QuestionBank/detail/{id}": {
+      "get": {
+        "tags": [
+          "QuestionBank"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -888,6 +1072,73 @@
         }
       }
     },
+    "/api/QuestionType/count/{skillId}": {
+      "get": {
+        "tags": [
+          "QuestionType"
+        ],
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/QuestionType/count-question-type/{skillId}/{structId}": {
+      "get": {
+        "tags": [
+          "QuestionType"
+        ],
+        "parameters": [
+          {
+            "name": "skillId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "structId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Skill": {
       "post": {
         "tags": [
@@ -1016,7 +1267,7 @@
         }
       }
     },
-    "/api/Skill/bankid/{id}": {
+    "/api/Skill/bank-id/{id}": {
       "get": {
         "tags": [
           "Skill"
@@ -1056,103 +1307,19 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "IdCard": {
-                    "type": "string"
-                  },
-                  "DateOfIssue": {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  "PlaceOfIssue": {
-                    "type": "string"
-                  },
-                  "Gender": {
-                    "type": "boolean"
-                  },
-                  "DateOfBirth": {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  "Password": {
-                    "type": "string"
-                  },
-                  "FullName": {
-                    "type": "string"
-                  },
-                  "Email": {
-                    "type": "string"
-                  },
-                  "PhoneNumber": {
-                    "type": "string"
-                  },
-                  "Strict": {
-                    "type": "string"
-                  },
-                  "WardId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "ImageFace": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "ImageIdCardBefore": {
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "ImageIdCardAfter": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              },
-              "encoding": {
-                "IdCard": {
-                  "style": "form"
-                },
-                "DateOfIssue": {
-                  "style": "form"
-                },
-                "PlaceOfIssue": {
-                  "style": "form"
-                },
-                "Gender": {
-                  "style": "form"
-                },
-                "DateOfBirth": {
-                  "style": "form"
-                },
-                "Password": {
-                  "style": "form"
-                },
-                "FullName": {
-                  "style": "form"
-                },
-                "Email": {
-                  "style": "form"
-                },
-                "PhoneNumber": {
-                  "style": "form"
-                },
-                "Strict": {
-                  "style": "form"
-                },
-                "WardId": {
-                  "style": "form"
-                },
-                "ImageFace": {
-                  "style": "form"
-                },
-                "ImageIdCardBefore": {
-                  "style": "form"
-                },
-                "ImageIdCardAfter": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/UserCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateDto"
               }
             }
           }
@@ -1174,6 +1341,28 @@
             "schema": {
               "type": "string",
               "format": "uuid"
+            }
+          },
+          {
+            "name": "IdCard",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DateOfIssue",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "PlaceOfIssue",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1316,7 +1505,7 @@
         }
       }
     },
-    "/api/User/role": {
+    "/api/User/update-role": {
       "put": {
         "tags": [
           "User"
@@ -1340,16 +1529,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "User"
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1414,6 +1593,65 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/role": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/account": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/account-by-role/{role}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "role",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/user-id": {
+      "get": {
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1846,6 +2084,9 @@
             "type": "integer",
             "format": "int32"
           },
+          "isCreating": {
+            "type": "boolean"
+          },
           "isActive": {
             "type": "boolean"
           },
@@ -1855,6 +2096,10 @@
           },
           "manager": {
             "$ref": "#/components/schemas/User"
+          },
+          "createDue": {
+            "type": "string",
+            "format": "date"
           },
           "createdQuestionUserId": {
             "type": "string",
@@ -1897,10 +2142,6 @@
           },
           "isActive": {
             "type": "boolean"
-          },
-          "managerId": {
-            "type": "string",
-            "format": "uuid"
           },
           "createdQuestionUserId": {
             "type": "string",
@@ -1996,13 +2237,9 @@
             "type": "string",
             "format": "uuid"
           },
-          "createdDate": {
+          "name": {
             "type": "string",
-            "format": "date"
-          },
-          "updatedDate": {
-            "type": "string",
-            "format": "date"
+            "nullable": true
           },
           "questionBankId": {
             "type": "string",
@@ -2024,6 +2261,27 @@
               "$ref": "#/components/schemas/ExamQuestion"
             },
             "nullable": true
+          },
+          "userCreateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userCreate": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamStructCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "questionBankId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -2050,12 +2308,56 @@
           "questionType": {
             "$ref": "#/components/schemas/QuestionType"
           },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
           "examStructId": {
             "type": "string",
             "format": "uuid"
           },
           "examStruct": {
             "$ref": "#/components/schemas/ExamStruct"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamStructDetailCreateDto": {
+        "type": "object",
+        "properties": {
+          "skill": {
+            "type": "string",
+            "nullable": true
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "examStructId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamStructUpdateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2407,13 +2709,6 @@
             },
             "nullable": true
           },
-          "examStructs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExamStruct"
-            },
-            "nullable": true
-          },
           "examStructDetails": {
             "type": "array",
             "items": {
@@ -2536,9 +2831,6 @@
             "type": "string",
             "nullable": true
           },
-          "isProcess": {
-            "type": "boolean"
-          },
           "isCreateConfirm": {
             "type": "boolean"
           },
@@ -2555,12 +2847,12 @@
           },
           "createDue": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "reviewDue": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "reviewedUserId": {
@@ -2609,10 +2901,6 @@
             "type": "string",
             "format": "uuid"
           },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
           "createdUserId": {
             "type": "string",
             "format": "uuid",
@@ -2622,6 +2910,14 @@
             "type": "string",
             "format": "uuid",
             "nullable": true
+          },
+          "createdDue": {
+            "type": "string",
+            "format": "date"
+          },
+          "reviewedDue": {
+            "type": "string",
+            "format": "date"
           }
         },
         "additionalProperties": false
@@ -2751,6 +3047,27 @@
               "$ref": "#/components/schemas/QuestionBank"
             },
             "nullable": true
+          },
+          "examStructs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamStruct"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserCreateDto": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2794,9 +3111,9 @@
             "type": "string",
             "format": "uuid"
           },
-          "roleName": {
+          "roleId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           }
         },
         "additionalProperties": false

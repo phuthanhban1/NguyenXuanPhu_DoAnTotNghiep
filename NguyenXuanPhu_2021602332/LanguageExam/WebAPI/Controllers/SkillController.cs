@@ -18,13 +18,13 @@ namespace WebAPI.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SkillCreateDto skillCreateDto)
+        public async Task<IActionResult> Create(SkillCreateDto skillCreateDto)
         {
             await _skillService.AddAsync(skillCreateDto);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] SkillUpdateDto skillUpdateDto)
+        public async Task<IActionResult> Update(SkillUpdateDto skillUpdateDto)
         {
             await _skillService.UpdateAsync(skillUpdateDto);
             return Ok();
@@ -79,11 +79,12 @@ namespace WebAPI.Controllers
             }
             return Ok(skill);
         }
-        [HttpGet("bankid/{id}")]
+        [HttpGet("bank-id/{id}")]
         public async Task<IActionResult> GetSkillByBankId(Guid id)
         {
-            var list = await _skillService.GetSkillByBankId(id);
+            var list = await _skillService.GetByQuestionBankIdAsync(id);
             return Ok(list);
         }
+
     }
 }

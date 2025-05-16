@@ -15,13 +15,18 @@ namespace WebAPI.Controllers
             _examService = examService;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateExam([FromBody] ExamCreateDto examCreateDto)
+        public async Task<IActionResult> CreateExam(ExamCreateDto examCreateDto)
         {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
             if (examCreateDto == null)
             {
                 return BadRequest("Exam data is null");
             }
-            await _examService.AddAsync(examCreateDto);
+            await _examService.AddAsync(Guid.Parse(sid), examCreateDto);
             return Ok();
         }
         [HttpPut]
@@ -58,5 +63,18 @@ namespace WebAPI.Controllers
             var exams = await _examService.GetByManagerIdAsync(id);
             return Ok(exams);
         }
+
+        [HttpGet("create-exam")]
+        public async Task<IActionResult> GetExamByCreate()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            var exam = await _examService.GetExamByCreate(Guid.Parse(sid));
+            return Ok(exam);
+        }
+
     }
 }

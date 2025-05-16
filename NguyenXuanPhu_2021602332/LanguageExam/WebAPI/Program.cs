@@ -1,6 +1,7 @@
 using Application.Services.Implements;
 using Application.Services.Interfaces;
 using Infrastructure.Context;
+using Infrastructure.Repositories.Interfaces;
 using Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
@@ -22,10 +23,13 @@ builder.Services.AddTransient<IProvinceService, ProvinceService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IWardService, WardService>();
 builder.Services.AddTransient<IQuestionBankService, QuestionBankService>();
-builder.Services.AddTransient<IExamFileService, ExamFileService>();
+builder.Services.AddTransient<IExamService, ExamService>();
 builder.Services.AddTransient<ISkillService, SkillService>();
 builder.Services.AddTransient<IQuestionTypeService, QuestionTypeService>();
 builder.Services.AddTransient<IContentBlockService, ContentBlockService>();
+builder.Services.AddTransient<IExamStructService, ExamStructService>();
+builder.Services.AddTransient<IExamStructDetailService, ExamStructDetailService>();
+builder.Services.AddTransient<IRoleService, RoleService>();
 
 
 

@@ -14,8 +14,6 @@ namespace Application.Dtos.ExamDtos
         public string Password { get; set; }
         public int Fee { get; set; }
         public bool IsActive { get; set; }
-        // id manager
-        public Guid ManagerId { get; set; }
         // id created exam question
         public Guid CreatedQuestionUserId { get; set; }
 

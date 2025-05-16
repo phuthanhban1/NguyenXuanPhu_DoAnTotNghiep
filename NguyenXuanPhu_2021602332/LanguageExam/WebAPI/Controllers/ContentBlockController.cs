@@ -52,5 +52,6 @@ namespace WebAPI.Controllers
             await _contentBlockService.DeleteAsync(id);
             return Ok();
         }
+
     }
 }

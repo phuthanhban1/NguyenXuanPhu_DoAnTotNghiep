@@ -159,6 +159,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("BeginDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateOnly>("CreateDue")
+                        .HasColumnType("date");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -169,6 +172,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCreating")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("ManagerId")
@@ -258,23 +264,21 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("CreatedDate")
-                        .HasColumnType("date");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("QuestionBankId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("QuestionTypeId")
+                    b.Property<Guid>("UserCreateId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateOnly>("UpdatedDate")
-                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionBankId");
 
-                    b.HasIndex("QuestionTypeId");
+                    b.HasIndex("UserCreateId");
 
                     b.ToTable("ExamStruct", (string)null);
                 });
@@ -284,6 +288,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("ExamStructId")
                         .HasColumnType("uniqueidentifier");
@@ -410,7 +417,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreatedDate = new DateOnly(2025, 5, 15),
+                            CreatedDate = new DateOnly(2025, 5, 16),
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
@@ -480,7 +487,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("316f8c9c-a9a2-4b17-b4c4-6434d165bc62"),
-                            Name = "quản lý ngân hàng đề"
+                            Name = "quản lý ngân hàng câu hỏi"
                         },
                         new
                         {
@@ -527,16 +534,13 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("CreateDue")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("CreateDue")
+                        .HasColumnType("date");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsCreateConfirm")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsProcess")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsReviewConfirm")
@@ -549,8 +553,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("QuestionBankId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("ReviewDue")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("ReviewDue")
+                        .HasColumnType("date");
 
                     b.Property<Guid?>("ReviewedUserId")
                         .HasColumnType("uniqueidentifier");
@@ -571,7 +575,6 @@ namespace Infrastructure.Migrations
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
                             CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
                             IsCreateConfirm = false,
-                            IsProcess = false,
                             IsReviewConfirm = false,
                             Name = "Đọc",
                             QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
@@ -658,7 +661,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5edbf27a-de94-43d7-b172-7b60973dd04b"),
+                            Id = new Guid("4710320e-2a2c-463e-9a77-35b5a6b67747"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -840,11 +843,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.QuestionType", null)
+                    b.HasOne("Domain.Entities.User", "UserCreate")
                         .WithMany("ExamStructs")
-                        .HasForeignKey("QuestionTypeId");
+                        .HasForeignKey("UserCreateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("QuestionBank");
+
+                    b.Navigation("UserCreate");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamStructDetail", b =>
@@ -1081,8 +1088,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("ContentBlocks");
 
                     b.Navigation("ExamStructDetails");
-
-                    b.Navigation("ExamStructs");
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>
@@ -1100,6 +1105,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("CreatedQuestionExam");
 
                     b.Navigation("CreatedQuestions");
+
+                    b.Navigation("ExamStructs");
 
                     b.Navigation("ManagedExam");
 
