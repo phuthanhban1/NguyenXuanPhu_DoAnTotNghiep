@@ -17,5 +17,6 @@ namespace Application.Services.Interfaces
         Task DeleteAsync(Guid id);
         //Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto);
         Task<List<ContentBlockDto>> GetByStatus(Guid questionTypeId, byte status);
+        Task ChangeStatus(ContentBlockStatusDto contentBlockStatusDto);
     }
 }

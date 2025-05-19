@@ -216,5 +216,34 @@ namespace Application.Services.Implements
             var listDto = _mapper.Map<List<UserDto>>(list);
             return listDto;
         }
+
+        public async Task<UserDto> GetUser(Guid id)
+        {
+            var user = await _unitOfWork.Users.GetUserById(id);
+            var userDto = _mapper.Map<UserDto>(user);
+            if(user.WardId == null)
+            {
+                userDto.FullAddress = "Chưa có địa chỉ";
+            } else
+            {
+                var address = await _unitOfWork.Wards.GetAddress((int)user.WardId);
+                if (user.Strict != null)
+                {
+                    userDto.FullAddress = user.Strict + ", " + address;
+                }
+                else
+                {
+                    userDto.FullAddress = address;
+                }
+            }
+            return userDto;
+        }
+
+        public async Task<bool> CheckFullInfor(Guid id)
+        {
+            var user = await _unitOfWork.Users.GetByIdAsync(id);
+            if (user.IdCard == null) return false;
+            return true;
+        }
     }
 }

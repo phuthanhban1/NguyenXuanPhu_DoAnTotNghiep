@@ -1,4 +1,4 @@
-using Application.Services.Implements;
+﻿using Application.Services.Implements;
 using Application.Services.Interfaces;
 using Infrastructure.Context;
 using Infrastructure.Repositories.Interfaces;
@@ -29,7 +29,11 @@ builder.Services.AddTransient<IQuestionTypeService, QuestionTypeService>();
 builder.Services.AddTransient<IContentBlockService, ContentBlockService>();
 builder.Services.AddTransient<IExamStructService, ExamStructService>();
 builder.Services.AddTransient<IExamStructDetailService, ExamStructDetailService>();
+builder.Services.AddTransient<IExamQuestionDetailService, ExamQuestionDetailService>();
+builder.Services.AddTransient<IExamQuestionService, ExamQuestionService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
+builder.Services.AddTransient<IRoomService, RoomService>();
+builder.Services.AddTransient<IExamineeService, ExamineeService>();
 
 
 
@@ -121,6 +125,11 @@ builder.Services.AddCors(options =>
         policy
             .WithOrigins("http://127.0.0.1:5503") // domain FE
         .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+
+        policy.WithOrigins("http://127.0.0.1:5504") 
+              .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials();
     });

@@ -9,6 +9,7 @@ using Application.Dtos.QuestionBankDtos;
 using Application.Dtos.QuestionDtos;
 using Application.Dtos.QuestionTypeDtos;
 using Application.Dtos.RoleDtos;
+using Application.Dtos.RoomDtos;
 using Application.Dtos.SkillDtos;
 using Application.Dtos.UserDtos;
 using AutoMapper;
@@ -20,6 +21,8 @@ namespace Application.Mappings
     {
         public AutoMapperProfile()
         {
+            CreateMap<Room, RoomDto>();
+            CreateMap<Exam, ExamDto>();
             CreateMap<ExamStructDetailCreateDto, ExamStructDetail>();
             CreateMap<ExamStructDetail, ExamStructDetailDto>().ForMember(esdd => esdd.QuestionTypeName, s => s.MapFrom(s => s.QuestionType.Name));
             CreateMap<ExamStruct, ExamStructDto>();
@@ -50,10 +53,16 @@ namespace Application.Mappings
             CreateMap<User, UserDto>()
                 .ForMember(ud => ud.ImageFaceBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageFace.FileData)))
                 .ForMember(ud => ud.ImageIdCardBeforeBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageIdCardBefore.FileData)))
-                .ForMember(ud => ud.ImageIdCardAfterBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageIdCardAfter.FileData)));
-                
+                .ForMember(ud => ud.ImageIdCardAfterBase64, u => u.MapFrom(u => Convert.ToBase64String(u.ImageIdCardAfter.FileData)))
+                .ForMember(ud => ud.FullAddress, u => u.Ignore());
+            CreateMap<Examinee, ExamineeDto>()
+                .ForMember(ed => ed.RoomName, e => e.MapFrom(e => e.Room.Name))
+                .ForMember(ed => ed.FullName, e => e.MapFrom(e => e.User.FullName))
+                .ForMember(ed => ed.Email, e => e.MapFrom(e => e.User.Email))
+                ;
 
-            
+
+
 
             CreateMap<ExamFile, ImageFileDto>();
 

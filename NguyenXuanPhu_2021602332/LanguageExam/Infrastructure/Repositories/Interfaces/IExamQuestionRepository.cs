@@ -9,5 +9,7 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IExamQuestionRepository : IGenericRepository<ExamQuestion>
     {
+        Task<ExamQuestion> GetByExamId(Guid id);
+        Task<Guid> GetIdByExamId(Guid id);
     }
 }

@@ -38,7 +38,8 @@ namespace Infrastructure.UnitOfWork
             Users = new UserRepository(_context);
             Roles = new RoleRepository(_context);
             Wards = new WardRepository(_context);
-            
+            ExamQuestionDetails = new ExamQuestionDetailRepository(_context);
+            Rooms = new RoomRepository(_context);
         }
         
 
@@ -98,6 +99,10 @@ namespace Infrastructure.UnitOfWork
         public IExamStructRepository ExamStructs { get; set; }
 
         public IExamStructDetailRepository ExamStructDetails { get; set; }
+
+        public IExamQuestionDetailRepository ExamQuestionDetails { get; set; }
+
+        public IRoomRepository Rooms { get; set; }
 
         public void Dispose()
         {

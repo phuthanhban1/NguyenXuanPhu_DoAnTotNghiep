@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateExam([FromBody] ExamUpdateDto examUpdateDto)
+        public async Task<IActionResult> UpdateExam(ExamUpdateDto examUpdateDto)
         {
             if (examUpdateDto == null)
             {
@@ -51,17 +51,29 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllExam()
+        public async Task<IActionResult> GetAllExams()
         {
             var exams = await _examService.GetAllAsync();
             return Ok(exams);
         }
 
+        // get exams by manager id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExamByManager(Guid id)
         {
-            var exams = await _examService.GetByManagerIdAsync(id);
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            var exams = await _examService.GetByManagerIdAsync(Guid.Parse(sid));
             return Ok(exams);
+        }
+        [HttpGet("exam/{id}")]
+        public async Task<IActionResult> GetExamById(Guid id)
+        {
+            var exam = await _examService.GetById(id);
+            return Ok(exam);
         }
 
         [HttpGet("create-exam")]

@@ -10,7 +10,6 @@
     <Folder Include="Dtos\BaseDtos\" />
     <Folder Include="Dtos\AudioFileDtos\" />
     <Folder Include="Dtos\DistrictDtos\" />
-    <Folder Include="Dtos\ExamQuestionDtos\" />
     <Folder Include="Dtos\WardDtos\" />
     <Folder Include="Dtos\ProvinceDtos\" />
   </ItemGroup>

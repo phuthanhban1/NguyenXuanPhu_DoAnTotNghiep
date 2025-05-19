@@ -11,6 +11,13 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
+        public async Task ChangeStatus(Guid id, byte status)
+        {
+            var contentBlock = _context.ContentBlock.Find(id);
+            contentBlock.Status = status;
+            _context.Update(contentBlock);
+        }
+
         public async Task<List<ContentBlock>> GetByQuestionTypeId(Guid id)
         {
             var list = _context.Set<ContentBlock>().Where(c => c.QuestionTypeId == id).ToList();

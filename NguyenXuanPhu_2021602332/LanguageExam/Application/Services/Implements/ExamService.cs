@@ -27,10 +27,8 @@ namespace Application.Services.Implements
             var exam = _mapper.Map<Exam>(examCreateDto);
             exam.ManagerId = managerId;
             exam.Id = Guid.NewGuid();
-            exam.CreatedDate = DateTime.UtcNow;
-            exam.IsActive = true;
+            exam.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow);
             exam.IsCreating = true;
-            exam.UpdatedDate = DateTime.UtcNow;
             await _unitOfWork.Exams.AddAsync(exam);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -53,13 +51,17 @@ namespace Application.Services.Implements
         {
             var exams = await _unitOfWork.Exams.GetAllAsync();
             var examDtos = _mapper.Map<List<ExamDto>>(exams);
+            examDtos = examDtos.OrderByDescending(x => x.StartDate).ToList();
             return examDtos;
         }
 
-        public Task<ExamDto> GetByIdAsync(Guid id)
+        public async Task<Exam> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var exam = await _unitOfWork.Exams.GetByIdAsync(id);
+            return exam;
         }
+
+        
 
         public async Task<List<ExamDto>> GetByManagerIdAsync(Guid id)
         {

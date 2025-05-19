@@ -9,6 +9,6 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IWardRepository : IGenericRepository<Ward>
     {
-        string GetAddress(int wardId);
+        Task<string> GetAddress(int wardId);
     }
 }

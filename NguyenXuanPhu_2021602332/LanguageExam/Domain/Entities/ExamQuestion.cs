@@ -9,9 +9,6 @@ namespace Domain.Entities
     public class ExamQuestion
     {
         public Guid Id { get; set; }
-        public string Skill { get; set; }
-        public int Order { get; set; }
-
         //foreign key exam
         public Guid ExamId { get; set; }
         public Exam Exam { get; set; }
@@ -21,8 +18,10 @@ namespace Domain.Entities
         public ExamStruct ExamStruct { get; set; }
 
         // fk: audio
-        public Guid AudioFileId { get; set; }
-        public ExamFile AudioFile { get; set; }
+        public Guid? AudioFileId { get; set; }
+        public ExamFile? AudioFile { get; set; }
+
+        public List<ExamQuestionDetail>? ExamQuestionDetails { get; set; }
 
 
     }

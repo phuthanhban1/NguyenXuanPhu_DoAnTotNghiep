@@ -177,33 +177,21 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="index.html">
+                <a href="" class="active">
                     <i class="fas fa-chart-line"></i>
                     Tổng quan
                 </a>
             </li>
             <li>
-                <a href="#" class="active">
+                <a href="examinee.html" >
                     <i class="fas fa-users"></i>
-                    Danh sách thí sinh
+                    Thí sinh
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fas fa-file-alt"></i>
-                    Quản lý tạo đề
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-id-card"></i>
-                    Tạo số báo danh
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-door-open"></i>
-                    Phòng thi
+                <a href="#" >
+                    <i class="fas fa-users"></i>
+                    Kết quả
                 </a>
             </li>
         </ul>
@@ -217,14 +205,7 @@
                 <h2 class="mb-1">Chi tiết kỳ thi</h2>
                 <p class="text-muted mb-0">Thông tin chi tiết và quản lý kỳ thi</p>
             </div>
-            <div>
-                <button class="action-button btn-edit" onclick="editExam()">
-                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
-                </button>
-                <button class="action-button btn-delete" onclick="deleteExam()">
-                    <i class="fas fa-trash me-2"></i>Xóa
-                </button>
-            </div>
+            
         </div>
 
         <!-- Exam Information -->
@@ -263,24 +244,18 @@
 
                 <!-- Students List -->
                 <div class="info-card">
-                    <h5><i class="fas fa-users"></i>Danh sách thí sinh</h5>
-                    <div class="student-list">
-                        <div class="student-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="mb-1">Nguyễn Văn A</h6>
-                                <small class="text-muted">SBD: 2024001</small>
-                            </div>
-                            <span class="badge bg-success">Đã đăng ký</span>
-                        </div>
-                        <div class="student-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="mb-1">Trần Thị B</h6>
-                                <small class="text-muted">SBD: 2024002</small>
-                            </div>
-                            <span class="badge bg-warning">Chờ xác nhận</span>
-                        </div>
-                        <!-- More students... -->
+                    <h5><i class="fas fa-door-open"></i>Phòng thi</h5>
+                    <div class="room-card">
+                        <h6>Phòng 101</h6>
+                        <p class="mb-1">Sức chứa: 30 thí sinh</p>
+                        <p class="mb-0">Đã phân: 25 thí sinh</p>
                     </div>
+                    <div class="room-card">
+                        <h6>Phòng 102</h6>
+                        <p class="mb-1">Sức chứa: 30 thí sinh</p>
+                        <p class="mb-0">Đã phân: 20 thí sinh</p>
+                    </div>
+                    <!-- More rooms... -->
                 </div>
             </div>
 
@@ -309,22 +284,6 @@
                         </div>
                         <small class="text-muted">4/8 phòng</small>
                     </div>
-                </div>
-
-                <!-- Exam Rooms -->
-                <div class="info-card">
-                    <h5><i class="fas fa-door-open"></i>Phòng thi</h5>
-                    <div class="room-card">
-                        <h6>Phòng 101</h6>
-                        <p class="mb-1">Sức chứa: 30 thí sinh</p>
-                        <p class="mb-0">Đã phân: 25 thí sinh</p>
-                    </div>
-                    <div class="room-card">
-                        <h6>Phòng 102</h6>
-                        <p class="mb-1">Sức chứa: 30 thí sinh</p>
-                        <p class="mb-0">Đã phân: 20 thí sinh</p>
-                    </div>
-                    <!-- More rooms... -->
                 </div>
             </div>
         </div>

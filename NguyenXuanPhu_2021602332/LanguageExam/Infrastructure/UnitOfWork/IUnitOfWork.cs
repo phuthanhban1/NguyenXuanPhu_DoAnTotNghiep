@@ -10,6 +10,8 @@ namespace Infrastructure.UnitOfWork
 {
     public interface IUnitOfWork
     {
+        IRoomRepository Rooms { get; }
+        IExamQuestionDetailRepository ExamQuestionDetails { get; }
         IAnswerRepository Answers { get;}
         IExamFileRepository ExamFiles { get;}
         IContentBlockRepository ContentBlocks { get; }

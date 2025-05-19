@@ -75,7 +75,6 @@
         <nav class="mt-4">
             <a href="#dashboard" class="block py-3 px-6 text-gray-600">Tổng quan</a>
             <a href="#exam-structure" class="block py-3 px-6 text-gray-600">Cấu trúc đề thi</a>
-            <a href="#create-exam" class="block py-3 px-6 text-gray-600">Tạo đề thi</a>
         </nav>
     </aside>
 
@@ -126,6 +125,30 @@
         <section id="create-exam" class="mt-8 hidden">
             <h3 class="text-lg font-semibold text-gray-800">Tạo đề thi</h3>
             <p class="text-gray-600 mt-2">Tạo đề thi mới dựa trên cấu trúc có sẵn.</p>
+            <div class="mt-4">
+                <label class="text-gray-600">Chọn kỹ năng</label>
+                <select id="listSkill" class="form-select mt-2 w-full p-2 border rounded-lg"></select>
+            </div>
+            <div class="mt-4">
+                <divוש="flex justify-between items-center">
+                    <h4 class="text-gray-600">Danh sách cấu trúc đề</h4>
+                    <div>
+                        <button id="addStruct" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStructModal">Thêm</button>
+                        <button id="saveAllStruct" class="btn btn-success ml-2">Lưu tất cả</button>
+                    </div>
+                </div>
+                <table class="mt-4 bg-white rounded-lg shadow">
+                    <thead>
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>Tên kiểu câu hỏi</th>
+                            <th>Số lượng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="structList"></tbody>
+                </table>
+            </div>
         </section>
 
         <!-- Modal for adding new structure -->
@@ -282,6 +305,10 @@
                                                 ${s.userCreateId !== userId ? ' style="display: none"' : ''} 
                                                 data-struct-id='${s.id}' 
                                                 data-struct-name='${s.name}'>Xóa</button>
+                                            <button class="btn btn-sm btn-success btn-create"  
+                                                id="btn-create"
+                                                data-struct-id='${s.id}' 
+                                                data-struct-name='${s.name}'>Tạo đề</button>
                                         </td>
                                     </tr>
                                 `);
@@ -299,6 +326,9 @@
                 }
             }
 
+            $(document).on('click', '.btn-create', function() {
+                
+            })
             // Handle question bank selection
             $('#listBank').on('change', function() {
                 bankId = $(this).val();

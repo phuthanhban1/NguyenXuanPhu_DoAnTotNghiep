@@ -52,6 +52,11 @@ namespace WebAPI.Controllers
             await _contentBlockService.DeleteAsync(id);
             return Ok();
         }
-
+        [HttpPost("status")]
+        public async Task<IActionResult> ChangeStatus(ContentBlockStatusDto contentBlockStatusDto)
+        {
+            await _contentBlockService.ChangeStatus(contentBlockStatusDto);
+            return Ok();
+        }
     }
 }

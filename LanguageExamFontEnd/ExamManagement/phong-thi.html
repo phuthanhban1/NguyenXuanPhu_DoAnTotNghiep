@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý phòng thi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-width: 250px;
+        }
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            transition: all 0.3s;
+        }
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .sidebar-menu li {
+            padding: 0;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .sidebar-menu a.active {
+            background: #3498db;
+            color: white;
+        }
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        .exam-table {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .exam-table th, .exam-table td {
+            vertical-align: middle;
+            padding: 12px;
+        }
+        .exam-table th {
+            background: #f1f3f5;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .exam-table tr:hover {
+            background: #f8f9fa;
+            cursor: pointer;
+        }
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        .status-upcoming {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        .status-ongoing {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .status-completed {
+            background-color: #f5f5f5;
+            color: #616161;
+        }
+        .search-box {
+            padding-left: 35px;
+            border-radius: 20px;
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        #searchResults, #editSearchResults {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10000;
+        }
+        .user-search-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .user-search-item:hover {
+            background-color: #f8f9fa;
+        }
+        .user-search-item.active {
+            background-color: #e3f2fd;
+        }
+        .list-group-item img {
+            object-fit: cover;
+        }
+        .toast-container {
+            z-index: 9999;
+        }
+        .action-btn {
+            margin-right: 5px;
+        }
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa phòng thi này?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4 class="mb-0">Quản lý phòng thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html" class=""><i class="fas fa-chart-line"></i>Tổng quan</a></li>
+            <li><a href="phong-thi.html" class="active"><i class="fas fa-door-open"></i>Phòng thi</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Quản lý phòng thi</h2>
+            </div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">
+                <i class="fas fa-plus me-2"></i>Tạo phòng
+            </button>
+        </div>
+
+        <div class="exam-table table-responsive">
+            <table class="table table-hover" id="examTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Tên phòng thi</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="roomList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Room Modal -->
+    <div class="modal fade" id="addRoomModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tạo phòng thi mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addRoomForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tên phòng thi</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Số lượng (sĩ số)</label>
+                            <input type="number" class="form-control" name="capacity" min="1" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="createRoomBtn">Tạo mới</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Room Modal -->
+    <div class="modal fade" id="editRoomModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa phòng thi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editRoomForm">
+                        <input type="hidden" name="id">
+                        <div class="mb-3">
+                            <label class="form-label">Tên phòng thi</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Số lượng (sĩ số)</label>
+                            <input type="number" class="form-control" name="capacity" min="1" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="updateRoomBtn">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Static room list for testing
+        var rooms = [
+            // { id: '1', name: 'Phòng A101', capacity: 30 },
+            // { id: '2', name: 'Phòng B204', capacity: 25 },
+            // { id: '3', name: 'Phòng C305', capacity: 40 }
+        ];
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const $toast = $('#liveToast');
+            $toast.removeClass('bg-success bg-danger bg-warning').addClass(`bg-${type}`);
+            $toast.find('.toast-body').text(message);
+            const toast = new bootstrap.Toast($toast[0]);
+            toast.show();
+        }
+
+        // Render room row for table
+        function renderRoomRow(room) {
+            return `
+                <tr data-room-id="${room.id}">
+                    <td>${room.name || 'Không có tên'}</td>
+                    <td>${room.amount || 0}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning action-btn edit-room" title="Sửa">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger action-btn delete-room" title="Xóa">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // Load rooms into table
+        function loadRooms() {
+            const $roomList = $('#roomList');
+            console.log('312', rooms)
+            $roomList.html(rooms.map(room => renderRoomRow(room)).join(''));
+        }
+
+        // Create new room
+        function createRoom() {
+            const $form = $('#addRoomForm');
+            if (!$form[0].checkValidity()) {
+                $form[0].reportValidity();
+                return;
+            }
+
+            const formData = new FormData($form[0]);
+            const newRoom = {// Simple ID generation
+                name: formData.get('name'),
+                amount: parseInt(formData.get('capacity'))
+            };
+
+            $.ajax({
+                url: `https://localhost:7001/api/room`,
+                type: 'POST',
+                xhrFields: { withCredentials: true },
+                contentType: 'application/json',
+                data: JSON.stringify(newRoom),
+                success: function(response) {
+
+                    rooms.push(newRoom);
+                    const modal = bootstrap.Modal.getInstance($('#addRoomModal')[0]);
+                    modal.hide();
+                    $form[0].reset();
+                    loadRooms();
+                    showToast('Tạo phòng thi thành công!', 'success');
+                }
+            })
+            
+        }
+
+        // Show edit room modal
+        function showEditRoomModal(roomId) {
+            const room = rooms.find(r => r.id === roomId);
+            if (!room) {
+                showToast('Không tìm thấy phòng thi!', 'danger');
+                return;
+            }
+
+            const $form = $('#editRoomForm');
+            $form.find('[name="id"]').val(room.id);
+            $form.find('[name="name"]').val(room.name);
+            $form.find('[name="capacity"]').val(room.amount);
+
+            const modal = new bootstrap.Modal($('#editRoomModal')[0]);
+            modal.show();
+        }
+
+        // Update room
+        function updateRoom() {
+            const $form = $('#editRoomForm');
+            if (!$form[0].checkValidity()) {
+                $form[0].reportValidity();
+                return;
+            }
+
+            const formData = new FormData($form[0]);
+            const roomId = formData.get('id');
+            const roomIndex = rooms.findIndex(r => r.id === roomId);
+            if (roomIndex === -1) {
+                showToast('Không tìm thấy phòng thi!', 'danger');
+                return;
+            }
+
+            var newRoom = {
+                id: roomId,
+                name: formData.get('name'),
+                amount: parseInt(formData.get('capacity'))
+            }
+            
+
+            $.ajax({
+                url: `https://localhost:7001/api/room`,
+                type: 'PUT',
+                xhrFields: { withCredentials: true },
+                contentType: 'application/json',
+                data: JSON.stringify(newRoom),
+                success: function(response) {
+
+                    rooms[roomIndex] = {
+                        id: roomId,
+                        name: formData.get('name'),
+                        amount: parseInt(formData.get('capacity'))
+                    };
+                     const modal = bootstrap.Modal.getInstance($('#editRoomModal')[0]);
+                    modal.hide();
+                    $form[0].reset();
+                    loadRooms();
+                    showToast('Cập nhật phòng thi thành công!', 'success');
+                }
+            })
+           
+        }
+
+        // Delete room
+        function deleteRoom(roomId) {
+            $('#confirmDeleteBtn').off('click').on('click', function() {
+                rooms = rooms.filter(r => r.id !== roomId);
+                const modal = bootstrap.Modal.getInstance($('#confirmDeleteModal')[0]);
+                modal.hide();
+                loadRooms();
+                showToast('Xóa phòng thi thành công!', 'success');
+            });
+            const modal = new bootstrap.Modal($('#confirmDeleteModal')[0]);
+            modal.show();
+        }
+
+        // Initialize page
+        $(document).ready(function() {
+            $.ajax({
+                url: `https://localhost:7001/api/room`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    console.log('404', response)
+                    rooms = response
+                    loadRooms();
+                }
+            })
+            // Load rooms
+            
+
+            // Handle create room button
+            $('#createRoomBtn').on('click', createRoom);
+
+            // Handle update room button
+            $('#updateRoomBtn').on('click', updateRoom);
+
+            // Handle edit and delete buttons
+            $(document).on('click', '.edit-room', function(e) {
+                e.stopPropagation();
+                const roomId = $(this).closest('tr').data('room-id');
+                showEditRoomModal(roomId);
+            });
+
+            $(document).on('click', '.delete-room', function(e) {
+                e.stopPropagation();
+                const roomId = $(this).closest('tr').data('room-id');
+                deleteRoom(roomId);
+            });
+        });
+    </script>
+</body>
+</html>

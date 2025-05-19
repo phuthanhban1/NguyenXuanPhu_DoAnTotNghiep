@@ -42,5 +42,6 @@
         public List<QuestionBank>? QuestionBanks { get; set; }
 
         public List<ExamStruct>? ExamStructs { get; set; }
+        public List<Examinee>? Examinees { get; set; }
     }
 }

@@ -1,4 +1,11 @@
 $(document).ready(function() {
+   // alert('Vui lòng cập nhật thông tin')
+    Swal.fire({
+        title: 'Cập nhật thông tin!',
+        text: 'Vui lòng cập nhật thông tin cá nhân.',
+        
+        confirmButtonText: 'OK'
+    })
     // Lấy danh sách tỉnh/thành phố khi load trang
     $.ajax({
         url: 'https://localhost:7001/api/province', // Thay bằng endpoint thực tế của bạn
@@ -220,7 +227,7 @@ $(document).ready(function() {
         }
     }
 
-                // Handle image uploads
+    // Handle image uploads
     $('#IDCardFront, #IDCardBack, #Image3x4').change(function() {
         readURL(this);
     });
@@ -246,6 +253,21 @@ $(document).ready(function() {
                     contentType: false,
                     xhrFields: { withCredentials: true },
                     success: function(response) {
+                        Swal.fire({
+                            title: 'Thành công!',
+                            text: 'Dữ liệu đã được lưu thành công.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Hành động sau khi nhấn OK
+                                // Ví dụ: chuyển hướng trang
+                                window.location.href = 'index.html';
+                                
+                                // Hoặc gọi hàm khác
+                                // doSomethingElse();
+                            }
+                        });
                         console.log('Thêm thành công' + response);
                     },
                     error: function(error) {

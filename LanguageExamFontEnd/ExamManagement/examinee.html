@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết kỳ thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+    <style>
+        :root {
+            --sidebar-width: 250px;
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --success-color: #2e7d32;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f1f3f5;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .sidebar-menu li {
+            padding: 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-menu a.active {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        .sidebar-menu i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            min-height: 100vh;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .main-content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* Header Buttons */
+        .header-actions .btn {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .header-actions .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .header-actions .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        /* Table Styling */
+        .examinee-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .examinee-table th,
+        .examinee-table td {
+            padding: 15px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .examinee-table th {
+            background: #f8f9fa;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .examinee-table td {
+            border-bottom: 1px solid #eee;
+            color: #34495e;
+        }
+
+        .examinee-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .examinee-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .examinee-table .btn {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            padding: 15px 20px;
+        }
+
+        .modal-header .modal-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer .btn {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar-header h4,
+            .sidebar-menu a span {
+                display: none;
+            }
+
+            .sidebar-menu i {
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-actions .btn {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>Quản lý kỳ thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tổng quan</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="active">
+                    <i class="fas fa-users"></i>
+                    <span>Thí sinh</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-poll"></i>
+                    <span>Kết quả</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Quản lý thí sinh</h2>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="createRoom">
+                    Tạo phòng thi
+                </button>
+                <button class="btn btn-primary" id="createExamineeNumber">Tạo số báo danh</button>
+            </div>
+        </div>
+
+        <!-- Examinee Table -->
+        <div class="table-responsive">
+            <table class="examinee-table">
+                <thead>
+                    <tr>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th>Số báo danh</th>
+                        <th>Phòng thi</th>
+                        <th>Thứ tự</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="listExaminee">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Get exam ID from URL (assuming it's passed as a query parameter)
+        
+        const examId = localStorage.getItem('examId')
+
+        // Load exam details
+        function loadExamDetails() {
+            $.ajax({
+                url: `https://localhost:7001/api/examinee/examinees/${examId}`,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Update examinee list
+                    console.log(response)
+                    $('#listExaminee').html(response.map(e => `
+                        <tr>
+                            <td>${e.fullName || 'N/A'}</td>
+                            <td>${e.email || 'N/A'}</td>
+                            <td>${e.examineeNumber || 'N/A'}</td>
+                            <td>${e.roomName || 'N/A'}</td>
+                            <td>${e.location || 'N/A'}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" data-id="${e.userId || ''}">Chi tiết</button>
+                            </td>
+                        </tr>
+                    `).join(''));
+                },
+                error: function(error) {
+                    console.error('Error loading exam details:', error);
+                    $('#listExaminee').html('<tr><td colspan="6">Không thể tải dữ liệu</td></tr>');
+                }
+            });
+        }
+
+        // Create room function
+        function createRoom() {
+            const roomName = $('#roomName').val();
+            const roomCapacity = $('#roomCapacity').val();
+            const roomLocation = $('#roomLocation').val();
+
+            if (!roomName || !roomCapacity || !roomLocation) {
+                alert('Vui lòng điền đầy đủ thông tin.');
+                return;
+            }
+
+            // Simulate API call to create room
+            $.ajax({
+                url: 'https://localhost:7001/api/rooms',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    examId: examId,
+                    name: roomName,
+                    capacity: parseInt(roomCapacity),
+                    location: roomLocation
+                }),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    alert('Tạo phòng thi thành công!');
+                    $('#createRoomModal').modal('hide');
+                    $('#createRoomForm')[0].reset();
+                    // Optionally reload examinee list or update UI
+                    loadExamDetails();
+                },
+                error: function(error) {
+                    console.error('Error creating room:', error);
+                    alert('Có lỗi xảy ra khi tạo phòng thi.');
+                }
+            });
+        }
+
+        // Load exam details when page loads
+        $(document).ready(function() {
+            loadExamDetails();
+            $('#createExamineeNumber').on('click', function() {
+                $.ajax({
+                    url: `https://localhost:7001/api/examinee/exam-number/${examId}`,
+                    type: 'GET',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        
+                        Swal.fire({
+                            title: 'Thành công!',
+                            text: 'Tạo số báo danh thành công.',
+                            icon: 'success',
+                            timer: 2000, // Tự đóng sau 2 giây
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            didClose: () => {
+                                loadExamDetails();
+                            }
+                        });
+                        
+                    },
+                error: function(error) {
+                    console.error('Error creating room:', error);
+                    alert('Có lỗi xảy ra khi tạo phòng thi.');
+                }
+                });
+            })
+            $('#createRoom').on('click', function() {
+                window.location.href = 'create-room.html'
+            })
+        });
+    </script>
+</body>
+</html>

@@ -35,17 +35,27 @@ namespace Infrastructure.Repositories.Implementations
             string roleName = "";
             if(role == 1) { roleName = "người tạo câu hỏi"; }
             else if(role == 2) { roleName = "người đánh giá câu hỏi"; }
-            list = await _context.User
-                    .Include(u => u.Role)
-                    .Include(u => u.Ward)
-                    .Include(u => u.ImageFace)
-                    .Include(u => u.ImageIdCardBefore)
-                    .Include(u => u.ImageIdCardAfter)
-                .Where(x => x.Role.Name == roleName).ToListAsync();
+            else if(role == 3) { roleName = "người tạo đề"; }
+                list = await _context.User
+                        .Include(u => u.Role)
+                        .Include(u => u.Ward)
+                        .Include(u => u.ImageFace)
+                        .Include(u => u.ImageIdCardBefore)
+                        .Include(u => u.ImageIdCardAfter)
+                    .Where(x => x.Role.Name == roleName).ToListAsync();
             return list;
         }
 
-
-
+        public async Task<User> GetUserById(Guid id)
+        {
+            var user = _context.User
+                        .Include(u => u.Role)
+                        .Include(u => u.Ward)
+                        .Include(u => u.ImageFace)
+                        .Include(u => u.ImageIdCardBefore)
+                        .Include(u => u.ImageIdCardAfter)
+                    .FirstOrDefault(x => x.Id == id);
+            return user;
+        }
     }
 }

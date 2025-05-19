@@ -33,7 +33,6 @@ namespace Application.Services.Implements
                     Level = contentBlockDoubleDto.Level,
                     QuestionTypeId = contentBlockDoubleDto.QuestionTypeId,
                     Status = 0,
-                    IsUsed = false,
                     CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                     UpdatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                 };
@@ -100,7 +99,6 @@ namespace Application.Services.Implements
                     Level = contentBlockSingleDto.Level,
                     QuestionTypeId = contentBlockSingleDto.QuestionTypeId,
                     Status = 0,
-                    IsUsed = false,
                     CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                     UpdatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
                 };
@@ -176,6 +174,12 @@ namespace Application.Services.Implements
         public Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task ChangeStatus(ContentBlockStatusDto contentBlockStatusDto)
+        {
+            await _unitOfWork.ContentBlocks.ChangeStatus(contentBlockStatusDto.Id, contentBlockStatusDto.Status);
+            await _unitOfWork.SaveChangeAsync();
         }
     }
     

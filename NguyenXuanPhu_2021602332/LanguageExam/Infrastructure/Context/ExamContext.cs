@@ -15,7 +15,8 @@ namespace Infrastructure.Context
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<ExamQuestionDetail> ExamQuestionDetails { get; set; }
         public DbSet<Answer> Answer { get; set; }
         public DbSet<ContentBlock> ContentBlock { get; set; }
         public DbSet<DetailResult> DetailResult { get; set; }

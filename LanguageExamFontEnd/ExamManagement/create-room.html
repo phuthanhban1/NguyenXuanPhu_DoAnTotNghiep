@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết kỳ thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+    <style>
+        :root {
+            --sidebar-width: 260px;
+            --primary-color: #1e88e5;
+            --secondary-color: #263238;
+            --success-color: #43a047;
+            --danger-color: #e53935;
+            --background-color: #f4f6f9;
+            --table-hover: #e3f2fd;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            transition: width 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .sidebar-menu li {
+            padding: 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .sidebar-menu a.active {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            box-shadow: inset 4px 0 0 white;
+        }
+
+        .sidebar-menu i {
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            min-height: 100vh;
+            background: white;
+            transition: margin-left 0.3s ease;
+            border-radius: 10px 0 0 0;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Header and Controls */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #listRoom {
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            min-width: 200px;
+            background: white;
+            transition: border-color 0.2s ease;
+        }
+
+        #listRoom:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+
+        #btnChoose {
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 6px;
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        #btnChoose:hover {
+            background-color: #1565c0;
+            transform: translateY(-1px);
+        }
+
+        #btnChoose:active {
+            transform: translateY(0);
+        }
+
+        /* Table Styling */
+        .examinee-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+
+        .examinee-table th,
+        .examinee-table td {
+            padding: 16px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .examinee-table th {
+            background: #f5f7fa;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .examinee-table td {
+            border-bottom: 1px solid #e9ecef;
+            color: #37474f;
+        }
+
+        .examinee-table tfoot td {
+            background: #f5f7fa;
+            font-weight: 600;
+            color: var(--secondary-color);
+            border-top: 2px solid #e9ecef;
+        }
+
+        .examinee-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .examinee-table tr:hover {
+            background: var(--table-hover);
+        }
+
+        .examinee-table tr {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .examinee-table tr.new-row {
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+
+            .sidebar-header h4,
+            .sidebar-menu a span {
+                display: none;
+            }
+
+            .sidebar-menu i {
+                margin-right: 0;
+                font-size: 1.4rem;
+            }
+
+            .main-content {
+                margin-left: 80px;
+                padding: 20px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            #listRoom {
+                min-width: 100%;
+            }
+
+            #btnChoose {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>Quản lý kỳ thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tổng quan</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="active">
+                    <i class="fas fa-users"></i>
+                    <span>Thí sinh</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-poll"></i>
+                    <span>Kết quả</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Tạo phòng thi</h2>
+            </div>
+        </div>
+
+        <!-- Examinee Table -->
+        <div class="table-responsive">
+            <div class="header-actions">
+                <select id="listRoom"></select>
+                <button id="btnChoose">Chọn</button>
+            </div>
+            <table class="examinee-table">
+                <thead>
+                    <tr>
+                        <th>Tên phòng</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody id="listChoosedRoom"></tbody>
+                <tfoot>
+                    <tr>
+                        <td>Tổng cộng</td>
+                        <td id="totalAmount">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button class="btn btn-primary" id="create">Tạo phòng thi</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Store rooms data
+        let listRoom = [];
+        let selectedRooms = [];
+        const examId = localStorage.getItem('examId');
+
+        // Function to update select options
+        function updateSelectOptions() {
+            $('#listRoom').html(listRoom
+                .filter(room => !selectedRooms.some(selected => selected.id === room.id))
+                .map(room => `<option value="${room.id}">${room.name}</option>`)
+                .join(''));
+        }
+
+        // Function to update table and total amount
+        function updateTable() {
+            $('#listChoosedRoom').html(selectedRooms.map(room => `
+                <tr class="new-row">
+                    <td>${room.name}</td>
+                    <td>${room.amount || 'N/A'}</td>
+                </tr>
+            `).join(''));
+
+            // Calculate total amount
+            const totalAmount = selectedRooms.reduce((sum, room) => {
+                return sum + (parseInt(room.amount) || 0);
+            }, 0);
+            $('#totalAmount').text(totalAmount);
+
+            // Remove animation class after animation
+            setTimeout(() => $('.new-row').removeClass('new-row'), 300);
+        }
+
+        async function  CountExaminee() {
+            var count = 0
+            await $.ajax({
+                    url: `https://localhost:7001/api/examinee/count/${examId}`,
+                    type: 'GET',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    success: function(response) {
+                        count = response
+
+                    },
+                    error: function(error) {
+                       
+                    }
+                });
+            return count
+        }
+
+        async function  CreateRoom(data) {
+            await $.ajax({
+                    url: `https://localhost:7001/api/examinee/create-room/${examId}`,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        Swal.fire({
+                            title: 'Thành công!',
+                            text: 'Tạo phòng thành công.',
+                            icon: 'success',
+                            timer: 2000, // Tự đóng sau 2 giây
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            didClose: () => {
+                                window.location.href = 'examinee.html'
+                            }
+                        });
+
+                    },
+                    error: function(error) {
+                       
+                    }
+                });
+            
+        }
+        // Load exam details when page loads
+        $(document).ready(function() {
+            $.ajax({
+                url: `https://localhost:7001/api/room`,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    console.log(response);
+                    listRoom = response.map(room => ({
+                        id: room.id,
+                        name: room.name,
+                        amount: room.amount
+                    }));
+                    updateSelectOptions();
+                },
+                error: function(error) {
+                    console.error('Error loading exam details:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Không thể tải danh sách phòng thi!',
+                    });
+                }
+            });
+
+            // Handle choose button click
+            $('#btnChoose').click(function() {
+                const selectedId = $('#listRoom').val();
+                if (!selectedId) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Chưa chọn phòng',
+                        text: 'Vui lòng chọn một phòng thi!',
+                    });
+                    return;
+                }
+
+                const selectedRoom = listRoom.find(room => room.id === selectedId);
+                if (selectedRoom) {
+                    selectedRooms.push(selectedRoom);
+                    updateSelectOptions();
+                    updateTable();
+                }
+            });
+            $('#create').on('click', async function() {
+                if(selectedRooms.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Chưa chọn phòng',
+                        text: 'Vui lòng chọn một phòng thi!',
+                    });
+                }
+                var sum = selectedRooms.reduce((total, item) => total + item.amount, 0);
+                var count = await CountExaminee()
+                if(sum < count) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Chưa đủ phòng cho tất cả thí sinh ',
+                        text: 'Vui lòng chọn thêm phòng thi!',
+                    });
+                } else {
+                    var data = selectedRooms.map(room => ({
+                        Id: room.id,
+                        Amount: room.amount
+                    }))
+                    await CreateRoom(data)
+                }
+                
+            }) 
+
+            
+        });
+    </script>
+</body>
+</html>

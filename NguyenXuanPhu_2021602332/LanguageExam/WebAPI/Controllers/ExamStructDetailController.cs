@@ -32,5 +32,7 @@ namespace WebAPI.Controllers
             await _examStructDetailService.Add(list);
             return Ok();
         }
+
+        
     }
 }

@@ -69,6 +69,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ContentBlockController",
+    "Method": "ChangeStatus",
+    "RelativePath": "api/ContentBlock/status",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contentBlockStatusDto",
+        "Type": "Application.Dtos.ContentBlockDtos.ContentBlockStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.DistrictController",
     "Method": "Add",
     "RelativePath": "api/District",
@@ -198,7 +214,7 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExamController",
-    "Method": "GetAllExam",
+    "Method": "GetAllExams",
     "RelativePath": "api/Exam",
     "HttpMethod": "GET",
     "IsController": true,
@@ -249,6 +265,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ExamController",
+    "Method": "GetExamById",
+    "RelativePath": "api/Exam/exam/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ExamineeController",
     "Method": "CreateExaminee",
     "RelativePath": "api/Examinee",
@@ -266,15 +298,116 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExamineeController",
-    "Method": "UpdateExaminee",
-    "RelativePath": "api/Examinee",
-    "HttpMethod": "PUT",
+    "Method": "CountExaminee",
+    "RelativePath": "api/Examinee/count/{examId}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "examineeUpdateDto",
-        "Type": "Application.Dtos.ExamineeDtos.ExamineeUpdateDto",
+        "Name": "examId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "CreateRoom",
+    "RelativePath": "api/Examinee/create-room/{examId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "list",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.RoomDtos.RoomExamDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "CreateExamNumber",
+    "RelativePath": "api/Examinee/exam-number/{examId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "GetExaminees",
+    "RelativePath": "api/Examinee/examinees/{examId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "IsRegist",
+    "RelativePath": "api/Examinee/is-regist/{examId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamQuestionController",
+    "Method": "Add",
+    "RelativePath": "api/ExamQuestion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examQuestionCreateDto",
+        "Type": "Application.Dtos.ExamQuestionDtos.ExamQuestionCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamQuestionDetailController",
+    "Method": "GenExam",
+    "RelativePath": "api/ExamQuestionDetail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examQuestionDetailCreateDto",
+        "Type": "Application.Dtos.ExamQuestionDetailDtos.ExamQuestionDetailCreateDto",
         "IsRequired": true
       }
     ],
@@ -719,6 +852,80 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.RoomController",
+    "Method": "GetAll",
+    "RelativePath": "api/Room",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.RoomController",
+    "Method": "Create",
+    "RelativePath": "api/Room",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomCreateDto",
+        "Type": "Application.Dtos.RoomDtos.RoomCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.RoomController",
+    "Method": "Update",
+    "RelativePath": "api/Room",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomDto",
+        "Type": "Application.Dtos.RoomDtos.RoomDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.RoomController",
+    "Method": "GetById",
+    "RelativePath": "api/Room/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.RoomController",
+    "Method": "Delete",
+    "RelativePath": "api/Room/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.SkillController",
     "Method": "Create",
     "RelativePath": "api/Skill",
@@ -964,6 +1171,16 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "CheckAuthorize",
+    "RelativePath": "api/User/authorize",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
     "Method": "CheckEmail",
     "RelativePath": "api/User/check-email",
     "HttpMethod": "GET",
@@ -976,6 +1193,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "CheckFullInfor",
+    "RelativePath": "api/User/check-infor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -1044,6 +1271,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.UserController",
+    "Method": "GetInforUser",
+    "RelativePath": "api/User/user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

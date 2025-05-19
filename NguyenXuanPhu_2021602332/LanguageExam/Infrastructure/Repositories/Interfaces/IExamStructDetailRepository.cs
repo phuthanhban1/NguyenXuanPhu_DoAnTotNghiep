@@ -11,5 +11,6 @@ namespace Infrastructure.Repositories.Interfaces
     {
         Task<List<ExamStructDetail>> GetByExamStructId(Guid id, string skill);
         Task DeleteByStructId(Guid id);
+        Task<List<ExamStructDetail>> GetAllByExamStructId(Guid id);
     }
 }

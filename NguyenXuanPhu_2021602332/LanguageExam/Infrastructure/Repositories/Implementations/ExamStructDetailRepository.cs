@@ -22,6 +22,12 @@ namespace Infrastructure.Repositories.Implementations
             list.ForEach(l => DeleteAsync(l));
         }
 
+        public async Task<List<ExamStructDetail>> GetAllByExamStructId(Guid id)
+        {
+            var list = _context.ExamStructDetail.Where(e => e.ExamStructId == id).ToList();
+            return list;
+        }
+
         public async Task<List<ExamStructDetail>> GetByExamStructId(Guid id, string skill)
         {
             var list = _context.ExamStructDetail

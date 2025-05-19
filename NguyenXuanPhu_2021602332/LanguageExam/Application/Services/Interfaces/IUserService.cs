@@ -18,6 +18,10 @@ namespace Application.Services.Interfaces
         Task<bool> CheckUserByEmail(string email);
         Task<List<GetAllUserDto>> GetAccounts(Guid id);
         Task<List<UserDto>> GetUserByRole(int roleNumber);
-        
+
+        Task<UserDto> GetUser(Guid id);
+        Task<bool> CheckFullInfor(Guid id);
+
+
     }
 }

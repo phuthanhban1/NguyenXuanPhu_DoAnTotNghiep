@@ -99,10 +99,14 @@
                                 } else if(response === roleExamCreate) {
                                     window.location.href = 'QuanLyCauTrucDe/index.html';
                                 } else if(response === roleExaminee) {
-                                    window.location.href = 'ExamCreate/exam_create_overview.html';
+                                    window.location.href = 'User/index.html';
                                 } if(response === roleAdmin){
                                     window.location.href = 'Admin/index.html';
-                                } else {
+                                } else if(response === roleExamManager) {
+                                    window.location.href = 'ExamManagement/index.html';
+
+                                }
+                                else {
                                     //window.location.href = 'main.html';
                                     console.log('Không có quyền');
                                 }

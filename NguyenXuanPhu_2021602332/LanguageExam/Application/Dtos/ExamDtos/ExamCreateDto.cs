@@ -10,10 +10,12 @@ namespace Application.Dtos.ExamDtos
     public class ExamCreateDto
     {
         public string Name { get; set; }
-        public DateTime BeginDate { get; set; }
+        public DateOnly StartDate { get; set; }
+        public DateOnly RegistDate { get; set; }
+        public int Amount { get; set; }
         public string Password { get; set; }
         public int Fee { get; set; }
-        public bool IsActive { get; set; }
+        public DateOnly CreateQuestionDue { get; set; }
         // id created exam question
         public Guid CreatedQuestionUserId { get; set; }
 

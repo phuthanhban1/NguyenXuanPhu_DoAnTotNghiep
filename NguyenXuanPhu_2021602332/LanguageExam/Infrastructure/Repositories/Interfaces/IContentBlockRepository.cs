@@ -11,5 +11,6 @@ namespace Infrastructure.Repositories.Interfaces
     {
         Task<List<ContentBlock>> GetByQuestionTypeId(Guid id);
         Task<List<ContentBlock>> GetByStatus(Guid questionTypeId, byte status);
+        Task ChangeStatus(Guid id, byte status);
     }
 }

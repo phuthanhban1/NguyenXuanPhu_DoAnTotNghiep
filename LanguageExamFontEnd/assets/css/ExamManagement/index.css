@@ -1,0 +1,137 @@
+
+:root {
+    --sidebar-width: 250px;
+}
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    transition: all 0.3s;
+}
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+.sidebar-menu li {
+    padding: 0;
+}
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.sidebar-menu a:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+.sidebar-menu a.active {
+    background: #3498db;
+    color: white;
+}
+.sidebar-menu i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+.exam-table {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+.exam-table th, .exam-table td {
+    vertical-align: middle;
+    padding: 12px;
+}
+.exam-table th {
+    background: #f1f3f5;
+    font-weight: 600;
+    color: #2c3e50;
+}
+.exam-table tr:hover {
+    background: #f8f9fa;
+    cursor: pointer;
+}
+.status-badge {
+    font-size: 0.9em;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-block;
+}
+.status-upcoming {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+.status-ongoing {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+.status-completed {
+    background-color: #f5f5f5;
+    color: #616161;
+}
+.search-box {
+    padding-left: 35px;
+    border-radius: 20px;
+}
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+#searchResults, #editSearchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 10000;
+}
+.user-search-item {
+    padding: 10px;
+    cursor: pointer;
+}
+.user-search-item:hover {
+    background-color: #f8f9fa;
+}
+.user-search-item.active {
+    background-color: #e3f2fd;
+}
+.list-group-item img {
+    object-fit: cover;
+}
+.toast-container {
+    z-index: 9999;
+}
+.action-btn {
+    margin-right: 5px;
+}
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

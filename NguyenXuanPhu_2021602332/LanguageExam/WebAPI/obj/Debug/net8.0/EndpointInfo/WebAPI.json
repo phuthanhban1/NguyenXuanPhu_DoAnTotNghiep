@@ -129,6 +129,37 @@
         }
       }
     },
+    "/api/ContentBlock/status": {
+      "post": {
+        "tags": [
+          "ContentBlock"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBlockStatusDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBlockStatusDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBlockStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/District/province/{provinceId}": {
       "get": {
         "tags": [
@@ -384,6 +415,29 @@
         }
       }
     },
+    "/api/Exam/exam/{id}": {
+      "get": {
+        "tags": [
+          "Exam"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Exam/create-exam": {
       "get": {
         "tags": [
@@ -425,26 +479,202 @@
             "description": "OK"
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/api/Examinee/is-regist/{examId}": {
+      "get": {
         "tags": [
           "Examinee"
+        ],
+        "parameters": [
+          {
+            "name": "examId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Examinee/count/{examId}": {
+      "get": {
+        "tags": [
+          "Examinee"
+        ],
+        "parameters": [
+          {
+            "name": "examId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Examinee/examinees/{examId}": {
+      "get": {
+        "tags": [
+          "Examinee"
+        ],
+        "parameters": [
+          {
+            "name": "examId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Examinee/exam-number/{examId}": {
+      "get": {
+        "tags": [
+          "Examinee"
+        ],
+        "parameters": [
+          {
+            "name": "examId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Examinee/create-room/{examId}": {
+      "post": {
+        "tags": [
+          "Examinee"
+        ],
+        "parameters": [
+          {
+            "name": "examId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExamineeUpdateDto"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomExamDto"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExamineeUpdateDto"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomExamDto"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ExamineeUpdateDto"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RoomExamDto"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExamQuestion": {
+      "post": {
+        "tags": [
+          "ExamQuestion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamQuestionCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamQuestionCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamQuestionCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ExamQuestionDetail": {
+      "post": {
+        "tags": [
+          "ExamQuestionDetail"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamQuestionDetailCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamQuestionDetailCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamQuestionDetailCreateDto"
               }
             }
           }
@@ -1139,6 +1369,120 @@
         }
       }
     },
+    "/api/Room": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Room"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoomDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Room/{id}": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Room"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Skill": {
       "post": {
         "tags": [
@@ -1569,6 +1913,18 @@
         }
       }
     },
+    "/api/User/authorize": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/login": {
       "post": {
         "tags": [
@@ -1648,6 +2004,30 @@
       }
     },
     "/api/User/user-id": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/check-infor": {
       "get": {
         "tags": [
           "User"
@@ -1853,9 +2233,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "isUsed": {
-            "type": "boolean"
-          },
           "createdDate": {
             "type": "string",
             "format": "date"
@@ -1892,9 +2269,6 @@
           "questionType": {
             "$ref": "#/components/schemas/QuestionType"
           },
-          "examQuestion": {
-            "$ref": "#/components/schemas/ExamQuestion"
-          },
           "questions": {
             "type": "array",
             "items": {
@@ -1915,6 +2289,9 @@
               "$ref": "#/components/schemas/SimilarQuestion"
             },
             "nullable": true
+          },
+          "examQuestionDetail": {
+            "$ref": "#/components/schemas/ExamQuestionDetail"
           }
         },
         "additionalProperties": false
@@ -1993,6 +2370,20 @@
         },
         "additionalProperties": false
       },
+      "ContentBlockStatusDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "DetailResult": {
         "type": "object",
         "properties": {
@@ -2066,29 +2457,27 @@
           },
           "createdDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
-          "updatedDate": {
+          "registDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
-          "beginDate": {
+          "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
           "password": {
             "type": "string",
             "nullable": true
           },
-          "fee": {
+          "amount": {
             "type": "integer",
             "format": "int32"
           },
-          "isCreating": {
-            "type": "boolean"
-          },
-          "isActive": {
-            "type": "boolean"
+          "fee": {
+            "type": "integer",
+            "format": "int32"
           },
           "managerId": {
             "type": "string",
@@ -2097,9 +2486,12 @@
           "manager": {
             "$ref": "#/components/schemas/User"
           },
-          "createDue": {
+          "createQuestionDue": {
             "type": "string",
             "format": "date"
+          },
+          "isCreating": {
+            "type": "boolean"
           },
           "createdQuestionUserId": {
             "type": "string",
@@ -2128,9 +2520,17 @@
             "type": "string",
             "nullable": true
           },
-          "beginDate": {
+          "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
+          },
+          "registDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
           },
           "password": {
             "type": "string",
@@ -2140,8 +2540,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "isActive": {
-            "type": "boolean"
+          "createQuestionDue": {
+            "type": "string",
+            "format": "date"
           },
           "createdQuestionUserId": {
             "type": "string",
@@ -2198,14 +2599,6 @@
             "type": "string",
             "format": "uuid"
           },
-          "skill": {
-            "type": "string",
-            "nullable": true
-          },
-          "order": {
-            "type": "integer",
-            "format": "int32"
-          },
           "examId": {
             "type": "string",
             "format": "uuid"
@@ -2222,10 +2615,78 @@
           },
           "audioFileId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "audioFile": {
             "$ref": "#/components/schemas/ExamFile"
+          },
+          "examQuestionDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamQuestionDetail"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamQuestionCreateDto": {
+        "type": "object",
+        "properties": {
+          "examId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "examStructId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamQuestionDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "skill": {
+            "type": "string",
+            "nullable": true
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contentBlockId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentBlock": {
+            "$ref": "#/components/schemas/ContentBlock"
+          },
+          "examQuestionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "examQuestion": {
+            "$ref": "#/components/schemas/ExamQuestion"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamQuestionDetailCreateDto": {
+        "type": "object",
+        "properties": {
+          "examId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "examStructId": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -2373,9 +2834,17 @@
             "type": "string",
             "nullable": true
           },
-          "beginDate": {
+          "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
+          },
+          "registDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
           },
           "password": {
             "type": "string",
@@ -2385,8 +2854,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "isActive": {
-            "type": "boolean"
+          "createQuestionDue": {
+            "type": "string",
+            "format": "date"
           },
           "createdQuestionUserId": {
             "type": "string",
@@ -2402,32 +2872,31 @@
             "type": "string",
             "format": "uuid"
           },
+          "exam": {
+            "$ref": "#/components/schemas/Exam"
+          },
           "userId": {
             "type": "string",
             "format": "uuid"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
           },
           "location": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "room": {
-            "type": "integer",
-            "format": "int32",
+          "roomId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
+          },
+          "room": {
+            "$ref": "#/components/schemas/Room"
           },
           "examineeNumber": {
             "type": "string",
-            "nullable": true
-          },
-          "readingScore": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "listeningScore": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "detailResults": {
@@ -2446,33 +2915,6 @@
           "examId": {
             "type": "string",
             "format": "uuid"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ExamineeUpdateDto": {
-        "type": "object",
-        "properties": {
-          "examId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "location": {
-            "type": "string",
-            "nullable": true
-          },
-          "room": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2792,6 +3234,77 @@
         },
         "additionalProperties": false
       },
+      "Room": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "examinees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Examinee"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomExamDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "SimilarQuestion": {
         "type": "object",
         "properties": {
@@ -3052,6 +3565,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExamStruct"
+            },
+            "nullable": true
+          },
+          "examinees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Examinee"
             },
             "nullable": true
           }

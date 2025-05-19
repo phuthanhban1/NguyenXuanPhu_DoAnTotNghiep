@@ -23,6 +23,7 @@ namespace Application.Dtos.UserDtos
         public string? Strict { get; set; }
         //foreign key ward
         public int? WardId { get; set; }
+        public string? FullAddress { get; set; }
         // fk img: anh mat
         public string? ImageFaceBase64 { get; set; }
         // fk img: id card before

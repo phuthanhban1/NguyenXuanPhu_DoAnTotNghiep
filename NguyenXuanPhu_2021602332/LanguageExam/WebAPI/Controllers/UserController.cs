@@ -90,6 +90,18 @@ namespace WebAPI.Controllers
 
             return Ok(new { Sid = sid });
         }
+
+        [HttpGet("authorize")]
+        public async Task<ActionResult> CheckAuthorize()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            
+            return Ok();
+        }
         [HttpPost("login")]
         public async Task<ActionResult> Login(UserLoginDto userLoginDto)
         {
@@ -147,6 +159,29 @@ namespace WebAPI.Controllers
             return Ok(sid);
         }
 
+        [HttpGet("user")]
+        public async Task<ActionResult> GetInforUser()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            var user = await _userService.GetUser(Guid.Parse(sid));
+            return Ok(user);
+        }
+
+        [HttpGet("check-infor")]
+        public async Task<IActionResult> CheckFullInfor()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            var check = await _userService.CheckFullInfor(Guid.Parse(sid));
+            return Ok(check);
+        }
 
     }
 }

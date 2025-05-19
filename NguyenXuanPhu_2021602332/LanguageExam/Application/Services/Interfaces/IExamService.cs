@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.ExamDtos;
 using Application.Dtos.QuestionBankDtos;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace Application.Services.Interfaces
         Task<List<ExamDto>> GetAllAsync();
         Task<List<ExamDto>> GetByManagerIdAsync(Guid id);
         Task<ExamDto> GetExamByCreate(Guid id);
+        Task<Exam> GetById(Guid id);
     }
 }

@@ -11,7 +11,7 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
-        public string GetAddress(int wardId)
+        public async Task<string> GetAddress(int wardId)
         {
             var result = _context.Ward.Where(w => w.Id == wardId)
                 .Include(w => w.District)

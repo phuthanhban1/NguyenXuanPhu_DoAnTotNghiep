@@ -4,190 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý kỳ thi</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --sidebar-width: 250px;
-        }
-        
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background: #2c3e50;
-            color: white;
-            padding: 20px 0;
-            transition: all 0.3s;
-        }
-        
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        
-        .sidebar-menu li {
-            padding: 0;
-        }
-        
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .sidebar-menu a:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
-        
-        .sidebar-menu a.active {
-            background: #3498db;
-            color: white;
-        }
-        
-        .sidebar-menu i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 20px;
-            min-height: 100vh;
-            background: #f8f9fa;
-        }
-        
-        .exam-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .exam-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .status-badge {
-            font-size: 0.9em;
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
-        
-        .status-upcoming {
-            background-color: #e3f2fd;
-            color: #1976d2;
-        }
-        
-        .status-ongoing {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .status-completed {
-            background-color: #f5f5f5;
-            color: #616161;
-        }
-        
-        .search-box {
-            padding-left: 35px;
-            border-radius: 20px;
-        }
-        
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-        }
-        
-        .stats-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .stats-card i {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: #3498db;
-        }
-        
-        .stats-card h3 {
-            font-size: 1.8em;
-            margin: 0;
-            color: #2c3e50;
-        }
-        
-        .stats-card p {
-            color: #7f8c8d;
-            margin: 5px 0 0;
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/ExamManagement/index.css">
+    <!-- Bootstrap Datepicker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
+
+<!-- Ngôn ngữ tiếng Việt cho datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/locales/bootstrap-datepicker.vi.min.js"></script>
 </head>
 <body>
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn xóa kỳ thi này?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
             <h4 class="mb-0">Quản lý kỳ thi</h4>
         </div>
         <ul class="sidebar-menu">
-            <li>
-                <a href="#" class="active">
-                    <i class="fas fa-chart-line"></i>
-                    Tổng quan
-                </a>
-            </li>
-            <li>
-                <a href="exam_detail.html">
-                    <i class="fas fa-users"></i>
-                    Danh sách thí sinh
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-file-alt"></i>
-                    Quản lý tạo đề
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-id-card"></i>
-                    Tạo số báo danh
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-door-open"></i>
-                    Phòng thi
-                </a>
-            </li>
+            <li><a href="index.html" class="active"><i class="fas fa-chart-line"></i>Tổng quan</a></li>
+            <li><a href="phong-thi.html"><i class="fas fa-door-open"></i>Phòng thi</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="mb-1">Tổng quan kỳ thi</h2>
@@ -198,44 +67,11 @@
             </button>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>12</h3>
-                    <p>Kỳ thi đang diễn ra</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <i class="fas fa-users"></i>
-                    <h3>150</h3>
-                    <p>Tổng số thí sinh</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <i class="fas fa-door-open"></i>
-                    <h3>8</h3>
-                    <p>Phòng thi</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <i class="fas fa-file-alt"></i>
-                    <h3>24</h3>
-                    <p>Đề thi đã tạo</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Search and Filter -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="position-relative">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="form-control search-box" placeholder="Tìm kiếm kỳ thi...">
+                    <input type="text" class="form-control search-box" placeholder="Tìm kiếm kỳ thi..." id="examSearch">
                 </div>
             </div>
             <div class="col-md-3">
@@ -256,9 +92,22 @@
             </div>
         </div>
 
-        <!-- Exam List -->
-        <div class="row g-4" id="examList">
-            <!-- Exam cards will be dynamically added here -->
+        <div class="exam-table table-responsive">
+            <table class="table table-hover" id="examTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Tên kỳ thi</th>
+                        <th scope="col">Ngày thi</th>
+                        <th scope="col">Ngày đăng ký</th>
+                        <th scope="col">Số lượng thí sinh</th>
+                        <th scope="col">Mật khẩu</th>
+                        <th scope="col">Lệ phí</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="examList"></tbody>
+            </table>
         </div>
     </div>
 
@@ -277,51 +126,177 @@
                             <input type="text" class="form-control" name="name" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Ngày bắt đầu</label>
-                            <input type="datetime-local" class="form-control" name="startDate" required>
+                            <label class="form-label">Ngày thi</label>
+                            <input type="date" class="form-control" name="startDate" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Ngày kết thúc</label>
-                            <input type="datetime-local" class="form-control" name="endDate" required>
+                            <label class="form-label type-date">Ngày bắt đầu đăng ký</label>
+                            <input type="date" class="form-control" name="registDate" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Mô tả</label>
-                            <textarea class="form-control" name="description" rows="3"></textarea>
+                            <label class="form-label">Số thí sinh</label>
+                            <input type="number" class="form-control" name="amount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Lệ phí (VND)</label>
+                            <input type="number" class="form-control" name="fee" min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hạn tạo đề</label>
+                            <input type="date" class="form-control" name="createQuestionDue" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tìm kiếm người phụ trách</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="searchEmail" placeholder="Nhập email để tìm kiếm..." autocomplete="off">
+                            </div>
+                            <div id="searchResults" class="d-none">
+                                <div id="userSearchList" class="list-group w-100"></div>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary" onclick="createExam()">Tạo mới</button>
+                    <button type="button" class="btn btn-primary" id="createExamBtn">Tạo mới</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Edit Exam Modal -->
+    <div class="modal fade" id="editExamModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa kỳ thi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editExamForm">
+                        <input type="hidden" name="id">
+                        <div class="mb-3">
+                            <label class="form-label">Tên kỳ thi</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày thi</label>
+                            <input type="date" class="form-control" name="startDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày bắt đầu đăng ký</label>
+                            <input type="date" class="form-control" name="registDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Số thí sinh</label>
+                            <input type="number" class="form-control" name="amount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Lệ phí (VND)</label>
+                            <input type="number" class="form-control" name="fee" min="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Hạn tạo đề</label>
+                            <input type="date" class="form-control" name="createQuestionDue" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tìm kiếm người phụ trách</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="editSearchEmail" placeholder="Nhập email để tìm kiếm..." autocomplete="off">
+                            </div>
+                            <div id="editSearchResults" class="d-none">
+                                <div id="editUserSearchList" class="list-group w-100"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="updateExamBtn">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // Format date to Vietnamese locale
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('vi-VN', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
+    <script type="module">
+        
+        // User data for search
+        let userData = [];
+
+        // Selected user ID for add/edit
+        let selectedUserId = null;
+
+        // Fetch users by role
+        function fetchGetAccount(roleNumber) {
+            return $.ajax({
+                url: `https://localhost:7001/api/user/account-by-role/${roleNumber}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true }
             });
         }
 
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const $toast = $('#liveToast');
+            $toast.removeClass('bg-success bg-danger bg-warning').addClass(`bg-${type}`);
+            $toast.find('.toast-body').text(message);
+            const toast = new bootstrap.Toast($toast[0]);
+            toast.show();
+        }
+
+        // Format date to Vietnamese locale
+        function formatDate(dateString) {
+            if (!dateString || dateString === '0001-01-01') return 'N/A';
+            try {
+                const date = new Date(dateString);
+                if (isNaN(date.getTime())) return 'N/A';
+                return date.toLocaleDateString('vi-VN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                });
+            } catch (e) {
+                return 'N/A';
+            }
+        }
+
+        // Format date for date input
+        function formatDateForInput(dateString) {
+            if (!dateString) return '';
+            try {
+                const date = new Date(dateString);
+                if (isNaN(date.getTime())) return '';
+                return date.toISOString().split('T')[0];
+            } catch (e) {
+                return '';
+            }
+        }
+
         // Get exam status based on dates
-        function getExamStatus(startDate, endDate) {
+        function getExamStatus(startDate) {
             const now = new Date();
-            const start = new Date(startDate);
-            const end = new Date(endDate);
+            const start = startDate ? new Date(startDate) : null;
+            
+
+            if (!start || isNaN(start.getTime()) ) {
+                console.log('Invalid date(s):', { startDate});
+                return 'completed';
+            }
 
             if (now < start) return 'upcoming';
-            if (now > end) return 'completed';
+            if (now > start) return 'completed';
             return 'ongoing';
         }
 
@@ -329,176 +304,411 @@
         function getStatusInfo(status) {
             switch(status) {
                 case 'upcoming':
-                    return {
-                        text: 'Sắp diễn ra',
-                        class: 'status-upcoming'
-                    };
+                    return { text: 'Sắp diễn ra', class: 'status-upcoming', value: 'upcoming' };
                 case 'ongoing':
-                    return {
-                        text: 'Đang diễn ra',
-                        class: 'status-ongoing'
-                    };
+                    return { text: 'Đang diễn ra', class: 'status-ongoing', value: 'ongoing' };
                 case 'completed':
-                    return {
-                        text: 'Đã kết thúc',
-                        class: 'status-completed'
-                    };
+                    return { text: 'Đã kết thúc', class: 'status-completed', value: 'completed' };
+                default:
+                    return { text: 'Đã kết thúc', class: 'status-completed', value: 'completed' };
             }
         }
 
-        // Render exam card
-        function renderExamCard(exam) {
-            const status = getExamStatus(exam.startDate, exam.endDate);
+        // Render exam row for table
+        function renderExamRow(exam) {
+            const status = getExamStatus(exam.startDate);
+            console.log('320', status)
             const statusInfo = getStatusInfo(status);
+            const isDisabled = status === 'completed' ? 'disabled' : '';
             
             return `
-                <div class="col-md-6 col-lg-4">
-                    <div class="card exam-card" onclick="viewExamDetail('${exam.id}')">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h5 class="card-title mb-0">${exam.name}</h5>
-                                <span class="badge ${statusInfo.class}">${statusInfo.text}</span>
-                            </div>
-                            <p class="text-muted small mb-3">${exam.description || 'Không có mô tả'}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <small class="text-muted d-block">Bắt đầu</small>
-                                    <div>${formatDate(exam.startDate)}</div>
-                                </div>
-                                <div>
-                                    <small class="text-muted d-block">Kết thúc</small>
-                                    <div>${formatDate(exam.endDate)}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <tr data-status="${statusInfo.value}" data-exam-id="${exam.id}">
+                    <td>${exam.name || 'Không có tên'}</td>
+                    <td>${formatDate(exam.startDate)}</td>
+                    <td>${formatDate(exam.registDate)}</td>
+                    <td>${exam.amount || 0}</td>
+                    <td>${exam.password || 'N/A'}</td>
+                    <td>${exam.fee || 0}</td>
+                    <td><span class="badge ${statusInfo.class}">${statusInfo.text}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning action-btn edit-exam" title="Sửa" ${isDisabled}>
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
             `;
         }
 
-        // Load exams
+        // Load exams via AJAX
         function loadExams() {
             $.ajax({
-                url: 'https://localhost:7001/api/exams',
+                url: 'https://localhost:7001/api/exam',
                 type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
+                xhrFields: { withCredentials: true },
                 success: function(response) {
-                    const examList = document.getElementById('examList');
-                    examList.innerHTML = response.map(exam => renderExamCard(exam)).join('');
+                    console.log('API exams response:', response);
+                    const $examList = $('#examList');
+                    $examList.html(response.map(exam => renderExamRow(exam)).join(''));
+                    $examList.find('tr').on('click', function(e) {
+                        if ($(e.target).closest('.action-btn').length) return;
+                        const examId = $(this).data('exam-id');
+                        viewExamDetail(examId);
+                    });
                 },
                 error: function(error) {
                     console.error('Error loading exams:', error);
+                    showToast('Không thể tải danh sách kỳ thi!', 'danger');
                 }
             });
+        }
+
+        // Search users for exam creator
+        function searchUsers(searchTerm, searchInputId, resultsId, listId) {
+            searchTerm = searchTerm ? searchTerm.toLowerCase().trim() : '';
+            const $searchResults = $(`#${resultsId}`);
+            const $userSearchList = $(`#${listId}`);
+
+            $userSearchList.html('<div class="list-group-item text-center">Đang tải...</div>');
+            $searchResults.removeClass('d-none');
+
+            if (!userData || userData.length === 0) {
+                $userSearchList.html(`
+                    <div class="list-group-item text-center text-muted">
+                        Không có dữ liệu người dùng
+                    </div>
+                `);
+                return;
+            }
+
+            const matchedUsers = searchTerm
+                ? userData.filter(user => 
+                    user.email.toLowerCase().includes(searchTerm) ||
+                    user.fullName.toLowerCase().includes(searchTerm)
+                )
+                : userData;
+
+            $userSearchList.empty();
+            if (matchedUsers.length > 0) {
+                const html = matchedUsers.map(user => {
+                    const highlightedEmail = searchTerm
+                        ? user.email.replace(
+                              new RegExp(searchTerm, 'gi'),
+                              match => `<span class="bg-warning">${match}</span>`
+                          )
+                        : user.email;
+                    const highlightedName = searchTerm
+                        ? user.fullName.replace(
+                              new RegExp(searchTerm, 'gi'),
+                              match => `<span class="bg-warning">${match}</span>`
+                          )
+                        : user.fullName;
+                    return `
+                        <button type="button" class="list-group-item list-group-item-action user-search-item" data-user-id="${user.id}">
+                            <div class="d-flex align-items-center">
+                                <img src="${user.imageFaceBase64 || 'https://via.placeholder.com/32'}" class="rounded-circle me-2" width="32" height="32" alt="Avatar">
+                                <div>
+                                    <div class="fw-bold">${highlightedName || 'Không có tên'}</div>
+                                    <small class="text-muted">${highlightedEmail}</small>
+                                </div>
+                            </div>
+                        </button>
+                    `;
+                }).join('');
+                $userSearchList.append(html);
+                $searchResults.removeClass('d-none');
+            } else {
+                $userSearchList.html(`
+                    <div class="list-group-item text-center text-muted">
+                        Không tìm thấy kết quả cho "${searchTerm}"
+                    </div>
+                `);
+                $searchResults.removeClass('d-none');
+            }
         }
 
         // Create new exam
         function createExam() {
-            const form = document.getElementById('addExamForm');
-            const formData = new FormData(form);
+            const $form = $('#addExamForm');
+            if (!$form[0].checkValidity()) {
+                $form[0].reportValidity();
+                return;
+            }
+
+            const formData = new FormData($form[0]);
             const examData = {
-                name: formData.get('name'),
-                startDate: formData.get('startDate'),
-                endDate: formData.get('endDate'),
-                description: formData.get('description')
+                Name: formData.get('name'),
+                StartDate: formData.get('startDate'),
+                RegistDate: formData.get('registDate'),
+                CreateQuestionDue: formData.get('createQuestionDue'),
+                Password: formData.get('password'),
+                Amount: parseInt(formData.get('amount')),
+                Fee: formData.get('fee') ? parseFloat(formData.get('fee')) : null,
+                CreatedQuestionUserId: selectedUserId
             };
 
+            if (!selectedUserId) {
+                showToast('Vui lòng chọn người phụ trách!', 'warning');
+                return;
+            }
+
             $.ajax({
-                url: 'https://localhost:7001/api/exams',
+                url: 'https://localhost:7001/api/exam',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(examData),
-                xhrFields: {
-                    withCredentials: true
-                },
+                xhrFields: { withCredentials: true },
                 success: function(response) {
-                    // Close modal and reset form
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addExamModal'));
+                    const modal = bootstrap.Modal.getInstance($('#addExamModal')[0]);
                     modal.hide();
-                    form.reset();
-
-                    // Reload exams
+                    $form[0].reset();
+                    $('#searchEmail').val('');
+                    selectedUserId = null;
+                    $('#searchResults').addClass('d-none');
+                    $('#userSearchList').empty();
                     loadExams();
-
-                    // Show success message
-                    alert('Tạo kỳ thi thành công!');
+                    showToast('Tạo kỳ thi thành công!', 'success');
                 },
                 error: function(error) {
                     console.error('Error creating exam:', error);
-                    alert('Có lỗi xảy ra khi tạo kỳ thi. Vui lòng thử lại!');
+                    showToast('Có lỗi xảy ra khi tạo kỳ thi!', 'danger');
                 }
             });
+        }
+
+        // Show edit exam modal
+        function showEditExamModal(examId) {
+            $.ajax({
+                url: `https://localhost:7001/api/exam/exam/${examId}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(exam) {
+                    const $form = $('#editExamForm');
+                    $form.find('[name="id"]').val(exam.id);
+                    $form.find('[name="name"]').val(exam.name);
+                    $form.find('[name="startDate"]').val(formatDateForInput(exam.startDate));
+                    $form.find('[name="registDate"]').val(formatDateForInput(exam.registDate));
+                    $form.find('[name="amount"]').val(exam.amount);
+                    $form.find('[name="fee"]').val(exam.fee || '');
+                    $form.find('[name="password"]').val(exam.password || '');
+                    $form.find('[name="createQuestionDue"]').val(formatDateForInput(exam.createQuestionDue));
+                    
+                    const user = userData.find(u => u.id === exam.createdQuestionUserId);
+                    selectedUserId = exam.createdQuestionUserId;
+                    $('#editSearchEmail').val(user ? user.email : '');
+
+                    const modal = new bootstrap.Modal($('#editExamModal')[0]);
+                    modal.show();
+                },
+                error: function(error) {
+                    console.error('Error fetching exam:', error);
+                    showToast('Không thể tải thông tin kỳ thi!', 'danger');
+                }
+            });
+        }
+
+        // Update exam
+        function updateExam() {
+            const $form = $('#editExamForm');
+            if (!$form[0].checkValidity()) {
+                $form[0].reportValidity();
+                return;
+            }
+
+            const formData = new FormData($form[0]);
+            const examData = {
+                Id: formData.get('id'),
+                Name: formData.get('name'),
+                StartDate: formData.get('startDate'),
+                RegistDate: formData.get('registDate'),
+                CreateQuestionDue: formData.get('createQuestionDue'),
+                Password: formData.get('password'),
+                Amount: parseInt(formData.get('amount')),
+                Fee: formData.get('fee') ? parseFloat(formData.get('fee')) : null,
+                CreatedQuestionUserId: selectedUserId
+            };
+
+            if (!selectedUserId) {
+                showToast('Vui lòng chọn người phụ trách!', 'warning');
+                return;
+            }
+
+            $.ajax({
+                url: `https://localhost:7001/api/exam`,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(examData),
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    const modal = bootstrap.Modal.getInstance($('#editExamModal')[0]);
+                    modal.hide();
+                    $form[0].reset();
+                    $('#editSearchEmail').val('');
+                    selectedUserId = null;
+                    $('#editSearchResults').addClass('d-none');
+                    $('#editUserSearchList').empty();
+                    loadExams();
+                    showToast('Cập nhật kỳ thi thành công!', 'success');
+                },
+                error: function(error) {
+                    console.error('Error updating exam:', error);
+                    showToast('Có lỗi xảy ra khi cập nhật kỳ thi!', 'danger');
+                }
+            });
+        }
+
+        // Delete exam
+        function deleteExam(examId) {
+            $('#confirmDeleteBtn').off('click').on('click', function() {
+                $.ajax({
+                    url: `https://localhost:7001/api/exam/${examId}`,
+                    type: 'DELETE',
+                    xhrFields: { withCredentials: true },
+                    success: function() {
+                        const modal = bootstrap.Modal.getInstance($('#confirmDeleteModal')[0]);
+                        modal.hide();
+                        loadExams();
+                        showToast('Xóa kỳ thi thành công!', 'success');
+                    },
+                    error: function(error) {
+                        console.error('Error deleting exam:', error);
+                        showToast('Có lỗi xảy ra khi xóa kỳ thi!', 'danger');
+                    }
+                });
+            });
+            const modal = new bootstrap.Modal($('#confirmDeleteModal')[0]);
+            modal.show();
         }
 
         // View exam detail
         function viewExamDetail(examId) {
-            window.location.href = `exam_detail.html?id=${examId}`;
+            localStorage.setItem('examId', examId);
+            window.location.href = `exam_detail.html`;
         }
 
-        // Search and filter functionality
-        document.querySelector('.search-box').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const examCards = document.querySelectorAll('.exam-card');
-            
-            examCards.forEach(card => {
-                const examName = card.querySelector('.card-title').textContent.toLowerCase();
-                const examDesc = card.querySelector('.text-muted').textContent.toLowerCase();
-                
-                if (examName.includes(searchTerm) || examDesc.includes(searchTerm)) {
-                    card.closest('.col-md-6').style.display = '';
-                } else {
-                    card.closest('.col-md-6').style.display = 'none';
-                }
-            });
-        });
-
-        document.getElementById('statusFilter').addEventListener('change', function(e) {
-            const status = e.target.value;
-            const examCards = document.querySelectorAll('.exam-card');
-            
-            examCards.forEach(card => {
-                const cardStatus = card.querySelector('.badge').textContent.toLowerCase();
-                if (!status || cardStatus.includes(status)) {
-                    card.closest('.col-md-6').style.display = '';
-                } else {
-                    card.closest('.col-md-6').style.display = 'none';
-                }
-            });
-        });
-
-        document.getElementById('sortBy').addEventListener('change', function(e) {
-            const sortBy = e.target.value;
-            const examList = document.getElementById('examList');
-            const examCards = Array.from(examList.children);
-            
-            examCards.sort((a, b) => {
-                const cardA = a.querySelector('.exam-card');
-                const cardB = b.querySelector('.exam-card');
-                
-                switch(sortBy) {
-                    case 'newest':
-                        return new Date(cardB.querySelector('div:last-child div:first-child').textContent) - 
-                               new Date(cardA.querySelector('div:last-child div:first-child').textContent);
-                    case 'oldest':
-                        return new Date(cardA.querySelector('div:last-child div:first-child').textContent) - 
-                               new Date(cardB.querySelector('div:last-child div:first-child').textContent);
-                    case 'name':
-                        return cardA.querySelector('.card-title').textContent.localeCompare(
-                            cardB.querySelector('.card-title').textContent
-                        );
-                    default:
-                        return 0;
-                }
-            });
-            
-            examCards.forEach(card => examList.appendChild(card));
-        });
-
-        // Load exams when page loads
+        // Initialize page
         $(document).ready(function() {
-            loadExams();
+            
+            fetchGetAccount(3)
+                .done(response => {
+                    userData = response.map(user => ({
+                        id: user.id || '',
+                        email: user.email || '',
+                        fullName: user.fullName || '',
+                        imageFaceBase64: user.imageFaceBase64 || null
+                    }));
+                    loadExams();
+                })
+                .fail(error => {
+                    console.error('Error fetching users:', error);
+                    showToast('Không thể tải danh sách người dùng!', 'danger');
+                    userData = [
+                        { id: '1', email: 'user1@example.com', fullName: 'User One', imageFaceBase64: null },
+                        { id: '2', email: 'user2@example.com', fullName: 'User Two', imageFaceBase64: null },
+                        { id: '3', email: 'admin@example.com', fullName: 'Admin User', imageFaceBase64: null }
+                    ];
+                    loadExams();
+                });
+
+            $('#examSearch').on('input', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                $('#examList tr').each(function() {
+                    const examName = $(this).find('td').eq(0).text().toLowerCase();
+                    $(this).toggle(examName.includes(searchTerm));
+                });
+            });
+
+            $('#statusFilter').on('change', function() {
+                const status = $(this).val();
+                $('#examList tr').each(function() {
+                    const rowStatus = $(this).data('status');
+                    $(this).toggle(!status || rowStatus === status);
+                });
+            });
+
+            $('#sortBy').on('change', function() {
+                const sortBy = $(this).val();
+                const $examList = $('#examList');
+                const $examRows = $examList.children('tr').get();
+
+                $examRows.sort(function(a, b) {
+                    const nameA = $(a).find('td').eq(0).text();
+                    const nameB = $(b).find('td').eq(0).text();
+                    const startDateA = new Date($(a).find('td').eq(1).text());
+                    const startDateB = new Date($(b).find('td').eq(1).text());
+
+                    switch(sortBy) {
+                        case 'newest':
+                            return startDateB - startDateA;
+                        case 'oldest':
+                            return startDateA - startDateB;
+                        case 'name':
+                            return nameA.localeCompare(nameB);
+                        case 'amount':
+                            return parseInt($(a).find('td').eq(3).text()) - parseInt($(b).find('td').eq(3).text());
+                        default:
+                            return 0;
+                    }
+                });
+
+                $examList.empty().append($examRows);
+            });
+
+            $('#searchEmail').on('input', function() {
+                searchUsers($(this).val(), 'searchEmail', 'searchResults', 'userSearchList');
+            }).on('focus', function() {
+                searchUsers($(this).val(), 'searchEmail', 'searchResults', 'userSearchList');
+            });
+
+            $('#editSearchEmail').on('input', function() {
+                searchUsers($(this).val(), 'editSearchEmail', 'editSearchResults', 'editUserSearchList');
+            }).on('focus', function() {
+                searchUsers($(this).val(), 'editSearchEmail', 'editSearchResults', 'editUserSearchList');
+            });
+
+            $(document).on('click', '.user-search-item', function() {
+                const userId = $(this).data('user-id');
+                const email = $(this).find('.text-muted').text();
+                const $searchInput = $(this).closest('.modal').find('input[type="email"]');
+                const $results = $(this).closest('.modal').find('.d-none');
+                const $list = $(this).closest('.list-group');
+
+                selectedUserId = userId;
+                $searchInput.val(email);
+                $results.addClass('d-none');
+                $list.empty();
+                
+                $('.user-search-item').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#searchEmail, #editSearchEmail, #searchResults, #editSearchResults').length) {
+                    $('#searchResults, #editSearchResults').addClass('d-none');
+                    $('#userSearchList, #editUserSearchList').empty();
+                }
+            });
+
+            $('#addExamModal').on('shown.bs.modal', function() {
+                $('#searchEmail').focus();
+            });
+            $('#editExamModal').on('shown.bs.modal', function() {
+                $('#editSearchEmail').focus();
+            });
+
+            $('#createExamBtn').on('click', createExam);
+            $('#updateExamBtn').on('click', updateExam);
+
+            $(document).on('click', '.edit-exam:not(:disabled)', function(e) {
+                e.stopPropagation();
+                const examId = $(this).closest('tr').data('exam-id');
+                showEditExamModal(examId);
+            });
+
+            $(document).on('click', '.delete-exam:not(:disabled)', function(e) {
+                e.stopPropagation();
+                const examId = $(this).closest('tr').data('exam-id');
+                deleteExam(examId);
+            });
         });
     </script>
 </body>
