@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.ExamDtos;
+using Application.Services.Implements;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,12 @@ namespace WebAPI.Controllers
             return Ok(exams);
         }
 
+        [HttpGet("confirm/{examId}")]
+        public async Task<IActionResult> Confirm(Guid examId)
+        {
+           await _examService.Confirm(examId);
+            return Ok();
+        }
         // get exams by manager id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExamByManager(Guid id)
@@ -87,6 +94,15 @@ namespace WebAPI.Controllers
             var exam = await _examService.GetExamByCreate(Guid.Parse(sid));
             return Ok(exam);
         }
+
+        [HttpGet("is-create/{examId}")]
+        public async Task<IActionResult> HasQuestion(Guid examId)
+        {
+            var exam = await _examService.GetById(examId);
+            return Ok(exam.IsCreated);
+        }
+
+
 
     }
 }

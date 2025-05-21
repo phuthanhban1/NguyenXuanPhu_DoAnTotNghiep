@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Infrastructure.Configurations
 {
@@ -13,12 +14,14 @@ namespace Infrastructure.Configurations
 
             builder.HasOne(a => a.Examinee)
                    .WithMany(q => q.DetailResults)
-                   .HasForeignKey(a => new {a.UserId , a.ExamId});
+                   .HasForeignKey(a => new {a.ExamId , a.UserId});
 
             builder.HasOne(a => a.Answer)
                      .WithMany(q => q.DetailResults)
                      .HasForeignKey(a => a.AnswerId)
                      .OnDelete(DeleteBehavior.NoAction);
+
+           
         }
     }
     

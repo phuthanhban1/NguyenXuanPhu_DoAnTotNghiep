@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giao diện thi trắc nghiệm</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafbfc;
+      margin: 0;
+      padding: 0;
+    }
+    .container-fluid {
+      max-width: 1400px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .main-content {
+      padding: 32px 24px;
+      margin-right: 320px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+    .sidebar {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      width: 300px;
+      background: #f7f7f7;
+      padding: 24px 16px;
+      border-left: 1px solid #eee;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+    .question-block {
+      margin-bottom: 32px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 24px;
+    }
+    .question-number {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #2d6cdf;
+      margin-bottom: 8px;
+    }
+    .question-text {
+      margin-bottom: 12px;
+    }
+    .answers label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .reading-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: #2d6cdf;
+    }
+    .sidebar .timer {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 16px;
+    }
+    .sidebar button {
+      width: 100%;
+      padding: 10px;
+      background: #2d6cdf;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .question-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .question-list button {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #bbb;
+      background: #fff;
+      color: #000;
+      border-radius: 4px;
+      font-size: 1em;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .question-list button.active {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+    .answer-option label {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .answer-option label:hover {
+      background-color: #f0f0f0;
+    }
+    .answer-option input[type="radio"] {
+      margin-right: 10px;
+    }
+    .correct-answer-badge {
+      display: none;
+    }
+    @media (max-width: 1200px) {
+      .main-content {
+        margin-right: 0;
+        max-height: none;
+        overflow-y: visible;
+      }
+      .sidebar {
+        position: relative;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+        border-radius: 0;
+        border-left: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="main-content col-12 col-lg-9">
+        <div id="start-screen" class="text-center">
+          <button id="start-btn" class="btn btn-success btn-lg">Bắt đầu bài thi</button>
+        </div>
+        <div id="quiz-screen" style="display: none;">
+          <div class="reading-title">Nghe</div>
+          <div id="examQuestion"></div>
+        </div>
+      </div>
+      <div class="sidebar col-12 col-lg-3">
+        <div>Thời gian làm bài:</div>
+        <div class="timer" id="timer">1:00:00</div>
+        <button id="submitExam">NỘP BÀI</button>
+        <div style="font-weight:bold; margin-bottom:8px;">Nghe</div>
+        <div class="question-list"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    var listQuestion = [];
+    var examId = localStorage.getItem('examId') || '9A6C4D78-9CDF-4256-8B5D-3EE724F22165';
+    var currentQuestion = 0;
+    var answers = [];
+    var flatQuestions = [];
+
+    async function GetQuestionTypeName(contentId) {
+      var name = '';
+      await $.ajax({
+        url: `https://localhost:7001/api/contentBlock/question-type/${contentId}`,
+        type: 'GET',
+        xhrFields: { withCredentials: true },
+        success: function(response) {
+          name = response;
+        },
+        error: function(error) {
+          console.error('Error loading question type:', error.responseText);
+        }
+      });
+      return name;
+    }
+
+    async function GetExamQuestion(examId) {
+      await $.ajax({
+        url: `https://localhost:7001/api/examQuestionDetail/${examId}`,
+        type: 'GET',
+        xhrFields: { withCredentials: true },
+        success: function(response) {
+          listQuestion = response;
+          // Flatten questions for sequential display
+          flatQuestions = [];
+          const ngheList = listQuestion['nghe'];
+          if (ngheList) {
+            Object.keys(ngheList).sort((a, b) => Number(a) - Number(b)).forEach(key => {
+              ngheList[key].forEach(contentBlock => {
+                if (contentBlock.isSingle) {
+                  flatQuestions.push({
+                    contentBlock: contentBlock,
+                    question: contentBlock.questions[0],
+                    index: flatQuestions.length + 1
+                  });
+                } else {
+                  contentBlock.questions.forEach(question => {
+                    flatQuestions.push({
+                      contentBlock: contentBlock,
+                      question: question,
+                      index: flatQuestions.length + 1
+                    });
+                  });
+                }
+              });
+            });
+          }
+        },
+        error: function(error) {
+          console.error('Error loading questions:', error.responseText);
+          $('#examQuestion').html('<p>Lỗi khi tải dữ liệu</p>');
+        }
+      });
+    }
+
+    async function renderQuestion() {
+      const examQuestionDiv = $('#examQuestion');
+      examQuestionDiv.empty();
+      if (currentQuestion >= flatQuestions.length) {
+        // End of questions, submit answers
+        await submitExam();
+        return;
+      }
+
+      const q = flatQuestions[currentQuestion];
+      const questionTypeName = await GetQuestionTypeName(q.contentBlock.id);
+      let contentBlockHtml = `
+        <div class="col-12 mt-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-lg font-semibold text-gray-800 mb-4">${questionTypeName}</div>
+              <!-- Media Section -->
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  ${q.contentBlock.imageBase64 ? `<img src="data:image/jpeg;base64,${q.contentBlock.imageBase64}" alt="Question Image" class="media-preview mb-3">` : ''}
+                </div>
+                <div class="col-md-8">
+                  ${q.contentBlock.audioBase64 ? `<audio id="audio-player" class="audio-preview mb-3" onended="nextQuestion()"><source src="data:audio/mpeg;base64,${q.contentBlock.audioBase64}" type="audio/mpeg">Your browser does not support the audio element.</audio>` : ''}
+                  <div id="audio-error" class="text-danger text-center mb-3" style="display: none;"></div>
+                </div>
+              </div>
+              <!-- Content Block Content -->
+              <div class="mb-4 d-flex">
+                <h6 class="fw-bold mr-2">Nội dung câu hỏi:</h6>
+                <p>${q.contentBlock.content || 'Nội dung không có'}</p>
+              </div>
+              <div class="question-block" id="question-${q.index}">
+                <div class="card-header bg-white">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Câu hỏi ${q.index}</h5>
+                  </div>
+                </div>
+                <h6 class="fw-bold mb-3" ${q.question.content ? '' : 'style="display: none;"'}>Câu hỏi: ${q.question.content}</h6>
+                <div class="mb-3">
+                  <div class="list-group answers">
+                    ${q.question.answers && Array.isArray(q.question.answers) ? q.question.answers.map((answer, ansIndex) => `
+                      <div class="answer-option">
+                        <label>
+                          <input type="radio" name="question-${q.index}" value="${answer.id}" />
+                          <span class="answer-label">${String.fromCharCode(65 + ansIndex)}. ${answer.content || 'Đáp án trống'}</span>
+                        </label>
+                      </div>
+                    `).join('') : '<p>Không có đáp án</p>'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      examQuestionDiv.append(contentBlockHtml);
+
+      // Auto-play audio
+      const audioPlayer = document.getElementById('audio-player');
+      if (audioPlayer) {
+        audioPlayer.play().catch(e => {
+          $('#audio-error').text('Lỗi phát âm thanh: ' + e.message).show();
+        });
+      }
+
+      // Update sidebar question list
+      const questionListDiv = $('.question-list');
+      questionListDiv.empty();
+      for (let i = 1; i <= flatQuestions.length; i++) {
+        questionListDiv.append(`
+          <button class="question-nav ${i === q.index ? 'active' : ''}" data-q="${i}" disabled>${i}</button>
+        `);
+      }
+
+      // Handle answer selection
+      $(`.answers input[name="question-${q.index}"]`).on('change', function() {
+        $(`.question-nav[data-q="${q.index}"]`).addClass('active');
+      });
+    }
+
+    async function submitExam() {
+      // Send answers to server
+      await $.ajax({
+        url: `https://localhost:7001/api/detailResult/listening/${examId}`,
+        type: 'POST',
+        contentType: 'application/json',
+        xhrFields: { withCredentials: true },
+        data: JSON.stringify(answers),
+        success: function(response) {
+          alert('Bài thi đã được nộp thành công!');
+          localStorage.removeItem('remainingTime');
+          localStorage.removeItem('timerInterval');
+          window.location.href = 'do-exam-reading.html';
+        },
+        error: function(error) {
+          console.error('Error submitting exam:', error.responseText);
+          alert('Lỗi khi nộp bài thi. Vui lòng thử lại.');
+        }
+      });
+    }
+
+    function nextQuestion() {
+      // Save selected answer
+      const q = flatQuestions[currentQuestion];
+      const selectedAnswerId = $(`input[name="question-${q.index}"]:checked`).val();
+      if (selectedAnswerId) {
+        answers.push(selectedAnswerId);
+      }
+      currentQuestion++;
+      if (currentQuestion < flatQuestions.length) {
+        renderQuestion();
+      } else {
+        $('#examQuestion').html(`
+          <div class="text-center">
+            <h5>Kết thúc bài thi!</h5>
+            <p>Đang nộp bài...</p>
+          </div>
+        `);
+        submitExam();
+      }
+    }
+
+    $(document).ready(async function() {
+      await GetExamQuestion(examId);
+
+      // Handle start button
+      $('#start-btn').on('click', function() {
+        $('#start-screen').hide();
+        $('#quiz-screen').show();
+        renderQuestion();
+      });
+
+      // Timer
+      function startTimer(duration) {
+        let timer = localStorage.getItem('remainingTime') ? 
+                    parseInt(localStorage.getItem('remainingTime')) : 
+                    duration;
+        const timerDisplay = $('#timer');
+        const countdown = setInterval(function() {
+          const minutes = parseInt(timer / 60, 10);
+          const seconds = parseInt(timer % 60, 10);
+          const displayTime = minutes.toString().padStart(2, '0') + ':' + 
+                             seconds.toString().padStart(2, '0');
+          timerDisplay.text(displayTime);
+          localStorage.setItem('remainingTime', timer);
+          if (--timer < 0) {
+            clearInterval(countdown);
+            timerDisplay.text('00:00');
+            localStorage.removeItem('remainingTime');
+            alert('Hết thời gian làm bài! Bài thi sẽ được nộp tự động.');
+            submitExam();
+          }
+        }, 1000);
+        localStorage.setItem('timerInterval', countdown);
+      }
+
+      const oldInterval = localStorage.getItem('timerInterval');
+      if (oldInterval) {
+        clearInterval(parseInt(oldInterval));
+      }
+      startTimer(60 * 60);
+
+      // Handle manual submission
+      $('#submitExam').on('click', function() {
+        if (confirm('Bạn có chắc chắn muốn nộp bài?')) {
+          // Save current answer before submitting
+          const q = flatQuestions[currentQuestion];
+          const selectedAnswerId = $(`input[name="question-${q.index}"]:checked`).val();
+          if (selectedAnswerId) {
+            answers.push(selectedAnswerId);
+          }
+          submitExam();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

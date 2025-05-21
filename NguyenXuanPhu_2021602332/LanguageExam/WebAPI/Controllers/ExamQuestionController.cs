@@ -21,5 +21,12 @@ namespace WebAPI.Controllers
             await _examQuestionService.Add(examQuestionCreateDto);
             return Ok();
         }
+
+        [HttpGet("{examId}")]
+        public async Task<IActionResult> HasQuestion(Guid examId)
+        {
+            var check = await _examQuestionService.HasQuestion(examId);
+            return Ok(check);
+        }
     }
 }

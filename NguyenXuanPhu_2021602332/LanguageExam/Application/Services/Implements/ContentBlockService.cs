@@ -5,6 +5,7 @@ using Application.Services.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,7 +96,7 @@ namespace Application.Services.Implements
                 var contentBlock = new ContentBlock
                 {
                     Id = Guid.NewGuid(),
-                    Content = contentBlockSingleDto.TextContent,
+                    Content = contentBlockSingleDto.Content,
                     Level = contentBlockSingleDto.Level,
                     QuestionTypeId = contentBlockSingleDto.QuestionTypeId,
                     Status = 0,
@@ -179,6 +180,37 @@ namespace Application.Services.Implements
         public async Task ChangeStatus(ContentBlockStatusDto contentBlockStatusDto)
         {
             await _unitOfWork.ContentBlocks.ChangeStatus(contentBlockStatusDto.Id, contentBlockStatusDto.Status);
+            await _unitOfWork.SaveChangeAsync();
+        }
+
+        public async Task<string> GetQuestionTypeName(Guid id)
+        {
+            var contentBlock = _unitOfWork.ContentBlocks.GetById(id).Include(c => c.QuestionType).ToList()[0];
+            return contentBlock.QuestionType.Name;
+        }
+
+        public async Task Approve(Guid contentBlockId)
+        {
+           var contentBlock = await _unitOfWork.ContentBlocks.GetByIdAsync(contentBlockId);
+            if (contentBlock == null)
+            {
+                throw new NotFoundException("ContentBlock not found");
+            }
+            contentBlock.Status = 1;
+            await _unitOfWork.ContentBlocks.UpdateAsync(contentBlock);
+            await _unitOfWork.SaveChangeAsync();
+        }
+
+        public async Task Reject(ContentBlockRejectDto contentBlockRejectDto)
+        {
+            var contentBlock = await _unitOfWork.ContentBlocks.GetByIdAsync(contentBlockRejectDto.Id);
+            if (contentBlock == null)
+            {
+                throw new NotFoundException("ContentBlock not found");
+            }
+            contentBlock.RejectionReason = contentBlockRejectDto.RejectionReason;
+            contentBlock.Status = 2;
+            await _unitOfWork.ContentBlocks.UpdateAsync(contentBlock);
             await _unitOfWork.SaveChangeAsync();
         }
     }

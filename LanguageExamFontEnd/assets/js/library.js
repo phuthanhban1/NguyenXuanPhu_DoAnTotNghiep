@@ -17,24 +17,45 @@ function formatDate(input) {
     return `${day}-${month}-${year}`; // '01-01-0001'
 }
 
-function showSuccessAndRedirect() {
-Swal.fire({
-    title: 'Thành công!',
-    text: 'Dữ liệu đã được lưu thành công.',
-    icon: 'success',
-    confirmButtonText: 'OK'
-}).then((result) => {
-    if (result.isConfirmed) {
-        // Hành động sau khi nhấn OK
-        // Ví dụ: chuyển hướng trang
-        window.location.href = 'https://example.com';
-        
-        // Hoặc gọi hàm khác
-        // doSomethingElse();
-    }
-});
+function showSuccessAndRedirect(text) {
+    Swal.fire({
+        title: 'Thành công!',
+        text: text,
+        icon: 'success',
+        confirmButtonText: 'OK',
+        timer: 2000
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Hành động sau khi nhấn OK
+            // Ví dụ: chuyển hướng trang
+            window.location.href = 'https://example.com';
+            
+            // Hoặc gọi hàm khác
+            // doSomethingElse();
+        }
+    });
 }
-
+function confirmDelete() {
+    Swal.fire({
+      title: 'Bạn có chắc chắn muốn xóa?',
+      text: "Hành động này không thể hoàn tác!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Vâng, xóa đi!',
+      cancelButtonText: 'Hủy'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Gọi hàm xóa hoặc xử lý tại đây
+        Swal.fire(
+          'Đã xóa!',
+          'Mục đã được xóa thành công.',
+          'success'
+        );
+      }
+    });
+  }
 export async function checkAuthorize() {
     // console.log(1)
     var check = true;

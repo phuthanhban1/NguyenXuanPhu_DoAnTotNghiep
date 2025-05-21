@@ -95,6 +95,7 @@ namespace Application.Mappings
                 .ForMember(cbd => cbd.AudioBase64, cb => cb.MapFrom(cb => Convert.ToBase64String(cb.AudioFile.FileData)))
                 .ForMember(cbd => cbd.ImageBase64, cb => cb.MapFrom(cb => Convert.ToBase64String(cb.ImageFile.FileData)))
                 .ForMember(cbd => cbd.Questions, cb => cb.MapFrom(cb => cb.Questions))
+                .ForMember(cbd => cbd.Questions, cb => cb.MapFrom(cb => cb.Questions))
                 .ForMember(cbd => cbd.IsSingle, cb => cb.MapFrom(cb => cb.QuestionType.IsSingle))
                 ;
 

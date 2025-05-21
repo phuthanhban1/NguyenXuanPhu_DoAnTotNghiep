@@ -19,5 +19,6 @@ namespace Application.Services.Interfaces
         Task<List<ExamDto>> GetByManagerIdAsync(Guid id);
         Task<ExamDto> GetExamByCreate(Guid id);
         Task<Exam> GetById(Guid id);
+        Task Confirm(Guid id);
     }
 }

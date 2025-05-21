@@ -14,5 +14,13 @@ namespace Infrastructure.Repositories.Implementations
         public DetailResultRepository(ExamContext context) : base(context)
         {
         }
+
+        public async Task<List<DetailResult>> GetDetailResultsByExamUser(Guid examId, Guid userId)
+        {
+            var detailResults = _context.DetailResult
+                .Where(x => x.ExamId == examId && x.UserId == userId)
+                .ToList();
+            return detailResults;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Dtos.ExamQuestionDetailDtos;
+﻿using Application.Dtos.ContentBlockDtos;
+using Application.Dtos.ExamQuestionDetailDtos;
 using Application.Dtos.ExamStructDetail;
 using Domain.Entities;
 using System;
@@ -12,5 +13,6 @@ namespace Application.Services.Interfaces
     public interface IExamQuestionDetailService
     {
         Task GenExam(ExamQuestionDetailCreateDto examQuestionDetailCreateDto);
+        Task<Dictionary<string, Dictionary<int, List<ContentBlockExamDto>>>> GetExamQuestionDetail(Guid examId);
     }
 }

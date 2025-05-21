@@ -23,7 +23,7 @@ namespace Application.Services.Implements
 
         public async Task Add(List<ExamStructDetailCreateDto> list)
         {
-            await _unitOfWork.ExamStructDetails.DeleteByStructId(list[0].ExamStructId);
+            await _unitOfWork.ExamStructDetails.DeleteByStructId(list[0].ExamStructId, list[0].Skill);
             var listEntity = _mapper.Map<List<ExamStructDetail>>(list);
             listEntity.ForEach(l => l.Id = Guid.NewGuid());
             listEntity.ForEach(async l => await _unitOfWork.ExamStructDetails.AddAsync(l));

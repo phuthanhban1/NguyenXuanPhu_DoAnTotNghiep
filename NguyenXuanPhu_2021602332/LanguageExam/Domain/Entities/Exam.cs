@@ -21,7 +21,7 @@ namespace Domain.Entities
         public Guid ManagerId { get; set; }
         public User Manager { get; set; }
         public DateOnly CreateQuestionDue { get; set; }
-        public bool IsCreating { get; set; }
+        public bool IsCreated { get; set; }
         // id created exam question
         public Guid CreatedQuestionUserId { get; set; }
         public User CreatedQuestionUser { get; set; }

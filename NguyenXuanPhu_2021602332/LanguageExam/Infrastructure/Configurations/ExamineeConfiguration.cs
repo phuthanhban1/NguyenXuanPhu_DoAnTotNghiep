@@ -25,6 +25,7 @@ namespace Infrastructure.Configurations
             builder.HasOne(em => em.Exam)
                 .WithMany(u => u.Examinees)
                 .HasForeignKey(em => em.ExamId);
+            
         }
     }
 }

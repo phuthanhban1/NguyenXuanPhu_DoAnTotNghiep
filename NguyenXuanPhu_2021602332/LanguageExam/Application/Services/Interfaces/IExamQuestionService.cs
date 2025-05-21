@@ -10,5 +10,6 @@ namespace Application.Services.Interfaces
     public interface IExamQuestionService
     {
         Task Add(ExamQuestionCreateDto examQuestionCreateDto);
+        Task<bool> HasQuestion(Guid id);
     }
 }

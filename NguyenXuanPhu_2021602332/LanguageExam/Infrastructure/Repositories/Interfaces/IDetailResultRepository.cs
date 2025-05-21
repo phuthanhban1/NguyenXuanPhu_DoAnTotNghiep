@@ -9,5 +9,6 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface IDetailResultRepository : IGenericRepository<DetailResult>
     {
+        Task<List<DetailResult>> GetDetailResultsByExamUser(Guid examId, Guid userId);
     }
 }

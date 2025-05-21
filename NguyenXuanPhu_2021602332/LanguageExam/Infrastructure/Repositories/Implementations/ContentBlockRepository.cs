@@ -34,5 +34,16 @@ namespace Infrastructure.Repositories.Implementations
                 .Where(x => x.QuestionTypeId == questionTypeId && x.Status == status).ToList();
             return list;
         }
+
+        public Task<ContentBlock> GetContentBlockByIdAsync(Guid id)
+        {
+            var contentBlock = _context.ContentBlock
+                .Include(x => x.QuestionType)
+                .Include(x => x.AudioFile)
+                .Include(x => x.ImageFile)
+                .Include(x => x.Questions).ThenInclude(x => x.Answers)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            return contentBlock;
+        }
     }
 }

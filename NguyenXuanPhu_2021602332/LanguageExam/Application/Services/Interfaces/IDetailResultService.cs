@@ -13,6 +13,9 @@ namespace Application.Services.Interfaces
         Task AddAsync(DetailResultCreateDto detailResultCreateDto);
         Task UpdateAsync(DetailResultUpdateDto detailResultUpdateDto);
         Task DeleteAsync(Guid id);
-        
+
+        Task CreateDetailResult(Guid examId, Guid userId, List<Guid> listResults, string skillName);
+
+        Task<Dictionary<string, int>> GetResultsByExamUser(Guid examId, Guid userId);
     }
 }

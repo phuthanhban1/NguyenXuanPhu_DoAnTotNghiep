@@ -8,8 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
     <style>
         /* CSS cho hình ảnh */
 .media-preview {
@@ -446,43 +451,7 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2">
-                        <a class="nav-link active" id="menu-dashboard" href="trang-chu.html">
-                            <i class="fas fa-home"></i>Trang chủ
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item mb-2">
-                        <a class="nav-link" id="menu-question" href="#" onclick="toggleSubMenu(event)">
-                            <i class="fas fa-tasks"></i>Duyệt câu hỏi
-                            <i class="fas fa-chevron-down float-end"></i>
-                        </a>
-                        <ul class="nav flex-column ms-3 mt-2 d-none" id="submenu-question">
-                            <li class="nav-item mb-1">
-                                <a class="nav-link" id="menu-approved-questions" href="da-duyet.html" >
-                                    <i class="fas fa-check-circle"></i>Câu hỏi đã duyệt
-                                </a>
-                            </li>
-                            <li class="nav-item mb-1">
-                                <a class="nav-link" id="menu-pending-questions" href="cho-duyet.html" >
-                                    <i class="fas fa-clock"></i>Câu hỏi chờ duyệt
-                                </a>
-                            </li>
-                            <li class="nav-item mb-1">
-                                <a class="nav-link" id="menu-rejected-questions" href="bi-tu-choi.html">
-                                    <i class="fas fa-times-circle"></i>Câu hỏi bị từ chối
-                                </a>
-                            </li>
-                            <li class="nav-item mb-1">
-                                <a class="nav-link" id="menu-used-questions" href="da-dung.html">
-                                    <i class="fas fa-times-circle"></i>Câu hỏi đã dùng
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                </ul>
+               
             </nav>
 
             <!-- Main content -->
@@ -500,12 +469,12 @@
                                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
                                         <li class="breadcrumb-item" id="bank-name"></li>
                                         <li class="breadcrumb-item" id="skill-name"></li>
-                                        <li class="breadcrumb-item active">Danh sách câu hỏi đã duyệt</li>
+                                        <li class="breadcrumb-item active">Danh sách câu hỏi bị từ chối</li>
                                     </ol>
                                 </nav>
                                 <h2 class="mt-2">
                                     <i class="fas fa-plus-circle text-primary me-2"></i>
-                                    Câu hỏi đã duyệt
+                                    Câu hỏi bị từ chối
                                 </h2>
                             </div>
                         </div>
@@ -533,20 +502,13 @@
             </main>
         </div>
     </div> 
-    
-
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
-    
-    <script>
-       
-    
+    <script type="module">
+       import {sidebar} from '/assets/js/AddQuestionManagement/common.js'
+        
+       window.toggleSubMenu = function(e) {
+                e.preventDefault();
+                $('#submenu-question').toggleClass('d-none');
+            }
     let questionCounter = 0; // Thêm biến đếm số câu hỏi
     var skillName = '';
    var getQuestions = function() {
@@ -568,6 +530,7 @@
    }
     
     $(document).ready(function() {
+        $('.sidebar').append(sidebar)
         var addQuestionUrl = 'add_reading_question.html';
         var skillId = '';
         var skillName = '';
@@ -579,7 +542,7 @@
         $('.content-section').hide();
         $('#add-question').show();
         $('.nav-link').removeClass('active');
-        $('#menu-approved-questions').addClass('active');
+        $('#menu-rejected-questions').addClass('active');
         $('#submenu-question').removeClass('d-none');
         
         var questionTypes = []
@@ -631,15 +594,6 @@
             getQuestions();
            
         });
-
-       
-
-        
-
-       
-
-       
-
 });
 
 function renderQuestions(response, editIdx = null) {
@@ -717,6 +671,11 @@ function renderQuestions(response, editIdx = null) {
                 `;
             });
             html += `</div></div>`;
+            if(item.rejexctionReason != null) {
+                html += `
+                    <div>Lý do từ chối: ${item.rejexctionReason}</div>
+                `
+            }
             
         } else if (!item.isSingle && Array.isArray(item.questions)) {
             // Câu hỏi kép (nhiều câu nhỏ)
@@ -763,6 +722,11 @@ function renderQuestions(response, editIdx = null) {
                     `;
                 });
                 html += `</div></div>`;
+                if(item.rejexctionReason != null) {
+                    html += `
+                        <div>Lý do từ chối: ${item.rejexctionReason}</div>
+                    `
+                 }
             });
         }
 

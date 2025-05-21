@@ -9,7 +9,7 @@ namespace Domain.Entities
     public class DetailResult
     {
         public Guid Id { get; set; }
-        public int QuestionNumber { get; set; }
+        public string Skill { get; set; }
         // fK: answer
         public Guid AnswerId { get; set; }
         public Answer Answer { get; set; }

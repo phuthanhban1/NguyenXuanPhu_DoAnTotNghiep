@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý ngân hàng đề thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/ReviewQuestionManagement/review-waiting.css">
+    
+</head>
+<body class="bg-light">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 sidebar">
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 col-lg-10">
+                <!-- Existing content sections -->
+                
+                <!-- Add question section -->
+                <div id="add-question" class="content-section" style="display: none;">
+                    <div class="container-fluid py-5">
+                        <!-- Header with Breadcrumb -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
+                                        <li class="breadcrumb-item" id="bank-name"></li>
+                                        <li class="breadcrumb-item" id="skill-name"></li>
+                                        <li class="breadcrumb-item active">Danh sách câu hỏi bị từ chối</li>
+                                    </ol>
+                                </nav>
+                                <h2 class="mt-2">
+                                    <i class="fas fa-plus-circle text-primary me-2"></i>
+                                    Câu hỏi bị từ chối
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- Question form -->
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="questionForm">
+                                    <!-- Question type selection -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Loại câu hỏi</label>
+                                        <select class="form-select" id="questionCategory">
+                                            <option value="">Chọn loại câu hỏi...</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Question list -->
+                                    <div id="questionList"></div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div> 
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    
+    <script type="module">
+       
+    import {sidebar} from '/assets/js/ReviewQuestionManagement/common.js'
+    let questionCounter = 0; // Thêm biến đếm số câu hỏi
+    var skillName = '';
+   var getQuestions = function() {
+        const selectedValue = $('#questionCategory').val();
+        const [id, isSingle, hasImage] = selectedValue.split('_');
+        $.ajax({
+            url: `https://localhost:7001/api/contentblock/${id}/${2}`,
+            type: 'GET',
+            xhrFields: { withCredentials : true},
+            success: function(response) {
+                console.log('response ', response);
+                renderQuestions(response);
+            },
+            error: function(error) {
+                console.error('Error loading question types:', error.responseText);
+                return null;
+            }
+        })
+   }
+    
+    $(document).ready(function() {
+        $('.sidebar').append(sidebar)
+        var addQuestionUrl = 'add_reading_question.html';
+        var skillId = '';
+        var skillName = '';
+        var bankName = '';
+        let questionCounter = 0;
+        let currentEditId = null;
+
+        // Show question-type section by default
+        $('.content-section').hide();
+        $('#add-question').show();
+        $('.nav-link').removeClass('active');
+        $('#menu-rejected-questions').addClass('active');
+        $('#submenu-question').removeClass('d-none');
+        
+        var questionTypes = []
+        // thêm form theo type
+        $.ajax({
+            url: 'https://localhost:7001/api/skill/skill',
+            type: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(response) {
+                skillId = response.id
+                console.log('response skill: ', response)
+                skillName = response.name;
+                $('#bank-name').text(response.questionBankName)
+                $('#skill-name').text(response.name)
+                console.log('Skill ID:', skillId);
+                // get question type
+                $.ajax({
+                    url: `https://localhost:7001/api/questiontype/skill/${skillId}`,
+                    type: 'GET',
+                    xhrFields: { withCredentials : true},
+                    success: function(response) {
+                        console.log('Question Types:', response);
+                        questionTypes = response;
+                        // Clear existing options
+                        $('#questionCategory').empty();
+                        // Add new options from questionTypes
+                        questionTypes.forEach(type => {
+                            $('#questionCategory').append(`<option value="${type.id}_${type.isSingle}_${type.hasImage}">${type.name}</option>`);
+                        });
+                    
+                        getQuestions();
+                    },
+                    error: function(error) {
+                        console.error('Error loading question types:', error.responseText);
+                    }
+                })
+            },
+            error: function(error) {
+                console.log('Error:', error.responseText);
+                
+            }
+        });
+
+        // Xử lý chọn loại câu hỏi
+        $('#questionCategory').on('change', function() {
+            $('#questionList').empty();
+            getQuestions();
+           
+        });
+});
+
+function renderQuestions(response, editIdx = null) {
+    window.currentQuestions = response; // Store questions for manipulation
+    const $list = $('#questionList');
+    $list.empty();
+
+    response.forEach((item, idx) => {
+        let isEditing = (editIdx === idx);
+        let html = `
+        <div class="card question-card mb-4" data-idx="${idx}">
+            <div class="card-header bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Câu hỏi ${idx + 1}</h5>
+                    <div class="question-actions">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+        `;
+
+        // Display score
+        html += `
+            <div class="mb-2">
+                Điểm: ${isEditing
+                    ? `<input type="number" class="form-control edit-score" value="${item.score || 1}" style="width:100px;display:inline-block;">`
+                    : `<span class="badge bg-info">${item.score || 1}</span>`
+                }
+            </div>
+        `;
+
+        // Display image if available
+        if (item.imageBase64) {
+            html += `
+                <div class="mb-3">
+                    <img src="data:image/*;base64,${item.imageBase64}" alt="Question Image" class="media-preview mb-3">
+                </div>
+            `;
+        }
+
+        // Display audio if available
+        if (item.audioBase64) {
+            html += `
+                <div class="mb-3">
+                    <audio controls class="audio-preview mb-3">
+                        <source src="data:audio/*;base64,${item.audioBase64}" type="audio/mpeg">
+                        Trình duyệt của bạn không hỗ trợ audio.
+                    </audio>
+                </div>
+            `;
+        }
+
+        // Single question
+        if (item.isSingle) {
+            html += `
+                <div class="mb-4">
+                    <h6 class="fw-bold">Nội dung câu hỏi:</h6>
+                    ${isEditing
+                        ? `<textarea class="form-control edit-content">${item.content || ''}</textarea>`
+                        : `<p>${item.content || ''}</p>`
+                    }
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold mb-3">Các đáp án:</h6>
+                    <div class="list-group">
+            `;
+            (item.questions[0].answers || []).forEach((ans, i) => {
+                html += `
+                    <div class="list-group-item answer-option${ans.isCorrect ? ' correct-answer' : ''}">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">${String.fromCharCode(65 + i)}.</div>
+                            ${isEditing
+                                ? `<input type="text" class="form-control edit-answer me-2" value="${ans.content}">`
+                                : `<div>${ans.content}</div>`
+                            }
+                            ${isEditing
+                                ? `<input type="radio" name="edit-correct-${idx}" class="form-check-input ms-2 edit-correct" ${ans.isCorrect ? 'checked' : ''} style="margin-left:10px;">`
+                                : (ans.isCorrect ? '<div class="ms-auto"><span class="badge bg-success">Đáp án đúng</span></div>' : '')
+                            }
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div></div>`;
+        }
+        // Non-single question (multiple sub-questions)
+        else if (!item.isSingle && Array.isArray(item.questions)) {
+            html += `
+                <div class="mb-4">
+                    <h6 class="fw-bold">Nội dung đoạn:</h6>
+                    ${isEditing
+                        ? `<textarea class="form-control edit-content">${item.content || ''}</textarea>`
+                        : `<p>${item.content || ''}</p>`
+                    }
+                </div>
+            `;
+            (item.questions || []).forEach((q, subIdx) => {
+                html += `
+                <div class="mb-3">
+                    <div class="mb-2"><strong>Câu hỏi nhỏ ${subIdx + 1}:</strong>
+                        ${isEditing
+                            ? `<input type="text" class="form-control edit-sub-content" data-subidx="${subIdx}" value="${q.content || ''}">`
+                            : q.content || ''
+                        }
+                    </div>
+                    <div class="mb-2">Điểm: ${isEditing
+                        ? `<input type="number" class="form-control edit-sub-score" data-subidx="${subIdx}" value="${q.score || 1}" style="width:100px;display:inline-block;">`
+                        : `<span class="badge bg-info">${q.score || 1}</span>`
+                    }</div>
+                    <div class="list-group">
+                `;
+                (q.answers || []).forEach((ans, i) => {
+                    html += `
+                        <div class="list-group-item answer-option${ans.isCorrect ? ' correct-answer' : ''}">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">${String.fromCharCode(65 + i)}.</div>
+                                ${isEditing
+                                    ? `<input type="text" class="form-control edit-answer me-2" data-subidx="${subIdx}" value="${ans.content}">`
+                                    : `<div>${ans.content}</div>`
+                                }
+                                ${isEditing
+                                    ? `<input type="radio" name="edit-correct-${idx}-${subIdx}" class="form-check-input ms-2 edit-correct" data-subidx="${subIdx}" ${ans.isCorrect ? 'checked' : ''} style="margin-left:10px;">`
+                                    : (ans.isCorrect ? '<div class="ms-auto"><span class="badge bg-success">Đáp án đúng</span></div>' : '')
+                                }
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+            });
+        }
+
+        // Display rejection reason (corrected typo and styled)
+        if (item.rejectionReason) {
+            html += `
+                <div class="mt-3">
+                    <h6 class="fw-bold">Lý do từ chối:</h6>
+                    <div class="alert alert-warning" role="alert">
+                        ${item.rejectionReason}
+                    </div>
+                </div>
+            `;
+        }
+
+        html += `</div></div>`;
+        $list.append(html);
+    });
+} 
+   
+   </script>
+</body>
+</html>

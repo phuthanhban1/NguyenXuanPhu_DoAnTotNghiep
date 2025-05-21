@@ -28,8 +28,16 @@ namespace Application.Services.Implements
             exam.ManagerId = managerId;
             exam.Id = Guid.NewGuid();
             exam.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow);
-            exam.IsCreating = true;
+            exam.IsCreated = false;
             await _unitOfWork.Exams.AddAsync(exam);
+            await _unitOfWork.SaveChangeAsync();
+        }
+
+        public async Task Confirm(Guid id)
+        {
+            var exam = await _unitOfWork.Exams.GetByIdAsync(id);
+            exam.IsCreated = true;
+            await _unitOfWork.Exams.UpdateAsync(exam);
             await _unitOfWork.SaveChangeAsync();
         }
 

@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories.Implementations
 
         public async Task<Exam> GetExamByCreate(Guid id)
         {
-            var exam = _context.Set<Exam>().FirstOrDefault(x => x.CreatedQuestionUserId == id && x.IsCreating == true);
+            var exam = _context.Set<Exam>().FirstOrDefault(x => x.CreatedQuestionUserId == id && x.IsCreated == false);
             return exam;
         }
     }

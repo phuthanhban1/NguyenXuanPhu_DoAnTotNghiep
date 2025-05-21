@@ -11,7 +11,7 @@ namespace Application.Dtos.ContentBlockDtos
     public class ContentBlockCreateDto
     {
         public Guid Id { get; set; }
-        public string? TextContent { get; set; }
+        public string? Content { get; set; }
        
         public byte Level { get; set; }
         //public bool IsConfirm { get; set; }

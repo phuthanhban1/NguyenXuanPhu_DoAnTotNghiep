@@ -96,6 +96,11 @@
                     <h4 class="text-gray-600">Hạn tạo</h4>
                     <p class="text-2xl font-bold text-blue-600" id="dueDate"></p>
                 </div>
+                <div class="bg-white p-6 rounded-lg shadow card">
+                    <a href="exam-question.html"><h4 class="text-gray-600">Đề thi</h4>
+                    <p class="text-2xl font-bold text-blue-600" id="checkExamQuestion">Xem đề</p></a>
+                    
+                </div>
             </div>
         </section>
 
@@ -176,6 +181,7 @@
     </main>
 
     <script>
+        var examId = null
         // Handle menu navigation
         const links = document.querySelectorAll('.sidebar a');
         const sections = document.querySelectorAll('main section');
@@ -201,10 +207,26 @@
             return `${day}-${month}-${year}`;
         }
 
-        $(document).ready(function() {
+        async function HasQuestion(id) {
+            var check = null;
+           await $.ajax({
+                url: `https://localhost:7001/api/exam/is-create/${id}`,
+                type: 'GET',
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    check = response
+                },
+                error: function(error) {
+                    console.error('Error loading check:', error.responseText);
+                }
+            });
+            return check
+        }
+        $(document).ready( async function() {
             var userId = '';
             var bankId = '';
 
+            
             // Reset modal state when it is shown
             $('#addStructModal').on('show.bs.modal', function(event) {
                 const button = $(event.relatedTarget); // Button that triggered the modal
@@ -244,8 +266,9 @@
                 type: 'GET',
                 xhrFields: { withCredentials: true },
                 success: function(response) {
+                    examId = response.id
                     $('#examName').text(response.name);
-                    $('#dueDate').text(formatDate(response.createDue));
+                    $('#dueDate').text(formatDate(response.createQuestionDue));
                 },
                 error: function(error) {
                     console.error('Error loading exam:', error.responseText);
@@ -270,7 +293,12 @@
             });
 
             // Fetch exam structures based on selected question bank
-            function FetchExamStruct(bankId) {
+            async function FetchExamStruct(bankId) {
+                var hasQuestion = true
+                if(examId != null) {
+                    hasQuestion = await HasQuestion(examId)
+                }
+                
                 console.log(bankId);
                 $('#structList').empty();
                 if (bankId) {
@@ -293,7 +321,7 @@
                                         <td>${s.name}</td>
                                         <td>
                                             <button class="btn btn-sm btn-info"><a class="text-white text-decoration-none"
-                                                href="chi-tiet-cau-truc.html?structId=${s.id}&bankId=${bankId}"
+                                                href="exam-struct-detail.html?structId=${s.id}&bankId=${bankId}"
                                                 >Chi tiết</a></button>
                                             <button class="btn btn-sm btn-warning edit-struct" 
                                                 ${s.userCreateId !== userId ? ' style="display: none"' : ''} 
@@ -308,6 +336,7 @@
                                             <button class="btn btn-sm btn-success btn-create"  
                                                 id="btn-create"
                                                 data-struct-id='${s.id}' 
+                                                ${examId === null &&  hasQuestion ? ' style="display: none"' : ''}
                                                 data-struct-name='${s.name}'>Tạo đề</button>
                                         </td>
                                     </tr>
@@ -326,8 +355,39 @@
                 }
             }
 
-            $(document).on('click', '.btn-create', function() {
-                
+            $(document).on('click', '.btn-create', async function() {
+                console.log(359)
+                await $.ajax({
+                    url: 'https://localhost:7001/api/examQuestionDetail',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    xhrFields: { withCredentials: true},
+                    data: JSON.stringify({
+                        ExamId: examId,
+                        ExamStructId: $(this).data('struct-id')
+                    }),
+                    success: function(response) {
+                            Swal.fire({
+                                title: 'Thành công!',
+                                text: 'Tạo đề thành công.',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Hành động sau khi nhấn OK
+                                    // Ví dụ: chuyển hướng trang
+                                   // window.location.href = 'https://example.com';
+                                    
+                                    // Hoặc gọi hàm khác
+                                    // doSomethingElse();
+                                }
+    });
+                    }, 
+                    error: function(error) {
+                        console.log(error.responseText)
+                    }
+
+                })
             })
             // Handle question bank selection
             $('#listBank').on('change', function() {

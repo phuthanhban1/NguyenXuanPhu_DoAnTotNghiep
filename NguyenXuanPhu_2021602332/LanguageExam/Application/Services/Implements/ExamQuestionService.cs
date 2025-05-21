@@ -32,5 +32,12 @@ namespace Application.Services.Implements
             await _unitOfWork.ExamQuestions.AddAsync(examQuestion);
             await _unitOfWork.SaveChangeAsync();
         }
+
+        public async Task<bool> HasQuestion(Guid id)
+        {
+            var examQuestion = await _unitOfWork.ExamQuestions.GetByExamId(id);
+            if (examQuestion == null) return false;
+            return true;
+        }
     }
 }

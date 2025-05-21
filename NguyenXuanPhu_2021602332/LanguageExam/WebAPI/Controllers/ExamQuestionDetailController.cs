@@ -23,5 +23,16 @@ namespace WebAPI.Controllers
             await _examQuestionDetailService.GenExam(examQuestionDetailCreateDto);
             return Ok();
         }
+
+        [HttpGet("{examId}")]
+        public async Task<IActionResult> GetExamQuestionDetail(Guid examId)
+        {
+            var examQuestionDetails = await _examQuestionDetailService.GetExamQuestionDetail(examId);
+            if (examQuestionDetails == null)
+            {
+                return BadRequest("ExamQuestionDetail is null");
+            }
+            return Ok(examQuestionDetails);
+        }
     }
 }

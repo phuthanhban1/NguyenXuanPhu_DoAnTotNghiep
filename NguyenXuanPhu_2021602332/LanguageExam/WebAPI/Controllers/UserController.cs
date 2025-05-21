@@ -76,7 +76,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult> CheckEmail(string email)
         {
             var check = await _userService.CheckUserByEmail(email);
-            return Ok(new { exists = check }); // Trả về { exists: true } nếu email tồn tại, { exists: false } nếu không
+            return Ok(new { exists = check });
         }
 
         [HttpGet("test")]
@@ -183,5 +183,11 @@ namespace WebAPI.Controllers
             return Ok(check);
         }
 
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            Response.Cookies.Delete("jwt_token");
+            return Ok();
+        }
     }
 }

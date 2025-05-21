@@ -18,5 +18,9 @@ namespace Application.Services.Interfaces
         //Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto);
         Task<List<ContentBlockDto>> GetByStatus(Guid questionTypeId, byte status);
         Task ChangeStatus(ContentBlockStatusDto contentBlockStatusDto);
+        Task<string> GetQuestionTypeName(Guid id);
+
+        Task Approve(Guid contentBlockId);
+        Task Reject(ContentBlockRejectDto contentBlockRejectDto);
     }
 }

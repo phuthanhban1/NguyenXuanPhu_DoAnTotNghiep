@@ -34,6 +34,7 @@ builder.Services.AddTransient<IExamQuestionService, ExamQuestionService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<IRoomService, RoomService>();
 builder.Services.AddTransient<IExamineeService, ExamineeService>();
+builder.Services.AddTransient<IDetailResultService, DetailResultService>();
 
 
 

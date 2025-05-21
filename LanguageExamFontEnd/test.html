@@ -3,158 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel File Reader</title>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
-    <!-- XLSX -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <title>Header with User Dropdown</title>
     <style>
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            padding: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .user-profile {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            object-fit: cover;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            min-width: 150px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
             font-family: Arial, sans-serif;
+            font-size: 14px;
         }
-        .file-input {
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
+
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Excel File Reader</h1>
-        <div class="file-input">
-            <input type="file" id="fileInput" accept=".xlsx, .xls" />
+    <header>
+        <div class="user-profile">
+            <img src="https://tiki.vn/blog/wp-content/uploads/2023/01/oLkoHpw9cqRtLPTbg67bgtUvUdV1BnXRnAqqBZOVkEtPgf-_Ct3ADFJYXIjfDd0fTyECLEsWq5yZ2CCOEGxIsuHSmNNNUZQcnQT5-Ld6yoK19Q_Sphb0MmX64ga-O_TIPjItNkTL5ns4zqP1Z0OBzsIoeYKtcewnrjnVsw8vfG8uYwwCDkXaoozCrmH1kA.jpg" alt="User Avatar" class="user-img">
+            <div class="dropdown-menu">
+                <a href="#">Thông tin cá nhân</a>
+                <a href="#">Cài đặt</a>
+                <a href="#">Đăng xuất</a>
+            </div>
         </div>
-        <div id="output"></div>
-    </div>
+    </header>
 
     <script>
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            console.log(file);
-            const reader = new FileReader();
+        const userImg = document.querySelector('.user-img');
+        const dropdown = document.querySelector('.dropdown-menu');
 
-            reader.onload = function(e) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: 'array' });
-                
-                // Get the first worksheet
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                
-                // Convert to JSON
-                const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-                
-                // Display the data in a table
-                displayData(jsonData);
-            };
-
-            reader.readAsArrayBuffer(file);
+        // Toggle menu khi click vào ảnh user
+        userImg.addEventListener('click', function(event) {
+            dropdown.classList.toggle('active');
+            event.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
         });
 
-        function displayData(data) {
-           // console.log(data);
-           // console.log(data[0]);
-            if (data.length === 0) {
-                document.getElementById('output').innerHTML = 'No data found in the Excel file.';
-                return;
+        // Đóng menu khi click ra ngoài
+        document.addEventListener('click', function(event) {
+            if (!userImg.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
             }
-
-            // Create table
-            let table = '<table>';
-            
-            // Add header row
-            table += '<tr>';
-            for (let key in data[0]) {
-                table += `<th>${key}</th>`;
-            }
-            table += '</tr>';
-            
-            // Add data rows
-            data.forEach(row => {
-                table += '<tr>';
-                for (let key in row) {
-                    table += `<td>${row[key]}</td>`;
-                }
-                table += '</tr>';
-            });
-            
-            table += '</table>';
-            
-            document.getElementById('output').innerHTML = table;
-        }
-        var formData = {}
-        function updateProduct(productId, updatedData) {
-            // fetch(`https://localhost:7001/api/questiontype`, {
-            //     method: 'PUT',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(updatedData)
-            // })
-            // .then(response => {
-            //     if (!response.ok) {
-            //         throw new Error(`HTTP error! Status: ${response.status}`);
-            //     }
-            //     return response.json();
-            // })
-            // .then(data => {
-            //     console.log('Update successful:', data);
-            // })
-            // .catch(error => {
-            //     console.error('Error updating product:', error);
-            // });
-            
-            $.ajax({
-                url: 'https://localhost:7001/api/questiontype',
-                type: 'PUT',
-                contentType: 'application/json',
-                
-                data: JSON.stringify(formData),
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    hideModal();
-                    loadQuestionTypes(); // Tải lại danh sách
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Thành công!',
-                        text: currentEditId ? 'Cập nhật thành công!' : 'Thêm mới thành công!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    currentEditId = null; // Reset currentEditId sau khi lưu thành công
-                },
-                error: function(error) {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Lỗi!',
-                        text: error.responseJSON ? error.responseJSON['Message'] : 'Có lỗi xảy ra. Vui lòng thử lại!'
-                    });
-                }
-            })
-        
-        }       
-updateProduct(1, 3);
-
+        });
     </script>
 </body>
 </html>

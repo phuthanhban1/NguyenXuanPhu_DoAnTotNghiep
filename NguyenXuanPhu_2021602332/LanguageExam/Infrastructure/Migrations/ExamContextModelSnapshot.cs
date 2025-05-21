@@ -105,8 +105,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("QuestionNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("Skill")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -115,7 +116,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("AnswerId");
 
-                    b.HasIndex("UserId", "ExamId");
+                    b.HasIndex("ExamId", "UserId");
 
                     b.ToTable("DetailResult", (string)null);
                 });
@@ -163,7 +164,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Fee")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsCreating")
+                    b.Property<bool>("IsCreated")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("ManagerId")
@@ -430,7 +431,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreatedDate = new DateOnly(2025, 5, 19),
+                            CreatedDate = new DateOnly(2025, 5, 20),
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
@@ -695,7 +696,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2a11ff56-dcd2-4c97-abe9-41b1085a4a9c"),
+                            Id = new Guid("55b8d8d5-56b1-440a-92a6-ee7cbed4378d"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -797,7 +798,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Entities.Examinee", "Examinee")
                         .WithMany("DetailResults")
-                        .HasForeignKey("UserId", "ExamId")
+                        .HasForeignKey("ExamId", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

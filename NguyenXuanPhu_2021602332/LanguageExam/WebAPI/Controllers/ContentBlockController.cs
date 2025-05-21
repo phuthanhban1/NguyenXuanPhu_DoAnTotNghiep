@@ -58,5 +58,29 @@ namespace WebAPI.Controllers
             await _contentBlockService.ChangeStatus(contentBlockStatusDto);
             return Ok();
         }
+
+        [HttpGet("question-type/{contentBlockId}")]
+        public async Task<IActionResult> GetQuestionTypeName(Guid contentBlockId)
+        {
+            string name = await _contentBlockService.GetQuestionTypeName(contentBlockId);
+            
+            return Ok(name);
+        }
+
+        [HttpPut("approve/{contentBlockId}")]
+        public async Task<IActionResult> Approve(Guid contentBlockId)
+        {
+            await _contentBlockService.Approve(contentBlockId);
+
+            return Ok();
+        }
+
+        [HttpPut("reject")]
+        public async Task<IActionResult> Reject(ContentBlockRejectDto contentBlockRejectDto)
+        {
+            await _contentBlockService.Reject(contentBlockRejectDto);
+
+            return Ok();
+        }
     }
 }

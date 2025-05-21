@@ -16,9 +16,9 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
-        public async Task DeleteByStructId(Guid id)
+        public async Task DeleteByStructId(Guid id, string skillName)
         {
-            var list = _context.ExamStructDetail.Where(e => e.ExamStructId == id).ToList();
+            var list = _context.ExamStructDetail.Where(e => e.ExamStructId == id && e.Skill == skillName).ToList();
             list.ForEach(l => DeleteAsync(l));
         }
 

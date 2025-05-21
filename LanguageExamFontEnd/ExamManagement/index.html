@@ -585,6 +585,12 @@
             window.location.href = `exam_detail.html`;
         }
 
+function convertStringToDate(dateStr) {
+    
+    const [day, month, year] = dateStr.split('/').map(Number);
+    const date = new Date(year, month - 1, day);
+    return date
+}
         // Initialize page
         $(document).ready(function() {
             
@@ -633,8 +639,8 @@
                 $examRows.sort(function(a, b) {
                     const nameA = $(a).find('td').eq(0).text();
                     const nameB = $(b).find('td').eq(0).text();
-                    const startDateA = new Date($(a).find('td').eq(1).text());
-                    const startDateB = new Date($(b).find('td').eq(1).text());
+                    const startDateA = convertStringToDate($(a).find('td').eq(1).text());
+                    const startDateB = convertStringToDate($(b).find('td').eq(1).text());
 
                     switch(sortBy) {
                         case 'newest':

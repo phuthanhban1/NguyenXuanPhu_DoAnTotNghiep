@@ -10,7 +10,7 @@ namespace Application.Dtos.ContentBlockDtos
 {
     public class ContentBlockSingleDto
     {
-        public string? TextContent { get; set; }
+        public string? Content { get; set; }
         public byte Level { get; set; }
         public byte Score { get; set; }
         public IFormFile? ImageFile { get; set; }

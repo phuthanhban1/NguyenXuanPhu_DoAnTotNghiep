@@ -6,6 +6,10 @@
     <title>Login</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom CSS -->
     <style>
         body {
@@ -92,27 +96,41 @@
                             },
                             success: function(response) {
                                 console.log('Role:', response);
-                                if(response === roleCreateQuestion) {
-                                    window.location.href = 'QuanLyThemCauHoi/trang-chu.html';
-                                } else if(response === roleBankManager) {
-                                    window.location.href = 'QuestionBankManagement/question_bank.html';
-                                } else if(response === roleExamCreate) {
-                                    window.location.href = 'QuanLyCauTrucDe/index.html';
-                                } else if(response === roleExaminee) {
-                                    window.location.href = 'User/index.html';
-                                } if(response === roleAdmin){
-                                    window.location.href = 'Admin/index.html';
-                                } else if(response === roleExamManager) {
-                                    window.location.href = 'ExamManagement/index.html';
+                                Swal.fire({
+                                    title: 'Thành công!',
+                                    text: 'Đăng nhập thành công.',
+                                    showConfirmButton: false,
+                                    icon: 'success',
+                                    timer: 2000
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                        if(response === roleCreateQuestion) {
+                                        window.location.href = 'QuanLyThemCauHoi/trang-chu.html';
+                                        } else if(response === roleBankManager) {
+                                            window.location.href = 'QuestionBankManagement/question_bank.html';
+                                        } else if(response === roleExamCreate) {
+                                            window.location.href = 'QuanLyCauTrucDe/index.html';
+                                        } else if(response === roleExaminee) {
+                                            window.location.href = 'User/index.html';
+                                        } if(response === roleAdmin){
+                                            window.location.href = 'Admin/index.html';
+                                        } else if(response === roleExamManager) {
+                                            window.location.href = 'ExamManagement/index.html';
 
-                                }
-                                else {
-                                    //window.location.href = 'main.html';
-                                    console.log('Không có quyền');
-                                }
+                                        } else if(response == roleReviewQuestion) {
+                                            window.location.href = 'QuanLyDuyetCauHoi/index.html';
+
+                                        }
+                                        else {
+                                            //window.location.href = 'main.html';
+                                            console.log('Không có quyền');
+                                        }
+                                    }
+                                });
+                                
                             },
                             error: function(error) {
-                                console.log('Error:', error);
+                               
                             }
                         });
                         console.log('OK');
@@ -120,14 +138,14 @@
                         //window.location.href = 'main.html';
                     },
                     error: function(error) {
-                        console.log('Error');
-                        if(error.responseText) {
-                            console.log(error.responseText);
-                        }
-                        if(error.status) {
-                            console.log(error.status);
-                            
-                        }
+                       Swal.fire({
+                                    title: 'Lỗi!',
+                                    text: error.responseJSON.Message,
+                                    showConfirmButton: false,
+                                    icon: 'error',
+                                    timer: 2000
+                                })
+                        
                     }
                 });
             });
