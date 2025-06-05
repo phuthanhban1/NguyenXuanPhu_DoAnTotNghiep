@@ -15,25 +15,21 @@ namespace WebAPI.Controllers
             _contentBlockService = contentBlockService;
         }
 
-        [HttpPost("single")]
-        public async Task<IActionResult> AddSingle([FromForm] List<ContentBlockSingleDto> lists)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromForm] ContentBlockUpdateDto contentBlockUpdateDto)
         {
-            if (lists == null)
-            {
-                return BadRequest("ContentBlockSingleTextDto cannot be null");
-            }
-            await _contentBlockService.AddSingle(lists);
+            await _contentBlockService.Update(contentBlockUpdateDto);
             return Ok();
         }
 
-        [HttpPost("double")]
-        public async Task<IActionResult> AddDouble([FromForm] List<ContentBlockDoubleDto> lists)
+        [HttpPost]
+        public async Task<IActionResult> Add([FromForm] List<ContentBlockCreateDto> lists)
         {
             if (lists == null)
             {
                 return BadRequest("ContentBlockDoubleTextDto cannot be null");
             }
-            await _contentBlockService.AddDouble(lists);
+            await _contentBlockService.Add(lists);
             return Ok();
         }
         [HttpGet("{questionTypeId}/{status}")]

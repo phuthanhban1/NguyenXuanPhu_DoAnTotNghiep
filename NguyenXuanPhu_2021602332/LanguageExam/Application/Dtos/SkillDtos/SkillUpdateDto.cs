@@ -13,7 +13,7 @@ namespace Application.Dtos.SkillDtos
         public Guid? CreatedUserId { get; set; }
         // review user
         public Guid? ReviewedUserId { get; set; }
-        public DateOnly CreatedDue { get; set; }
-        public DateOnly ReviewedDue { get; set; }
+        public DateTime? CreatedDue { get; set; }
+        public DateTime? ReviewedDue { get; set; }
     }
 }

@@ -32,63 +32,103 @@ namespace Application.Services.Implements
         {
             var list = await _unitOfWork.QuestionTypes.GetsBySkillId(skillId);
             List<QuestionTypeCountDto> listDto = new List<QuestionTypeCountDto>();
-            foreach(var qt in list)
+            foreach (var qt in list)
             {
-                var qtcd = _mapper.Map<QuestionTypeCountDto>(qt);
-                var listDistinct = new List<ContentBlock>();
-                
-                while(qt.ContentBlocks.Count != 0)
+
+                var questionTypeCountDto = _mapper.Map<QuestionTypeCountDto>(qt);
+                questionTypeCountDto.QuestionTypeCounts = new Dictionary<int, int>();
+                var listContent = await _unitOfWork.ContentBlocks.GetByStatus(qt.Id, 1);
+                listContent.ForEach(l =>
                 {
-                    var first = qt.ContentBlocks.FirstOrDefault();
-                    listDistinct.Add(first);
-                    qt.ContentBlocks.RemoveAt(0);
-                    var listGuid = await _unitOfWork.SimilarQuestions.GetSimilarQuestions(first.Id);
-                    listGuid.ForEach(l =>
+                    var score = l.Questions.Sum(x => x.Score);
+                    if (questionTypeCountDto.QuestionTypeCounts.ContainsKey(score))
                     {
-                        var index = qt.ContentBlocks.FindIndex(x => x.Id == l);
-                        qt.ContentBlocks.RemoveAt(index);
-                    });
-                }
-                qtcd.Count = listDistinct.Count;
-                listDto.Add(qtcd);
+                        questionTypeCountDto.QuestionTypeCounts[score] += 1;
+                    }
+                    else
+                    {
+                        questionTypeCountDto.QuestionTypeCounts.Add(score, 1);
+                    }
+                });
+                
+                listDto.Add(questionTypeCountDto);
             }
             return listDto;
         }
 
-        public Task<List<QuestionTypeCountDto>> CountQuestionType(Guid skillId, string skillName)
+        public async Task<List<QuestionTypeCountDto>> CountQuestionTypePending(Guid skillId)
         {
-            throw new NotImplementedException();
-        }
-
-        // lấy số lượng dạng còn lại
-        public async Task<List<QuestionTypeCountDto>> CountQuestionType2(Guid skillId, Guid structId)
-        {
-            var skill = await _unitOfWork.Skills.GetByIdAsync(skillId);
-            var list = await this.CountQuestionType(skillId);
-            Dictionary<Guid, QuestionTypeCountDto> dictQuestionType = new Dictionary<Guid, QuestionTypeCountDto>();
+            var list = await _unitOfWork.QuestionTypes.GetsBySkillId(skillId);
+            List<QuestionTypeCountDto> listDto = new List<QuestionTypeCountDto>();
             foreach (var qt in list)
             {
-                dictQuestionType.Add(qt.Id, qt);
-            }
-            Dictionary<Guid, int> dictExamStructDetail = new Dictionary<Guid, int>();
-            var listStructDetail = await _unitOfWork.ExamStructDetails.GetByExamStructId(structId, skill.Name);
-            listStructDetail.ForEach(l =>
-            {
-                if(dictExamStructDetail.ContainsKey(l.QuestionTypeId))
-                {
-                    dictExamStructDetail[l.QuestionTypeId] += l.Amount;
-                } else
-                {
-                    dictExamStructDetail.Add(l.QuestionTypeId, 0);
-                }    
-            });
-            foreach (Guid key in dictExamStructDetail.Keys)
-            {
-                dictQuestionType[key].Count -= dictExamStructDetail[key];
-            }
-            return dictQuestionType.Values.ToList();
 
+                var questionTypeCountDto = _mapper.Map<QuestionTypeCountDto>(qt);
+                questionTypeCountDto.QuestionTypeCounts = new Dictionary<int, int>();
+                var listContent = await _unitOfWork.ContentBlocks.GetByStatus(qt.Id, 0);
+                listContent.ForEach(l =>
+                {
+                    var score = l.Questions.Sum(x => x.Score);
+                    if (questionTypeCountDto.QuestionTypeCounts.ContainsKey(score))
+                    {
+                        questionTypeCountDto.QuestionTypeCounts[score] += 1;
+                    }
+                    else
+                    {
+                        questionTypeCountDto.QuestionTypeCounts.Add(score, 1);
+                    }
+                });
+
+                listDto.Add(questionTypeCountDto);
+            }
+            return listDto;
         }
+        public async Task<List<QuestionTypeCountDto>> CountQuestionType2(Guid skillId, Guid structId)
+        {
+            var questionTypeCount = await CountQuestionType(skillId);
+            var skill = await _unitOfWork.Skills.GetByIdAsync(skillId);
+            var listStructDetail = await _unitOfWork.ExamStructDetails.GetByExamStructId(structId, skill.Name);
+            foreach (var item in listStructDetail)
+            {
+                var questionType = questionTypeCount.Find(e => e.Id == item.Id);
+                if (questionType != null)
+                {
+                    questionType.QuestionTypeCounts[item.Score] -= item.Amount;
+                }
+            }
+            return questionTypeCount;
+        }
+
+
+        // lấy số lượng dạng còn lại
+        //public async Task<List<QuestionTypeCountDto>> CountQuestionType2(Guid skillId, Guid structId)
+        //{
+        //    var skill = await _unitOfWork.Skills.GetByIdAsync(skillId);
+        //    var list = await this.CountQuestionType(skillId);
+        //    Dictionary<Guid, QuestionTypeCountDto> dictQuestionType = new Dictionary<Guid, QuestionTypeCountDto>();
+        //    foreach (var qt in list)
+        //    {
+        //        dictQuestionType.Add(qt.Id, qt);
+        //    }
+        //    Dictionary<Guid, int> dictExamStructDetail = new Dictionary<Guid, int>();
+        //    var listStructDetail = await _unitOfWork.ExamStructDetails.GetByExamStructId(structId, skill.Name);
+        //    listStructDetail.ForEach(l =>
+        //    {
+        //        if(dictExamStructDetail.ContainsKey(l.QuestionTypeId))
+        //        {
+        //            dictExamStructDetail[l.QuestionTypeId] += l.Amount;
+        //        } else
+        //        {
+        //            dictExamStructDetail.Add(l.QuestionTypeId, 0);
+        //        }    
+        //    });
+        //    foreach (Guid key in dictExamStructDetail.Keys)
+        //    {
+        //        dictQuestionType[key].Count -= dictExamStructDetail[key];
+        //    }
+        //    return dictQuestionType.Values.ToList();
+
+        //}
 
         public async Task DeleteAsync(Guid id)
         {

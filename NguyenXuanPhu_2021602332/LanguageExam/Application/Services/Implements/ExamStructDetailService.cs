@@ -34,6 +34,7 @@ namespace Application.Services.Implements
         {
             var list = await _unitOfWork.ExamStructDetails.GetByExamStructId(id, skill);
             var listDto = _mapper.Map<List<ExamStructDetailDto>>(list);
+            
             return listDto;
         }
     }

@@ -1,0 +1,44 @@
+
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .date-range-card {
+            background: linear-gradient(45deg, #4158d0, #c850c0);
+            color: white;
+        }
+        .skill-badge {
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .skill-badge:hover {
+            transform: scale(1.05);
+        }
+        .bg-warning {
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .toast-container {
+            z-index: 9999;
+        }
+        .error {
+      color: #dc3545 !important;
+      font-size: 0.875rem !important;
+      margin-top: 5px !important;
+      display: block !important;
+    }
+    .valid {
+      border-color: #28a745 !important;
+    }
+    .invalid {
+      border-color: #dc3545 !important;
+    }
+   

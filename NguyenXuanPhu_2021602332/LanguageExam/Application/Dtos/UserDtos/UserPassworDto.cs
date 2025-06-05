@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos.UserDtos
 {
-    public class UserPassworDto
+    public class UserPasswordDto
     {
-        public Guid Id { get; set; }
-        public string OldPassword { get; set; }
-        public string NewPassword { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

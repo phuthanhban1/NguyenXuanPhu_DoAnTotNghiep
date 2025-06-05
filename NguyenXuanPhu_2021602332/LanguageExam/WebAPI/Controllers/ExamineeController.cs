@@ -16,6 +16,7 @@ namespace WebAPI.Controllers
             _examineeService = examineeService;
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> CreateExaminee(ExamineeCreateDto examineeCreateDto)
         {
@@ -66,5 +67,38 @@ namespace WebAPI.Controllers
             await _examineeService.CreateRoom(examId, list);
             return Ok();
         }
+        [HttpGet("count-room/{examId}")]
+        public async Task<IActionResult> CountRoom(Guid examId)
+        {
+            var count = await _examineeService.CountRoom(examId);
+            return Ok(count);
+        }
+
+        [HttpGet("schedule")]
+        public async Task<IActionResult> GetSchedule()
+        {
+            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
+            if (sid == null)
+            {
+                return Unauthorized();
+            }
+            var listExam = await _examineeService.GetSchedule(Guid.Parse(sid));
+            return Ok(listExam);
+        }
+
+        [HttpPost("score")]
+        public async Task<IActionResult> GetExamineeTaken(ExamineeScoreDto examineeScoreDto)
+        {
+            var examinee = await _examineeService.GetResultsByExamUser(examineeScoreDto);
+            return Ok(examinee);
+        }
+
+        [HttpPost("test")]
+        public async Task<IActionResult> Test()
+        {
+            await _examineeService.Test();
+            return Ok();
+        }
+
     }
 }

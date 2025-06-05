@@ -16,8 +16,8 @@ namespace Application.Dtos.SkillDtos
         // review user
         public Guid ReviewedUserId { get; set; }
         public string ReviewedUserName { get; set; }
-        public DateOnly CreateDue { get; set; }
-        public DateOnly ReviewDue { get; set; }
+        public DateTime CreateDue { get; set; }
+        public DateTime ReviewDue { get; set; }
     }
    
 }

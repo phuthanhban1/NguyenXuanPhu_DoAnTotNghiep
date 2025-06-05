@@ -124,12 +124,12 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins("http://127.0.0.1:5503") // domain FE
+            .WithOrigins("http://127.0.0.1:5505") // domain FE
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials();
 
-        policy.WithOrigins("http://127.0.0.1:5504") 
+        policy.WithOrigins("http://127.0.0.1:5505") 
               .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials();

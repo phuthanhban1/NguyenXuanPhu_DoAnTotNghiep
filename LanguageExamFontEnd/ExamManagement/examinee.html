@@ -9,6 +9,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/ExamManagement/sidebar.css">
 
     <style>
         :root {
@@ -22,70 +23,6 @@
         body {
             font-family: 'Roboto', sans-serif;
             background: #f1f3f5;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background: var(--secondary-color);
-            color: white;
-            padding: 20px 0;
-            transition: all 0.3s ease;
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebar-header h4 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        .sidebar-menu li {
-            padding: 0;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .sidebar-menu a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .sidebar-menu a.active {
-            background: var(--primary-color);
-            color: white;
-            font-weight: 500;
-        }
-
-        .sidebar-menu i {
-            margin-right: 12px;
-            width: 20px;
-            text-align: center;
         }
 
         /* Main Content */
@@ -226,6 +163,12 @@
     </style>
 </head>
 <body>
+    <div class="header-common">
+        <script type="module">
+            import {genHeader} from '/assets/js/library.js';
+            genHeader($('.header-common'))
+        </script>
+    </div>
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -233,13 +176,13 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="#">
+                <a href="exam-detail.html">
                     <i class="fas fa-chart-line"></i>
                     <span>Tổng quan</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="active">
+                <a href="examinee.html" class="active">
                     <i class="fas fa-users"></i>
                     <span>Thí sinh</span>
                 </a>
@@ -389,7 +332,6 @@
                                 loadExamDetails();
                             }
                         });
-                        
                     },
                 error: function(error) {
                     console.error('Error creating room:', error);

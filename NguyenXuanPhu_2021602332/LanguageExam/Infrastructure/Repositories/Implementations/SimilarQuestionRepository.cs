@@ -15,16 +15,20 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
-        public async Task<List<Guid>> GetSimilarQuestions(Guid id)
+        public async Task<List<SimilarQuestion>> GetSimilarQuestions(Guid id)
         {
             var list = _context.Set<SimilarQuestion>().Where(s => s.ContentBlockId1 == id || s.ContentBlockId2 == id).ToList();
-            var listGuid = list.Select(s =>
+            foreach (var s in list)
             {
-                if (s.ContentBlockId1 == id) return s.ContentBlockId2;
-                if (s.ContentBlockId2 == id) return s.ContentBlockId1;
-                return Guid.Empty;
-            }).ToList();
-            return listGuid;
+                if (s.ContentBlockId1 == id) s.ContentBlockId1 = s.ContentBlockId2;
+                if (s.ContentBlockId2 == id) s.ContentBlockId2 = s.ContentBlockId1;
+            };
+            return list;
+        }
+        public async Task<List<SimilarQuestion>> GetSimilarQuestionsById(Guid id)
+        {
+            var list = _context.Set<SimilarQuestion>().Where(s => s.ContentBlockId1 == id || s.ContentBlockId2 == id).ToList();
+            return list;
         }
     }
 }

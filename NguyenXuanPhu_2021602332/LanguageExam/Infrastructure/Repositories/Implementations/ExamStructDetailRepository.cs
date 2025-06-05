@@ -32,7 +32,8 @@ namespace Infrastructure.Repositories.Implementations
         {
             var list = _context.ExamStructDetail
                 .Include(e => e.QuestionType)
-                .Where(e => e.ExamStructId == id && e.Skill == skill).ToList();
+                .Where(e => e.ExamStructId == id && e.Skill == skill)
+                .OrderBy(e => e.Order).ToList();
             return list;
         }
     }

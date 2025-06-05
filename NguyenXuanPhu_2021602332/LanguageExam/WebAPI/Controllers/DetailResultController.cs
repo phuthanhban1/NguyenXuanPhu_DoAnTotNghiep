@@ -11,37 +11,31 @@ namespace WebAPI.Controllers
         private readonly IDetailResultService _detailResultService;
         public DetailResultController(IDetailResultService detailResultService)
         {
-
             _detailResultService = detailResultService;
         }
 
-        [HttpPost("reading/{examId}")]
-        public async Task<IActionResult> CreateDetailResult(Guid examId, List<Guid> listResults)
+        // add reading answer
+        [HttpPost("{examId}/{skillName}")]
+        public async Task<IActionResult> CreateDetailResult(Guid examId, string skillName, List<Guid> listResults)
         {
             var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
             if (sid == null)
             {
                 return Unauthorized();
             }
-            await _detailResultService.CreateDetailResult(examId, Guid.Parse(sid), listResults, "đọc");
+            var skill = "listening";
+            if (skillName == "reading") skill = "reading";
+            else if (skillName == "writing") skill = "writing";
+            else if (skillName == "speaking") skill = "speaking";
+            await _detailResultService.CreateDetailResult(examId, Guid.Parse(sid), listResults, skill);
             return Ok();
         }
 
-        [HttpPost("listening/{examId}")]
-        public async Task<IActionResult> CreateDetailResultListen(Guid examId, List<Guid> listResults)
+        // admin get result
+        [HttpGet("admin/{examId}")]
+        public async Task<IActionResult> GetAllResult(Guid examId)
         {
-            var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
-            if (sid == null)
-            {
-                return Unauthorized();
-            }
-            await _detailResultService.CreateDetailResult(examId, Guid.Parse(sid), listResults, "nghe");
-            return Ok();
-        }
-        [HttpGet("{examId}/{userId}")]
-        public async Task<IActionResult> GetResultsByExamUser(Guid examId, Guid userId)
-        {
-            var result = await _detailResultService.GetResultsByExamUser(examId, userId);
+            var result = await _detailResultService.GetAllResult(examId);
             return Ok(result);
         }
     }

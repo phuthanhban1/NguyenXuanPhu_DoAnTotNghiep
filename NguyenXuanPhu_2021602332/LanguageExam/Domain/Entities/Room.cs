@@ -11,7 +11,6 @@ namespace Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public byte Amount { get; set; }
-
         public List<Examinee> Examinees { get; set; }
     }
 }

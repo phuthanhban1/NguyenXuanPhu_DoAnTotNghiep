@@ -11,7 +11,7 @@ namespace Application.Services.Interfaces
         Task<List<GetAllUserDto>> GetAllAsync();
 
         Task UpdateRole(UserRoleUpdateDto userRoleUpdateDto);
-        Task UpdatePassword(UserPassworDto userPassworDto);
+        Task UpdatePassword(UserPasswordDto userPasswordDto);
 
         Task<string> Login(UserLoginDto userLoginDto);
         Task<List<GetAllUserDto>> GetByEmail(string email);

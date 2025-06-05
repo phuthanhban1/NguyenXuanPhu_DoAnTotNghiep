@@ -17,10 +17,6 @@ namespace Domain.Entities
         public Guid ExamStructId { get; set; }
         public ExamStruct ExamStruct { get; set; }
 
-        // fk: audio
-        public Guid? AudioFileId { get; set; }
-        public ExamFile? AudioFile { get; set; }
-
         public List<ExamQuestionDetail>? ExamQuestionDetails { get; set; }
 
 

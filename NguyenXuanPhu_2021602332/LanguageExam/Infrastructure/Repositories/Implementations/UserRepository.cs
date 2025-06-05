@@ -16,10 +16,15 @@ namespace Infrastructure.Repositories.Implementations
         {
         }
 
+        public async Task<User> GetUserByEmail(string email, Guid roleId)
+        {
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == email && u.RoleId == roleId);
+            return user;
+        }
         public async Task<List<User>> GetAccounts(Guid id)
         {
             var list = await _context.User.Include(r => r.Role)
-                .Where(x => x.RoleId != id).ToListAsync();
+                .Where(x => x.RoleId != Guid.Parse("2959CA56-A667-46A0-ACEA-EBA1E9961419")).ToListAsync();
             return list;
         }
 
@@ -55,6 +60,12 @@ namespace Infrastructure.Repositories.Implementations
                         .Include(u => u.ImageIdCardBefore)
                         .Include(u => u.ImageIdCardAfter)
                     .FirstOrDefault(x => x.Id == id);
+            return user;
+        }
+
+        public async Task<User> GetByEmail(string email)
+        {
+            var user = _context.User.FirstOrDefault(x => x.Email == email);
             return user;
         }
     }

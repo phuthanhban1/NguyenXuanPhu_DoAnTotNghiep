@@ -25,9 +25,37 @@ namespace Application.Services.Implements
         public async Task AddAsync(Guid managerId, ExamCreateDto examCreateDto)
         {
             var exam = _mapper.Map<Exam>(examCreateDto);
+            var user = await _unitOfWork.Users.GetUserByEmail(examCreateDto.Email, Guid.Parse("45B76D26-26E2-41D1-A0F7-ED6B55DC2190"));
+            if (user == null)
+            {
+                throw new NotFoundException($"Không tìm thấy người tạo đề có email {examCreateDto.Email}");
+            }
+            var exitExam = await _unitOfWork.Exams.GetExamByCreate(user.Id);
+            if(exitExam != null)
+            {
+                throw new BadRequestException($"Người tạo đề có email {examCreateDto.Email} đã có nhiệm vụ");
+            }
+            if (examCreateDto.StartDate.Date < DateTime.Now.Date.AddDays(14))
+            {
+                throw new BadRequestException("Ngày thi cần cách ngày hiện tại ít nhất 2 tuần");
+            }
+            if (examCreateDto.StartDate.Date < examCreateDto.RegistDate.Date.AddDays(14))
+            {
+                throw new BadRequestException("Ngày bắt đầu đăng ký phải trước ngày thi ít nhất 2 tuần");
+            }
+            if (examCreateDto.StartDate.Date < examCreateDto.CreateQuestionDue.Date.AddDays(7))
+            {
+                throw new BadRequestException("Hạn duyệt đề phải kết thúc trước ngày thi ít nhất 1 tuần");
+            }
+            var check = await _unitOfWork.Exams.CheckDate(examCreateDto.StartDate);
+            if(check)
+            {
+                throw new BadRequestException($"Đã có kỳ thi vào ngày {examCreateDto.StartDate.ToString("dd-MM-yyyy")} ");
+            }
+            exam.CreatedQuestionUserId = user.Id;
             exam.ManagerId = managerId;
             exam.Id = Guid.NewGuid();
-            exam.CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow);
+            exam.CreatedDate = DateTime.UtcNow;
             exam.IsCreated = false;
             await _unitOfWork.Exams.AddAsync(exam);
             await _unitOfWork.SaveChangeAsync();
@@ -69,13 +97,21 @@ namespace Application.Services.Implements
             return exam;
         }
 
-        
-
         public async Task<List<ExamDto>> GetByManagerIdAsync(Guid id)
         {
             var exams = await _unitOfWork.Exams.GetAllAsync();
             var examByManagers = exams.Where(exams => exams.ManagerId == id).ToList();
             var examDtos = _mapper.Map<List<ExamDto>>(examByManagers);
+            return examDtos;
+        }
+
+        public async Task<List<ExamDto>> GetComingExams()
+        {
+            var exams = _unitOfWork.Exams.GetAll()
+                .Where(e => e.StartDate.Date >= DateTime.Now.Date)
+                .OrderBy(e => e.StartDate)
+                .ToList();
+            var examDtos = _mapper.Map<List<ExamDto>>(exams);
             return examDtos;
         }
 
@@ -88,6 +124,12 @@ namespace Application.Services.Implements
             }
             var examDto = _mapper.Map<ExamDto>(exam);
             return examDto;
+        }
+
+        public async Task<List<Exam>> GetExamHasResult()
+        {
+            var list = await _unitOfWork.Exams.GetExamHasResult();
+            return list;
         }
 
         public async Task UpdateAsync(ExamUpdateDto examUpdateDto)

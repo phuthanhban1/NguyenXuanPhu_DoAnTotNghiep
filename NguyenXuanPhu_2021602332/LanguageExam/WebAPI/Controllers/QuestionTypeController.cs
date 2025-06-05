@@ -84,6 +84,12 @@ namespace WebAPI.Controllers
             return Ok(list);
         }
 
+        [HttpGet("count-pending/{skillId}")]
+        public async Task<IActionResult> CountQuestionTypePending(Guid skillId)
+        {
+            var list = await _questionTypeService.CountQuestionTypePending(skillId);
+            return Ok(list);
+        }
         [HttpGet("count-question-type/{skillId}/{structId}")]
         public async Task<IActionResult> CountQuestionTypeById(Guid skillId, Guid structId)
         {

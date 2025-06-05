@@ -97,6 +97,12 @@
 
 </head>
 <body>
+    <div class="header-common">
+    <script type="module">
+        import {genHeader} from '/assets/js/library.js';
+        genHeader($('.header-common'))
+    </script>
+    </div>
     <div class="container py-5">
         <div class="row mb-4">
             <div class="col-md-6">
@@ -105,11 +111,6 @@
             <div class="col-md-6">
                 <div class="d-flex justify-content-end">
                     <input type="text" class="form-control search-box me-2" placeholder="Tìm kiếm tài khoản..." style="max-width: 250px;">
-                    <select name="" id="">
-                        <option value=""><a href="" class="btn btn-success">Trang chủ</a></option>
-                        <option value=""><a href="" class="btn btn-success">Đăng xuất</a></option>
-                    </select>
-                    
                 </div>
             </div>
         </div>
@@ -164,17 +165,7 @@
                     </ul>
                 </nav>
             </div>
-            <!-- <div class="card-footer">
-                <nav>
-                    <ul class="pagination justify-content-end mb-0">
-                        <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-                    </ul>
-                </nav>
-            </div> -->
+            
         </div>
     </div>
 

@@ -9,6 +9,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/ExamManagement/sidebar.css">
 
     <style>
         :root {
@@ -26,76 +27,6 @@
             background: var(--background-color);
             margin: 0;
             overflow-x: hidden;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background: var(--secondary-color);
-            color: white;
-            padding: 20px 0;
-            transition: width 0.3s ease;
-            overflow-y: auto;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebar-header h4 {
-            margin: 0;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        .sidebar-menu li {
-            padding: 0;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            padding: 14px 20px;
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .sidebar-menu a:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .sidebar-menu a.active {
-            background: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            box-shadow: inset 4px 0 0 white;
-        }
-
-        .sidebar-menu i {
-            margin-right: 12px;
-            width: 24px;
-            text-align: center;
-            font-size: 1.2rem;
         }
 
         /* Main Content */
@@ -265,6 +196,12 @@
     </style>
 </head>
 <body>
+    <div class="header-common">
+        <script type="module">
+            import {genHeader} from '/assets/js/library.js';
+            genHeader($('.header-common'))
+        </script>
+    </div>
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
@@ -272,13 +209,13 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a href="#">
+                <a href="exam-detail.html">
                     <i class="fas fa-chart-line"></i>
                     <span>Tổng quan</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="active">
+                <a href="examinee.html" class="active">
                     <i class="fas fa-users"></i>
                     <span>Thí sinh</span>
                 </a>
@@ -372,7 +309,6 @@
                     },
                     success: function(response) {
                         count = response
-
                     },
                     error: function(error) {
                        
@@ -381,109 +317,153 @@
             return count
         }
 
-        async function  CreateRoom(data) {
-            await $.ajax({
-                    url: `https://localhost:7001/api/examinee/create-room/${examId}`,
-                    type: 'POST',
-                    contentType: 'application/json',
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    data: JSON.stringify(data),
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'Thành công!',
-                            text: 'Tạo phòng thành công.',
-                            icon: 'success',
-                            timer: 2000, // Tự đóng sau 2 giây
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            didClose: () => {
-                                window.location.href = 'examinee.html'
-                            }
-                        });
-
-                    },
-                    error: function(error) {
-                       
+// hàm lấy kỳ thi
+async function getExam() {
+    var exam = null
+    await $.ajax({
+        url: `https://localhost:7001/api/exam/exam/${examId}`,
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(response) {
+            exam = response
+        },
+        error: function(error) {
+            console.error('Error loading exam details:', error);
+        }
+    });
+    return exam   
+}
+// đếm xem bao nhiêu người đã đăng ký
+async function countExaminee() {
+    var count = 0;
+    await $.ajax({
+        url: `https://localhost:7001/api/examinee/count/${examId}`,
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(response) {
+            count = response
+        }
+    });
+    return count
+}
+    async function  CreateRoom(data) {
+        await $.ajax({
+            url: `https://localhost:7001/api/examinee/create-room/${examId}`,
+            type: 'POST',
+            contentType: 'application/json',
+            xhrFields: {
+                withCredentials: true
+            },
+            data: JSON.stringify(data),
+            success: function(response) {
+                Swal.fire({
+                    title: 'Thành công!',
+                    text: 'Tạo phòng thành công.',
+                    icon: 'success',
+                    timer: 2000, // Tự đóng sau 2 giây
+                    showConfirmButton: false,
+                    timerProgressBar: true,
+                    didClose: () => {
+                        window.location.href = 'examinee.html'
                     }
                 });
-            
-        }
-        // Load exam details when page loads
-        $(document).ready(function() {
-            $.ajax({
-                url: `https://localhost:7001/api/room`,
-                type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function(response) {
-                    console.log(response);
-                    listRoom = response.map(room => ({
-                        id: room.id,
-                        name: room.name,
-                        amount: room.amount
-                    }));
-                    updateSelectOptions();
-                },
-                error: function(error) {
-                    console.error('Error loading exam details:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Lỗi',
-                        text: 'Không thể tải danh sách phòng thi!',
-                    });
-                }
-            });
-
-            // Handle choose button click
-            $('#btnChoose').click(function() {
-                const selectedId = $('#listRoom').val();
-                if (!selectedId) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Chưa chọn phòng',
-                        text: 'Vui lòng chọn một phòng thi!',
-                    });
-                    return;
-                }
-
-                const selectedRoom = listRoom.find(room => room.id === selectedId);
-                if (selectedRoom) {
-                    selectedRooms.push(selectedRoom);
-                    updateSelectOptions();
-                    updateTable();
-                }
-            });
-            $('#create').on('click', async function() {
-                if(selectedRooms.length === 0) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Chưa chọn phòng',
-                        text: 'Vui lòng chọn một phòng thi!',
-                    });
-                }
-                var sum = selectedRooms.reduce((total, item) => total + item.amount, 0);
-                var count = await CountExaminee()
-                if(sum < count) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Chưa đủ phòng cho tất cả thí sinh ',
-                        text: 'Vui lòng chọn thêm phòng thi!',
-                    });
-                } else {
-                    var data = selectedRooms.map(room => ({
-                        Id: room.id,
-                        Amount: room.amount
-                    }))
-                    await CreateRoom(data)
-                }
-                
-            }) 
-
-            
+            },
+            error: function(error) {
+            }
         });
+    }
+        // Load exam details when page loads
+$(document).ready(function() {
+$.ajax({
+    url: `https://localhost:7001/api/room`,
+    type: 'GET',
+    xhrFields: {
+        withCredentials: true
+    },
+    success: function(response) {
+        console.log(response);
+        listRoom = response.map(room => ({
+            id: room.id,
+            name: room.name,
+            amount: room.amount
+        }));
+        updateSelectOptions();
+    },
+    error: function(error) {
+        console.error('Error loading exam details:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            text: 'Không thể tải danh sách phòng thi!',
+        });
+    }
+});
+
+// Handle choose button click
+$('#btnChoose').click(function() {
+    const selectedId = $('#listRoom').val();
+    if (!selectedId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Chưa chọn phòng',
+            text: 'Vui lòng chọn một phòng thi!',
+        });
+        return;
+    }
+
+    const selectedRoom = listRoom.find(room => room.id === selectedId);
+    if (selectedRoom) {
+        selectedRooms.push(selectedRoom);
+        updateSelectOptions();
+        updateTable();
+    }
+});
+$('#create').on('click', async function() {
+    
+// Lấy ngày hiện tại
+    const today = new Date();
+    var exam = await getExam()
+    var inputDate = new Date(exam.registDate);
+    // So sánh
+    var countExaminee = await countExaminee()
+    if(countExaminee < exam.Amount) {
+        if (inputDate.getDate() + 7 <= today) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Chưa được phép tạo',
+                text: 'Chưa kết thúc đăng ký!',
+            });
+        } 
+    }
+
+    if(selectedRooms.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Chưa chọn phòng',
+            text: 'Vui lòng chọn một phòng thi!',
+        });
+    }
+    var sum = selectedRooms.reduce((total, item) => total + item.amount, 0);
+    var count = await CountExaminee()
+    if(sum < count) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Chưa đủ phòng cho tất cả thí sinh ',
+            text: 'Vui lòng chọn thêm phòng thi!',
+        });
+    } else {
+        var data = selectedRooms.map(room => ({
+            Id: room.id,
+            Amount: room.amount
+        }))
+        await CreateRoom(data)
+    }
+})        
+});
     </script>
 </body>
 </html>

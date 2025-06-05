@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết kỳ thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/ExamManagement/sidebar.css">
+
+    <style>
+        :root {
+            --sidebar-width: 250px;
+        }
+        
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h5 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h5 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .status-upcoming {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-ongoing {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-completed {
+            background-color: #f5f5f5;
+            color: #616161;
+        }
+
+        .action-button {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-edit {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .student-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .student-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .student-item:hover {
+            background: #f8f9fa;
+        }
+
+        .room-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .room-card:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header-common">
+        <script type="module">
+            import {genHeader} from '/assets/js/library.js';
+            genHeader($('.header-common'))
+        </script>
+    </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4 class="mb-0">Quản lý kỳ thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="exam-detail.html" class="active">
+                    <i class="fas fa-chart-line"></i>
+                    Tổng quan
+                </a>
+            </li>
+            <li>
+                <a href="examinee.html" >
+                    <i class="fas fa-users"></i>
+                    Thí sinh
+                </a>
+            </li>
+            <li>
+                <a href="result.html" >
+                    <i class="fas fa-poll"></i>
+                    Kết quả
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Chi tiết kỳ thi</h2>
+                <p class="text-muted mb-0">Thông tin chi tiết và quản lý kỳ thi</p>
+            </div>
+            
+        </div>
+
+        <!-- Exam Information -->
+        <div class="row">
+            <!-- Basic Info -->
+            <div class="col-md-8">
+                <div class="info-card">
+                    <h5><i class="fas fa-info-circle"></i>Thông tin cơ bản</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Tên kỳ thi</p>
+                            <h4 id="examName">Kỳ thi TOPIK I kỳ 100</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1 text-muted">Ngày bắt đầu</p>
+                            <p id="startDate">01/01/2024 08:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="mb-1 text-muted">Mô tả</p>
+                            <p id="description">Kỳ thi đánh giá năng lực tiếng Hàn trình độ TOPIK I.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students List -->
+                <div class="info-card" id="examRoomList">
+                    <h5><i class="fas fa-door-open"></i>Phòng thi</h5>
+                    
+                    
+                    <!-- More rooms... -->
+                </div>
+            </div>
+
+            <!-- Exam Progress -->
+            <div class="col-md-4">
+                <div class="info-card">
+                    <h5><i class="fas fa-chart-pie"></i>Tiến độ</h5>
+                    <div class="mb-4" id="register">
+                        <p class="mb-2">Đăng ký thí sinh</p>
+                        
+                    </div>
+                    <div class="mb-4" id="createQuestion">
+                        <p class="mb-2">Tạo đề thi</p>
+                        
+                    </div>
+                    <div class="mb-4" id="roomCount">
+                        <p class="mb-2">Phân phòng thi</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Exam Modal -->
+    <div class="modal fade" id="editExamModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chỉnh sửa thông tin kỳ thi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editExamForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tên kỳ thi</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày bắt đầu</label>
+                            <input type="datetime-local" class="form-control" name="startDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày kết thúc</label>
+                            <input type="datetime-local" class="form-control" name="endDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="saveExamChanges()">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// Get exam ID from URL
+var exam = null;
+const examId = localStorage.getItem('examId')
+
+        // Load exam details
+async function loadExamDetails() {
+    await $.ajax({
+        url: `https://localhost:7001/api/exam/exam/${examId}`,
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(response) {
+            // Update exam information
+            console.log('346', response)
+            exam = response
+            document.getElementById('examName').textContent = response.name;
+            document.getElementById('startDate').textContent = formatDate(response.startDate);  
+        },
+        error: function(error) {
+            console.error('Error loading exam details:', error);
+        }
+    });
+}
+
+// đếm xem bao nhiêu người đã đăng ký
+async function countExaminee() {
+    var count = 0;
+    await $.ajax({
+        url: `https://localhost:7001/api/examinee/count/${examId}`,
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(response) {
+            count = response
+        }
+    });
+    return count
+}
+async function countRoom() {
+    var count = 0;
+    await $.ajax({
+        url: `https://localhost:7001/api/room`,
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(response) {
+            response.forEach(() => count++)
+        }
+    });
+    return count
+}
+async function getExamRoom() {
+    var rooms = null;
+    await $.ajax({
+        url: `https://localhost:7001/api/examinee/count-room/${examId}`,
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(response) {
+            rooms = response
+        }
+    });
+    return rooms
+}
+
+// Format date to Vietnamese locale
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('vi-VN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+        // Load exam details when page loads
+$(document).ready(async function() {
+    await loadExamDetails();
+    var count = await countExaminee()
+    $('#register').append(`
+    <div class="progress">
+        <div class="progress-bar bg-success" style="width: ${Math.round(count / exam.amount * 100 * 100) / 100}%"></div>
+    </div>
+    <small class="text-muted">${count}/${exam.amount} thí sinh</small>
+    `)
+    $('#createQuestion').append(`
+    <div class="progress">
+        <div class="progress-bar bg-primary" style="width: ${exam.isCreated == 'true' ? 100 : 0}%"></div>
+    </div>
+    <small class="text-muted">${exam.isCreated == 'true' ? 'Đã hoàn thành' : 'Chưa hoàn thành'}</small>
+    `)
+
+    var countRoomVal = await countRoom()
+    var examRoom = await getExamRoom()
+    var countExamRoom = examRoom == null ? 0 : Object.keys(examRoom).length
+    $('#roomCount').append(`
+        <div class="progress">
+            <div class="progress-bar bg-warning" style="width: ${Math.round(countExamRoom / countRoomVal * 100 * 100) / 100}%"></div>
+        </div>
+        <small class="text-muted">${ countExamRoom != 0 ? `${countExamRoom}/${countRoomVal} phòng` : 'Chưa có'}</small>
+    `)
+    
+    if(examRoom != null) {
+        Object.entries(examRoom).forEach(([key, room]) => {
+            $('#examRoomList').append(`
+                <div class="room-card">
+                    <h6>${room.name}</h6>
+                    <p class="mb-1">Sức chứa: ${room.amount} thí sinh</p>
+                    <p class="mb-0">Đã phân: ${room.examineeAmount} thí sinh</p>
+                </div>
+            `);
+        });
+        
+    }
+});
+</script>
+</body>
+</html>

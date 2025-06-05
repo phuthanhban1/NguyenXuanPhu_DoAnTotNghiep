@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biểu mẫu đăng ký</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .error {
+      color: #dc3545 !important;
+      font-size: 0.875rem !important;
+      margin-top: 5px !important;
+      display: block !important;
+    }
+    .valid {
+      border-color: #28a745 !important;
+    }
+    .invalid {
+      border-color: #dc3545 !important;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="form-container bg-white p-4 rounded shadow-sm">
+      <h2 class="text-center mb-4">Biểu mẫu đăng ký</h2>
+      <form id="registerForm" novalidate>
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Nhập họ và tên">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+          </div>
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Đăng ký</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">Thông báo</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+      </div>
+      <div class="toast-body"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    // Thêm rule 'pattern'
+    jQuery.validator.addMethod('pattern', function(value, element, param) {
+      if (this.optional(element)) return true;
+      return param.test(value);
+    }, 'Giá trị không hợp lệ');
+
+    // Hiển thị toast
+    function showToast(msg, type) {
+      const t = new bootstrap.Toast($('#liveToast')[0]);
+      const el = $('#liveToast');
+      el.removeClass('bg-success bg-danger bg-warning').addClass('bg-' + type);
+      el.find('.toast-body').text(msg);
+      t.show();
+    }
+
+    $(function() {
+      $('#registerForm').validate({
+        // debug: true, // <-- Đã bỏ
+        rules: {
+          fullName: { required: true, minlength: 2 },
+          email:    { required: true, email: true },
+          phone:    { required: true, pattern: /^(0|\+84)(3|5|7|8|9)[0-9]{8}$/ },
+          password: { required: true, minlength: 6 }
+        },
+        messages: {
+          fullName: { required: "Vui lòng nhập họ và tên", minlength: "Tối thiểu 2 ký tự" },
+          email:    { required: "Vui lòng nhập email",    email: "Email không hợp lệ" },
+          phone:    { required: "Vui lòng nhập số điện thoại", pattern: "SĐT Việt Nam hợp lệ" },
+          password: { required: "Vui lòng nhập mật khẩu", minlength: "Tối thiểu 6 ký tự" }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, el) {
+          error.addClass('error');
+          error.insertAfter(el.closest('.input-group'));
+        },
+        highlight: function(el) {
+          $(el).addClass('invalid').removeClass('valid');
+        },
+        unhighlight: function(el) {
+          $(el).removeClass('invalid').addClass('valid');
+        },
+        invalidHandler: function(e, validator) {
+          showToast('Vui lòng kiểm tra các trường không hợp lệ', 'warning');
+        },
+        submitHandler: function(form) {
+          // Gọi API đăng ký...
+          showToast('Form hợp lệ, đang gửi dữ liệu...', 'success');
+          // Ví dụ:
+          // $.post('/api/register', $(form).serialize(), ...)
+        }
+      });
+    });
+  </script>
+</body>
+</html>

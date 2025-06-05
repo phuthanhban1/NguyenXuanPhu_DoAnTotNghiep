@@ -3,17 +3,13 @@ using Application.Dtos.ContentBlockDtos;
 using Application.Dtos.ExamQuestionDetailDtos;
 using Application.Dtos.ExamStructDetail;
 using Application.Dtos.QuestionDtos;
+using Application.Dtos.QuestionTypeDtos;
 using Application.Exceptions;
 using Application.Services.Interfaces;
 using AutoMapper;
 using Domain.Entities;
-using Infrastructure.Repositories.Interfaces;
 using Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Services.Implements
 {
@@ -48,34 +44,39 @@ namespace Application.Services.Implements
                 await _unitOfWork.ExamQuestions.AddAsync(examQuestion);
             }
 
-            var examStructs = await _unitOfWork.ExamStructDetails.GetAllByExamStructId(examQuestionDetailCreateDto.ExamStructId);
-            Dictionary<Guid, List<ExamStructDetail>> dictQuestionTypes = new Dictionary<Guid, List<ExamStructDetail>>();
-            examStructs.ForEach(e =>
+            var examStructDetails = await _unitOfWork.ExamStructDetails.GetAllByExamStructId(examQuestionDetailCreateDto.ExamStructId);
+            examStructDetails = examStructDetails.OrderBy(e => e.Order).ToList();
+            var dictQuestionTypes = new Dictionary<QuestionTypeGenDto, List<ExamStructDetail>>();
+            examStructDetails.ForEach(e =>
             {
-                if (!dictQuestionTypes.ContainsKey(e.QuestionTypeId))
+                var questionTypeGenDto = new QuestionTypeGenDto
                 {
-                    dictQuestionTypes[e.QuestionTypeId] = new List<ExamStructDetail>();
+                    QuestionTypeId = e.QuestionTypeId,
+                    Score = e.Score
+                };
+                if (!dictQuestionTypes.ContainsKey(questionTypeGenDto))
+                {
+                    dictQuestionTypes[questionTypeGenDto] = new List<ExamStructDetail>();
                 }
-                dictQuestionTypes[e.QuestionTypeId].Add(e);
+                dictQuestionTypes[questionTypeGenDto].Add(e);
             });
+            Random rand = new Random();
             // duyệt các questionType
             foreach (var key in  dictQuestionTypes.Keys)
             {
                 // lấy tên skill
 
                 // lấy tất cả content trong 1 question type
-                var contentBlocks = await _unitOfWork.ContentBlocks.GetByQuestionTypeId(key);
-                contentBlocks = contentBlocks.Where(c => c.Status == 1).ToList();
+                var contentBlocks = await _unitOfWork.ContentBlocks.GetByQuestionTypeScore(key.QuestionTypeId, key.Score);
                 foreach (var item in dictQuestionTypes[key])
                 {
                     // lấy số lượng câu hỏi
-                    var amount = await GetAmountOfStructDetail(item.Id);
-                    for(int i = 0; i < amount; i++)
+                    for(int i = 0; i < item.Amount; i++)
                     {
                         // lấy từng câu hỏi một
                         if (contentBlocks != null && contentBlocks.Count > 0)
                         {
-                            Random rand = new Random();
+                            
                             int index = rand.Next(contentBlocks.Count);
                             var contentBlock = contentBlocks[index];
                             var examQuestionDetail = new ExamQuestionDetail
@@ -90,12 +91,10 @@ namespace Application.Services.Implements
                             await _unitOfWork.ExamQuestionDetails.AddAsync(examQuestionDetail);
                             listExamQuestion.Add(examQuestionDetail);
                             contentBlocks.RemoveAt(index);
-                            var listGuid = await _unitOfWork.SimilarQuestions.GetSimilarQuestions(contentBlock.Id);
-                            listGuid.ForEach(l =>
-                            {
-                                var index = contentBlocks.FindIndex(x => x.Id == l);
-                                contentBlocks.RemoveAt(index);
-                            });
+                        }
+                        else
+                        {
+                            throw new BadRequestException("Không đủ câu hỏi để tạo đề");
                         }
                         
                     }

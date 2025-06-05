@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.AnswerDtos;
 using Application.Dtos.ContentBlockDtos;
+using Application.Dtos.DetailResultDtos;
 using Application.Dtos.ExamDtos;
 using Application.Dtos.ExamineeDtos;
 using Application.Dtos.ExamStruct;
@@ -10,6 +11,7 @@ using Application.Dtos.QuestionDtos;
 using Application.Dtos.QuestionTypeDtos;
 using Application.Dtos.RoleDtos;
 using Application.Dtos.RoomDtos;
+using Application.Dtos.SimilarQuestions;
 using Application.Dtos.SkillDtos;
 using Application.Dtos.UserDtos;
 using AutoMapper;
@@ -61,8 +63,12 @@ namespace Application.Mappings
                 .ForMember(ed => ed.Email, e => e.MapFrom(e => e.User.Email))
                 ;
 
+            CreateMap<ContentBlock, ContentBlockSimilarDto>();
+            
 
-
+            CreateMap<Examinee, DetailResultDto>()
+                .ForMember(ed => ed.FullName, e => e.MapFrom(e => e.User.FullName));
+                
 
             CreateMap<ExamFile, ImageFileDto>();
 
@@ -98,15 +104,29 @@ namespace Application.Mappings
                 .ForMember(cbd => cbd.Questions, cb => cb.MapFrom(cb => cb.Questions))
                 .ForMember(cbd => cbd.IsSingle, cb => cb.MapFrom(cb => cb.QuestionType.IsSingle))
                 ;
-
-               // .ForMember(cbd => cbd.Questions.Answers, cb => cb.MapFrom(cb => cb.Questions.Answers));
+            CreateMap<SimilarQuestion, SimilarQuestionDto>()
+                .ForMember(sqd => sqd.Id, s => s.MapFrom(s => s.ContentBlockId1));
+            CreateMap<ContentBlock, SimilarQuestionDto>()
+                .ForMember(cbd => cbd.AudioBase64, cb => cb.MapFrom(cb => Convert.ToBase64String(cb.AudioFile.FileData)))
+                .ForMember(cbd => cbd.ImageBase64, cb => cb.MapFrom(cb => Convert.ToBase64String(cb.ImageFile.FileData)))
+                .ForMember(cbd => cbd.Questions, cb => cb.MapFrom(cb => cb.Questions))
+                .ForMember(cbd => cbd.Questions, cb => cb.MapFrom(cb => cb.Questions))
+                .ForMember(cbd => cbd.IsSingle, cb => cb.MapFrom(cb => cb.QuestionType.IsSingle))
+                ;
+            // .ForMember(cbd => cbd.Questions.Answers, cb => cb.MapFrom(cb => cb.Questions.Answers));
 
             CreateMap<Question, QuestionCreateDto>().ReverseMap();
             CreateMap<QuestionType, QuestionTypeCountDto>()
-                .ForMember(qtc => qtc.Count, qt => qt.Ignore());
+                .ForMember(qtd => qtd.QuestionTypeCounts, u => u.Ignore());
+            
 
             CreateMap<User, GetAllUserDto>()
                 .ForMember(g => g.RoleName, u => u.MapFrom(u => u.Role.Name));
+
+            CreateMap<AnswerCreateDto, Answer>();
+            CreateMap<QuestionCreateDto, Question>();
+
+
         }
     }
 }

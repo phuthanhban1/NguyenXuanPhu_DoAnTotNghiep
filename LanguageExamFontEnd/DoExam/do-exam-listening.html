@@ -223,7 +223,7 @@
           }
         },
         error: function(error) {
-          console.error('Error loading questions:', error.responseText);
+          console.log('Error loading questions:', error.responseText);
           $('#examQuestion').html('<p>Lỗi khi tải dữ liệu</p>');
         }
       });
@@ -232,11 +232,11 @@
     async function renderQuestion() {
       const examQuestionDiv = $('#examQuestion');
       examQuestionDiv.empty();
-      if (currentQuestion >= flatQuestions.length) {
-        // End of questions, submit answers
-        await submitExam();
-        return;
-      }
+      // if (currentQuestion >= flatQuestions.length) {
+      //   // End of questions, submit answers
+      //   await submitExam();
+      //   return;
+      // }
 
       const q = flatQuestions[currentQuestion];
       const questionTypeName = await GetQuestionTypeName(q.contentBlock.id);
@@ -256,7 +256,7 @@
                 </div>
               </div>
               <!-- Content Block Content -->
-              <div class="mb-4 d-flex">
+              <div class="mb-4" ${q.contentBlock.content ? '': 'style="display: none;"'}>
                 <h6 class="fw-bold mr-2">Nội dung câu hỏi:</h6>
                 <p>${q.contentBlock.content || 'Nội dung không có'}</p>
               </div>
@@ -312,7 +312,7 @@
     async function submitExam() {
       // Send answers to server
       await $.ajax({
-        url: `https://localhost:7001/api/detailResult/listening/${examId}`,
+        url: `https://localhost:7001/api/detailResult/${examId}/listening`,
         type: 'POST',
         contentType: 'application/json',
         xhrFields: { withCredentials: true },
@@ -352,8 +352,9 @@
     }
 
     $(document).ready(async function() {
+      console.log(examId)
       await GetExamQuestion(examId);
-
+      console.log('357', flatQuestions)
       // Handle start button
       $('#start-btn').on('click', function() {
         $('#start-screen').hide();

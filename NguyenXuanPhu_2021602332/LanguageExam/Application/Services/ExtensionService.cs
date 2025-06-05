@@ -14,7 +14,7 @@ namespace Application.Services
     {
         public static string RoleCreate = "người tạo câu hỏi";
         static readonly HttpClient client = new HttpClient();
-        static string apiKey = ""; // Thay bằng API key Gemini của bạn
+        static string apiKey = "AIzaSyCPOkRXPnfzrFFdysp68mjvLr120v2-2mM"; // Thay bằng API key Gemini của bạn
         static string model = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
         public static string Sid = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid";
 
@@ -129,7 +129,7 @@ namespace Application.Services
         }
 
         public static async Task<List<SimilarQuestion>> 
-        SimilarCheck(List<ContentBlockDto> oldList, List<ContentBlockDto> newList)
+        SimilarCheck(List<ContentBlockSimilarDto> oldList, List<ContentBlockSimilarDto> newList)
         {
             var results = new List<SimilarQuestion>();
 
@@ -140,7 +140,7 @@ namespace Application.Services
                     var q1 = newList[i];
                     var q2 = oldList[j];
 
-                    var prompt = @$"So sánh mức độ giống nhau về ý nghĩa giữa hai câu hỏi tiếng Hàn sau đây:
+                    var prompt = @$"So sánh mức độ giống nhau về ý nghĩa giữa hai câu hỏi sau đây:
                             1. {q1.Content}
                             2. {q2.Content}
                             Trả lời theo định dạng sau:

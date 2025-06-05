@@ -1,4 +1,6 @@
 ﻿using Application.Dtos.DetailResultDtos;
+using Application.Dtos.ExamineeDtos;
+using Application.Exceptions;
 using Application.Services.Interfaces;
 using AutoMapper;
 using Domain.Entities;
@@ -22,16 +24,18 @@ namespace Application.Services.Implements
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public Task AddAsync(DetailResultCreateDto detailResultCreateDto)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task CreateDetailResult(Guid examId, Guid userId, List<Guid> listResults, string skillName)
         {
             var examinee = await _unitOfWork.Examinees.GetByExamAndUserId(examId, userId);
+            var score = 0;
             foreach (var item in listResults)
             {
+                var answer = _unitOfWork.Answers.GetById(item).Include(a => a.Question).ToList()[0];
+                if (answer.IsCorrect == true)
+                {
+                    score += answer.Question.Score;
+                }
                 var detailResult = new DetailResult
                 {
                     Id = Guid.NewGuid(),
@@ -42,54 +46,22 @@ namespace Application.Services.Implements
                 };
                 await _unitOfWork.DetailResults.AddAsync(detailResult);
             }
+            if (skillName == "reading") examinee.ReadingScore = score;
+            else if (skillName == "listening") examinee.ListeningScore = score;
+            else if (skillName == "writing") examinee.WritingScore = score;
+            else if (skillName == "speaking") examinee.SpeakingScore = score;
+            await _unitOfWork.Examinees.UpdateAsync(examinee);
             await _unitOfWork.SaveChangeAsync();
         }
 
+        public async Task<List<DetailResultDto>> GetAllResult(Guid examId)
+        {
+            var examinees = await _unitOfWork.Examinees.GetExamineesByExamId(examId);
+            examinees = examinees.Where(e => e.IsExamTaken == true).ToList();
+            var examineeDtos = _mapper.Map<List<DetailResultDto>>(examinees);
+            return examineeDtos;
+        }
+
         
-        public Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Dictionary<string, int>> GetResultsByExamUser(Guid examId, Guid userId)
-        {
-            var listResult = await _unitOfWork.DetailResults.GetDetailResultsByExamUser(examId, userId);
-            var result = new Dictionary<string, List<Guid>>();
-            foreach (var item in listResult)
-            {
-                if (result.ContainsKey(item.Skill))
-                {
-                    result[item.Skill].Add(item.AnswerId);
-                }
-                else
-                {
-                    result[item.Skill] = new List<Guid> { item.AnswerId };
-                }
-            }
-            var resultCount = new Dictionary<string, int>();
-            foreach (var skill in result.Keys)
-            {
-                var list = result[skill];
-                foreach (var item in list)
-                {
-                    var answer = _unitOfWork.Answers.GetById(item).Include(a => a.Question).ToList()[0];
-                    if (answer.IsCorrect == true)
-                    {
-                        if (!resultCount.ContainsKey(skill))
-                        {
-                            resultCount[skill] = 0;
-                        }
-                        resultCount[skill] += answer.Question.Score;
-                    }
-                    
-                }
-            }
-            return resultCount;
-        }
-
-        public Task UpdateAsync(DetailResultUpdateDto detailResultUpdateDto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

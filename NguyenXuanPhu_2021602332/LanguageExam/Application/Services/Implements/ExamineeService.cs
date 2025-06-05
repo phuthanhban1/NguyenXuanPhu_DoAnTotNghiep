@@ -1,4 +1,5 @@
-﻿using Application.Dtos.ExamineeDtos;
+﻿using Application.Dtos.DetailResultDtos;
+using Application.Dtos.ExamineeDtos;
 using Application.Dtos.RoomDtos;
 using Application.Exceptions;
 using Application.Services.Interfaces;
@@ -35,9 +36,37 @@ namespace Application.Services.Implements
             {
                 ExamId = examId,
                 UserId = userId,
+                IsExamTaken = false
             };
             await _unitOfWork.Examinees.AddAsync(examinee);
             await _unitOfWork.SaveChangeAsync();
+        }
+        public async Task<Dictionary<Guid, RoomExamGetDto>> CountRoom(Guid examId)
+        {
+            var rooms = new Dictionary<Guid, RoomExamGetDto>();
+            var listExaminees = await _unitOfWork.Examinees.GetExamineesByExamId(examId);
+            if (listExaminees[0].RoomId == null)
+            {
+                return null;
+            }
+            foreach (var item in listExaminees)
+            {
+                var roomId = (Guid)item.RoomId;
+                if(rooms.ContainsKey(roomId))
+                {
+                    rooms[roomId].ExamineeAmount += 1;
+                } else
+                {
+                    rooms[roomId] = new RoomExamGetDto
+                    {
+                        Id = roomId,
+                        Name = item.Room.Name,
+                        Amount = item.Room.Amount,
+                        ExamineeAmount = 1
+                    };
+                }
+            }
+            return rooms;
         }
 
         public async Task CreateExamNumber(Guid id)
@@ -54,7 +83,6 @@ namespace Application.Services.Implements
             }
             await _unitOfWork.SaveChangeAsync();
         }
-
         public async Task CreateRoom(Guid examId, List<RoomExamDto> list)
         {
             var examinees = await _unitOfWork.Examinees.GetExamineesByExamId(examId);
@@ -78,10 +106,6 @@ namespace Application.Services.Implements
 
         }
 
-        public Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<List<ExamineeDto>> GetByExamIdAsync(Guid id)
         {
@@ -97,6 +121,33 @@ namespace Application.Services.Implements
             return examineeDto;
         }
 
+        public async Task<List<ExamineeScheduleDto>> GetSchedule(Guid userId)
+        {
+            var listExaminee = await _unitOfWork.Examinees.GetExamineesByUserId(userId);
+            var listExamineeSchedules = new List<ExamineeScheduleDto>();
+            foreach (var examinee in listExaminee)
+            {
+                var exam = await _unitOfWork.Exams.GetByIdAsync(examinee.ExamId);
+                var examSchedule = new ExamineeScheduleDto
+                {
+                    Id = exam.Id,
+                    Name = exam.Name,
+                    StartDate = exam.StartDate,
+                    Password = exam.Password
+                };
+                if(examinee.Room != null)
+                {
+                    examSchedule.RoomName = examinee.Room.Name;
+                }
+                if(examinee.ExamineeNumber != null)
+                {
+                    examSchedule.ExamineeNumber = examinee.ExamineeNumber;
+                }
+                listExamineeSchedules.Add(examSchedule);
+            }
+            return listExamineeSchedules;
+        }
+
         public async Task<List<ExamineeDto>> GetUserByExamId(Guid id)
         {
             var examinees = await _unitOfWork.Examinees.GetExamineesByExamId(id);
@@ -104,19 +155,38 @@ namespace Application.Services.Implements
             return examineeDtos;
         }
 
-        public async Task UpdateAsync(ExamineeUpdateDto examineeUpdateDto)
+        public async Task<DetailResultDto> GetResultsByExamUser(ExamineeScoreDto examineeScoreDto)
         {
-            var examinee = await _unitOfWork.Examinees.GetByExamAndUserId(examineeUpdateDto.ExamId, examineeUpdateDto.UserId);
+            var examinee = await _unitOfWork.Examinees.GetExamineeByNumber(examineeScoreDto.ExamId, examineeScoreDto.ExamineeNumber);
             if(examinee == null)
             {
-                throw new NotFoundException($"Không tìm thấy thí sinh có id {examineeUpdateDto.UserId} trong kì thi có id {examineeUpdateDto.ExamId}");
-            } else
-            {
-                _mapper.Map(examineeUpdateDto, examinee);
-                await _unitOfWork.Examinees.UpdateAsync(examinee);
-                await _unitOfWork.SaveChangeAsync();
+                throw new NotFoundException($"Không tìm thấy thí sinh có mã {examineeScoreDto.ExamineeNumber}");
             }
-                
+            if (examinee.User.DateOfBirth != examineeScoreDto.DateOfBirth)
+            {
+                throw new BadRequestException("Thí sinh có ngày sinh không tồn tại");
+            }
+            var examineeDto = _mapper.Map<DetailResultDto>(examinee);
+            return examineeDto;
+        }
+
+        public async Task Test()
+        {
+            for(int i = 1; i <= 50; i++)
+            {
+                var email = $"thisinh{i}@gmail.com";
+                var user = await _unitOfWork.Users.GetUserByEmail(email, Guid.Parse("A0E4F1D5-3C8B-4F2A-8E6C-7D9B5E0A2F1D"));
+                var examinee = new Examinee
+                {
+                    ExamId = Guid.Parse("D0D95456-6423-48C6-AE88-BC18EFD2D3C6"),
+                    UserId = user.Id,
+                    IsExamTaken = true,
+                    ReadingScore = new Random().Next(0, 101),
+                    ListeningScore = new Random().Next(0, 101),
+                };
+                await _unitOfWork.Examinees.AddAsync(examinee);
+            }
+            await _unitOfWork.SaveChangeAsync();
         }
     }
 }

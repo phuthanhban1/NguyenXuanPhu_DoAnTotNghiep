@@ -12,6 +12,7 @@ namespace Application.Services.Interfaces
         Task<List<QuestionType>> GetAllAsync();
         Task<List<QuestionTypeDto>> GetsBySkillId(Guid skillId);
         Task<List<QuestionTypeCountDto>> CountQuestionType(Guid skillId);
+        Task<List<QuestionTypeCountDto>> CountQuestionTypePending(Guid skillId);
 
         Task<List<QuestionTypeCountDto>> CountQuestionType2(Guid skillId, Guid structId);
     }

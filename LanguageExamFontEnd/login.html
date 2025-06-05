@@ -6,10 +6,13 @@
     <title>Login</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
-
+    <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery và jQuery Validation -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <!-- Custom CSS -->
     <style>
         body {
@@ -62,10 +65,24 @@
         .forgot-password a:hover {
             color: #0d6efd;
         }
+        .error {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+        }
+        .error::before {
+            content: "⚠ ";
+            font-size: 1rem;
+            margin-right: 0.25rem;
+        }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+    <script type="module">
+        import {getApi} from '/assets/js/library.js';
+
+$(document).ready(function() {
+            // Định nghĩa các vai trò
             var roleExamManager = 'quản lý kỳ thi';
             var roleCreateQuestion = 'người tạo câu hỏi';
             var roleReviewQuestion = 'người đánh giá câu hỏi';
@@ -73,83 +90,97 @@
             var roleAdmin = 'quản trị viên';
             var roleExamCreate = 'người tạo đề';
             var roleExaminee = 'thí sinh';
-            $('#form-login').on('submit', function(e) {
-                e.preventDefault(); // Prevent form from submitting normally
-                
-                $.ajax({
-                    url: 'https://localhost:7001/api/user/login',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        Email: $('#email').val(),
-                        Password: $('#password').val()
-                    }),
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    success: function(response) {
-                        $.ajax({
-                            url: 'https://localhost:7001/api/user/role',
-                            type: 'GET',
-                            xhrFields: {
-                                withCredentials: true
-                            },
-                            success: function(response) {
-                                console.log('Role:', response);
-                                Swal.fire({
-                                    title: 'Thành công!',
-                                    text: 'Đăng nhập thành công.',
-                                    showConfirmButton: false,
-                                    icon: 'success',
-                                    timer: 2000
-                                }).then((result) => {
-                                    if (result.dismiss === Swal.DismissReason.timer) {
-                                        if(response === roleCreateQuestion) {
-                                        window.location.href = 'QuanLyThemCauHoi/trang-chu.html';
-                                        } else if(response === roleBankManager) {
-                                            window.location.href = 'QuestionBankManagement/question_bank.html';
-                                        } else if(response === roleExamCreate) {
-                                            window.location.href = 'QuanLyCauTrucDe/index.html';
-                                        } else if(response === roleExaminee) {
-                                            window.location.href = 'User/index.html';
-                                        } if(response === roleAdmin){
-                                            window.location.href = 'Admin/index.html';
-                                        } else if(response === roleExamManager) {
-                                            window.location.href = 'ExamManagement/index.html';
 
-                                        } else if(response == roleReviewQuestion) {
-                                            window.location.href = 'QuanLyDuyetCauHoi/index.html';
+            // Xác thực biểu mẫu bằng jQuery Validation
+        $("#form-login").validate({
+            rules: {
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Password: {
+                    required: true
+                }
+            },
+            messages: {
+                Email: {
+                    required: "Vui lòng nhập email",
+                    email: "Vui lòng nhập email đúng định dạng"
+                },
+                Password: {
+                    required: "Vui lòng nhập mật khẩu"
+                }
+            },
+            errorElement: "div",
+            errorPlacement: function(error, element) {
+                error.addClass("error");
+                error.insertAfter(element);
+            }
+        })
 
-                                        }
-                                        else {
-                                            //window.location.href = 'main.html';
-                                            console.log('Không có quyền');
-                                        }
-                                    }
-                                });
-                                
-                            },
-                            error: function(error) {
-                               
-                            }
-                        });
-                        console.log('OK');
-                        //console.log(response);
-                        //window.location.href = 'main.html';
-                    },
-                    error: function(error) {
-                       Swal.fire({
-                                    title: 'Lỗi!',
-                                    text: error.responseJSON.Message,
-                                    showConfirmButton: false,
-                                    icon: 'error',
-                                    timer: 2000
-                                })
-                        
+    $(".btn-login").on('click', function(e) {
+        e.preventDefault()
+        if(!$("#form-login").valid()) return;
+        $.ajax({
+            url: 'https://localhost:7001/api/user/login',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                Email: $('#email').val(),
+                Password: $('#password').val()
+            }),
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(response) {
+                Swal.fire({
+                    title: 'Thành công!',
+                    text: 'Đăng nhập thành công.',
+                    showConfirmButton: false,
+                    icon: 'success',
+                    timer: 1000
+                }).then( async function(result) {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        var response = await getApi('user/role');
+                        if (response === roleCreateQuestion) {
+                            window.location.href = 'AddQuestionManagement/index.html';
+                        } else if (response === roleBankManager) {
+                            window.location.href = 'QuestionBankManagement/question_bank.html';
+                        } else if (response === roleExamCreate) {
+                            window.location.href = 'ExamStructManagement/index.html';
+                        } else if (response === roleExaminee) {
+                            window.location.href = 'index.html';
+                        } else if (response === roleAdmin) {
+                            window.location.href = 'Admin/index.html';
+                        } else if (response === roleExamManager) {
+                            window.location.href = 'ExamManagement/index.html';
+                        } else if (response === roleReviewQuestion) {
+                            window.location.href = 'ReviewQuestionManagement/index.html';
+                        } else {
+                            console.log(response)
+                            Swal.fire({
+                                title: 'Lỗi!',
+                                text: 'Vai trò không hợp lệ hoặc bạn không có quyền truy cập.',
+                                showConfirmButton: false,
+                                icon: 'error',
+                                timer: 1500
+                            });
+                        }
                     }
                 });
-            });
+            }, 
+            error: function(error) {
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: error.responseJSON.Message || 'Lỗi kết nối.',
+                    showConfirmButton: false,
+                    icon: 'error',
+                    timer: 1000
+                })
+            }
         });
+    })   
+});
     </script>
 </head>
 <body>
@@ -159,32 +190,25 @@
                 <h1>Đăng Nhập</h1>
                 <p class="text-muted">Vui lòng đăng nhập để tiếp tục</p>
             </div>
-            <form id="form-login" >
+            <form id="form-login">
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                    <input type="email" class="form-control" id="email" name="Email" placeholder="name@example.com">
                     <label for="email">Email</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                    <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
                     <label for="password">Mật khẩu</label>
-                </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                    <label class="form-check-label" for="rememberMe">
-                        Ghi nhớ tôi
-                    </label>
                 </div>
                 <button id="btn-login" type="submit" class="btn btn-primary btn-login">Đăng nhập</button>
                 <div class="forgot-password">
-                    <a href="#">Quên mật khẩu?</a>
+                    <a href="ResetPassword/email-input.html">Quên mật khẩu?</a>
                 </div>
                 <div class="register-link text-center mt-3">
-                    <p class="mb-0">Chưa có tài khoản? <a href="register.html" class="text-primary">Đăng ký ngay</a></p>
+                    <p class="mb-0">Chưa có tài khoản? <a href="Register/register.html" class="text-primary">Đăng ký ngay</a></p>
                 </div>
             </form>
         </div>
     </div>
-
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

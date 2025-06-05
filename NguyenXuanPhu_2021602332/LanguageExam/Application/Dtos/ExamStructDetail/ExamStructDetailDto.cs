@@ -16,5 +16,6 @@ namespace Application.Dtos.ExamStructDetail
         public string QuestionTypeName { get; set; }
         public int Amount { get; set; }
        
+        public byte Score { get; set; }
     }
 }

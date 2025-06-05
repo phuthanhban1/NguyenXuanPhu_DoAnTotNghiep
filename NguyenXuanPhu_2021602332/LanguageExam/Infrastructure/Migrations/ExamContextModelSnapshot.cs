@@ -57,14 +57,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("CreatedDate")
-                        .HasColumnType("date");
-
                     b.Property<Guid?>("ImageFileId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte>("Level")
-                        .HasColumnType("tinyint");
 
                     b.Property<Guid>("QuestionTypeId")
                         .HasColumnType("uniqueidentifier");
@@ -74,9 +68,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
-
-                    b.Property<DateOnly?>("UpdatedDate")
-                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -152,11 +143,11 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("CreateQuestionDue")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("CreateQuestionDue")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateOnly>("CreatedDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("CreatedQuestionUserId")
                         .HasColumnType("uniqueidentifier");
@@ -178,11 +169,11 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("RegistDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("RegistDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -222,9 +213,6 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AudioFileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
@@ -232,10 +220,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AudioFileId")
-                        .IsUnique()
-                        .HasFilter("[AudioFileId] IS NOT NULL");
 
                     b.HasIndex("ExamId")
                         .IsUnique();
@@ -317,6 +301,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("QuestionTypeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte>("Score")
+                        .HasColumnType("tinyint");
+
                     b.Property<string>("Skill")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -341,11 +328,26 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ExamineeNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsExamTaken")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ListeningScore")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Location")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReadingScore")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("RoomId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SpeakingScore")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WritingScore")
+                        .HasColumnType("int");
 
                     b.HasKey("ExamId", "UserId");
 
@@ -431,7 +433,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
-                            CreatedDate = new DateOnly(2025, 5, 20),
+                            CreatedDate = new DateOnly(2025, 6, 3),
                             Language = "Hàn",
                             ManagerId = new Guid("8a7dd16f-85bf-4143-be0b-a31da3bbe44a"),
                             Name = "Topik 1",
@@ -569,17 +571,11 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly?>("CreateDue")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("CreateDue")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CreatedUserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsCreateConfirm")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsReviewConfirm")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -588,8 +584,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("QuestionBankId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly?>("ReviewDue")
-                        .HasColumnType("date");
+                    b.Property<DateTime?>("ReviewDue")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("ReviewedUserId")
                         .HasColumnType("uniqueidentifier");
@@ -609,8 +605,6 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
                             CreatedUserId = new Guid("93d09639-a7b9-4825-b364-30366908b007"),
-                            IsCreateConfirm = false,
-                            IsReviewConfirm = false,
                             Name = "Đọc",
                             QuestionBankId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34"),
                             ReviewedUserId = new Guid("61af889a-7617-43e7-9cb2-537a01e97a34")
@@ -696,7 +690,7 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("55b8d8d5-56b1-440a-92a6-ee7cbed4378d"),
+                            Id = new Guid("a851f658-9397-435d-8d2f-cbd356f76848"),
                             Email = "phuthanhban3@gmail.com",
                             FullName = "Nguyễn Xuân Phú",
                             IsActive = true,
@@ -839,10 +833,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.ExamQuestion", b =>
                 {
-                    b.HasOne("Domain.Entities.ExamFile", "AudioFile")
-                        .WithOne("ExamQuestion")
-                        .HasForeignKey("Domain.Entities.ExamQuestion", "AudioFileId");
-
                     b.HasOne("Domain.Entities.Exam", "Exam")
                         .WithOne("ExamQuestion")
                         .HasForeignKey("Domain.Entities.ExamQuestion", "ExamId")
@@ -854,8 +844,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ExamStructId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AudioFile");
 
                     b.Navigation("Exam");
 
@@ -1103,9 +1091,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.ExamFile", b =>
                 {
                     b.Navigation("AudioContentBlock");
-
-                    b.Navigation("ExamQuestion")
-                        .IsRequired();
 
                     b.Navigation("ImageContentBlock");
 

@@ -3,6 +3,7 @@ using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace WebAPI.Controllers
@@ -58,7 +59,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("password")]
-        public async Task<ActionResult> UpdatePassword(UserPassworDto userPasswordDto)
+        public async Task<ActionResult> UpdatePassword(UserPasswordDto userPasswordDto)
         {
             await _userService.UpdatePassword(userPasswordDto);
             return Ok();
@@ -119,8 +120,7 @@ namespace WebAPI.Controllers
             };
 
             Response.Cookies.Append("token", token, cookieOptions);
-
-            return Ok(token);
+            return Ok();
         }
         [HttpGet("role")]
         public async Task<ActionResult> GetRole()
@@ -165,7 +165,7 @@ namespace WebAPI.Controllers
             var sid = HttpContext.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid")?.Value;
             if (sid == null)
             {
-                return Unauthorized();
+                return Ok(null);
             }
             var user = await _userService.GetUser(Guid.Parse(sid));
             return Ok(user);
@@ -186,7 +186,13 @@ namespace WebAPI.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            Response.Cookies.Delete("jwt_token");
+            Response.Cookies.Delete("token");
+            Response.Cookies.Delete("token", new CookieOptions
+            {
+                SameSite = SameSiteMode.None,
+                Secure = true, // hoặc true nếu dùng HTTPS
+                Path = "/"
+            });
             return Ok();
         }
     }

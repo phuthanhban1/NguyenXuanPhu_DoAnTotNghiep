@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết kỳ thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="/assets/css/ExamManagement/sidebar.css">
+    <style>
+        :root {
+            --sidebar-width: 250px;
+        }
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h5 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h5 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .status-upcoming {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-ongoing {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-completed {
+            background-color: #f5f5f5;
+            color: #616161;
+        }
+
+        .action-button {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-edit {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .student-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .student-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .student-item:hover {
+            background: #f8f9fa;
+        }
+
+        .room-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .room-card:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart-container {
+            max-height: 400px;
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .filter-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        select, input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #scoreRangeFilterContainer {
+            display: none; /* Ẩn mặc định */
+        }
+        .pagination-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .pagination-container button {
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .pagination-container button:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+        .pagination-container span {
+            font-size: 14px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart-container {
+            max-height: 400px;
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .filter-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        select, input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        #scoreRangeFilterContainer {
+            display: none; /* Ẩn mặc định */
+        }
+        .pagination-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .pagination-container button {
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        .pagination-container button:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+        .pagination-container span {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-common">
+        <script type="module">
+            import {genHeader} from '/assets/js/library.js';
+            genHeader($('.header-common'))
+        </script>
+    </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4 class="mb-0">Quản lý kỳ thi</h4>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="exam-detail.html" >
+                    <i class="fas fa-chart-line"></i>
+                    Tổng quan
+                </a>
+            </li>
+            <li>
+                <a href="examinee.html" >
+                    <i class="fas fa-users"></i>
+                    Thí sinh
+                </a>
+            </li>
+            <li>
+                <a href="result.html" class="active">
+                    <i class="fas fa-poll"></i>
+                    Kết quả
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+<div class="main-content">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1">Kết quả thi</h2>
+        </div>
+    </div>
+    <div id="candidateCount" style="text-align: center; font-size: 18px; margin-bottom: 20px;">
+        Số thí sinh dự thi: <span id="filteredCount"></span> / <span id="totalCount"></span>
+    </div>
+    <div class="container">
+        <h2>Phân Bố Điểm Thi (Biểu đồ tròn)</h2>
+        <canvas id="examChart" class="chart-container"></canvas>
+        <div class="filter-container">
+            <div>
+                <label for="skillFilter">Lọc kỹ năng (biểu đồ đường): </label>
+                <select id="skillFilter">
+                    <option value="all">Tất cả</option>
+                    <option value="listening">Nghe</option>
+                    <option value="reading">Đọc</option>
+                </select>
+            </div>
+        </div>
+        <h2>Phân Bố Điểm Thi (Biểu đồ đường)</h2>
+        <canvas id="trendChart" class="chart-container"></canvas>
+        <h2>Danh Sách Kết Quả</h2>
+        <div class="filter-container">
+            <div id="scoreRangeFilterContainer">
+                <label for="scoreRangeFilter">Lọc theo khoảng điểm (bảng): </label>
+                <select id="scoreRangeFilter">
+                    <option value="all">Tất cả</option>
+                    <option value="0-80">0-80</option>
+                    <option value="80-140">80-140</option>
+                    <option value="140-200">140-200</option>
+                </select>
+            </div>
+            <div>
+                <label for="sortOrder">Sắp xếp (bảng): </label>
+                <select id="sortOrder">
+                    <option value="asc">Tăng dần</option>
+                    <option value="desc">Giảm dần</option>
+                </select>
+            </div>
+            <div>
+                <label for="searchInput">Tìm kiếm (bảng): </label>
+                <input type="text" id="searchInput" placeholder="Mã thí sinh hoặc họ tên">
+            </div>
+            <div>
+                <label for="rowsPerPage">Số dòng mỗi trang (bảng): </label>
+                <select id="rowsPerPage">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã Thí Sinh</th>
+                    <th>Họ Tên</th>
+                    <th>Nghe</th>
+                    <th>Đọc</th>
+                    <th>Tổng Điểm</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+        <div class="pagination-container">
+            <button id="prevPage" disabled>Trang trước</button>
+            <span id="pageInfo">Trang 1 / 1</span>
+            <button id="nextPage" disabled>Trang sau</button>
+        </div>
+    </div> 
+</div>
+    <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="module">
+    import { getApi } from '/assets/js/library.js';
+
+    var examId = localStorage.getItem('examId');
+    console.log('exam id', examId);
+    var examResults = await getApi(`detailResult/admin/${examId}`);
+    var allExamineeCount = await getApi(`examinee/count/${examId}`);
+
+    // Cập nhật số thí sinh
+    $('#filteredCount').text(examResults.length ? examResults.length : 0);
+    $('#totalCount').text(allExamineeCount);
+
+    let currentSkill = 'all';
+    let currentScoreRange = 'all';
+    let currentSortOrder = 'asc';
+    let currentSearch = '';
+    let currentPage = 1;
+    let rowsPerPage = 10;
+    let pieChart, lineChart;
+
+    // Hàm tính tổng điểm
+    const calculateTotal = (result) => {
+        return result.listeningScore + result.readingScore;
+    };
+
+    // Hàm lọc theo khoảng điểm
+    const filterByScoreRange = (results, scoreRange) => {
+        if (scoreRange === 'all') return results;
+        const [min, max] = scoreRange.split('-').map(Number);
+        return results.filter(result => {
+            const score = calculateTotal(result);
+            return score >= min && score < max;
+        });
+    };
+
+    // Hàm lọc theo tìm kiếm
+    const filterBySearch = (results, search) => {
+        if (!search) return results;
+        const searchLower = search.toLowerCase();
+        return results.filter(result => 
+            (result.examineeNumber && result.examineeNumber.toLowerCase().includes(searchLower)) ||
+            result.fullName.toLowerCase().includes(searchLower)
+        );
+    };
+
+    // Hàm tính thống kê cho biểu đồ
+    const getScoreDistribution = (results, skill, chartType) => {
+        if (chartType === 'pie') {
+            const scoreRanges = { "0-80": 0, "80-140": 0, "140-200": 0 };
+            results.forEach(result => {
+                let score = calculateTotal(result);
+                if (score < 80) scoreRanges["0-80"]++;
+                else if (score < 140) scoreRanges["80-140"]++;
+                else scoreRanges["140-200"]++;
+            });
+            return scoreRanges;
+        } else {
+            const scoreRanges = {};
+            for (let i = 0; i <= (skill === 'all' ? 190 : 90); i += 10) {
+                scoreRanges[`${i}-${i+10}`] = 0;
+            }
+            results.forEach(result => {
+                let score = skill === 'all' ? calculateTotal(result) : (skill === 'listening' ? result.listeningScore : result.readingScore);
+                score = Math.min(score, skill === 'all' ? 200 : 100);
+                const rangeStart = Math.floor(score / 10) * 10;
+                scoreRanges[`${rangeStart}-${rangeStart+10}`]++;
+            });
+            return scoreRanges;
+        }
+    };
+
+    // Hàm vẽ biểu đồ
+    const renderCharts = (skill) => {
+        const pieScoreRanges = getScoreDistribution(examResults, 'all', 'pie');
+        const lineScoreRanges = getScoreDistribution(examResults, skill, 'line');
+        const ctxPie = document.getElementById('examChart').getContext('2d');
+        const ctxLine = document.getElementById('trendChart').getContext('2d');
+
+        if (pieChart) pieChart.destroy();
+        if (lineChart) lineChart.destroy();
+
+        pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(pieScoreRanges),
+                datasets: [{
+                    label: 'Số lượng thí sinh',
+                    data: Object.values(pieScoreRanges),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Thống Kê Phân Bố Điểm Thi (Tròn) - Tổng điểm'
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        lineChart = new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: Object.keys(lineScoreRanges),
+                datasets: [{
+                    label: 'Số lượng thí sinh',
+                    data: Object.values(lineScoreRanges),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Số lượng thí sinh' },
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0
+                        }
+                    },
+                    x: {
+                        title: { display: true, text: 'Khoảng điểm' }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Thống Kê Phân Bố Điểm Thi (Đường) - ${skill === 'all' ? 'Tổng điểm' : skill.charAt(0).toUpperCase() + skill.slice(1)}`
+                    }
+                }
+            }
+        });
+    };
+
+    // Hàm hiển thị bảng kết quả
+    const renderTable = (results, page, rowsPerPage) => {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+        const start = (page - 1) * rowsPerPage;
+        const end = Math.min(start + rowsPerPage, results.length);
+        const paginatedResults = results.slice(start, end);
+        paginatedResults.forEach((result, index) => {
+            const total = calculateTotal(result);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${start + index + 1}</td>
+                <td>${result.examineeNumber || 'N/A'}</td>
+                <td>${result.fullName}</td>
+                <td>${result.listeningScore}</td>
+                <td>${result.readingScore}</td>
+                <td>${total}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        const totalPages = Math.ceil(results.length / rowsPerPage) || 1;
+        document.getElementById('pageInfo').textContent = `Trang ${page} / ${totalPages}`;
+        document.getElementById('prevPage').disabled = page === 1;
+        document.getElementById('nextPage').disabled = page >= totalPages;
+    };
+
+    // Hàm xử lý lọc và sắp xếp cho bảng
+    const applyTableFiltersAndSort = () => {
+        const scoreRangeFilterContainer = document.getElementById('scoreRangeFilterContainer');
+        scoreRangeFilterContainer.style.display = currentSkill === 'all' ? 'block' : 'none';
+        
+        let filteredResults = [...examResults];
+        filteredResults = filterBySearch(filteredResults, currentSearch);
+        filteredResults = filterByScoreRange(filteredResults, currentScoreRange);
+        if (currentSortOrder === 'asc') {
+            filteredResults.sort((a, b) => calculateTotal(a) - calculateTotal(b));
+        } else {
+            filteredResults.sort((a, b) => calculateTotal(b) - calculateTotal(a));
+        }
+        currentPage = Math.min(currentPage, Math.ceil(filteredResults.length / rowsPerPage) || 1);
+        renderTable(filteredResults, currentPage, rowsPerPage);
+    };
+
+    // Xử lý sự kiện thay đổi bộ lọc
+    document.getElementById('skillFilter').addEventListener('change', (e) => {
+        currentSkill = e.target.value;
+        if (currentSkill !== 'all') {
+            currentScoreRange = 'all';
+            document.getElementById('scoreRangeFilter').value = 'all';
+        }
+        renderCharts(currentSkill);
+        applyTableFiltersAndSort();
+    });
+
+    document.getElementById('scoreRangeFilter').addEventListener('change', (e) => {
+        currentScoreRange = e.target.value;
+        currentPage = 1;
+        applyTableFiltersAndSort();
+    });
+
+    document.getElementById('sortOrder').addEventListener('change', (e) => {
+        currentSortOrder = e.target.value;
+        currentPage = 1;
+        applyTableFiltersAndSort();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        currentPage = 1;
+        applyTableFiltersAndSort();
+    });
+
+    document.getElementById('rowsPerPage').addEventListener('change', (e) => {
+        rowsPerPage = parseInt(e.target.value);
+        currentPage = 1;
+        applyTableFiltersAndSort();
+    });
+
+    document.getElementById('prevPage').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            applyTableFiltersAndSort();
+        }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', () => {
+        let filteredResults = [...examResults];
+        filteredResults = filterBySearch(filteredResults, currentSearch);
+        filteredResults = filterByScoreRange(filteredResults, currentScoreRange);
+        const totalPages = Math.ceil(filteredResults.length / rowsPerPage) || 1;
+        if (currentPage < totalPages) {
+            currentPage++;
+            applyTableFiltersAndSort();
+        }
+    });
+
+    // Khởi tạo giao diện
+    renderCharts(currentSkill);
+    applyTableFiltersAndSort();
+</script>   
+</body>
+</html>

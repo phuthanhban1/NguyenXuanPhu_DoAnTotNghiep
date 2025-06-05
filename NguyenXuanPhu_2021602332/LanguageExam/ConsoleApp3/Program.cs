@@ -17,7 +17,7 @@ public class SimilarityResult
 public class Program
 {
     static readonly HttpClient client = new HttpClient();
-    static string apiKey = ""; // Thay bằng API key Gemini của bạn
+    static string apiKey = "AIzaSyCPOkRXPnfzrFFdysp68mjvLr120v2-2mM"; // Thay bằng API key Gemini của bạn
     static string model = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
     static async Task<string> GetScoreAndReasonFromGemini(string prompt)
     {

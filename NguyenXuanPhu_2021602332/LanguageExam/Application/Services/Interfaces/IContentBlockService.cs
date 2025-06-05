@@ -10,17 +10,18 @@ namespace Application.Services.Interfaces
 {
     public interface IContentBlockService
     {
-        IEnumerable<ContentBlock> GetAllAsync();
-        Task<ContentBlock> GetByIdAsync(Guid id);
-        Task AddDouble(List<ContentBlockDoubleDto> contentBlockDoubleDto);
-        Task AddSingle(List<ContentBlockSingleDto> list);
+        Task Update(ContentBlockUpdateDto contentBlockUpdateDto);
+        Task Add(List<ContentBlockCreateDto> contentBlockDoubleDto);
+        
         Task DeleteAsync(Guid id);
-        //Task UpdateAsync(ContentBlockUpdateDto contentBlockUpdateDto);
+       
         Task<List<ContentBlockDto>> GetByStatus(Guid questionTypeId, byte status);
         Task ChangeStatus(ContentBlockStatusDto contentBlockStatusDto);
         Task<string> GetQuestionTypeName(Guid id);
 
         Task Approve(Guid contentBlockId);
         Task Reject(ContentBlockRejectDto contentBlockRejectDto);
+
+        
     }
 }

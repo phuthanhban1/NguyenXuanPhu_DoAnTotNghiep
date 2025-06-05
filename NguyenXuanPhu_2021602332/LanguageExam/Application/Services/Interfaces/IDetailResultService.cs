@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.DetailResultDtos;
+using Application.Dtos.ExamineeDtos;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,10 @@ namespace Application.Services.Interfaces
 {
     public interface IDetailResultService
     {
-        Task AddAsync(DetailResultCreateDto detailResultCreateDto);
-        Task UpdateAsync(DetailResultUpdateDto detailResultUpdateDto);
-        Task DeleteAsync(Guid id);
-
+        
+        Task<List<DetailResultDto>> GetAllResult(Guid examId);
         Task CreateDetailResult(Guid examId, Guid userId, List<Guid> listResults, string skillName);
-
-        Task<Dictionary<string, int>> GetResultsByExamUser(Guid examId, Guid userId);
+        
+        
     }
 }

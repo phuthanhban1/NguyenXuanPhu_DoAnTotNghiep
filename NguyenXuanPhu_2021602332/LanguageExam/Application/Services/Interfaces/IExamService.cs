@@ -14,11 +14,12 @@ namespace Application.Services.Interfaces
         Task AddAsync(Guid managerId, ExamCreateDto examCreateDto);
         Task UpdateAsync(ExamUpdateDto examUpdateDto);
         Task DeleteAsync(Guid id);
-        
+        Task<List<ExamDto>> GetComingExams();
         Task<List<ExamDto>> GetAllAsync();
         Task<List<ExamDto>> GetByManagerIdAsync(Guid id);
         Task<ExamDto> GetExamByCreate(Guid id);
         Task<Exam> GetById(Guid id);
         Task Confirm(Guid id);
+        Task<List<Exam>> GetExamHasResult();
     }
 }

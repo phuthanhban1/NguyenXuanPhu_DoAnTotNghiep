@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 using Infrastructure.Context;
-using Infrastructure.Migrations;
+
 using Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +22,15 @@ namespace Infrastructure.Repositories.Implementations
             return await _context.Set<Examinee>().Where(e => e.ExamId == examId && e.UserId == userId).FirstOrDefaultAsync();
         }
 
+        public async Task<Examinee> GetExamineeByNumber(Guid examId, string examineeNumber)
+        {
+            var examinee = await _context.Set<Examinee>()
+                .Include(e => e.User)
+                .Include(e => e.Exam)
+                .FirstOrDefaultAsync(e => e.ExamId == examId && e.ExamineeNumber == examineeNumber);
+            return examinee;
+        }
+
         public async Task<List<Examinee>> GetExamineesByExamId(Guid examId)
         {
             var examinees = _context.Set<Examinee>()
@@ -34,7 +43,9 @@ namespace Infrastructure.Repositories.Implementations
 
         public async Task<List<Examinee>> GetExamineesByUserId(Guid userId)
         {
-            var examinees = _context.Set<Examinee>().Where(e => e.UserId == userId).ToList();
+            var examinees = _context.Set<Examinee>()
+                .Include(e => e.Room)
+                .Where(e => e.UserId == userId).ToList();
             return examinees;
         }
     }

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #1a2a44;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: #1a2a44;
+      color: #fff;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header .contact {
+      font-size: 14px;
+      color: #a3bffa;
+    }
+
+    .header .search-bar {
+      flex-grow: 1;
+      margin: 0 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header .search-bar input {
+      width: 350px;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .header .search-bar button {
+      padding: 8px 15px;
+      background-color: #f4a261;
+      border: none;
+      color: #fff;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+
+    .header .search-bar button:hover {
+      background-color: #e07a5f;
+    }
+
+    .header .buttons button {
+      padding: 8px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background-color 0.3s;
+    }
+
+    .header .buttons .register {
+      background-color: #f4a261;
+      color: #fff;
+    }
+
+    .header .buttons .register:hover {
+      background-color: #e07a5f;
+    }
+
+    .header .buttons .login {
+      background-color: #2a9d8f;
+      color: #fff;
+    }
+
+    .header .buttons .login:hover {
+      background-color: #218c81;
+    }
+
+    /* Navigation Styles */
+    .nav {
+      background-color: #fff;
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav .logo img {
+      width: 70px;
+      margin-left: 30px;
+    }
+
+    .nav .nav-links {
+      display: flex;
+      gap: 25px;
+      flex-grow: 1;
+      justify-content: center;
+    }
+
+    .nav .nav-links a {
+      color: #1a2a44;
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+
+    .nav .nav-links a:hover {
+      color: #f4a261;
+    }
+
+    .nav .nav-links a.active {
+      color: #f4a261;
+    }
+
+    /* Main Content (Exam Table) Styles */
+    #registerExam.container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 30px;
+    }
+
+    #registerExam table {
+      table-layout: fixed;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #registerExam thead {
+      background-color: #1a2a44;
+      color: #fff;
+    }
+
+    #registerExam th {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    #registerExam td {
+      font-size: 14px;
+      color: #1a2a44;
+    }
+
+    #registerExam th:nth-child(1),
+    #registerExam td:nth-child(1) {
+      width: 20%;
+    }
+
+    #registerExam th:nth-child(2),
+    #registerExam td:nth-child(2),
+    #registerExam th:nth-child(3),
+    #registerExam td:nth-child(3),
+    #registerExam th:nth-child(4),
+    #registerExam td:nth-child(4) {
+      width: 20%;
+    }
+
+    #registerExam th:nth-child(5),
+    #registerExam td:nth-child(5) {
+      width: 20%;
+    }
+
+    .btn-regist-exam {
+      background-color: #f4a261;
+      border-color: #f4a261;
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .btn-regist-exam:hover {
+      background-color: #e07a5f;
+      border-color: #e07a5f;
+    }
+
+    /* Footer Styles */
+    .site-footer {
+      background-color: #1a2a44;
+      color: #fff;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-main {
+      background-image: url('https://iigvietnam.com/wp-content/themes/main/assets/images/common/footer-bg.png');
+      background-size: cover;
+      background-position: center;
+      padding: 30px 0;
+    }
+
+    .footer-main .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .footer-main .content_common.row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .footer-main .col-4 {
+      flex: 1.5;
+      min-width: 220px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-main ._label {
+      display: flex;
+      align-items: center;
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .footer-main ._label svg {
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .footer-main ._title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #f4a261;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .footer-main ._content p,
+    .footer-main ._content a {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #a3bffa;
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    .footer-main ._content a:hover {
+      color: #f4a261;
+      text-decoration: underline;
+    }
+
+    .footer-main ._bottom {
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+      color: #a3bffa;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+    }
+
+    .footer-main ._bottom a {
+      color: #a3bffa;
+      text-decoration: none;
+    }
+
+    .footer-main ._bottom a:hover {
+      color: #f4a261;
+      text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .header .search-bar input {
+        width: 100%;
+      }
+
+      .nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .footer-main .col-4 {
+        flex: 100%;
+        min-width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-main ._label {
+        justify-content: center;
+      }
+
+      #registerExam table {
+        table-layout: auto;
+      }
+    }
+     .header .user-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .header .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #a3bffa;
+    transition: border-color 0.3s;
+  }
+
+  .header .user-avatar:hover {
+    border-color: #f4a261;
+  }
+
+  .header .user-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    transition: color 0.3s;
+  }
+
+  .header .user-name:hover {
+    color: #f4a261;
+  }
+
+  .header .dropdown-menu {
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin-top: 5px;
+    min-width: 160px;
+    display: none;
+  }
+
+  .header .dropdown-menu.show {
+    display: block;
+  }
+
+  .header .dropdown-item {
+    font-family: 'Lora', serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1a2a44;
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .header .dropdown-item:hover {
+    background-color: #f4a261;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      gap: 12px;
+      padding: 15px 20px;
+    }
+
+    .header .user-section {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header .dropdown-menu {
+      width: 100%;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .header .dropdown-item {
+      padding: 12px 15px;
+    }
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  .ui-datepicker {
+            margin-top: -250px; /* Điều chỉnh khoảng cách để lịch hiển thị bên trên */
+        }
+  </style>
+</head>
+<body>
+  <div class="header-common">
+    <script type="module">
+        import {genHeader} from '/assets/js/library.js';
+        genHeader($('.header-common'))
+    </script>
+  </div>
+<div class="content">
+  <nav class="nav">
+    <div class="nav-links h-20">
+      <a href="index.html" id="registerNav">Đăng ký thi</a>
+      <a href="https://maps.app.goo.gl/8hZ27jFzzK8D8geMA">Địa điểm thi</a>
+      <a href="exam-schedule.html" id="scheduleNav">Lịch thi</a>
+      <a href="exam-enter.html" id="enterNav">Vào thi</a>
+      <a href="result.html" class="active" id="resultNav">Kết quả thi</a>
+    </div>
+    <style>
+      .nav .nav-links a.active {
+      color: #f4a261;
+    }
+    .nav {
+      height: 60px;
+    }
+    </style>
+    
+  </nav>
+<main>
+    <div class="container-fluid row justify-content-center">
+        <div class="col-5">
+            <h2 class="text-center mb-4">Tra cứu kết quả thi</h2>
+            <div class="card p-4">
+                <form id="examForm">
+                    <div class="mb-3">
+                        <label for="examSelect" class="form-label">Chọn kỳ thi</label>
+                        <select class="form-select" id="examSelect" required>
+                            <option value="">-- Chọn kỳ thi --</option>
+                            
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="examId" class="form-label">Số báo danh</label>
+                        <input type="text" class="form-control" id="examId" placeholder="Nhập số báo danh" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dob" class="form-label">Ngày sinh</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control text-3 h-auto py-2 type-date"
+                            id="DateOfBirth" name="DateOfBirth"
+                            placeholder="DD/MM/YYYY" data-provide="datepicker" required=""
+                            data-msg-required="Vui lòng nhập ngày sinh"
+                            data-rule-pattern="^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$"
+                            data-msg-pattern="Vui lòng nhập đúng định dạng dd/mm/yyyy">
+                            <label class="input-group-text" for="DateOfBirth"><i class="fas fa-calendar-alt"></i></label>
+                        </div>
+                        
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Tra cứu</button>
+                </form>
+                <div id="result" class="mt-4 d-none">
+                    <h4>Kết quả tra cứu</h4>
+                    <table class="table table-bordered">
+                        <tr><th>Họ và tên</th><td id="resultName"></td></tr>
+                        <tr><th>Ngày sinh</th><td id="resultDob"></td></tr>
+                        <tr><th>Điểm đọc</th><td id="resultReading"></td></tr>
+                        <tr><th>Điểm nghe</th><td id="resultListening"></td></tr>
+                        <tr><th>Tổng điểm</th><td id="resultTotal"></td></tr>
+                        <tr><th>Xếp loại</th><td id="type"></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+  </main>
+</div>
+  <div class="footer-common">
+  <script type="module">
+    import {genFooter} from '/assets/js/library.js';
+    genFooter($('.footer-common'))
+  </script>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery/jquery.min.js"></script>
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js"></script>
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.validation/jquery.validate.min.js"></script>
+<script type="module">
+import {checkAuthorize, getApi} from '/assets/js/library.js';
+$('#DateOfBirth').datepicker({
+            format: "dd/mm/yyyy",
+            language: "vi",
+            orientation: "bottom auto",
+            endDate: '+0d',
+            autoclose: true
+        });
+function formatDate(input) {
+    const parts = input.split('-'); // ['0001', '01', '01']
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+
+    return `${day}-${month}-${year}`; // '01-01-0001'
+}
+async function getScore(examineeScoreDto) {
+    var result = null
+    await $.ajax({
+        url: 'https://localhost:7001/api/examinee/score',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(examineeScoreDto),
+        xhrFields: {
+            withCredentials: false
+        },
+        success: function(response) {
+            result = response
+        }, 
+        error: function(error) {
+            console.log(error.responseText)
+        }
+    })
+    return result
+}
+function convertToDateOnly(input) {
+  const [day, month, year] = input.split('/');
+  const isoDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+  return isoDate; // gửi chuỗi này lên backend
+}
+ $(document).ready(async function() {
+    var listExam = await getApi('exam/result')
+    listExam.forEach(e => {
+        $('#examSelect').append(`
+            <option value="${e.id}">
+                ${e.name}
+            </option>
+        `)
+    });
+    $('#examForm').on('submit', async function(e) {
+        e.preventDefault();
+        
+        const examId = $('#examId').val(); 
+        console.log($('#DateOfBirth').val())
+        var examineeScoreDto = {
+            ExamId: $('#examSelect').val(),
+            DateOfBirth: convertToDateOnly($('#DateOfBirth').val()),
+            ExamineeNumber: $('#examId').val()
+        }
+        
+        // Giả lập dữ liệu kết quả (thay bằng API hoặc dữ liệu thực tế)
+        const mockData = await getScore(examineeScoreDto)
+
+        // Hiển thị kết quả
+        $('#resultName').text(mockData.fullName);
+        $('#resultDob').text(formatDate(examineeScoreDto.DateOfBirth));
+        $('#resultReading').text(mockData.readingScore);
+        $('#resultListening').text(mockData.listeningScore);
+        var total = mockData.readingScore + mockData.listeningScore
+        $('#resultTotal').text(total);
+        if(total < 80) {
+            $('#type').text("Không đạt")
+        } else if (total >= 80 && total < 140) {
+            $('#type').text("Cấp 1")
+        } else {
+            $('#type').text("Cấp 2")
+        }
+        $('#result').removeClass('d-none');
+    });
+});
+
+</script>
+</body>
+</html>

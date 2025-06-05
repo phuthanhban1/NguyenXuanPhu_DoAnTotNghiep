@@ -20,7 +20,9 @@ namespace Infrastructure.Repositories.Implementations
 
         public async Task<List<ContentBlock>> GetByQuestionTypeId(Guid id)
         {
-            var list = _context.Set<ContentBlock>().Where(c => c.QuestionTypeId == id).ToList();
+            var list = _context.Set<ContentBlock>().Where(c => c.QuestionTypeId == id)
+                .Include(x => x.Questions)
+                .ToList();
             return list;
         }
 
@@ -34,7 +36,14 @@ namespace Infrastructure.Repositories.Implementations
                 .Where(x => x.QuestionTypeId == questionTypeId && x.Status == status).ToList();
             return list;
         }
-
+        public async Task<List<ContentBlock>> GetByQuestionTypeScore(Guid questionTypeId, byte score)
+        {
+            var list = _context.Set<ContentBlock>()
+                .Include(x => x.QuestionType)
+                .Include(x => x.Questions)
+                .Where(x => x.QuestionTypeId == questionTypeId && x.Questions.Sum(q => q.Score) == score && x.Status == 1).ToList();
+            return list;
+        }
         public Task<ContentBlock> GetContentBlockByIdAsync(Guid id)
         {
             var contentBlock = _context.ContentBlock

@@ -58,6 +58,12 @@ namespace WebAPI.Controllers
             return Ok(exams);
         }
 
+        [HttpGet("is-comming")]
+        public async Task<IActionResult> GetComingExams()
+        {
+            var exams = await _examService.GetComingExams();
+            return Ok(exams);
+        }
         [HttpGet("confirm/{examId}")]
         public async Task<IActionResult> Confirm(Guid examId)
         {
@@ -100,6 +106,13 @@ namespace WebAPI.Controllers
         {
             var exam = await _examService.GetById(examId);
             return Ok(exam.IsCreated);
+        }
+
+        [HttpGet("result")]
+        public async Task<IActionResult> GetExamHasResult()
+        {
+            var list = await _examService.GetExamHasResult();
+            return Ok(list);
         }
 
 

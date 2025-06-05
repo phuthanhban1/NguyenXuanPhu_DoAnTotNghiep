@@ -10,5 +10,7 @@ namespace Infrastructure.Repositories.Interfaces
     public interface IExamRepository : IGenericRepository<Exam>
     {
         Task<Exam> GetExamByCreate(Guid id);
+        Task<List<Exam>> GetExamHasResult();
+        Task<bool> CheckDate(DateTime date);
     }
 }

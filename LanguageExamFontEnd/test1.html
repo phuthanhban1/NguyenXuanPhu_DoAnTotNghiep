@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-group col-lg-6">
+    <label class="form-label mb-1 text-2 required">Ngày sinh</label>
+    <div class="input-group">
+        <input type="text" class="form-control text-3 h-auto py-2 type-date"
+               id="DateOfBirth" name="DateOfBirth"
+               placeholder="DD/MM/YYYY" data-provide="datepicker" required=""
+               data-msg-required="Vui lòng nhập ngày sinh"
+               data-rule-pattern="^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$"
+               data-msg-pattern="Vui lòng nhập đúng định dạng dd/mm/yyyy">
+        <label class="input-group-text" for="DateOfBirth"><i class="fas fa-calendar-alt"></i></label>
+    </div>
+</div>
+
+<!-- Các thư viện cần thiết -->
+<link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery/jquery.min.js"></script>
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js"></script>
+<script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.validation/jquery.validate.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.type-date').datepicker({
+            format: "dd/mm/yyyy",
+            language: "vi",
+            orientation: "bottom auto",
+            endDate: '+0d',
+            autoclose: true
+        });
+
+        $("#UserInfoForm").validate({
+            rules: {
+                DateOfBirth: {
+                    required: true,
+                    pattern: /^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$/
+                }
+            },
+            messages: {
+                DateOfBirth: {
+                    required: "Vui lòng nhập ngày sinh",
+                    pattern: "Vui lòng nhập đúng định dạng dd/mm/yyyy"
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

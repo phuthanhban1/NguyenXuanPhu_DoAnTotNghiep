@@ -163,22 +163,17 @@ namespace Application.Services.Implements
             return tokenString;
         }
 
-        public async Task UpdatePassword(UserPassworDto userPassworDto)
+        public async Task UpdatePassword(UserPasswordDto userPasswordDto)
         {
-            var user = await _unitOfWork.Users.GetByIdAsync(userPassworDto.Id);
+            var user = await _unitOfWork.Users.GetByEmail(userPasswordDto.Email);
             if (user == null)
             {
-                throw new NotFoundException($"Không tìm thấy người dùng có id: {userPassworDto.Id}");
-            } else if(user.Password.CompareTo(userPassworDto.OldPassword) != 0)
-            {
-                throw new BadRequestException($"Mật khẩu cũ không chính xác");
-            }
-            else
-            {
-                user.Password = userPassworDto.NewPassword;
-                await _unitOfWork.Users.UpdateAsync(user);
-                await _unitOfWork.SaveChangeAsync();
-            }
+                throw new NotFoundException($"Không tìm thấy người dùng có email {userPasswordDto.Email}");
+            } 
+            
+            user.Password = userPasswordDto.Password;
+            await _unitOfWork.Users.UpdateAsync(user);
+            await _unitOfWork.SaveChangeAsync();
         }
 
         public async Task UpdateRole(UserRoleUpdateDto userRoleUpdateDto)

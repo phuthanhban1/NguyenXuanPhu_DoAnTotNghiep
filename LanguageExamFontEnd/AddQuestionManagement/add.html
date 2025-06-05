@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý ngân hàng đề thi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <!-- SheetJS for Excel parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <style>
+        body { background: #f8f9fa; }
+        .sidebar {
+            min-width: 220px;
+            max-width: 240px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 24px 0;
+            height: 100vh;
+        }
+        .sidebar .nav-link {
+            color: #333;
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #e9ecef;
+        }
+        .sidebar .nav-link.active {
+            background: #e9ecef;
+            color: #0d6efd;
+        }
+        .sidebar .nav .nav {
+            margin-left: 1rem;
+        }
+        .content-area {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 32px;
+            min-height: 400px;
+        }
+        .sidebar .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+        .info-section {
+            margin-bottom: 25px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .info-section:hover {
+            transform: translateY(-5px);
+        }
+        .info-section h2 {
+            color: #34495e;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            font-weight: 600;
+        }
+        .info-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .info-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        .info-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+        .info-item h3 {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .info-item p {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin: 0;
+        }
+        .confirm-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .confirm-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        #no-task-message {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        #no-task-message i {
+            font-size: 3em;
+            color: #bdc3c7;
+            margin-bottom: 15px;
+        }
+        #no-task-message h3 {
+            color: #7f8c8d;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        #no-task-message p {
+            color: #95a5a6;
+            font-size: 1em;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .skill-info {
+            padding: 10px;
+        }
+        .skill-info .d-flex {
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .skill-info .d-flex:hover {
+            background-color: #f8f9fa;
+        }
+        .skill-info i {
+            font-size: 1.2em;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        .skill-info h3 {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-bottom: 4px;
+        }
+        .skill-info p {
+            font-size: 1em;
+            color: #2c3e50;
+            font-weight: 500;
+            margin: 0;
+        }
+        .bank-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+        .bank-card .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 15px 20px;
+        }
+        .bank-card .card-body {
+            padding: 20px;
+        }
+        .action-button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .action-button i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .status-badge {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+        .deadline-info {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .deadline-warning {
+            color: #dc3545;
+        }
+        .confirm-button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 5px;
+            z-index: 1000;
+        }
+        .dropdown-item {
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .dropdown-item:hover {
+            background-color: #e9ecef;
+        }
+        .dropdown-item.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd;
+        }
+        .question-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        .question-card .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 15px 20px;
+        }
+        .question-card .card-body {
+            padding: 20px;
+        }
+        .answer-option {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        .answer-option:hover {
+            border-color: #0d6efd;
+            box-shadow: 0 2px 4px rgba(13, 110, 253, 0.1);
+            background-color: #fff;
+        }
+        #questionList {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #dee2e6;
+        }
+        .question-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0d6efd;
+        }
+        .question-card .card-header h5 {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .question-card .btn-danger {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .question-card .form-check {
+            margin-bottom: 15px;
+        }
+        .question-card .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+        .question-card textarea,
+        .question-card input[type="text"] {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+        }
+        .question-card textarea:focus,
+        .question-card input[type="text"]:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+        }
+        .modal-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1051;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-popup.show {
+            display: block;
+            animation: modalFadeIn 0.3s;
+        }
+        .modal-overlay.show {
+            display: block;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+        .question-type-card {
+            transition: all 0.3s ease;
+        }
+        .question-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="header-common">
+    <script type="module">
+        import {genHeader} from '/assets/js/library.js';
+        genHeader($('.header-common'))
+    </script>
+    </div>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 sidebar"></nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 col-lg-10">
+                <!-- Add question section -->
+                <div id="add-question" class="content-section" style="display: none;">
+                    <div class="container-fluid py-5">
+                        <!-- Header with Breadcrumb -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb mb-0">
+                                        <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Ngân hàng đề</a></li>
+                                        <li class="breadcrumb-item" id="bank-name"></li>
+                                        <li class="breadcrumb-item" id="skill-name"></li>
+                                        <li class="breadcrumb-item active">Thêm câu hỏi</li>
+                                    </ol>
+                                </nav>
+                                <h2 class="mt-2">
+                                    <i class="fas fa-plus-circle text-primary me-2"></i>
+                                    Thêm câu hỏi mới
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- Question form -->
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="questionForm">
+                                    <!-- Question type selection -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Loại câu hỏi</label>
+                                        <select class="form-select" id="questionCategory">
+                                            <option value="">Chọn loại câu hỏi...</option>
+                                        </select>
+                                        <div class="text-center mt-4">
+                                            <button type="button" class="btn btn-primary me-2" id="btn-add-question">
+                                                <i class="fas fa-plus me-2"></i>Thêm câu hỏi
+                                            </button>
+                                            <button type="button" class="btn btn-info" id="btn-upload-excel">
+                                                <i class="fas fa-file-excel me-2"></i>Tải lên Excel
+                                            </button>
+                                            <input type="file" id="excelInput" accept=".xlsx,.xls" style="display: none;">
+                                        </div>
+                                    </div>
+
+                                    <!-- Question list -->
+                                    <div id="questionList"></div>
+
+                                    <!-- Submit button -->
+                                    <div class="text-center mt-4">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-save me-2"></i>Lưu câu hỏi
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+    <script type="module">
+    import {sidebar} from '/assets/js/AddQuestionManagement/common.js';
+
+    let questionCounter = 0;
+    let skillName = '';
+    let skillId = '';
+    let questionTypes = [];
+
+    // Hàm tạo form cho câu hỏi đơn (giữ nguyên)
+    function createSingleFormHtml(hasImage = false, skillName = 'nghe', data = {}) {
+        questionCounter++;
+        return `
+        <div class="content-block">
+            <div class="card question-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><span class="badge bg-primary">Câu ${questionCounter}</span></h5>
+                    <button type="button" class="btn btn-danger btn-sm btn-delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="mt-3 audio-block" ${skillName !== 'nghe' ? 'style="display:none;"' : ''}>
+                            <label class="form-label">File âm thanh</label>
+                            <input type="file" accept="audio/*" class="form-control audio-input">
+                            <audio class="audio-preview" controls style="display:none; margin-top:10px;"></audio>
+                        </div>
+                    <!-- Thêm hình ảnh -->
+                        <div class="mt-2 image-block" ${!hasImage ? 'style="display:none;"' : ''}>
+                            <label class="form-label">Hình ảnh câu hỏi</label>
+                            <input type="file" accept="image/*" class="form-control image-input">
+                            <img class="image-preview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display: none;">
+                        </div>
+                    <!-- Nội dung câu hỏi text -->
+                    <div class="mb-3">
+                        <label class="form-label">Nội dung câu hỏi</label>
+                        <textarea class="form-control content-input" rows="4" placeholder="Nhập nội dung câu hỏi...">${data.question || ''}</textarea>
+                    </div>
+                    <div class="question-block">
+                        <input class="question-input" style="display: none;">
+                        <!-- Điểm số -->
+                        <div class="mb-3">
+                            <label class="form-label">Điểm số</label>
+                            <input type="number" class="form-control score-input" min="0" max="10" step="1" value="${data.score || 2}">
+                        </div>
+                        <!-- Đáp án -->
+                        <div class="mb-3">
+                            <label class="form-label">Đáp án</label>
+                            <div id="answerOptions_${questionCounter}">
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" ${data.correctAnswer === 'A' ? 'checked' : ''}>
+                                        <input type="text" class="form-control" placeholder="Đáp án A" value="${data.answerA || ''}" required>
+                                    </div>
+                                </div>
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" ${data.correctAnswer === 'B' ? 'checked' : ''}>
+                                        <input type="text" class="form-control" placeholder="Đáp án B" value="${data.answerB || ''}" required>
+                                    </div>
+                                </div>
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" ${data.correctAnswer === 'C' ? 'checked' : ''}>
+                                        <input type="text" class="form-control" placeholder="Đáp án C" value="${data.answerC || ''}" required>
+                                    </div>
+                                </div>
+                                <div class="answer-option">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <input type="radio" class="form-check-input me-2" name="correctAnswer_${questionCounter}" ${data.correctAnswer === 'D' ? 'checked' : ''}>
+                                        <input type="text" class="form-control" placeholder="Đáp án D" value="${data.answerD || ''}" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    // Hàm tạo form cho câu hỏi kép (giữ nguyên)
+    function createDoubleFormHtml(hasImage = false, skillName = 'nghe', data = {}) {
+        questionCounter++;
+        return `
+        <div class="content-block">
+            <div class="card question-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><span class="badge bg-primary">Câu ${questionCounter}</span></h5>
+                    <button type="button" class="btn btn-danger btn-sm btn-delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <!-- Đoạn văn -->
+                    <div class="mb-4">
+                        <label class="form-label">Đoạn văn</label>
+                        <textarea class="form-control content-input" rows="4" placeholder="Nhập đoạn văn...">${data.passage || ''}</textarea>
+                    </div>
+                    <div class="mt-3 audio-block" ${skillName !== 'nghe' ? 'style="display:none;"' : ''}>
+                            <label class="form-label">File âm thanh</label>
+                            <input type="file" accept="audio/*" class="form-control audio-input">
+                            <audio class="audio-preview" controls style="display:none; margin-top:10px;"></audio>
+                        </div>
+                    <!-- Thêm hình ảnh -->
+                        <div class="mt-2 image-block" ${!hasImage ? 'style="display:none;"' : ''}>
+                            <label class="form-label">Hình ảnh câu hỏi</label>
+                            <input type="file" accept="image/*" class="form-control image-input">
+                            <img class="image-preview" src="" alt="Xem trước ảnh" style="max-width:200px; margin-top:10px; display: none;">
+                        </div>
+                    <!-- Câu hỏi nhỏ -->
+                    <div>
+                        <div class="card mb-3 question-block">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Câu hỏi nhỏ 1</strong>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control question-input" placeholder="Nhập nội dung câu hỏi nhỏ..." value="${data.question1 || ''}">
+                                </div>
+                                <!-- Điểm số cho câu hỏi nhỏ 1 -->
+                                <div class="mb-3 mt-2">
+                                    <label class="form-label">Điểm số</label>
+                                    <input type="number" class="form-control score-input" min="0" max="10" step="0.5" value="${data.score1 || 1}">
+                                </div>
+                                <div>
+                                    <label class="form-label">Đáp án</label>
+                                    <div class="sub-answer-options">
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0" ${data.correctAnswer1 === 'A' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án A" value="${data.answer1A || ''}">
+                                            </div>
+                                        </div>
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0" ${data.correctAnswer1 === 'B' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án B" value="${data.answer1B || ''}">
+                                            </div>
+                                        </div>
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0" ${data.correctAnswer1 === 'C' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án C" value="${data.answer1C || ''}">
+                                            </div>
+                                        </div>
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_0" ${data.correctAnswer1 === 'D' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án D" value="${data.answer1D || ''}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3 question-block">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong>Câu hỏi nhỏ 2</strong>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control question-input" placeholder="Nhập nội dung câu hỏi nhỏ..." value="${data.question2 || ''}">
+                                </div>
+                                <!-- Điểm số cho câu hỏi nhỏ 2 -->
+                                <div class="mb-3 mt-2">
+                                    <label class="form-label">Điểm số</label>
+                                    <input type="number" class="form-control score-input" min="0" max="10" step="1" value="${data.score2 || 1}">
+                                </div>
+                                <div>
+                                    <label class="form-label">Đáp án</label>
+                                    <div class="sub-answer-options">
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1" ${data.correctAnswer2 === 'A' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án A" value="${data.answer2A || ''}">
+                                            </div>
+                                        </div>
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1" ${data.correctAnswer2 === 'B' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án B" value="${data.answer2B || ''}">
+                                            </div>
+                                        </div>
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1" ${data.correctAnswer2 === 'C' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án C" value="${data.answer2C || ''}">
+                                            </div>
+                                        </div>
+                                        <div class="answer-option">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <input type="radio" class="form-check-input me-2" name="correctSubAnswer_${questionCounter}_1" ${data.correctAnswer2 === 'D' ? 'checked' : ''}>
+                                                <input type="text" class="form-control" placeholder="Đáp án D" value="${data.answer2D || ''}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    // Các hàm khác (giữ nguyên)
+    function deleteQuestion(button) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa?',
+            text: "Hành động này không thể hoàn tác!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(button).closest('.question-card').parent().remove();
+                updateQuestionNumbers();
+            }
+        });
+    }
+
+    function updateQuestionNumbers() {
+        $('.question-card').each(function(index) {
+            $(this).find('.badge').text(`Câu ${index + 1}`);
+        });
+    }
+
+    function validateSingleQuestion(questionElement) {
+        const answerInputs = questionElement.find('.answer-option input[type="text"]');
+        const answers = answerInputs.map(function() {
+            return $(this).val().trim();
+        }).get();
+        
+        answerInputs.closest('.answer-option').css('border-color', '');
+        
+        const duplicateMap = new Map();
+        answers.forEach((answer, index) => {
+            if (answer) {
+                if (!duplicateMap.has(answer)) {
+                    duplicateMap.set(answer, [index]);
+                } else {
+                    duplicateMap.get(answer).push(index);
+                }
+            }
+        });
+
+        let hasDuplicates = false;
+        duplicateMap.forEach((indices, answer) => {
+            if (indices.length > 1) {
+                hasDuplicates = true;
+                indices.forEach(index => {
+                    answerInputs.eq(index).closest('.answer-option').css('border-color', 'red');
+                });
+            }
+        });
+
+        if (hasDuplicates) {
+            return {
+                isValid: false,
+                message: 'Các đáp án không được trùng nhau'
+            };
+        }
+        return { isValid: true };
+    }
+
+    function validateDoubleQuestion(questionElement) {
+        const subQuestions = questionElement.find('.card.mb-3');
+        for (let i = 0; i < subQuestions.length; i++) {
+            const subQuestion = $(subQuestions[i]);
+            const answerInputs = subQuestion.find('.answer-option input[type="text"]');
+            
+            answerInputs.closest('.answer-option').css('border-color', '');
+            
+            const answers = answerInputs.map(function() {
+                return $(this).val().trim();
+            }).get();
+
+            const duplicateMap = new Map();
+            answers.forEach((answer, index) => {
+                if (answer) {
+                    if (!duplicateMap.has(answer)) {
+                        duplicateMap.set(answer, [index]);
+                    } else {
+                        duplicateMap.get(answer).push(index);
+                    }
+                }
+            });
+
+            let hasDuplicates = false;
+            duplicateMap.forEach((indices, answer) => {
+                if (indices.length > 1) {
+                    hasDuplicates = true;
+                    indices.forEach(index => {
+                        answerInputs.eq(index).closest('.answer-option').css('border-color', 'red');
+                    });
+                }
+            });
+
+            if (hasDuplicates) {
+                return {
+                    isValid: false,
+                    message: `Câu hỏi nhỏ ${i + 1}: Các đáp án không được trùng nhau`
+                };
+            }
+        }
+        return { isValid: true };
+    }
+
+    function resetAllBorders() {
+        $('.answer-option').css('border-color', '');
+    }
+
+    function validateAllQuestions() {
+        const questions = $('#questionList > div');
+        if (questions.length === 0) {
+            return { isValid: true };
+        }
+
+        for (let i = 0; i < questions.length; i++) {
+            const questionElement = $(questions[i]);
+            const questionType = $('#questionCategory').val().split('_')[1]; // Lấy isSingle
+            let validationResult = { isValid: true };
+
+            if (questionType === 'true') {
+                validationResult = validateSingleQuestion(questionElement);
+            } else if (questionType === 'false') {
+                validationResult = validateDoubleQuestion(questionElement);
+            }
+
+            if (!validationResult.isValid) {
+                return {
+                    isValid: false,
+                    message: `Câu hỏi ${i + 1}: ${validationResult.message}`
+                };
+            }
+        }
+        return { isValid: true };
+    }
+
+    function getQuestionData(questionTypeId, hasImage) {
+        var listContent = [];
+        let imageFile = null;
+        let audioFile = null;
+        
+        
+        $('.content-block').each(function() {
+            if (hasImage === 'true') {
+            imageFile = $(this).find('.image-input').prop('files')[0];
+            }
+            
+            if (skillName === 'nghe') {
+                audioFile =  $(this).find('.audio-input').prop('files')[0];
+            }
+            const passage = $(this).find('.content-input').val();
+            var questions = [];
+            $(this).find('.question-block').each(function() {
+                let questionContent = $(this).find('.question-input').val();
+                let score = $(this).find('.score-input').val();
+                let answers = $(this).find('.answer-option').map(function() {
+                    return {
+                        Content: $(this).find('input[type="text"]').val(),
+                        IsCorrect: $(this).find('input[type="radio"]').is(':checked')
+                    };
+                }).get();
+                var question = {
+                    Content: questionContent,
+                    Score: score,
+                    Answers: answers
+                    
+                };
+                questions.push(question);
+            });
+                    
+            var contentBlock = {
+                Content: passage,
+                Questions: questions,
+                QuestionTypeId: questionTypeId,
+                ImageFile: imageFile,
+                AudioFile: audioFile,
+            };
+            listContent.push(contentBlock);
+        });
+        return listContent;
+    }
+
+    // Hàm xử lý tải lên Excel (giữ nguyên)
+    function handleExcelUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const selectedValue = $('#questionCategory').val();
+        if (!selectedValue) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cảnh báo!',
+                text: 'Vui lòng chọn loại câu hỏi trước khi tải lên Excel!'
+            });
+            $('#excelInput').val('');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(sheet);
+                const [id, isSingle, hasImage] = selectedValue.split('_');
+
+                $('#questionList').empty();
+                questionCounter = 0;
+                let invalidRows = [];
+
+                jsonData.forEach((row, index) => {
+                    if (isSingle === 'true') {
+                        // !row['Question'] || 
+                        if (!row['Điểm'] || !row['Đáp án A'] || !row['Đáp án B'] || 
+                            !row['Đáp án C'] || !row['Đáp án D'] || !['A', 'B', 'C', 'D'].includes(row['Đáp án đúng'])) {
+                            invalidRows.push(index + 2);
+                            return;
+                        }
+                        const questionData = {
+                            question: row['Câu hỏi'] == null ? '': row['Câu hỏi'],
+                            score: row['Điểm'],
+                            answerA: row['Đáp án A'],
+                            answerB: row['Đáp án B'],
+                            answerC: row['Đáp án C'],
+                            answerD: row['Đáp án D'],
+                            correctAnswer: row['Đáp án đúng']
+                        };
+                        $('#questionList').prepend(createSingleFormHtml(hasImage == 'true', skillName, questionData));
+                    } else {
+                        if (!row['Đoạn văn'] || !row['Câu hỏi 1'] || !row['Câu hỏi 1'] || !row['Đáp án 1A'] || 
+                            !row['Đáp án 1B'] || !row['Đáp án 1C'] || !row['Đáp án 1D'] || !['A', 'B', 'C', 'D'].includes(row['Đáp án đúng 1']) ||
+                            !row['Câu hỏi 2'] || !row['Điểm 2'] || !row['Đáp án 2A'] || !row['Đáp án 2B'] || 
+                            !row['Đáp án 2C'] || !row['Đáp án 2D'] || !['A', 'B', 'C', 'D'].includes(row['Đáp án đúng 2'])) {
+                            invalidRows.push(index + 2);
+                            return;
+                        }
+                        const questionData = {
+                            passage: row['Đoạn văn'],
+                            question1: row['Câu hỏi 1'],
+                            score1: row['Điểm 1'],
+                            answer1A: row['Đáp án 1A'],
+                            answer1B: row['Đáp án 1B'],
+                            answer1C: row['Đáp án 1C'],
+                            answer1D: row['Đáp án 1D'],
+                            correctAnswer1: row['Đáp án đúng 1'],
+                            question2: row['Câu hỏi 2'],
+                            score2: row['Điểm 2'],
+                            answer2A: row['Đáp án 2A'],
+                            answer2B: row['Đáp án 2B'],
+                            answer2C: row['Đáp án 2C'],
+                            answer2D: row['Đáp án 2D'],
+                            correctAnswer2: row['Đáp án đúng 2']
+                        };
+                        $('#questionList').prepend(createDoubleFormHtml(hasImage == 'true', skillName, questionData));
+                    }
+                });
+
+                updateQuestionNumbers();
+
+                if (invalidRows.length > 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cảnh báo!',
+                        text: `Một số dòng không hợp lệ (dòng ${invalidRows.join(', ')}). Chỉ các dòng hợp lệ được thêm.`
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Đã tải lên câu hỏi từ Excel thành công!',
+                        timer: 1500
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Không thể đọc file Excel. Vui lòng kiểm tra định dạng file!'
+                });
+            } finally {
+                $('#excelInput').val('');
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    $(document).ready(function() {
+        // preview image
+    $(document).on('change', '.image-input', function() {
+        console.log(11)
+        var $preview = $(this).closest('.image-block').find('.image-preview')
+        console.log('971', $preview)
+        const file = this.files[0];
+        if (file) {
+            console.log(222)
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+            $preview.attr('src', e.target.result )
+            $preview.show()
+            }
+            reader.readAsDataURL(file); // Chuyển ảnh sang dạng base64 để hiển thị
+        } else {
+            $preview.src = "#";
+            $preview.hidden = true;
+        }
+    })
+//preview audio
+$(document).on('change', '.audio-input', function(event) {
+var $preview = $(this).closest('.audio-block').find('.audio-preview')
+const file = event.target.files[0];
+if (file) {
+    const url = URL.createObjectURL(file);
+    $preview.attr('src', url).show()[0].load();
+}
+})
+$(document).on('click', '.btn-delete', function() {
+    deleteQuestion(this);
+});
+
+        // Gắn sự kiện tải lên Excel
+        $('#btn-upload-excel').on('click', function() {
+            $('#excelInput').click();
+        });
+
+        // Gắn sự kiện change cho input file
+        $('#excelInput').on('change', handleExcelUpload);
+
+        // Thêm sự kiện click cho nút "Thêm câu hỏi"
+        $('#btn-add-question').on('click', function() {
+            const selectedValue = $('#questionCategory').val();
+            if (!selectedValue) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo!',
+                    text: 'Vui lòng chọn loại câu hỏi trước khi thêm câu hỏi!'
+                });
+                return;
+            }
+
+            const [id, isSingle, hasImage] = selectedValue.split('_');
+            if (isSingle === 'true') {
+                $('#questionList').append(createSingleFormHtml(hasImage === 'true', skillName));
+            } else {
+                $('#questionList').append(createDoubleFormHtml(hasImage === 'true', skillName));
+            }
+            updateQuestionNumbers();
+        });
+
+        $('.sidebar').append(sidebar);
+
+        window.toggleSubMenu = function(e) {
+            e.preventDefault();
+            $('#submenu-question').toggleClass('d-none');
+        };
+
+        $('.content-section').hide();
+        $('#add-question').show();
+        $('.nav-link').removeClass('active');
+        $('#menu-add-question').addClass('active');
+        $('#submenu-question').removeClass('d-none');
+
+        // Tải danh sách kỹ năng
+        $.ajax({
+            url: 'https://localhost:7001/api/skill/skill',
+            type: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(response) {
+                skillId = response.id;
+                skillName = response.name;
+                $('#bank-name').text(response.questionBankName);
+                $('#skill-name').text(response.name.charAt(0).toUpperCase() + response.name.slice(1).toLowerCase());
+                console.log('Skill ID:', skillId);
+
+                $.ajax({
+                    url: `https://localhost:7001/api/questiontype/skill/${skillId}`,
+                    type: 'GET',
+                    xhrFields: { withCredentials: true },
+                    success: function(response) {
+                        console.log('Question Types:', response);
+                        questionTypes = response;
+                        $('#questionCategory').empty();
+                        $('#questionCategory').append('<option value="">Chọn loại câu hỏi...</option>');
+                        questionTypes.forEach(type => {
+                            $('#questionCategory').append(`<option value="${type.id}_${type.isSingle}_${type.hasImage}">${type.name}</option>`);
+                        });
+                    },
+                    error: function(error) {
+                        console.error('Error loading question types:', error.responseText);
+                    }
+                });
+            },
+            error: function(error) {
+                console.log('Error:', error.responseText);
+            }
+        });
+
+        // Cập nhật sự kiện change cho questionCategory
+        $('#questionCategory').on('change', function() {
+            $('#questionList').empty();
+            questionCounter = 0;
+            $('#btn-add-question').prop('disabled', false);
+            $('#btn-upload-excel').prop('disabled', false);
+            $('#excelInput').off('change').on('change', handleExcelUpload);
+        });
+
+        // Xử lý form submit
+        $('#questionForm').on('submit',async function(e) {
+            e.preventDefault();
+            const selectedValue = $('#questionCategory').val();
+            if (!selectedValue) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo!',
+                    text: 'Vui lòng chọn loại câu hỏi trước!'
+                });
+                return;
+            }
+            
+            resetAllBorders();
+            
+            const validationResult = validateAllQuestions();
+            if (!validationResult.isValid) {
+                Swal.fire({
+                    icon: 'error',
+                    title: validationResult.errorTitle || 'Lỗi!',
+                    text: validationResult.message || 'An error has occurred!'
+                });
+                return;
+            }
+
+            const [id, isSingle, hasImage] = selectedValue.split('_');
+            const questionsData = getQuestionData(id, hasImage);
+            if (!questionsData || questionsData.length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Cảnh báo!',
+                    text: 'Vui lòng thêm ít nhất một câu hỏi!'
+                });
+                return;
+            }
+            console.log(1164)
+            console.log('1098', questionsData)
+            var formData = new FormData()
+            questionsData.forEach((q, i) => {
+                formData.append(`lists[${i}].Content`, q.Content);
+                formData.append(`lists[${i}].Level`, q.Level);
+                formData.append(`lists[${i}].QuestionTypeId`, q.QuestionTypeId);
+                if (q.ImageFile) {
+                    formData.append(`lists[${i}].ImageFile`, q.ImageFile);
+                }
+                if (q.AudioFile) {
+                    formData.append(`lists[${i}].AudioFile`, q.AudioFile);
+                }
+                q.Questions.forEach((question, j) => {
+                    formData.append(`lists[${i}].Questions[${j}].Content`, question.Content);
+                    formData.append(`lists[${i}].Questions[${j}].Score`, question.Score);
+                    question.Answers.forEach((ans, k) => {
+                        formData.append(`lists[${i}].Questions[${j}].Answers[${k}].Content`, ans.Content);
+                        formData.append(`lists[${i}].Questions[${j}].Answers[${k}].IsCorrect`, ans.IsCorrect);
+                    });
+                });
+            });
+ 
+            Swal.fire({
+                title: 'Đang xử lý...',
+                text: 'Vui lòng chờ trong giây lát',
+                allowOutsideClick: false,
+                didOpen: () => {
+                Swal.showLoading();
+                }
+            });
+            await $.ajax({
+                url: 'https://localhost:7001/api/contentblock',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                xhrFields: { withCredentials: true },
+                success: function(response) {
+                    console.log('Server response:', response);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Đã lưu câu hỏi thành công!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                },
+                error: function(error) {
+                    console.error('Server error:', error.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Có lỗi xảy ra khi lưu câu hỏi. Vui lòng thử lại!'
+                    });
+                }
+            });
+                 
+                
+        });
+
+        $(document).on('input', '.answer-option input[type="text"]', function() {
+            resetAllBorders();
+            const validationResult = validateAllQuestions();
+            if (!validationResult.isValid) {
+                console.log(validationResult.message);
+            }
+        });
+    });
+    
+</script>
+</body>
+</html>

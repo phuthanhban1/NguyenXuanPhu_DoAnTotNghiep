@@ -51,12 +51,12 @@ namespace Application.Services.Implements
             else
             {
                 var currentDate = DateOnly.FromDateTime(DateTime.Now);
-                if ((currentDate.DayNumber - questionBank.CreatedDate.DayNumber) > 3)
+                if ((currentDate.DayNumber - questionBank.CreatedDate.DayNumber) > 7)
                 {
-                    throw new NotFoundException("Không thể xóa ngân hàng câu hỏi do đã được tạo hơn 3 ngày");
+                    throw new NotFoundException("Không thể xóa ngân hàng câu hỏi do đã được tạo hơn 7 ngày");
                 } else if(questionBank.Status == 1)
                 {
-                    throw new NotFoundException("Không thể xóa do ngân hàng câu hỏi đang hoạt động");
+                    throw new BadRequestException("Không thể xóa do ngân hàng câu hỏi đang hoạt động");
                 }
                 await _unitOfWork.QuestionBanks.DeleteAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
@@ -66,8 +66,7 @@ namespace Application.Services.Implements
         public async Task<List<QuestionBankDto>> GetAllAsync()
         {
             var banks = await _unitOfWork.QuestionBanks.GetAllAsync();
-            var activeBanks = banks.Where(b => b.Status == 1).ToList();
-            var questionBankDtos = _mapper.Map<List<QuestionBankDto>>(activeBanks);
+            var questionBankDtos = _mapper.Map<List<QuestionBankDto>>(banks);
             return questionBankDtos;
         }
 
@@ -111,8 +110,25 @@ namespace Application.Services.Implements
                         throw new BadRequestException($"Không thể sửa do tên ngân hàng đã tồn tại");
                     }
                 }
+                if(questionBank.Name == questionBankUpdateDto.Name && questionBank.Status == questionBankUpdateDto.Status)
+                {
+                    throw new BadRequestException("Không thể sửa do thông tin không thay đổi");
+                }
                 questionBank.Status = questionBankUpdateDto.Status;
                 questionBank.Name = questionBankUpdateDto.Name;
+               
+                var listSkill = await _unitOfWork.Skills.GetSkillsByBankId(questionBank.Id);
+                if (listSkill.Count > 0)
+                {
+                    foreach (var skill in listSkill)
+                    {
+                        skill.CreatedUserId = null;
+                        skill.ReviewedUserId = null;
+                        skill.CreateDue = DateTime.Now.AddDays(7);
+                        skill.ReviewDue = DateTime.Now.AddDays(14);
+                        await _unitOfWork.Skills.UpdateAsync(skill);
+                    }
+                }
                 await _unitOfWork.QuestionBanks.UpdateAsync(questionBank);
                 await _unitOfWork.SaveChangeAsync();
             }

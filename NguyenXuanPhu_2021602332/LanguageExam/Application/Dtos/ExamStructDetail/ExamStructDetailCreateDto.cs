@@ -13,6 +13,7 @@ namespace Application.Dtos.ExamStructDetail
         public int Order { get; set; }
         public Guid QuestionTypeId { get; set; }
         public int Amount { get; set; }
+        public byte Score { get; set; }
         public Guid ExamStructId { get; set; }
     }
 }

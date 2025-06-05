@@ -24,6 +24,7 @@ namespace WebAPI.Controllers
             }
             return Ok(list);
         }
+
         [HttpGet("{id}")]
         new public async Task<IActionResult> GetById(Guid id)
         {

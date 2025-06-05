@@ -11,8 +11,6 @@ namespace Application.Dtos.QuestionBankDtos
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public DateTime? QuestionCreateDue { get; set; }
-        public DateTime? QuestionReviewDue { get; set; }
         public byte Status { get; set; }
     }
 }

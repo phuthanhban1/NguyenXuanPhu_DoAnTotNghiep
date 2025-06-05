@@ -12,9 +12,6 @@ namespace Domain.Entities
         public Guid Id { get; set; }
         public string? Content { get; set; }
         public byte Status { get; set; } // 0: chờ xác nhân, 1: đã xác nhận, 2: bị từ chối, 3: đã dùng
-        public byte Level { get; set; }
-        public DateOnly CreatedDate { get; set; }
-        public DateOnly? UpdatedDate { get; set; }
         public string? RejectionReason { get; set; }
 
         // foreign key audio file

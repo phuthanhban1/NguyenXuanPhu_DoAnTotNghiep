@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Thông tin cá nhân</title>
+    <meta name="title" content="Thông tin cá nhân" />
+    <meta name="description" content="Xem và quản lý thông tin cá nhân của bạn" />
+    <meta name="author" content="IIG Viet Nam">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://s3-hfx03.fptcloud.com/online/img/favicon.png" type="image/x-icon" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/animate/animate.compat.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/owl.carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/owl.carousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/theme.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/theme-elements.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/simple-line-icons/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/fontawesome-free/css/all.min.css">
+
+    <!-- Revolution Slider CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/css/settings.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/css/layers.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/css/navigation.css">
+
+    <!-- Current Page CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/vendor/circle-flip-slideshow/css/component.css">
+
+    <!-- Skin CSS -->
+    <link id="skinCSS" rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/skins/default.css">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/custom.css">
+    <link rel="stylesheet" href="https://s3-hfx03.fptcloud.com/online/css/jquery.toast.min.css">
+
+    <!-- Croppie CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+
+    <!-- Custom CSS for Improved UI -->
+     <script type="module">
+            import {getApi} from '/assets/js/library.js';
+            var role = await getApi('user/role')
+            if(role == null) {
+                window.location.href = '../index.html'
+            }
+     </script>
+    <style>
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 15px;
+        }
+        .title-exam-registration {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a3c6c;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .text-title-form {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a3c6c;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #d1d9e6;
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #f9fafc;
+            transition: border-color 0.3s ease;
+        }
+        .form-control[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .input-group-text {
+            border-radius: 8px;
+            background-color: #f9fafc;
+        }
+        .place-photos {
+            text-align: center;
+        }
+        .box-img-3x4 {
+            border: 2px solid #d1d9e6;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 15px;
+            transition: box-shadow 0.3s ease;
+        }
+        .box-img-3x4:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .img-3x4 {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .place-userInfor {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        @media (max-width: 991px) {
+            .place-photos {
+                margin-top: 20px;
+            }
+        }
+    </style>
+
+    <!-- Head Libs -->
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/modernizr/modernizr.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery/jquery.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.vi.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.appear/jquery.appear.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.validation/jquery.validate.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/jquery.validation/additional-methods.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/lazysizes/lazysizes.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/isotope/jquery.isotope.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/theme.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/views/view.contact.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/theme.init.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/jquery.toast.min.js"></script>
+    <script src="https://s3-hfx03.fptcloud.com/online/scripts/js/business/identity.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59ERC2E791"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-59ERC2E791');
+    </script>
+
+    <!-- Croppie Initialization -->
+    <script>
+        $(document).ready(function() {
+            let $uploadCrop;
+            $('#cropImageBtn').on('click', function(e) {
+                e.preventDefault();
+                if ($uploadCrop) {
+                    $uploadCrop.croppie('result', {
+                        type: 'canvas',
+                        size: 'viewport'
+                    }).then(function(resp) {
+                        $('#Image3x4Preview').attr('src', resp);
+                        $('#cropImagePop').modal('hide');
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+
+<body data-plugin-page-transition class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'effect': 'default'}">
+    <div class="body">
+        <div style="min-height: 48vh">
+            <div class="container py-4">
+                <div class="row justify-content-center">
+                    <h2 class="text-center title-exam-registration">Thông tin tài khoản</h2>
+                </div>
+                <div class="row place-userInfor">
+                    <form id="UserInfoForm" class="contact-form needs-validation" novalidate="">
+                        <input hidden name="profileChange" value="0" />
+                        <input hidden name="profileId" value="" />
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 class="text-uppercase text-title-form">THÔNG TIN CÁ NHÂN</h4>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2">Họ và tên thí sinh</label>
+                                        <input type="text" class="form-control text-3 h-auto py-2" name="FullName" readonly>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2">Ngày sinh</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-3 h-auto py-2 type-date" id="DateOfBirth" name="DateOfBirth" readonly>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2">Giới tính</label>
+                                        <input type="text" class="form-control text-3 h-auto py-2" name="Gender" readonly>
+                                    </div>
+                                </div>
+                                <div class="row group-detail-typeIdCard">
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2 required">Số CCCD</label>
+                                        <input class="form-control text-3 h-auto py-2" type="text" name="CCCD" readonly>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2 required">Ngày cấp</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control text-3 h-auto py-2 type-date" id="DateOfIssueOfIDCard" name="DateOfIssueOfIDCard" readonly>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2 required">Nơi cấp</label>
+                                        <input class="form-control text-3 h-auto py-2" type="text" name="PlaceProvideIdCard" readonly>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="form-label mb-1 text-2 required">Số điện thoại</label>
+                                        <input class="form-control text-3 h-auto py-2" type="text" name="Phone" readonly>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-12">
+                                        <label class="form-label mb-1 text-2 required">Địa chỉ</label>
+                                        <input type="text" class="form-control text-3 h-auto py-2" name="FullAddress" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 place-photos">
+                                <div class="form-group">
+                                    <div class="box-img-3x4 img-thumbnail text-center position-relative">
+                                        <span class="d-block">
+                                            <small class="d-block text-muted mb-2">Ảnh người dùng</small>
+                                            <img id="Image3x4Preview" class="img-fluid img-3x4" src="" alt="Ảnh người dùng">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to Fetch User Data -->
+    <script>
+        function formatDate(input) {
+    const parts = input.split('-'); // ['0001', '01', '01']
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+
+    return `${day}-${month}-${year}`; // '01-01-0001'
+}
+        $(document).ready(function() {
+            // Lấy thông tin người dùng từ API
+            $.ajax({
+                url: 'https://localhost:7001/api/user/user',
+                method: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(response) {
+                    // Cập nhật dữ liệu vào biểu mẫu
+                    $('input[name="FullName"]').val(response.fullName || '');
+                    $('input[name="DateOfBirth"]').val(formatDate( response.dateOfBirth) || '');
+                    $('input[name="Gender"]').val(response.gender === 'false' ? 'Nam' : 'Nữ');
+                    $('input[name="CCCD"]').val(response.idCard || '');
+                    $('input[name="DateOfIssueOfIDCard"]').val(formatDate( response.dateOfIssue) || '');
+                    $('input[name="PlaceProvideIdCard"]').val(response.placeOfIssue || '');
+                    $('input[name="Phone"]').val(response.phoneNumber || '');
+                    $('input[name="FullAddress"]').val(response.fullAddress || '');
+                    $('#Image3x4Preview').attr('src', response.imageFaceBase64 ? `data:image/jpeg;base64,${response.imageFaceBase64}` : 'https://via.placeholder.com/150');
+
+                    // Khởi tạo datepicker cho các trường ngày
+                    
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Không thể tải thông tin người dùng. Vui lòng thử lại sau.';
+                    if (xhr.responseJSON?.Message) {
+                        errorMessage = xhr.responseJSON.Message;
+                    } else if (xhr.status === 401) {
+                        errorMessage = 'Bạn chưa đăng nhập. Vui lòng đăng nhập lại.';
+                    } else if (xhr.status === 403) {
+                        errorMessage = 'Bạn không có quyền truy cập thông tin này.';
+                    }
+                    $.toast({
+                        heading: 'Lỗi',
+                        text: errorMessage,
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        position: 'top-right'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

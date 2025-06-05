@@ -1,6 +1,58 @@
 [
   {
     "ContainingType": "WebAPI.Controllers.ContentBlockController",
+    "Method": "Update",
+    "RelativePath": "api/ContentBlock",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "Content",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AudioFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Questions",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.QuestionDtos.QuestionCreateDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ContentBlockController",
+    "Method": "Add",
+    "RelativePath": "api/ContentBlock",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lists",
+        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockCreateDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ContentBlockController",
     "Method": "Delete",
     "RelativePath": "api/ContentBlock/{id}",
     "HttpMethod": "DELETE",
@@ -54,22 +106,6 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ContentBlockController",
-    "Method": "AddDouble",
-    "RelativePath": "api/ContentBlock/double",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "lists",
-        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockDoubleDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.ContentBlockController",
     "Method": "GetQuestionTypeName",
     "RelativePath": "api/ContentBlock/question-type/{contentBlockId}",
     "HttpMethod": "GET",
@@ -102,22 +138,6 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ContentBlockController",
-    "Method": "AddSingle",
-    "RelativePath": "api/ContentBlock/single",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "lists",
-        "Type": "System.Collections.Generic.List\u00601[[Application.Dtos.ContentBlockDtos.ContentBlockSingleDto, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.ContentBlockController",
     "Method": "ChangeStatus",
     "RelativePath": "api/ContentBlock/status",
     "HttpMethod": "POST",
@@ -134,8 +154,34 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.DetailResultController",
-    "Method": "GetResultsByExamUser",
-    "RelativePath": "api/DetailResult/{examId}/{userId}",
+    "Method": "CreateDetailResult",
+    "RelativePath": "api/DetailResult/{examId}/{skillName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "skillName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "listResults",
+        "Type": "System.Collections.Generic.List\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.DetailResultController",
+    "Method": "GetAllResult",
+    "RelativePath": "api/DetailResult/admin/{examId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -143,53 +189,6 @@
       {
         "Name": "examId",
         "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.DetailResultController",
-    "Method": "CreateDetailResultListen",
-    "RelativePath": "api/DetailResult/listening/{examId}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "examId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "listResults",
-        "Type": "System.Collections.Generic.List\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebAPI.Controllers.DetailResultController",
-    "Method": "CreateDetailResult",
-    "RelativePath": "api/DetailResult/reading/{examId}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "examId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "listResults",
-        "Type": "System.Collections.Generic.List\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -409,6 +408,16 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExamController",
+    "Method": "GetComingExams",
+    "RelativePath": "api/Exam/is-comming",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamController",
     "Method": "HasQuestion",
     "RelativePath": "api/Exam/is-create/{examId}",
     "HttpMethod": "GET",
@@ -424,6 +433,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ExamController",
+    "Method": "GetExamHasResult",
+    "RelativePath": "api/Exam/result",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ExamineeController",
     "Method": "CreateExaminee",
     "RelativePath": "api/Examinee",
@@ -434,6 +453,22 @@
       {
         "Name": "examineeCreateDto",
         "Type": "Application.Dtos.ExamineeDtos.ExamineeCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "CountRoom",
+    "RelativePath": "api/Examinee/count-room/{examId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examId",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -522,6 +557,42 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "GetSchedule",
+    "RelativePath": "api/Examinee/schedule",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "GetExamineeTaken",
+    "RelativePath": "api/Examinee/score",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "examineeScoreDto",
+        "Type": "Application.Dtos.ExamineeDtos.ExamineeScoreDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ExamineeController",
+    "Method": "Test",
+    "RelativePath": "api/Examinee/test",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -670,7 +741,7 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ExamStructDetailController",
-    "Method": "GetStruct",
+    "Method": "GetStructDetail",
     "RelativePath": "api/ExamStructDetail/{structId}/{skill}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -941,6 +1012,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.QuestionTypeController",
+    "Method": "CountQuestionTypePending",
+    "RelativePath": "api/QuestionType/count-pending/{skillId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "skillId",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -1416,7 +1503,7 @@
     "Parameters": [
       {
         "Name": "userPasswordDto",
-        "Type": "Application.Dtos.UserDtos.UserPassworDto",
+        "Type": "Application.Dtos.UserDtos.UserPasswordDto",
         "IsRequired": true
       }
     ],

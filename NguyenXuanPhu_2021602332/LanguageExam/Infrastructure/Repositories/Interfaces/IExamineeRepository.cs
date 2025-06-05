@@ -13,5 +13,6 @@ namespace Infrastructure.Repositories.Interfaces
 
         Task<List<Examinee>> GetExamineesByExamId(Guid examId);
         Task<List<Examinee>> GetExamineesByUserId(Guid userId);
+        Task<Examinee> GetExamineeByNumber(Guid examId, string examineeNumber);
     }
 }

@@ -12,7 +12,8 @@ namespace Infrastructure.Repositories.Interfaces
         Task<User> Login(string email, string password);
         Task<List<User>> GetAccounts(Guid id);
         Task<List<User>> GetUsersByRole(int role);
-
+        Task<User> GetUserByEmail(string email, Guid roleId);
         Task<User> GetUserById(Guid id);
+        Task<User> GetByEmail(string email);
     }
 }

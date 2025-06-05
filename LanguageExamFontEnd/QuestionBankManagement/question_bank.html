@@ -15,7 +15,13 @@
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
+    <script type="module">
+        import {getApi} from '/assets/js/library.js';
+        var role = await getApi('user/role')
+        if(role != 'quản lý ngân hàng câu hỏi') {
+            window.location.href = '../index.html'
+        }
+    </script>
     <style>
         .language-card {
             cursor: pointer;
@@ -70,6 +76,12 @@
 
 </head>
 <body class="bg-light">
+    <div class="header-common">
+    <script type="module">
+        import {genHeader} from '/assets/js/library.js';
+        genHeader($('.header-common'))
+    </script>
+    </div>
     <div class="container py-5">
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -129,15 +141,15 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select">
-                        <option value="">Tất cả trạng thái</option>
-                        <option value="hoạt động">Hoạt động</option>
-                        <option value="đang tạo">Đang tạo</option>
-                        <option value="đã khóa">Đã khóa</option>
+                    <select class="form-select" id="statusFilter">
+                        <option value="3">Tất cả trạng thái</option>
+                        <option value="1">Hoạt động</option>
+                        <option value="0">Đang tạo</option>
+                        <option value="2">Đã khóa</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select">
+                    <select class="form-select" id="sortFilter">
                         <option value="">Sắp xếp theo</option>
                         <option value="newest">Mới nhất</option>
                         <option value="oldest">Cũ nhất</option>
@@ -270,32 +282,44 @@ $(document).ready(function() {
         renderExamList(filteredExams);
     });
 
-    // Xử lý lọc theo trạng thái
-    $('select').eq(0).on('change', function() {
-        var status = $(this).val();
-        var filteredExams = status ?
-            examData.filter(function(exam) { return exam.status === status; }) :
-            examData;
-        renderExamList(filteredExams);
-    });
+function parseDateString(dateStr) {
+    const parts = dateStr.split('/'); // ["10", "5", "2025"]
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Tháng trong JS bắt đầu từ 0
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+}
 
-    // Xử lý sắp xếp
-    $('select').eq(1).on('change', function() {
-        var sortBy = $(this).val();
-        var sortedExams = examData.slice();
-        switch (sortBy) {
-            case 'newest':
-                sortedExams.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
-                break;
-            case 'oldest':
-                sortedExams.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
-                break;
-            case 'name':
-                sortedExams.sort(function(a, b) { return a.name.localeCompare(b.name); });
-                break;
-        }
-        renderExamList(sortedExams);
-    });
+$('#statusFilter, #sortFilter').on('change', function () {
+    const status = $('#statusFilter').val();
+    const sortBy = $('#sortFilter').val();
+
+    console.log(examData)
+    // Bước 1: Lọc dữ liệu theo trạng thái
+    let filteredExams = (status === "3")
+        ? examData.slice() // tất cả trạng thái
+        : examData.filter(exam => exam.status == status); // so sánh lỏng để tránh lỗi kiểu dữ liệu
+
+    // Bước 2: Sắp xếp nếu có chọn
+    if (sortBy) {
+        filteredExams.sort((a, b) => {
+    switch (sortBy) {
+        case 'newest':
+            return parseDateString(b.date) - parseDateString(a.date);
+        case 'oldest':
+            return parseDateString(a.date) - parseDateString(b.date);
+        case 'name':
+            return a.name.localeCompare(b.name);
+        default:
+            return 0;
+    }
+});
+    }
+
+    // Bước 3: Render kết quả
+    renderExamList(filteredExams);
+});
+
 
     // Xử lý nút Edit
     $('tbody').on('click', '.btn-edit', function() {
@@ -339,7 +363,7 @@ $(document).ready(function() {
     }
     var handleDelete = function(id) {
         
-        Swal.fire({
+Swal.fire({
   title: 'Bạn có chắc chắn muốn xóa?',
   text: "Hành động này không thể hoàn tác!",
   icon: 'warning',
@@ -352,7 +376,6 @@ $(document).ready(function() {
   if (result.isConfirmed) {
     // Gọi hàm xóa ở đây
     xoaDuLieu(id);
-    
   }
 });
 
@@ -458,12 +481,6 @@ $(document).ready(function() {
         var $statusSelect = $form.find('select[name="Status"]');
         $statusSelect.val(exam.status);
 
-        // if (exam.status == 0 || exam.status == 2) {
-        //     $statusSelect.find('option[value="1"]').hide();
-        // } else {
-        //     $statusSelect.find('option[value="1"]').show();
-        // }
-
         // Hiện/ẩn 2 ô ngày khi mở modal
         if ($statusSelect.val() == "0") {
             $('#date-fields').removeClass('d-none');
@@ -488,8 +505,19 @@ $(document).ready(function() {
             Status: parseInt($('select[name="Status"]').val())
         };
         
-        console.log(exam);
-        $.ajax({
+Swal.fire({
+  title: 'Bạn có chắc chắn muốn sửa trạng thái?',
+  text: "Hành động này không thể hoàn tác!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'Đồng ý',
+  cancelButtonText: 'Hủy'
+}).then((result) => {
+  if (result.isConfirmed) {
+    // Gọi hàm xóa ở đây
+    $.ajax({
             url: 'https://localhost:7001/api/questionbank',
             type: 'PUT',
             data: JSON.stringify(exam),
@@ -505,15 +533,16 @@ $(document).ready(function() {
             error: function(error) { 
                 console.error('Error updating data:', error); 
                 console.log(error.responseText);
-                Swal.fire(
-                'Có lỗi xảy ra!',
-                error.responseJSON['Message'],
-                'false'
+                Swal.fire({
+                    icon: error,
+                    title: 'Có lỗi xảy ra!',
+                    text: error.responseJSON.Message,
+                }
                 )
             }
-        });
-        
-        
+        }); 
+  }
+});
         
     });
 
@@ -563,13 +592,6 @@ $(document).ready(function() {
     });
 
 });
-
-
- 
 </script>
-    
-    
 </body>
-
-
 </html>

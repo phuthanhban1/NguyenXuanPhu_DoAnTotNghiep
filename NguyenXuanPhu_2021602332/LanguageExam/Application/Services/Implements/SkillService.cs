@@ -43,9 +43,8 @@ namespace Application.Services.Implements
             }
             var skill = _mapper.Map<Skill>(skillDto);
             skill.Id = Guid.NewGuid();
-            
-            skill.IsCreateConfirm = false;
-            skill.IsReviewConfirm = false;
+            skill.CreateDue = DateTime.Now.AddDays(7);
+            skill.ReviewDue = DateTime.Now.AddDays(14);
             await _unitOfWork.Skills.AddAsync(skill);
             await _unitOfWork.SaveChangeAsync();
         }
@@ -58,14 +57,8 @@ namespace Application.Services.Implements
                 throw new NotFoundException($"Không tìm thấy kỹ năng có id {skill.Id}");
             }
             
-            if(role == "người tạo câu hỏi")
-            {
-                skill.IsCreateConfirm = true;
-            } else
-            {
-                skill.IsReviewConfirm = true;
-            }
-                await _unitOfWork.Skills.ConfirmSkill(skill);
+            
+            await _unitOfWork.Skills.ConfirmSkill(skill);
             await _unitOfWork.SaveChangeAsync();
         }
 
@@ -133,7 +126,6 @@ namespace Application.Services.Implements
             {
                 Id = skill.Id,
                 Name = skill.Name,
-                IsConfirm = skill.IsCreateConfirm,
                 QuestionBankName = skill.QuestionBank.Name,
                 Language = skill.QuestionBank.Language,
                 
@@ -141,7 +133,7 @@ namespace Application.Services.Implements
             };
             if(skill.CreateDue != null)
             {
-                skillOverViewDto.DueDate = (DateOnly)skill.CreateDue;
+                skillOverViewDto.DueDate = (DateTime)skill.CreateDue;
             }
             return skillOverViewDto;
         }
@@ -157,14 +149,13 @@ namespace Application.Services.Implements
             {
                 Id = skill.Id,
                 Name = skill.Name,
-                IsConfirm = skill.IsReviewConfirm,
                 QuestionBankName = skill.QuestionBank.Name,
                 Language = skill.QuestionBank.Language,
                 Task = "Duyệt câu hỏi"
             };
             if(skill.ReviewDue != null)
             {
-                skillOverViewDto.DueDate = (DateOnly)skill.ReviewDue;
+                skillOverViewDto.DueDate = (DateTime)skill.ReviewDue;
             }
             return skillOverViewDto;
         }
@@ -194,10 +185,24 @@ namespace Application.Services.Implements
                     }
                     skill.ReviewedUserId = skillUpdateDto.ReviewedUserId; 
                 }
-                if(skillUpdateDto.ReviewedDue != DateOnly.MinValue) { skill.ReviewDue = skillUpdateDto.ReviewedDue; }
-                if(skillUpdateDto.CreatedDue != DateOnly.MinValue) { skill.CreateDue = skillUpdateDto.CreatedDue; }
+                
+                if (skillUpdateDto.ReviewedDue != null)
+                {
+                    if(skillUpdateDto.ReviewedDue.Value.Date <= skill.CreateDue.Value.Date)
+                    {
+                        throw new BadRequestException("Hạn duyệt câu hỏi phải lớn hơn hạn tạo câu hỏi");
+                    }
+                    skill.ReviewDue = skillUpdateDto.ReviewedDue;
+                }
 
-
+                if (skillUpdateDto.CreatedDue != null)
+                {
+                    if(skillUpdateDto.CreatedDue.Value.Date >= skill.ReviewDue.Value.Date)
+                    {
+                        throw new BadRequestException("Hạn tạo câu hỏi phải nhỏ hơn hạn duyệt câu hỏi");
+                    }
+                    skill.CreateDue = skillUpdateDto.CreatedDue;
+                }
                 await _unitOfWork.Skills.UpdateAsync(skill);
                 await _unitOfWork.SaveChangeAsync();
             }

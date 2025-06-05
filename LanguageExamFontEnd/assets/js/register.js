@@ -239,11 +239,7 @@ $(document).ready(function() {
         var validateFile = ValidateFile();
 
         if (validateUserInfo && validateFile) {
-            
-                console.log('ok');
-        
                 e.preventDefault();
-                console.log('ok2');
                 var formData = new FormData($('#UserInfoForm')[0]);
                 $.ajax({
                     url: 'https://localhost:7001/api/user',
@@ -262,10 +258,7 @@ $(document).ready(function() {
                             if (result.isConfirmed) {
                                 // Hành động sau khi nhấn OK
                                 // Ví dụ: chuyển hướng trang
-                                window.location.href = 'index.html';
-                                
-                                // Hoặc gọi hàm khác
-                                // doSomethingElse();
+                                window.location.href = 'user-infor-confirm.html';
                             }
                         });
                         console.log('Thêm thành công' + response);

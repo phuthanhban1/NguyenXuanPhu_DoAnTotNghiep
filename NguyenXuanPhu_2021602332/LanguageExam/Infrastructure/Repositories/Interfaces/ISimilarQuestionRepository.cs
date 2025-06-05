@@ -9,6 +9,7 @@ namespace Infrastructure.Repositories.Interfaces
 {
     public interface ISimilarQuestionRepository : IGenericRepository<SimilarQuestion>
     {
-        Task<List<Guid>> GetSimilarQuestions(Guid id);
+        Task<List<SimilarQuestion>> GetSimilarQuestions(Guid id);
+        Task<List<SimilarQuestion>> GetSimilarQuestionsById(Guid id);
     }
 }

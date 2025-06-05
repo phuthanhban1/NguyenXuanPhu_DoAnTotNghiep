@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{structId}/{skill}")]
-        public async Task<IActionResult> GetStruct(Guid structId, string skill)
+        public async Task<IActionResult> GetStructDetail(Guid structId, string skill)
         {
             var list = await _examStructDetailService.GetStruct(structId, skill);
             if (list == null)
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             await _examStructDetailService.Add(list);
             return Ok();
         }
-
+        
         
     }
 }
